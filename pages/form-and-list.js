@@ -15,6 +15,7 @@ export default function FormAndList() {
     const submittedForm = {
       id: nanoid(),
       slider: rangeValue,
+      date: new Date().toLocaleString(),
     };
 
     setSubmittedRangeValues([...submittedRangeValues, submittedForm]);
@@ -50,7 +51,7 @@ export default function FormAndList() {
         {submittedRangeValues.map((submittedRangeValue, index) => {
           return (
             <li key={submittedRangeValue.id}>
-              {index}: {submittedRangeValue.slider}
+              {index}: {submittedRangeValue.slider} ({submittedRangeValue.date})
             </li>
           );
         })}
