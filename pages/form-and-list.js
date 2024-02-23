@@ -7,7 +7,7 @@ export default function FormAndList() {
 
   const handleRangeChange = (event) => {
     setRangeValue(event.target.value);
-    console.log(rangeValue);
+    // console.log(rangeValue);
   };
 
   function onSubmit(event) {
@@ -18,7 +18,7 @@ export default function FormAndList() {
     };
 
     setSubmittedRangeValues([...submittedRangeValues, submittedForm]);
-    console.log(submittedRangeValues);
+    console.log([...submittedRangeValues, submittedForm]);
   }
 
   return (
@@ -46,6 +46,15 @@ export default function FormAndList() {
         ></input>
         <button type="submit">save</button>
       </form>
+      <ul>
+        {submittedRangeValues.map((submittedRangeValue, index) => {
+          return (
+            <li key={submittedRangeValue.id}>
+              {index}: {submittedRangeValue.slider}
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
