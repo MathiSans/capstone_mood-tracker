@@ -19,6 +19,9 @@ export default function HomePage() {
       >
         <small>Github</small>
       </Link>
+      <Link style={{ color: "white" }} href={"form-and-list"}>
+        <small>User Story 1 – Form and List</small>
+      </Link>
     </div>
   );
 }
