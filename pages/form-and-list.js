@@ -2,7 +2,7 @@ import { useState } from "react";
 import { nanoid } from "nanoid";
 
 export default function FormAndList() {
-  const [rangeValue, setRangeValue] = useState();
+  const [rangeValue, setRangeValue] = useState(127.5);
   const [submittedRangeValues, setSubmittedRangeValues] = useState([]);
 
   const handleRangeChange = (event) => {
