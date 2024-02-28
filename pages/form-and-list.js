@@ -4,11 +4,10 @@ import styled from "styled-components";
 
 export default function FormAndList() {
   const [rangeValue, setRangeValue] = useState(127.5);
-  const [submittedRangeValues, setSubmittedRangeValues] = useState([]);
+  const [allEntries, setallEntries] = useState([]);
 
   const handleRangeChange = (event) => {
     setRangeValue(event.target.value);
-    // console.log(rangeValue);
   };
 
   function onSubmit(event) {
@@ -28,26 +27,22 @@ export default function FormAndList() {
       date: new Date().toLocaleString(),
     };
 
-    setSubmittedRangeValues([...submittedRangeValues, submittedForm]);
-    console.log([...submittedRangeValues, submittedForm]);
+    setallEntries([...allEntries, submittedForm]);
+    // console.log([...allEntries, submittedForm]);
     event.target.reset();
   }
 
-  function Emotion({ submittedRangeValue }) {
-    console.log(submittedRangeValue);
-    if (submittedRangeValue <= 51) {
+  function Intensity({ intensity }) {
+    if (intensity <= 51) {
       return <span>very sad</span>;
     }
-    if (submittedRangeValue >= 51 && submittedRangeValue <= 102) {
+    if (intensity >= 51 && intensity <= 102) {
       return <span>sad</span>;
     }
-    if (submittedRangeValue >= 102 && submittedRangeValue <= 153) {
+    if (intensity >= 102 && intensity <= 153) {
       return <span>pleasent</span>;
     }
-    if (submittedRangeValue >= 153 && submittedRangeValue <= 206) {
-      return <span>good</span>;
-    }
-    if (submittedRangeValue > 206) {
+    if (intensity >= 153 && intensity > 206) {
       return <span>extremely good</span>;
     }
   }
@@ -64,8 +59,8 @@ export default function FormAndList() {
         minHeight: "100vh",
       }}
     >
+      <h1>mood tracker</h1>
       <div style={{ maxWidth: "300px" }}>
-        <h1>mood tracker</h1>
         <form
           onSubmit={onSubmit}
           style={{
@@ -142,7 +137,7 @@ export default function FormAndList() {
         </form>
 
         <ul style={{ listStyle: "none", padding: "0" }}>
-          {submittedRangeValues.map((submittedRangeValue) => {
+          {allEntries.map((entry) => {
             return (
               <li
                 style={{
@@ -151,18 +146,17 @@ export default function FormAndList() {
                   flexDirection: "column",
                   gap: "10px",
                 }}
-                key={submittedRangeValue.id}
+                key={entry.id}
               >
-                <small>{submittedRangeValue.date}</small>
+                <small>{entry.date}</small>
                 <p>
                   You felt{" "}
                   <span style={{ fontWeight: "bold" }}>
-                    <Emotion submittedRangeValue={submittedRangeValue.slider} />
-                    .
+                    <Intensity intensity={entry.slider} />.
                   </span>{" "}
                   You selected these tags:{" "}
                   <span style={{ fontWeight: "bold" }}>
-                    {submittedRangeValue.experiences
+                    {entry.experiences
                       .filter((experience) => Object.values(experience)[0])
                       .map((experience, index, array) => (
                         <span key={nanoid()}>
@@ -174,7 +168,7 @@ export default function FormAndList() {
                   <span>
                     . You wrote:{" "}
                     <span style={{ fontWeight: "bold", fontStyle: "italic" }}>
-                      {submittedRangeValue.text}
+                      {entry.text}
                     </span>
                   </span>
                 </p>
@@ -204,35 +198,3 @@ const StyledCheckboxCheck = styled.input`
     background-color: green;
   }
 `;
-
-// // Filter the keys inside experiences array that are true
-// const trueExperiences = submittedForm.experiences.reduce((acc, exp) => {
-//   const [key, value] = Object.entries(exp)[0]; // Get the key-value pair
-//   if (value) {
-//     acc.push(`<span>${key}</span>`); // If value is true, push the key inside a span tag to the accumulator
-//   }
-//   return acc;
-// }, []);
-
-{
-  /* <label htmlFor="anger">
-            <input type="checkbox" name="anger" />
-            anger
-          </label>
-          <label htmlFor="enjoyment">
-            <input type="checkbox" name="enjoyment" />
-            enjoyment
-          </label>
-          <label htmlFor="disgust">
-            <input type="checkbox" name="disgust" />
-            disgust
-          </label>
-          <label htmlFor="fear">
-            <input type="checkbox" name="fear" />
-            fear
-          </label>
-          <label htmlFor="sadness">
-            <input type="checkbox" name="sadness" />
-            sadness
-          </label> */
-}
