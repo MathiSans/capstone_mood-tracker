@@ -64,27 +64,39 @@ export default function FormAndList() {
       }}
     >
       <h1>mood tracker</h1>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="anger">
-          <input type="checkbox" name="anger" />
-          anger
-        </label>
-        <label htmlFor="enjoyment">
-          <input type="checkbox" name="enjoyment" />
-          enjoyment
-        </label>
-        <label htmlFor="disgust">
-          <input type="checkbox" name="disgust" />
-          disgust
-        </label>
-        <label htmlFor="fear">
-          <input type="checkbox" name="fear" />
-          fear
-        </label>
-        <label htmlFor="sadness">
-          <input type="checkbox" name="sadness" />
-          sadness
-        </label>
+      <form
+        onSubmit={onSubmit}
+        style={{
+          display: "flex",
+          justifyContent: "start",
+          alignItems: "center",
+          flexDirection: "column",
+          gap: "20px",
+        }}
+      >
+        <div>
+          <h2>Select how you feel:</h2>
+          <label htmlFor="anger">
+            <input type="checkbox" name="anger" />
+            anger
+          </label>
+          <label htmlFor="enjoyment">
+            <input type="checkbox" name="enjoyment" />
+            enjoyment
+          </label>
+          <label htmlFor="disgust">
+            <input type="checkbox" name="disgust" />
+            disgust
+          </label>
+          <label htmlFor="fear">
+            <input type="checkbox" name="fear" />
+            fear
+          </label>
+          <label htmlFor="sadness">
+            <input type="checkbox" name="sadness" />
+            sadness
+          </label>
+        </div>
         <input
           type="range"
           name="slider"
