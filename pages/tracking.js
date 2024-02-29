@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
 import styled from "styled-components";
+import Form from "@/components/Form/Form";
 
 export default function FormAndList() {
   const [rangeValue, setRangeValue] = useState(127.5);
@@ -52,47 +53,11 @@ export default function FormAndList() {
       <header>
         <h1>mood tracker</h1>
       </header>
-      <StyledForm onSubmit={onSubmit}>
-        <StyledSliderContainer>
-          <StyledEmote>😔</StyledEmote>
-          <StyledInput
-            type="range"
-            name="slider"
-            value={rangeValue}
-            onChange={handleRangeChange}
-            min={0}
-            max={255}
-          ></StyledInput>
-          <StyledEmote>🤩</StyledEmote>
-        </StyledSliderContainer>
-        <p>Select how you feel:</p>
-        <StyledTagCloud>
-          <StyledCheckboxLabel htmlFor="anger">
-            Anger
-            <StyledCheckbox type="checkbox" name="anger" id="anger" />
-          </StyledCheckboxLabel>
-          <StyledCheckboxLabel htmlFor="fear">
-            Fear
-            <StyledCheckbox type="checkbox" name="fear" id="fear" />
-          </StyledCheckboxLabel>
-          <StyledCheckboxLabel htmlFor="enjoyment">
-            Enjoyment
-            <StyledCheckbox type="checkbox" name="enjoyment" id="enjoyment" />
-          </StyledCheckboxLabel>
-          <StyledCheckboxLabel htmlFor="disgust">
-            Disgust
-            <StyledCheckbox type="checkbox" name="disgust" id="disgust" />
-          </StyledCheckboxLabel>
-          <StyledCheckboxLabel htmlFor="sadness">
-            Sadness
-            <StyledCheckbox type="checkbox" name="sadness" id="sadness" />
-          </StyledCheckboxLabel>
-        </StyledTagCloud>
-
-        <StyledTextArea name="text" placeholder="What's on your mind today?" />
-        <StyledButton type="submit">Submit</StyledButton>
-        <StyledSeparator />
-      </StyledForm>
+      <Form
+        onSubmit={onSubmit}
+        handleRangeValue={handleRangeChange}
+        rangeValue={rangeValue}
+      />
 
       <StyledEntryList>
         {allEntries.map((entry) => {
@@ -126,57 +91,6 @@ export default function FormAndList() {
     </>
   );
 }
-
-const StyledForm = styled.form`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  flex-direction: column;
-  gap: 20px;
-`;
-
-const StyledSliderContainer = styled.div``;
-
-const StyledEmote = styled.span`
-  font-size: 2rem;
-`;
-
-const StyledInput = styled.input`
-  width: 200px;
-`;
-
-const StyledTagCloud = styled.div`
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-`;
-const StyledCheckboxLabel = styled.label`
-  border: 1px solid white;
-  cursor: pointer;
-  border-radius: 12px;
-  padding: 0.5rem;
-  &:active {
-    background-color: green;
-  }
-`;
-
-const StyledCheckbox = styled.input`
-  display: none;
-  &:checked {
-    background-color: green;
-  }
-`;
-const StyledTextArea = styled.textarea`
-  width: 100%;
-  height: 80px;
-  border-radius: 10px;
-`;
-
-const StyledButton = styled.button`
-  width: 100%;
-  height: 30px;
-  border-radius: 10px;
-`;
 
 const StyledEntryList = styled.ul`
   list-style-type: none;

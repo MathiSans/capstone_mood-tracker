@@ -19,7 +19,7 @@ export default function HomePage() {
       >
         <small>Github</small>
       </Link>
-      <Link style={{ color: "white" }} href={"form-and-list"}>
+      <Link style={{ color: "white" }} href={"tracking"}>
         <small>Mood Tracker</small>
       </Link>
     </div>
