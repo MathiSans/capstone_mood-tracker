@@ -12,7 +12,7 @@ export default function HomePage() {
         backgroundColor: "black",
       }}
     >
-      <h1 style={{ color: "white" }}>Working title: Mood Diary</h1>
+      <h1 style={{ color: "white" }}>Working title: Mood Tracker</h1>
       <Link
         style={{ color: "white" }}
         href={"https://github.com/MathiSans/mood-diary"}
@@ -20,7 +20,7 @@ export default function HomePage() {
         <small>Github</small>
       </Link>
       <Link style={{ color: "white" }} href={"form-and-list"}>
-        <small>User Story 1 – Form and List</small>
+        <small>Mood Tracker</small>
       </Link>
     </div>
   );
