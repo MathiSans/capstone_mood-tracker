@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import styled from "styled-components";
 import Form from "@/components/Form/Form";
 
-export default function FormAndList() {
+export default function Tracking() {
   const [rangeValue, setRangeValue] = useState(127.5);
   const [allEntries, setAllEntries] = useState([]);
 
@@ -53,11 +53,7 @@ export default function FormAndList() {
       <header>
         <h1>mood tracker</h1>
       </header>
-      <Form
-        onSubmit={onSubmit}
-        handleRangeValue={handleRangeChange}
-        rangeValue={rangeValue}
-      />
+      <Form onSubmit={onSubmit} handleRangeChange={handleRangeChange} />
 
       <StyledEntryList>
         {allEntries.map((entry) => {

@@ -1,27 +1,34 @@
 import Link from "next/link";
+import styled from "styled-components";
 
 export default function HomePage() {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        flexDirection: "column",
-        backgroundColor: "black",
-      }}
-    >
-      <h1 style={{ color: "white" }}>Working title: Mood Tracker</h1>
-      <Link
-        style={{ color: "white" }}
-        href={"https://github.com/MathiSans/mood-diary"}
-      >
-        <small>Github</small>
-      </Link>
-      <Link style={{ color: "white" }} href={"tracking"}>
-        <small>Mood Tracker</small>
-      </Link>
-    </div>
+    <Container>
+      <h1>Working title: Mood Tracker</h1>
+      <StyledLink href={"https://github.com/MathiSans/mood-diary"}>
+        <p>Github</p>
+      </StyledLink>
+      <StyledLink href={"tracking"}>
+        <p>Mood Tracker</p>
+      </StyledLink>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  background-color: black;
+`;
+
+const StyledLink = styled(Link)`
+  color: white;
+  font-size: 1.5rem;
+
+  p {
+    margin: 5px;
+  }
+`;

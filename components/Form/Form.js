@@ -1,6 +1,6 @@
 import * as Styled from "./Form.styled";
 
-export default function Form({ onSubmit, rangeValue, handleRangeChange }) {
+export default function Form({ onSubmit, handleRangeChange }) {
   return (
     <Styled.Form onSubmit={onSubmit}>
       <Styled.SliderContainer>
@@ -8,7 +8,6 @@ export default function Form({ onSubmit, rangeValue, handleRangeChange }) {
         <Styled.Input
           type="range"
           name="slider"
-          rangeValue={rangeValue}
           onChange={handleRangeChange}
           min={0}
           max={255}
@@ -38,7 +37,6 @@ export default function Form({ onSubmit, rangeValue, handleRangeChange }) {
           <Styled.Checkbox type="checkbox" name="sadness" id="sadness" />
         </Styled.CheckboxLabel>
       </Styled.TagCloud>
-
       <Styled.TextArea name="text" placeholder="What's on your mind today?" />
       <Styled.Button type="submit">Submit</Styled.Button>
       <Styled.Separator />

@@ -50,3 +50,8 @@ export const Button = styled.button`
   height: 30px;
   border-radius: 10px;
 `;
+
+export const Separator = styled.hr`
+  border: 0.5px solid grey;
+  width: 100%;
+`;
