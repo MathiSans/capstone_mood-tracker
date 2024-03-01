@@ -5,5 +5,4 @@ export const Form = styled.form`
   justify-content: start;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
 `;
