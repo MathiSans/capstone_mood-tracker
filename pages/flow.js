@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { nanoid } from "nanoid";
 import { TrackerContainer } from "@/styles";
 import styled from "styled-components";
