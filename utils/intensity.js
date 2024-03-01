@@ -1,4 +1,4 @@
-export default function intensity({ intensity }) {
+export default function Intensity({ intensity }) {
   if (intensity <= 51) {
     return <span>very sad</span>;
   }

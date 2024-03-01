@@ -4,11 +4,11 @@ import styled from "styled-components";
 export default function HomePage() {
   return (
     <Container>
-      <h1>Working title: Mood Tracker</h1>
+      <h1>Mood Tracker &#40;wip&#41;</h1>
       <StyledLink href={"https://github.com/MathiSans/mood-diary"}>
         <p>Github</p>
       </StyledLink>
-      <StyledLink href={"tracking"}>
+      <StyledLink href={"flow"}>
         <p>Mood Tracker</p>
       </StyledLink>
     </Container>

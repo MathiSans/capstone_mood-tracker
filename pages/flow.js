@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
+import { TrackerContainer } from "@/styles";
 import styled from "styled-components";
+import Intensity from "@/utils/intensity";
 import Form from "@/components/Form/Form";
 
-export default function Tracking() {
+export default function Flow() {
   const [rangeValue, setRangeValue] = useState(127.5);
   const [allEntries, setAllEntries] = useState([]);
 
@@ -33,23 +35,8 @@ export default function Tracking() {
     event.target.reset();
   }
 
-  function Intensity({ intensity }) {
-    if (intensity <= 51) {
-      return <span>very sad</span>;
-    }
-    if (intensity > 51 && intensity <= 102) {
-      return <span>sad</span>;
-    }
-    if (intensity > 102 && intensity <= 153) {
-      return <span>pleasant</span>;
-    }
-    if (intensity > 153 && intensity <= 255) {
-      return <span>extremely good</span>;
-    }
-  }
-
   return (
-    <>
+    <TrackerContainer>
       <header>
         <h1>mood tracker</h1>
       </header>
@@ -84,7 +71,7 @@ export default function Tracking() {
           );
         })}
       </StyledEntryList>
-    </>
+    </TrackerContainer>
   );
 }
 
@@ -96,7 +83,6 @@ const StyledEntry = styled.li`
   display: flex;
   justify-content: start;
   flex-direction: column;
-  gap: 10px;
 `;
 
 const StyledSliderText = styled.span`
