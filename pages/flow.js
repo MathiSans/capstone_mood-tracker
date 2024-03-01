@@ -1,40 +1,10 @@
 import { useState } from "react";
-import { nanoid } from "nanoid";
 import { TrackerContainer } from "@/styles";
 import styled from "styled-components";
 import Intensity from "@/utils/intensity";
 import Form from "@/components/Form/Form";
 
-export default function Flow() {
-  const [rangeValue, setRangeValue] = useState(127.5);
-  const [allEntries, setAllEntries] = useState([]);
-
-  const handleRangeChange = (event) => {
-    setRangeValue(event.target.value);
-  };
-
-  function onSubmit(event) {
-    event.preventDefault();
-    const submittedForm = {
-      id: nanoid(),
-      experiences: [
-        { anger: event.target.anger.checked },
-        { enjoyment: event.target.enjoyment.checked },
-        { fear: event.target.fear.checked },
-        { disgust: event.target.disgust.checked },
-        { sadness: event.target.sadness.checked },
-      ],
-      text: event.target.text.value,
-      slider: rangeValue,
-
-      date: new Date().toLocaleString(),
-    };
-
-    setAllEntries([...allEntries, submittedForm]);
-    console.log([...allEntries, submittedForm]);
-    event.target.reset();
-  }
-
+export default function Flow({ allEntries, onSubmit, handleRangeChange }) {
   return (
     <TrackerContainer>
       <header>
