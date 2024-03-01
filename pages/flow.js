@@ -1,16 +1,17 @@
 import { useState } from "react";
+import { nanoid } from "nanoid";
 import { TrackerContainer } from "@/styles";
 import styled from "styled-components";
 import Intensity from "@/utils/intensity";
 import Form from "@/components/Form/Form";
 
-export default function Flow({ allEntries, onSubmit, handleRangeChange }) {
+export default function Flow({ allEntries, handleSubmit, handleRangeChange }) {
   return (
     <TrackerContainer>
       <header>
         <h1>mood tracker</h1>
       </header>
-      <Form onSubmit={onSubmit} handleRangeChange={handleRangeChange} />
+      <Form onSubmit={handleSubmit} handleRangeChange={handleRangeChange} />
 
       <StyledEntryList>
         {allEntries.map((entry) => {

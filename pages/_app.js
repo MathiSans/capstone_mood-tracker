@@ -37,7 +37,7 @@ export default function App({ Component, pageProps }) {
       <GlobalStyle />
       <Component
         allEntries={allEntries}
-        handleSubmit={onSubmit}
+        handleSubmit={handleSubmit}
         handleRangeChange={handleRangeChange}
         {...pageProps}
       />
