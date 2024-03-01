@@ -1,8 +1,9 @@
-import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 import { TrackerContainer } from "@/styles";
-import styled from "styled-components";
-import Intensity from "@/utils/intensity";
+// import styled from "styled-components";
+// import Intensity from "@/utils/intensity";
 import Form from "@/components/Form/Form";
+import StyledEntryList from "@/components/EntryList/EntryList";
 
 export default function Flow({ allEntries, handleSubmit, handleRangeChange }) {
   return (
@@ -11,8 +12,8 @@ export default function Flow({ allEntries, handleSubmit, handleRangeChange }) {
         <h1>mood tracker</h1>
       </header>
       <Form onSubmit={handleSubmit} handleRangeChange={handleRangeChange} />
-
-      <StyledEntryList>
+      <StyledEntryList allEntries={allEntries} />
+      {/* <StyledEntryList>
         {allEntries.map((entry) => {
           return (
             <StyledEntry key={entry.id}>
@@ -40,35 +41,35 @@ export default function Flow({ allEntries, handleSubmit, handleRangeChange }) {
             </StyledEntry>
           );
         })}
-      </StyledEntryList>
+      </StyledEntryList> */}
     </TrackerContainer>
   );
 }
 
-const StyledEntryList = styled.ul`
-  list-style-type: none;
-  padding: 0;
-`;
-const StyledEntry = styled.li`
-  display: flex;
-  justify-content: start;
-  flex-direction: column;
-`;
+// const StyledEntryList = styled.ul`
+//   list-style-type: none;
+//   padding: 0;
+// `;
+// const StyledEntry = styled.li`
+//   display: flex;
+//   justify-content: start;
+//   flex-direction: column;
+// `;
 
-const StyledSliderText = styled.span`
-  font-weight: bold;
-`;
+// const StyledSliderText = styled.span`
+//   font-weight: bold;
+// `;
 
-const StyledExperienceText = styled.span`
-  font-weight: bold;
-`;
+// const StyledExperienceText = styled.span`
+//   font-weight: bold;
+// `;
 
-const StyledEntryText = styled.span`
-  font-weight: bold;
-  font-style: italic;
-`;
+// const StyledEntryText = styled.span`
+//   font-weight: bold;
+//   font-style: italic;
+// `;
 
-const StyledSeparator = styled.hr`
-  border: 0.5px solid grey;
-  width: 100%;
-`;
+// const StyledSeparator = styled.hr`
+//   border: 0.5px solid grey;
+//   width: 100%;
+// `;
