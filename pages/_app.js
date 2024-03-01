@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }) {
     setRangeValue(event.target.value);
   };
 
-  function onSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
     const submittedForm = {
       id: nanoid(),
@@ -37,7 +37,7 @@ export default function App({ Component, pageProps }) {
       <GlobalStyle />
       <Component
         allEntries={allEntries}
-        onSubmit={onSubmit}
+        handleSubmit={onSubmit}
         handleRangeChange={handleRangeChange}
         {...pageProps}
       />
