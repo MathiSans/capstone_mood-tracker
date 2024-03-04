@@ -1,10 +1,14 @@
 import GlobalStyle from "../styles";
 import { useState } from "react";
 import { nanoid } from "nanoid";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function App({ Component, pageProps }) {
   const [rangeValue, setRangeValue] = useState(127.5);
-  const [allEntries, setAllEntries] = useState([]);
+  // const [allEntries, setAllEntries] = useState([]);
+  const [allEntries, setAllEntries] = useLocalStorageState("allEntries", {
+    defaultValue: [],
+  });
 
   const handleRangeChange = (event) => {
     setRangeValue(event.target.value);
