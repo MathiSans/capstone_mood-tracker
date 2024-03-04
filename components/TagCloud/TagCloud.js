@@ -1,8 +1,8 @@
-import { TagCloud } from "./TagCloud.styled";
+import * as S from "@/components/styled";
 
-export default function StyledTagCloud() {
+export default function ExperienceTagCloud() {
   return (
-    <TagCloud>
+    <S.ExperienceTagCloud>
       <label htmlFor="anger">
         Anger
         <input type="checkbox" name="anger" id="anger" />
@@ -23,6 +23,6 @@ export default function StyledTagCloud() {
         Sadness
         <input type="checkbox" name="sadness" id="sadness" />
       </label>
-    </TagCloud>
+    </S.ExperienceTagCloud>
   );
 }

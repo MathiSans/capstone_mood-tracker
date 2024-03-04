@@ -1,5 +1,5 @@
-import { Button } from "./Button.styled";
+import * as S from "@/components/styled";
 
-export default function StyledButton() {
-  return <Button type="submit">Submit</Button>;
+export default function Button() {
+  return <S.Button type="submit">Submit</S.Button>;
 }

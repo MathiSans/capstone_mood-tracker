@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { TrackerContainer } from "@/styles";
+import { TrackerContainer } from "@/global-styles";
 import styled from "styled-components";
 import Intensity from "@/utils/intensity";
 import Form from "@/components/Form/Form";

@@ -1,4 +1,4 @@
-import { Form } from "./Form.styled";
+import * as S from "@/components/styled";
 import EmoteUnpleasant from "../Emotes/EmoteUnpleasant";
 import EmotePleasant from "../Emotes/EmotePleasant";
 import Slider from "../Slider/Slider";
@@ -8,9 +8,9 @@ import TextBox from "../TextBox/TextBox";
 import Button from "../Button/Button";
 import Separator from "../Separator/Separator";
 
-export default function StyledForm({ onSubmit, handleRangeChange }) {
+export default function Form({ onSubmit, handleRangeChange }) {
   return (
-    <Form onSubmit={onSubmit}>
+    <S.Form onSubmit={onSubmit}>
       <div>
         <EmoteUnpleasant />
         <Slider onChange={handleRangeChange} />
@@ -21,6 +21,6 @@ export default function StyledForm({ onSubmit, handleRangeChange }) {
       <TextBox />
       <Button />
       <Separator />
-    </Form>
+    </S.Form>
   );
 }

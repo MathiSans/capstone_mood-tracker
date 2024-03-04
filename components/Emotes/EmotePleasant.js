@@ -1,9 +1,9 @@
-import { EmotePleasant } from "./EmotePleasant.styled";
+import * as S from "@/components/styled";
 
-export default function StyledEmotePleasant() {
+export default function EmotePleasant() {
   return (
     <>
-      <EmotePleasant>🤩</EmotePleasant>
+      <S.EmotePleasant>🤩</S.EmotePleasant>
     </>
   );
 }

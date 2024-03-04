@@ -1,9 +1,9 @@
-import { Slider } from "./Slider.styled";
+import * as S from "@/components/styled";
 
-export default function StyledSlider() {
+export default function Slider() {
   return (
     <>
-      <Slider type="range" name="slider" min={0} max={255}></Slider>
+      <S.Slider type="range" name="slider" min={0} max={255}></S.Slider>
     </>
   );
 }

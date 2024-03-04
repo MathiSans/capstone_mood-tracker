@@ -1,8 +1,7 @@
-import GlobalStyle from "../global-styles";
 import { useState } from "react";
 import { nanoid } from "nanoid";
 
-export default function App({ Component, pageProps }) {
+export default function Tracking() {
   const [rangeValue, setRangeValue] = useState(127.5);
   const [allEntries, setAllEntries] = useState([]);
 
@@ -10,7 +9,7 @@ export default function App({ Component, pageProps }) {
     setRangeValue(event.target.value);
   };
 
-  function handleSubmit(event) {
+  function onSubmit(event) {
     event.preventDefault();
     const submittedForm = {
       id: nanoid(),
@@ -31,16 +30,4 @@ export default function App({ Component, pageProps }) {
     console.log([...allEntries, submittedForm]);
     event.target.reset();
   }
-
-  return (
-    <>
-      <GlobalStyle />
-      <Component
-        allEntries={allEntries}
-        handleSubmit={handleSubmit}
-        handleRangeChange={handleRangeChange}
-        {...pageProps}
-      />
-    </>
-  );
 }

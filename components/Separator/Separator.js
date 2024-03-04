@@ -1,5 +1,5 @@
-import { Separator } from "./Separator.styled";
+import * as S from "@/components/styled";
 
-export default function StyledSeparator() {
-  return <Separator />;
+export default function Separator() {
+  return <S.Separator />;
 }
