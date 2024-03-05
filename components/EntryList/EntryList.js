@@ -18,7 +18,6 @@ export default function StyledEntryList({ allEntries }) {
         return (
           <StyledEntry key={entry.id}>
             <small>{entry.date}</small>
-
             <p>
               You felt{" "}
               <SliderText>
