@@ -1,6 +1,126 @@
-[
-  {
-    "id": 1,
-    "slider-value": 200
-  }
-]
+{
+  "experiences": [
+    {
+      "name": "anger",
+      "color": "red",
+      "selected": false,
+      "intensity": [
+        { "name": "annoyance", "selected": false },
+        { "name": "frustration", "selected": false },
+        { "name": "exasperation", "selected": false },
+        { "name": "argumentativeness", "selected": false },
+        { "name": "bitterness", "selected": false },
+        { "name": "vengefulness", "selected": false },
+        { "name": "fury", "selected": false }
+      ],
+      "reactions": [
+        { "name": "dispute", "selected": false },
+        { "name": "be passive-aggressive", "selected": false },
+        { "name": "insult", "selected": false },
+        { "name": "quarrel", "selected": false },
+        { "name": "scream/yell", "selected": false },
+        { "name": "simmer/brood", "selected": false },
+        { "name": "suppress", "selected": false },
+        { "name": "use physical force", "selected": false },
+        { "name": "undermine", "selected": false }
+      ]
+    },
+    {
+      "name": "fear",
+      "color": "purple",
+      "selected": false,
+      "intensity": [
+        { "name": "trepidation", "selected": false },
+        { "name": "nervousness", "selected": false },
+        { "name": "anxiety", "selected": false },
+        { "name": "dread", "selected": false },
+        { "name": "desperation", "selected": false },
+        { "name": "panic", "selected": false },
+        { "name": "horror", "selected": false },
+        { "name": "terror", "selected": false }
+      ],
+      "reactions": [
+        { "name": "avoid", "selected": false },
+        { "name": "freeze", "selected": false },
+        { "name": "hesitate", "selected": false },
+        { "name": "ruminate", "selected": false },
+        { "name": "scream/yell", "selected": false },
+        { "name": "withdraw", "selected": false },
+        { "name": "worry", "selected": false }
+      ]
+    },
+    {
+      "name": "enjoyment",
+      "color": "yellow",
+      "selected": false,
+      "intensity": [
+        { "name": "sensory pleasure", "selected": false },
+        { "name": "rejoicing", "selected": false },
+        { "name": "compassion/joy", "selected": false },
+        { "name": "amusement", "selected": false },
+        { "name": "schadenfreude", "selected": false },
+        { "name": "peace", "selected": false },
+        { "name": "pride", "selected": false },
+        { "name": "fiero", "selected": false },
+        { "name": "naches", "selected": false },
+        { "name": "wonder", "selected": false },
+        { "name": "excitement", "selected": false },
+        { "name": "extasy", "selected": false }
+      ],
+      "reactions": [
+        { "name": "exclaim", "selected": false },
+        { "name": "engage/connect", "selected": false },
+        { "name": "gloat", "selected": false },
+        { "name": "indulge", "selected": false },
+        { "name": "maintain", "selected": false },
+        { "name": "savor", "selected": false },
+        { "name": "seek more", "selected": false }
+      ]
+    },
+    {
+      "name": "disgust",
+      "color": "green",
+      "selected": false,
+      "intensity": [
+        { "name": "dislike", "selected": false },
+        { "name": "aversion", "selected": false },
+        { "name": "distaste", "selected": false },
+        { "name": "repugnance", "selected": false },
+        { "name": "revulsion", "selected": false },
+        { "name": "abhorrence", "selected": false },
+        { "name": "loathing", "selected": false }
+      ],
+      "reactions": [
+        { "name": "avoid", "selected": false },
+        { "name": "dehumanize", "selected": false },
+        { "name": "vomit", "selected": false },
+        { "name": "withdraw", "selected": false }
+      ]
+    },
+    {
+      "name": "sadness",
+      "color": "blue",
+      "selected": false,
+      "intensity": [
+        { "name": "disappointment", "selected": false },
+        { "name": "discouragement", "selected": false },
+        { "name": "distraughtness", "selected": false },
+        { "name": "helplessness", "selected": false },
+        { "name": "hopelessness", "selected": false },
+        { "name": "misery", "selected": false },
+        { "name": "despair", "selected": false },
+        { "name": "grief", "selected": false },
+        { "name": "sorrow", "selected": false },
+        { "name": "anguish", "selected": false }
+      ],
+      "reactions": [
+        { "name": "feel ashamed", "selected": false },
+        { "name": "mourn", "selected": false },
+        { "name": "protest", "selected": false },
+        { "name": "ruminate", "selected": false },
+        { "name": "seek comfort", "selected": false },
+        { "name": "withdraw", "selected": false }
+      ]
+    }
+  ]
+}

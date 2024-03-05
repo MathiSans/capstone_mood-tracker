@@ -1,3 +1,3 @@
-export default function StyledGuide() {
-  return <h2 />;
+export default function Guide({ text, bigger }) {
+  return <h2 style={{ fontSize: `${bigger ? "3rem" : ""}` }}>{text}</h2>;
 }

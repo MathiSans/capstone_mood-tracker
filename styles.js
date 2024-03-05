@@ -26,7 +26,8 @@ export default createGlobalStyle`
     font-size: 1.5rem;
     font-weight: 200;
   }
-`;
+
+  `;
 
 export const TrackerContainer = styled.div`
   display: flex;
