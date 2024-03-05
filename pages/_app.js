@@ -32,7 +32,6 @@ export default function App({ Component, pageProps }) {
     };
 
     setAllEntries([...allEntries, submittedForm]);
-    console.log([...allEntries, submittedForm]);
     event.target.reset();
   }
 
