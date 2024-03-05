@@ -132,7 +132,7 @@ export default function TestFlow() {
 
   return (
     <>
-      {/* <Animation color={color} opacity={sliderValue} /> */}
+      <Animation color={color} opacity={sliderValue} />
       <TestFlowContainer>
         <>{PageDisplay()}</>
         <div style={{ display: "flex", gap: "20px" }}>
