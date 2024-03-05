@@ -9,6 +9,7 @@ import {
   EntryText,
   Separator,
   EditDeleteButton,
+  StyledEntryHeadnote,
 } from "@/components/EntryList/EntryList.styled";
 
 export default function StyledEntryList({ allEntries }) {
@@ -17,8 +18,12 @@ export default function StyledEntryList({ allEntries }) {
       {allEntries.map((entry) => {
         return (
           <StyledEntry key={entry.id}>
-            <small>{entry.date}</small>
-
+            <StyledEntryHeadnote>
+              <small>{entry.date}</small>
+              <span>
+                <EditDeleteButton>🗑️</EditDeleteButton>
+              </span>
+            </StyledEntryHeadnote>
             <p>
               You felt{" "}
               <SliderText>
