@@ -18,10 +18,7 @@ export default function StyledEntryList({ allEntries }) {
         return (
           <StyledEntry key={entry.id}>
             <small>{entry.date}</small>
-            <span>
-              <EditDeleteButton>E</EditDeleteButton>
-              <EditDeleteButton variant="2">D</EditDeleteButton>
-            </span>
+
             <p>
               You felt{" "}
               <SliderText>
