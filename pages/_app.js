@@ -35,6 +35,10 @@ export default function App({ Component, pageProps }) {
     event.target.reset();
   }
 
+  function handleDeleteEntryListItem(id) {
+    console.log("idTESTSST", id);
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -42,6 +46,7 @@ export default function App({ Component, pageProps }) {
         allEntries={allEntries}
         handleSubmit={handleSubmit}
         handleRangeChange={handleRangeChange}
+        handleDeleteEntryListItem={handleDeleteEntryListItem}
         {...pageProps}
       />
     </>

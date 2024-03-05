@@ -12,7 +12,12 @@ import {
   StyledEntryHeadnote,
 } from "@/components/EntryList/EntryList.styled";
 
-export default function StyledEntryList({ allEntries }) {
+export default function StyledEntryList({
+  allEntries,
+  handleDeleteEntryListItem,
+}) {
+  console.log("handleDeleteEntryListItem", handleDeleteEntryListItem);
+
   return (
     <EntryList>
       {allEntries.map((entry) => {
@@ -21,7 +26,9 @@ export default function StyledEntryList({ allEntries }) {
             <StyledEntryHeadnote>
               <small>{entry.date}</small>
               <span>
-                <EditDeleteButton>🗑️</EditDeleteButton>
+                <EditDeleteButton onClick={handleDeleteEntryListItem}>
+                  🗑️
+                </EditDeleteButton>
               </span>
             </StyledEntryHeadnote>
             <p>
