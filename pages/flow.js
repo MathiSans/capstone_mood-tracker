@@ -134,7 +134,7 @@ export default function TestFlow() {
 
   return (
     <>
-      {/* <Animation color={color} opacity={sliderValue} /> */}
+      <Animation color={color} opacity={sliderValue} />
       <FlowContainer>
         <>{PageDisplay()}</>
         <Navigation>
