@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
+import { experiences } from "@/experiences";
+import useLocalStorageState from "use-local-storage-state";
 import Guide from "@/components/Guide/Guide";
 import GuideAnimator from "@/components/GuideAnimator/GuideAnimator";
 import TestSlider from "@/components/TestSlider/TestSlider";
 import Animation from "@/components/Animation/Animation";
 import TestTagCloud from "@/components/TestTagCloud/TestTagCloud";
-import useLocalStorageState from "use-local-storage-state";
 import TestPage from "@/components/TestPage/TestPage";
 import TestFlowContainer from "@/components/TestFlowContainer/TestFlowContainer";
-import { experiences } from "@/experiences";
+import Navigation from "@/components/Navigation/Navigation";
+import TestNavButton from "@/components/TestNavButton/TestNavButton";
 
 export default function TestFlow() {
   const router = useRouter();
@@ -132,93 +134,48 @@ export default function TestFlow() {
 
   return (
     <>
-      <Animation color={color} opacity={sliderValue} />
+      {/* <Animation color={color} opacity={sliderValue} /> */}
       <TestFlowContainer>
         <>{PageDisplay()}</>
-        <div style={{ display: "flex", gap: "20px" }}>
-          {page > 2 && page <= 4 && (
-            <button
-              style={{
-                padding: "10px 26px",
-                color: "white",
-                backgroundColor: "transparent",
-                border: "1px solid white",
-                cursor: "pointer",
+        <Navigation>
+          {page === 0 && <TestNavButton disabled>login</TestNavButton>}
+          {page <= 1 && (
+            <TestNavButton
+              handleClick={() => {
+                setPage((currPage) => currPage + 1);
               }}
-              onClick={() => setPage((currPage) => currPage - 1)}
+            >
+              {page === 0 ? "anonymous" : "next"}
+            </TestNavButton>
+          )}
+          {page > 2 && page <= 4 && (
+            <TestNavButton
+              handleClick={() => setPage((currPage) => currPage - 1)}
             >
               prev
-            </button>
-          )}
-          {page === 0 && (
-            <button
-              disabled
-              style={{
-                padding: "10px 26px",
-                color: "grey",
-                backgroundColor: "transparent",
-                border: "1px solid grey",
-                cursor: "not-allowed",
-              }}
-            >
-              login
-            </button>
-          )}
-          {page <= 1 && (
-            <button
-              style={{
-                padding: "10px 26px",
-                color: "white",
-                backgroundColor: "transparent",
-                border: "1px solid white",
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                setPage((currPage) => currPage + 1);
-              }}
-            >
-              {page === 0 ? "anonymous" : "next"}
-            </button>
+            </TestNavButton>
           )}
           {page >= 2 && page <= 3 && (
-            <button
+            <TestNavButton
               disabled={experience.length === 0}
-              style={{
-                padding: "10px 26px",
-                backgroundColor: "transparent",
-                cursor: experience.length === 0 ? "not-allowed" : "pointer",
-                border:
-                  experience.length === 0
-                    ? "1px solid grey"
-                    : "1px solid white",
-                color: experience.length === 0 ? "grey" : "white",
-              }}
-              onClick={() => {
+              handleClick={() => {
                 setPage((currPage) => currPage + 1);
               }}
             >
-              {page === 0 ? "anonymous" : "next"}
-            </button>
+              next
+            </TestNavButton>
           )}
           {page === 4 && (
-            <button
+            <TestNavButton
               disabled={reactions.length === 0}
-              style={{
-                padding: "10px 26px",
-                backgroundColor: "transparent",
-                cursor: reactions.length === 0 ? "not-allowed" : "pointer",
-                border:
-                  reactions.length === 0 ? "1px solid grey" : "1px solid white",
-                color: reactions.length === 0 ? "grey" : "white",
-              }}
-              onClick={() => {
+              handleClick={() => {
                 handleSave();
               }}
             >
               save
-            </button>
+            </TestNavButton>
           )}
-        </div>
+        </Navigation>
       </TestFlowContainer>
     </>
   );
