@@ -6,7 +6,7 @@ export default function Flow({
   allEntries,
   handleSubmit,
   handleRangeChange,
-  deleteEntry,
+  onDeleteEntry,
 }) {
   return (
     <TrackerContainer>
@@ -14,7 +14,7 @@ export default function Flow({
         <h1>mood tracker</h1>
       </header>
       <Form onSubmit={handleSubmit} handleRangeChange={handleRangeChange} />
-      <EntryList allEntries={allEntries} deleteEntry={deleteEntry} />
+      <EntryList allEntries={allEntries} onDeleteEntry={onDeleteEntry} />
     </TrackerContainer>
   );
 }

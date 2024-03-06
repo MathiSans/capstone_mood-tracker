@@ -34,7 +34,7 @@ export default function App({ Component, pageProps }) {
     event.target.reset();
   }
 
-  function deleteEntry(id) {
+  function handleDeleteEntry(id) {
     setAllEntries((prevEntries) =>
       prevEntries.filter((entry) => entry.id !== id)
     );
@@ -47,7 +47,7 @@ export default function App({ Component, pageProps }) {
         allEntries={allEntries}
         handleSubmit={handleSubmit}
         handleRangeChange={handleRangeChange}
-        deleteEntry={deleteEntry}
+        onDeleteEntry={handleDeleteEntry}
         {...pageProps}
       />
     </>
