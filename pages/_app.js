@@ -35,8 +35,11 @@ export default function App({ Component, pageProps }) {
     event.target.reset();
   }
 
-  function handleDeleteEntryListItem(id) {
-    console.log("idTESTSST", id);
+  function deleteEntry(id) {
+    console.log("APPJSID", id);
+    setAllEntries((prevEntries) =>
+      prevEntries.filter((entry) => entry.id !== id)
+    );
   }
 
   return (
@@ -46,7 +49,7 @@ export default function App({ Component, pageProps }) {
         allEntries={allEntries}
         handleSubmit={handleSubmit}
         handleRangeChange={handleRangeChange}
-        handleDeleteEntryListItem={handleDeleteEntryListItem}
+        deleteEntry={deleteEntry}
         {...pageProps}
       />
     </>
