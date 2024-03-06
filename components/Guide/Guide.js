@@ -1,3 +1,5 @@
+import * as Styled from "./Guide.styled";
+
 export default function Guide({ text, bigger }) {
-  return <h2 style={{ fontSize: `${bigger ? "3rem" : ""}` }}>{text}</h2>;
+  return <Styled.Title bigger={bigger}>{text}</Styled.Title>;
 }

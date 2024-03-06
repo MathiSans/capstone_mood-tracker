@@ -13,7 +13,6 @@ export const StyledEntry = styled.li`
 
 export const StyledEntryHeadnote = styled.p`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
 `;
 

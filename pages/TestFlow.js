@@ -3,12 +3,15 @@ import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import { experiences } from "@/experiences";
 import useLocalStorageState from "use-local-storage-state";
+import Guide from "@/components/Guide/Guide";
+import GuideAnimator from "@/components/GuideAnimator/GuideAnimator";
+import Slider from "@/components/Slider/Slider";
 import Animation from "@/components/Animation/Animation";
+import TagCloud from "@/components/TagCloud/TagCloud";
 import Page from "@/components/Page/Page";
 import FlowContainer from "@/components/FlowContainer/FlowContainer";
 import Navigation from "@/components/Navigation/Navigation";
 import NavButton from "@/components/NavButton/NavButton";
-import PageDisplay from "@/components/PageDisplay/PageDisplay";
 
 export default function TestFlow() {
   const router = useRouter();
@@ -43,6 +46,63 @@ export default function TestFlow() {
     "what's your reaction?",
   ];
 
+  function PageDisplay() {
+    switch (page) {
+      case 0:
+        return (
+          <Page>
+            <Guide bigger={true} text={"komm zur Ruh"} />
+          </Page>
+        );
+      case 1:
+        return (
+          <Page>
+            <GuideAnimator guides={guides} />
+          </Page>
+        );
+      case 2:
+        return (
+          <Page>
+            <Guide text={guides[4]} />
+            <TagCloud
+              tags={experiences}
+              colorSelected={true}
+              allowMultiple={false}
+              onSelectTag={handleSelectExperience}
+              selectedTags={experience}
+            />
+          </Page>
+        );
+      case 3:
+        return (
+          <Page>
+            <Guide text={guides[5]} />
+            <Slider
+              experience={experience}
+              sliderValue={sliderValue}
+              handleSliderChange={handleSliderChange}
+            />
+          </Page>
+        );
+      case 4:
+        return (
+          <Page>
+            <Guide text={guides[6]} />
+            <TagCloud
+              selectedTags={reactions}
+              tags={experience[0].reactions}
+              colorSelected={true}
+              allowMultiple={true}
+              onSelectTag={handleSelectReactions}
+            />
+          </Page>
+        );
+    }
+  }
+
+  // function handleColorChange(color) {
+  //   setColor(color);
+  // }
   function handleSelectExperience(tags) {
     setExperience(tags);
     setColor(tags[0].color);
@@ -68,25 +128,14 @@ export default function TestFlow() {
       },
     ]);
     // router.push("entries");
+    // window.location.reload();
   }
 
   return (
     <>
       <Animation color={color} opacity={sliderValue} />
       <FlowContainer>
-        <Page>
-          <PageDisplay
-            guides={guides}
-            experience={experience}
-            experiences={experiences}
-            page={page}
-            reactions={reactions}
-            sliderValue={sliderValue}
-            handleSliderChange={handleSliderChange}
-            handleSelectExperience={handleSelectExperience}
-            handleSelectReactions={handleSelectReactions}
-          />
-        </Page>
+        <>{PageDisplay()}</>
         <Navigation>
           {page === 0 && <NavButton disabled>login</NavButton>}
           {page <= 1 && (
@@ -116,7 +165,9 @@ export default function TestFlow() {
           {page === 4 && (
             <NavButton
               disabled={reactions.length === 0}
-              handleClick={handleSave}
+              handleClick={() => {
+                handleSave();
+              }}
             >
               save
             </NavButton>

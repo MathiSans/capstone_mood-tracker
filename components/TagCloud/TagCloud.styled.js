@@ -11,7 +11,6 @@ export const TagCloud = styled.div`
 export const Button = styled.button`
   padding: 10px 26px;
   color: white;
-  background-color: transparent;
   border: 1px solid white;
   cursor: pointer;
   background-color: ${({ active, color }) => (active ? color : "transparent")};

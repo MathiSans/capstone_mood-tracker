@@ -1,7 +1,7 @@
 import * as Styled from "./TagCloud.styled";
 import { nanoid } from "nanoid";
 
-export default function TestTagCloud({
+export default function TagCloud({
   onSelectTag,
   selectedTags,
   tags,
@@ -24,15 +24,18 @@ export default function TestTagCloud({
     <Styled.TagCloud>
       {tags.map((tag) => (
         <Styled.Button
-          key={nanoid()}
+          key={tag.index}
           onClick={() => toggleTag(tag)}
-          style={{
-            backgroundColor:
-              colorSelected &&
-              selectedTags.some((selectedTag) => selectedTag.name === tag.name)
-                ? tag.color || "rgba(255, 255, 255, 0.2)"
-                : "transparent",
-          }}
+          active={
+            colorSelected &&
+            selectedTags.some((selectedTag) => selectedTag.name === tag.name)
+          }
+          color={
+            colorSelected &&
+            selectedTags.some((selectedTag) => selectedTag.name === tag.name)
+              ? tag.color || "rgba(255, 255, 255, 0.2)"
+              : "transparent"
+          }
         >
           {tag.name}
         </Styled.Button>

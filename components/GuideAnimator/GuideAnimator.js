@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Guide from "../Guide/Guide";
-import { AnimatedText } from "../Animation/Animation.styled";
+import { AnimatedText } from "./GuideAnimator.styled";
 
 export default function GuideAnimator({ guides }) {
   const [currentComponentIndex, setCurrentComponentIndex] = useState(0);

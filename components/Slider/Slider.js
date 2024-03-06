@@ -30,20 +30,13 @@ export default function Slider({
         min={0}
         max={1}
       />
-      <div style={{ display: "flex", gap: "10px" }}>
+      <Styled.IntensityContainer>
         {Intensity(sliderValue).map((intensity, index) => (
-          <div
-            key={index}
-            style={{
-              color: index === 1 ? "white" : "rgba(255, 255, 255, 0.2)",
-              textAlign: "center",
-              minWidth: "80px",
-            }}
-          >
+          <Styled.Intensity index={index} key={index}>
             {intensity}
-          </div>
+          </Styled.Intensity>
         ))}
-      </div>
+      </Styled.IntensityContainer>
     </>
   );
 }

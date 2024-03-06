@@ -35,7 +35,6 @@ export default function App({ Component, pageProps }) {
   }
 
   function deleteEntry(id) {
-    console.log("APPJSID", id);
     setAllEntries((prevEntries) =>
       prevEntries.filter((entry) => entry.id !== id)
     );
