@@ -16,6 +16,5 @@ export default function onSubmit(event) {
   };
 
   setAllEntries([...allEntries, submittedForm]);
-  console.log([...allEntries, submittedForm]);
   event.target.reset();
 }

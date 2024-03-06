@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { EntryList } from "./EntryList.styled";
+import { StyledEntryList } from "./EntryList.styled";
 import Intensity from "@/utils/intensity";
 
 import {
@@ -9,16 +9,28 @@ import {
   EntryText,
   Separator,
   EditDeleteButton,
+  StyledEntryHeadnote,
 } from "@/components/EntryList/EntryList.styled";
 
-export default function StyledEntryList({ allEntries }) {
+export default function EntryList({ allEntries, deleteEntry }) {
+  function handleDeleteEntryListItem(id) {
+    deleteEntry(id);
+  }
   return (
-    <EntryList>
+    <StyledEntryList>
       {allEntries.map((entry) => {
         return (
           <StyledEntry key={entry.id}>
-            <small>{entry.date}</small>
-
+            <StyledEntryHeadnote>
+              <small>{entry.date}</small>
+              <span>
+                <EditDeleteButton
+                  onClick={() => handleDeleteEntryListItem(entry.id)}
+                >
+                  🗑️
+                </EditDeleteButton>
+              </span>
+            </StyledEntryHeadnote>
             <p>
               You felt{" "}
               <SliderText>
@@ -41,6 +53,6 @@ export default function StyledEntryList({ allEntries }) {
           </StyledEntry>
         );
       })}{" "}
-    </EntryList>
+    </StyledEntryList>
   );
 }

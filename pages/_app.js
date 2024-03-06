@@ -5,7 +5,6 @@ import useLocalStorageState from "use-local-storage-state";
 
 export default function App({ Component, pageProps }) {
   const [rangeValue, setRangeValue] = useState(127.5);
-  // const [allEntries, setAllEntries] = useState([]);
   const [allEntries, setAllEntries] = useLocalStorageState("allEntries", {
     defaultValue: [],
   });
@@ -35,6 +34,12 @@ export default function App({ Component, pageProps }) {
     event.target.reset();
   }
 
+  function deleteEntry(id) {
+    setAllEntries((prevEntries) =>
+      prevEntries.filter((entry) => entry.id !== id)
+    );
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -42,6 +47,7 @@ export default function App({ Component, pageProps }) {
         allEntries={allEntries}
         handleSubmit={handleSubmit}
         handleRangeChange={handleRangeChange}
+        deleteEntry={deleteEntry}
         {...pageProps}
       />
     </>

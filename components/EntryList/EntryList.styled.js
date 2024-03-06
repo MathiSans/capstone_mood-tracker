@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const EntryList = styled.ul`
+export const StyledEntryList = styled.ul`
   list-style-type: none;
   padding: 0;
 `;
@@ -9,6 +9,11 @@ export const StyledEntry = styled.li`
   display: flex;
   justify-content: start;
   flex-direction: column;
+`;
+
+export const StyledEntryHeadnote = styled.p`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const SliderText = styled.span`
@@ -31,7 +36,7 @@ export const Separator = styled.hr`
 
 export const EditDeleteButton = styled.button`
   color: ${(props) => (props.variant !== "2" ? "white" : "black")};
-  background-color: ${(props) => (props.variant === "2" ? "red" : "green")};
+  background-color: ${(props) => (props.variant === "2" ? "red" : "white")};
   border-radius: 20%;
   border: 0;
 `;

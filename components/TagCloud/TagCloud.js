@@ -1,28 +1,45 @@
-import { TagCloud } from "./TagCloud.styled";
+import * as Styled from "./TagCloud.styled";
+import { nanoid } from "nanoid";
 
-export default function StyledTagCloud() {
+export default function TagCloud({
+  onSelectTag,
+  selectedTags,
+  tags,
+  colorSelected,
+  allowMultiple,
+}) {
+  const toggleTag = (tag) => {
+    if (allowMultiple) {
+      onSelectTag(
+        selectedTags.includes(tag)
+          ? selectedTags.filter((selectedTag) => selectedTag !== tag)
+          : [...selectedTags, tag]
+      );
+    } else {
+      onSelectTag([tag]);
+    }
+  };
+
   return (
-    <TagCloud>
-      <label htmlFor="anger">
-        Anger
-        <input type="checkbox" name="anger" id="anger" />
-      </label>
-      <label htmlFor="fear">
-        Fear
-        <input type="checkbox" name="fear" id="fear" />
-      </label>
-      <label htmlFor="enjoyment">
-        Enjoyment
-        <input type="checkbox" name="enjoyment" id="enjoyment" />
-      </label>
-      <label htmlFor="disgust">
-        Disgust
-        <input type="checkbox" name="disgust" id="disgust" />
-      </label>
-      <label htmlFor="sadness">
-        Sadness
-        <input type="checkbox" name="sadness" id="sadness" />
-      </label>
-    </TagCloud>
+    <Styled.TagCloud>
+      {tags.map((tag) => (
+        <Styled.Button
+          key={tag.index}
+          onClick={() => toggleTag(tag)}
+          active={
+            colorSelected &&
+            selectedTags.some((selectedTag) => selectedTag.name === tag.name)
+          }
+          color={
+            colorSelected &&
+            selectedTags.some((selectedTag) => selectedTag.name === tag.name)
+              ? tag.color || "rgba(255, 255, 255, 0.2)"
+              : "transparent"
+          }
+        >
+          {tag.name}
+        </Styled.Button>
+      ))}
+    </Styled.TagCloud>
   );
 }
