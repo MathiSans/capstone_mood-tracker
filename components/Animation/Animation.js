@@ -16,9 +16,9 @@ export default function Animation({ color, opacity, blur }) {
   const material = useMemo(() => {
     return (
       <AnimatedMeshDistortMaterial
-        distort={0.3 * opacity + 0.2}
+        distort={0.3 * opacity + 0.25}
         color={color}
-        speed={3 * opacity + 3}
+        speed={3 * opacity + 4}
       />
     );
   }, [color, opacity]);
@@ -26,6 +26,7 @@ export default function Animation({ color, opacity, blur }) {
   return (
     <Styled.Container style={{ filter: `blur(${blur}px)` }}>
       <Canvas shadows camera={{ position: [0, 0, 4.5], fov: 50 }}>
+        <directionalLight intensity={2} position={[0, 3, 2]} />
         <AccumulativeShadows
           temporal
           frames={200}
@@ -44,16 +45,16 @@ export default function Animation({ color, opacity, blur }) {
           />
         </AccumulativeShadows>
 
-        <Center top>
-          <mesh castShadow>
-            <sphereGeometry args={[0.9, 64, 64]} />
+        <Center >
+          <mesh >
+            <sphereGeometry args={[1.1, 64, 64]} />
             {material}
           </mesh>
         </Center>
-        <Env />
+        <Env/>
         <OrbitControls
           autoRotate
-          autoRotateSpeed={opacity * 10}
+          autoRotateSpeed={opacity * 5}
           enablePan={false}
           enableZoom={false}
           minPolarAngle={Math.PI / 2.1}

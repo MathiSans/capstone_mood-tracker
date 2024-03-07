@@ -11,8 +11,6 @@ export const Container = styled.div`
   background: black;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  filter: opacity(${(props) => props.opacity});
 
   &:after {
     content: "";
