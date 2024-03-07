@@ -1,5 +1,10 @@
 import styled, { keyframes } from "styled-components";
 
+export const ThreeAnimation = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
 export const Container = styled.div`
   position: absolute;
   z-index: -1;
