@@ -1,30 +1,23 @@
 import Animation from "../Animation/Animation";
 import Intensity from "@/utils/intensity";
-import { useState, useEffect } from "react";
 import * as Styled from "./EntryList.styled";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function EntriesList() {
-  const [dataFromLocalStorage, setDataFromLocalStorage] = useState([]);
+  const [moods, setMoods] = useLocalStorageState("anonymous_moods", {
+    defaultValue: [],
+  });
 
-  useEffect(() => {
-    const dataFromLocalStorage = localStorage.getItem("anonymous_moods");
-    if (dataFromLocalStorage) {
-      const parsedData = JSON.parse(dataFromLocalStorage);
-      setDataFromLocalStorage(parsedData);
-    }
-  }, []);
-
-  function handleDeleteEntry(index) {
-    const updatedData = [...dataFromLocalStorage];
-    updatedData.splice(index, 1);
-    setDataFromLocalStorage(updatedData);
-    localStorage.setItem("anonymous_moods", JSON.stringify(updatedData));
+  function handleDeleteEntry(id) {
+    const updatedMoods = moods.filter((mood) => mood.id !== id);
+    setMoods(updatedMoods);
   }
+
   return (
     <>
-      {dataFromLocalStorage.map((entry, index) => (
+      {moods.map((entry) => (
         <>
-          <Styled.Container key={index}>
+          <Styled.Container key={entry.id}>
             <Animation color={entry.experience[0].color} opacity={1} />
           </Styled.Container>
           <Styled.Sentence>
@@ -43,7 +36,7 @@ export default function EntriesList() {
               </span>
             ))}
           </Styled.Sentence>
-          <Styled.Button onClick={() => handleDeleteEntry(index)}>
+          <Styled.Button onClick={() => handleDeleteEntry(entry.id)}>
             delete mood
           </Styled.Button>
         </>
