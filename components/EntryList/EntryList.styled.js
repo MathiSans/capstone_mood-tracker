@@ -1,42 +1,28 @@
 import styled from "styled-components";
 
-export const StyledEntryList = styled.ul`
-  list-style-type: none;
-  padding: 0;
+export const Container = styled.div`
+  width: 120px;
+  height: 120px;
+  position: relative;
+  border-radius: 100px;
+  overflow: hidden;
+  filter: blur(10px);
 `;
 
-export const StyledEntry = styled.li`
-  display: flex;
-  justify-content: start;
-  flex-direction: column;
+export const Sentence = styled.p`
+  max-width: 300px;
+  text-align: center;
 `;
 
-export const StyledEntryHeadnote = styled.p`
-  display: flex;
-  justify-content: space-between;
+export const StaticText = styled.span`
+  color: grey;
 `;
 
-export const SliderText = styled.span`
-  font-weight: bold;
-`;
-
-export const ExperienceText = styled.span`
-  font-weight: bold;
-`;
-
-export const EntryText = styled.span`
-  font-weight: bold;
-  font-style: italic;
-`;
-
-export const Separator = styled.hr`
-  border: 0.5px solid grey;
-  width: 100%;
-`;
-
-export const EditDeleteButton = styled.button`
-  color: ${(props) => (props.variant !== "2" ? "white" : "black")};
-  background-color: ${(props) => (props.variant === "2" ? "red" : "white")};
-  border-radius: 20%;
-  border: 0;
+export const Button = styled.button`
+  color: red;
+  background-color: transparent;
+  border: 0.5px solid red;
+  padding: 6px 16px;
+  font-size: 0.5rem;
+  cursor: pointer;
 `;

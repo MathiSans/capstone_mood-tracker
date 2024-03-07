@@ -67,7 +67,7 @@ export default function TestFlow() {
         date: new Date().toLocaleString(),
       },
     ]);
-    // router.push("entries");
+    router.push("entries");
   }
 
   return (

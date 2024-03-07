@@ -1,58 +1,46 @@
-import { nanoid } from "nanoid";
-import { StyledEntryList } from "./EntryList.styled";
+import Animation from "../Animation/Animation";
 import Intensity from "@/utils/intensity";
+import * as Styled from "./EntryList.styled";
+import useLocalStorageState from "use-local-storage-state";
 
-import {
-  StyledEntry,
-  SliderText,
-  ExperienceText,
-  EntryText,
-  Separator,
-  EditDeleteButton,
-  StyledEntryHeadnote,
-} from "@/components/EntryList/EntryList.styled";
+export default function EntriesList() {
+  const [moods, setMoods] = useLocalStorageState("anonymous_moods", {
+    defaultValue: [],
+  });
 
-export default function EntryList({ allEntries, deleteEntry }) {
-  function handleDeleteEntryListItem(id) {
-    deleteEntry(id);
+  function handleDeleteEntry(id) {
+    const updatedMoods = moods.filter((mood) => mood.id !== id);
+    setMoods(updatedMoods);
   }
+
   return (
-    <StyledEntryList>
-      {allEntries.map((entry) => {
-        return (
-          <StyledEntry key={entry.id}>
-            <StyledEntryHeadnote>
-              <small>{entry.date}</small>
-              <span>
-                <EditDeleteButton
-                  onClick={() => handleDeleteEntryListItem(entry.id)}
-                >
-                  🗑️
-                </EditDeleteButton>
+    <>
+      {moods.map((entry) => (
+        <>
+          <Styled.Container key={entry.id}>
+            <Animation color={entry.experience[0].color} opacity={1} />
+          </Styled.Container>
+          <Styled.Sentence>
+            <Styled.StaticText>You felt</Styled.StaticText>{" "}
+            {entry.experience[0].name}.{" "}
+            <Styled.StaticText>More specifically</Styled.StaticText>{" "}
+            <Intensity
+              value={entry.slider}
+              experience={entry.experience[0].intensity}
+            />
+            <Styled.StaticText>. You selected these tags:</Styled.StaticText>{" "}
+            {entry.reactions.map((reaction, index, array) => (
+              <span key={index}>
+                {reaction.name}
+                {index < array.length - 1 && ", "}
               </span>
-            </StyledEntryHeadnote>
-            <p>
-              You felt{" "}
-              <SliderText>
-                <Intensity intensity={entry.slider} />.
-              </SliderText>{" "}
-              You selected these tags:{" "}
-              <ExperienceText>
-                {entry.experiences
-                  .filter((experience) => Object.values(experience)[0])
-                  .map((experience, index, array) => (
-                    <span key={nanoid()}>
-                      {Object.keys(experience)[0]}
-                      {index < array.length - 1 && ", "}
-                    </span>
-                  ))}
-              </ExperienceText>
-              <span>. You wrote:</span> <EntryText>{entry.text}</EntryText>
-            </p>
-            <Separator />
-          </StyledEntry>
-        );
-      })}{" "}
-    </StyledEntryList>
+            ))}
+          </Styled.Sentence>
+          <Styled.Button onClick={() => handleDeleteEntry(entry.id)}>
+            delete mood
+          </Styled.Button>
+        </>
+      ))}
+    </>
   );
 }

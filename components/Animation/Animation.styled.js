@@ -4,15 +4,15 @@ export const Container = styled.div`
   position: absolute;
   z-index: -1;
   background: black;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   filter: opacity(${(props) => props.opacity});
 
   &:after {
     content: "";
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-size: 200px;
     mix-blend-mode: overlay;
     position: absolute;
@@ -58,8 +58,8 @@ export const circular2Animation = keyframes`
 `;
 
 export const BlobsContainer = styled.div`
-  width: 70vh;
-  height: 70vh;
+  width: 70%;
+  height: 70%;
   display: block;
   position: absolute;
   top: 50%;
