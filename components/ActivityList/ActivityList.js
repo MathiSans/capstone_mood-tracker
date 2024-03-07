@@ -3,6 +3,7 @@ import { useState } from "react";
 import { nanoid } from "nanoid";
 import { StyledList } from "./ActivityList.styled";
 import styled from "styled-components";
+import Link from "next/link";
 
 export default function ActivityList() {
   const [activities, setActivities] = useState(initialActivities);
@@ -21,6 +22,8 @@ export default function ActivityList() {
 
   return (
     <DesignContainer>
+      <NewEntryLink href="#newentry">Add your Own activity</NewEntryLink>
+
       <StyledList>
         {activities.map((x) => (
           <StyledListElement key={nanoid()}>
@@ -30,7 +33,7 @@ export default function ActivityList() {
           </StyledListElement>
         ))}
       </StyledList>
-      <StyledForm onSubmit={handleSubmit}>
+      <StyledForm onSubmit={handleSubmit} id="newentry">
         <label htmlFor="Activity">
           Activity:
           <input
@@ -64,7 +67,6 @@ export default function ActivityList() {
 const DesignContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 600px;
   flex-direction: column;
 `;
 
@@ -99,4 +101,19 @@ const StyledForm = styled.form`
   border: 1px solid white;
   padding: 1.5rem;
   border-radius: 12px;
+`;
+
+const NewEntryLink = styled(Link)`
+  &:link {
+    color: yellow;
+  }
+  &:visited {
+    color: white;
+  }
+  &:hover {
+    color: hotpink;
+  }
+  &:active {
+    color: lightcyan;
+  }
 `;

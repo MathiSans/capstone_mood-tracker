@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const StyledList = styled.ul`
-  background-color: black;
-  color: white;
-  text-align: center;
+  list-style-type: none;
+  padding: 0;
+  width: 100vw;
+  margin: 0 auto;
 `;
