@@ -9,6 +9,8 @@ import FlowContainer from "@/components/FlowContainer/FlowContainer";
 import Navigation from "@/components/Navigation/Navigation";
 import NavButton from "@/components/NavButton/NavButton";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
+import PlaySound from "@/components/PlaySound/PlaySound";
+import memory from "@/public/memory.mp3";
 
 export default function TestFlow() {
   const router = useRouter();
@@ -32,6 +34,8 @@ export default function TestFlow() {
 
   // state that hold the current page
   const [page, setPage] = useState(0);
+
+  const [playMp3, setPlayMp3] = useState(false);
 
   const guides = [
     "share your emotions ...",
@@ -89,9 +93,13 @@ export default function TestFlow() {
         </Page>
         <Navigation>
           {page === 0 && <NavButton disabled>login</NavButton>}
+          {page > 0 && (
+            <PlaySound src={memory} play={playMp3} pageIndex={page} />
+          )}
           {page <= 1 && (
             <NavButton
               handleClick={() => {
+                setPlayMp3(true);
                 setPage((currPage) => currPage + 1);
               }}
             >
