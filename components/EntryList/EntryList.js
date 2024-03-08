@@ -18,7 +18,10 @@ export default function EntriesList() {
       {moods.map((entry) => (
         <>
           <Styled.Container key={entry.id}>
-            <Animation color={entry.experience[0].color} opacity={1} />
+            <Animation
+              color={entry.experience[0].color}
+              opacity={1}
+            />
           </Styled.Container>
           <Styled.Sentence>
             <Styled.StaticText>You felt</Styled.StaticText>{" "}

@@ -1,6 +1,6 @@
 import * as Styled from "./3DAnimation.styled";
-import React, { useMemo, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import React, { useMemo } from "react";
+import { Canvas } from "@react-three/fiber";
 import {
   Center,
   OrbitControls,
@@ -11,7 +11,7 @@ import {
 import { animated } from "@react-spring/three";
 import { MeshDistortMaterial } from "@react-three/drei";
 
-export default function Animation({ color, opacity, blur }) {
+export default function Animation({ color, opacity }) {
   const AnimatedMeshDistortMaterial = animated(MeshDistortMaterial);
   const material = useMemo(() => {
     return (
@@ -24,12 +24,8 @@ export default function Animation({ color, opacity, blur }) {
   }, [color, opacity]);
 
   return (
-    <Styled.Container style={{ filter: `blur(${blur}px)` }}>
-      <Canvas
-        shadows
-        camera={{ position: [0, 0, 4.5], fov: 50 }}
-        style={{ backgroundColor: "black" }}
-      >
+    <Styled.Container>
+      <Styled.CustomCanvas shadows camera={{ position: [0, 0, 4.5], fov: 50 }}>
         <directionalLight intensity={2} position={[0, 3, 2]} />
         <AccumulativeShadows
           temporal
@@ -63,7 +59,7 @@ export default function Animation({ color, opacity, blur }) {
           minPolarAngle={Math.PI / 2.1}
           maxPolarAngle={Math.PI / 2.1}
         />
-      </Canvas>
+      </Styled.CustomCanvas>
     </Styled.Container>
   );
 }
