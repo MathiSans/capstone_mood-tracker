@@ -12,8 +12,6 @@ import PageDisplay from "@/components/PageDisplay/PageDisplay";
 import PlayButton from "@/components/PlaySound/PlayButton";
 import PlaySound from "@/components/PlaySound/PlaySound";
 import memory from "@/public/sounds/memory.mp3";
-import Image from "next/image";
-import playing from "@/public/images/playing.gif";
 
 export default function TestFlow() {
   const router = useRouter();
@@ -52,10 +50,6 @@ export default function TestFlow() {
 
   function handleIsPlaying() {
     setAudioPlaying(!audioPlaying);
-  }
-
-  function handleIsClicked() {
-    setButtonClicked(!buttonClicked);
   }
 
   function handleSave() {

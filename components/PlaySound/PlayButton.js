@@ -23,7 +23,6 @@ const StyledPlayButton = styled.button`
   box-shadow: none;
   padding-inline: 1rem;
   padding-block: 0.1rem;
-  border-radius: 1rem;
   background-color: transparent;
   cursor: pointer;
 
