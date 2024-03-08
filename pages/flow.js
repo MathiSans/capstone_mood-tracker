@@ -9,33 +9,23 @@ import FlowContainer from "@/components/FlowContainer/FlowContainer";
 import Navigation from "@/components/Navigation/Navigation";
 import NavButton from "@/components/NavButton/NavButton";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
+import PlayButton from "@/components/PlaySound/PlayButton";
 import PlaySound from "@/components/PlaySound/PlaySound";
-import memory from "@/public/memory.mp3";
+import memory from "@/public/sounds/memory.mp3";
+import Image from "next/image";
+import playing from "@/public/images/playing.gif";
 
 export default function TestFlow() {
   const router = useRouter();
-
-  // local storage state to save everything at the end
   const [allEntries, setAllEntries] = useLocalStorageState("anonymous_moods", {
     defaultValue: [],
   });
-
-  // state to hold the selection of the first tag cloud
   const [experience, setExperience] = useState([]);
-
-  // state of the slider value
   const [sliderValue, setSliderValue] = useState(0.5);
-
-  // state to hold the selection of the second tag cloud
   const [reactions, setReactions] = useState([]);
-
-  // state that holds the color that is selected in the first tag cloud
   const [color, setColor] = useState("grey");
-
-  // state that hold the current page
   const [page, setPage] = useState(0);
-
-  const [playMp3, setPlayMp3] = useState(false);
+  const [audioPlaying, setAudioPlaying] = useState(false);
 
   const guides = [
     "share your emotions ...",
@@ -60,6 +50,14 @@ export default function TestFlow() {
     setSliderValue(event.target.value);
   }
 
+  function handleIsPlaying() {
+    setAudioPlaying(!audioPlaying);
+  }
+
+  function handleIsClicked() {
+    setButtonClicked(!buttonClicked);
+  }
+
   function handleSave() {
     setAllEntries([
       ...allEntries,
@@ -78,6 +76,23 @@ export default function TestFlow() {
     <>
       <Animation color={color} opacity={sliderValue} />
       <FlowContainer>
+        {page > 0 && (
+          <>
+            {audioPlaying && (
+              <PlaySound
+                src={memory}
+                audioPlaying={audioPlaying}
+                pageIndex={page}
+              />
+            )}
+          </>
+        )}
+        {page === 1 && (
+          <PlayButton
+            handleIsPlaying={handleIsPlaying}
+            audioPlaying={audioPlaying}
+          />
+        )}
         <Page>
           <PageDisplay
             guides={guides}
@@ -93,13 +108,9 @@ export default function TestFlow() {
         </Page>
         <Navigation>
           {page === 0 && <NavButton disabled>login</NavButton>}
-          {page > 0 && (
-            <PlaySound src={memory} play={playMp3} pageIndex={page} />
-          )}
           {page <= 1 && (
             <NavButton
               handleClick={() => {
-                setPlayMp3(true);
                 setPage((currPage) => currPage + 1);
               }}
             >

@@ -6,9 +6,6 @@ export default function DecreaseVolume({
   setCurrentVolume,
 }) {
   useEffect(() => {
-    console.log("volume:", currentVolume);
-    console.log("pageIndex:", pageIndex);
-
     if (pageIndex > 1) {
       const decreaseVolume = setInterval(() => {
         if (currentVolume > 0) {
