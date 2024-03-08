@@ -11,21 +11,25 @@ import {
 import { animated } from "@react-spring/three";
 import { MeshDistortMaterial } from "@react-three/drei";
 
-export default function Animation({ color, opacity, blur, speed }) {
+export default function Animation({ color, opacity, blur }) {
   const AnimatedMeshDistortMaterial = animated(MeshDistortMaterial);
   const material = useMemo(() => {
     return (
       <AnimatedMeshDistortMaterial
-        distort={0.3 * opacity + 0.25}
+        distort={0.6 * opacity + 0.25}
         color={color}
-        speed={3 * opacity + 4}
+        speed={6 * opacity + 4}
       />
     );
-  }, [color, opacity, speed]);
+  }, [color, opacity]);
 
   return (
     <Styled.Container style={{ filter: `blur(${blur}px)` }}>
-      <Canvas shadows camera={{ position: [0, 0, 4.5], fov: 50 }}>
+      <Canvas
+        shadows
+        camera={{ position: [0, 0, 4.5], fov: 50 }}
+        style={{ backgroundColor: "black" }}
+      >
         <directionalLight intensity={2} position={[0, 3, 2]} />
         <AccumulativeShadows
           temporal
@@ -47,11 +51,10 @@ export default function Animation({ color, opacity, blur, speed }) {
 
         <Center>
           <mesh>
-            <sphereGeometry args={[1.1, 64, 64]} />
+            <sphereGeometry args={[1.2, 64, 64]} />
             {material}
           </mesh>
         </Center>
-        <Env />
         <OrbitControls
           autoRotate
           autoRotateSpeed={opacity * 5 + 0.5}
@@ -63,8 +66,4 @@ export default function Animation({ color, opacity, blur, speed }) {
       </Canvas>
     </Styled.Container>
   );
-}
-
-function Env() {
-  return <Environment preset={"night"} background blur={1} />;
 }

@@ -22,7 +22,7 @@ export default function TestFlow() {
   const [experience, setExperience] = useState([]);
 
   // state of the slider value
-  const [sliderValue, setSliderValue] = useState(0.5);
+  const [sliderValue, setSliderValue] = useState(0);
 
   // state to hold the selection of the second tag cloud
   const [reactions, setReactions] = useState([]);
@@ -32,8 +32,6 @@ export default function TestFlow() {
 
   // state that hold the current page
   const [page, setPage] = useState(0);
-
-  const [speed, setSpeed] = useState(0);
 
   const guides = [
     "share your emotions ...",
@@ -77,8 +75,7 @@ export default function TestFlow() {
       <Animation
         color={color}
         opacity={sliderValue}
-        blur={3}
-        speed={sliderValue}
+        blur={2}
       />
       <FlowContainer>
         <Page>
