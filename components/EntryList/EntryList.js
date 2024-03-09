@@ -1,4 +1,4 @@
-import Animation from "../Animation/Animation";
+import Animation from "../3DAnimation/3DAnimation";
 import Intensity from "@/utils/intensity";
 import * as Styled from "./EntryList.styled";
 import useLocalStorageState from "use-local-storage-state";
@@ -18,7 +18,10 @@ export default function EntriesList() {
       {moods.map((entry) => (
         <>
           <Styled.Container key={entry.id}>
-            <Animation color={entry.experience[0].color} opacity={1} />
+            <Animation
+              color={entry.experience[0].color}
+              opacity={1}
+            />
           </Styled.Container>
           <Styled.Sentence>
             <Styled.StaticText>You felt</Styled.StaticText>{" "}

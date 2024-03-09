@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import { experiences } from "@/experiences";
 import useLocalStorageState from "use-local-storage-state";
-import Animation from "@/components/Animation/Animation";
+import Animation from "@/components/3DAnimation/3DAnimation";
 import Page from "@/components/Page/Page";
 import FlowContainer from "@/components/FlowContainer/FlowContainer";
 import Navigation from "@/components/Navigation/Navigation";
@@ -22,7 +22,7 @@ export default function TestFlow() {
   const [experience, setExperience] = useState([]);
 
   // state of the slider value
-  const [sliderValue, setSliderValue] = useState(0.5);
+  const [sliderValue, setSliderValue] = useState(0);
 
   // state to hold the selection of the second tag cloud
   const [reactions, setReactions] = useState([]);
@@ -72,7 +72,7 @@ export default function TestFlow() {
 
   return (
     <>
-      <Animation color={color} opacity={sliderValue} />
+      <Animation color={color} opacity={sliderValue}/>
       <FlowContainer>
         <Page>
           <PageDisplay
