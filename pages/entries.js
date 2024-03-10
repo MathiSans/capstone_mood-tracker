@@ -15,9 +15,7 @@ export default function Entries() {
         <EntriesList />
       </Styled.Page>
       <Styled.Navigation>
-        <NavButton handleClick={() => router.push("flow")}>
-          enter a mood
-        </NavButton>
+        <NavButton handleClick={() => router.push("/")}>enter a mood</NavButton>
       </Styled.Navigation>
     </Styled.Container>
   );
