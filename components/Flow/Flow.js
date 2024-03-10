@@ -4,14 +4,12 @@ import { useRouter } from "next/router";
 import { experiences } from "@/experiences";
 import useLocalStorageState from "use-local-storage-state";
 import Animation from "@/components/3DAnimation/3DAnimation";
-import Page from "@/components/Page/Page";
-import FlowContainer from "@/components/FlowContainer/FlowContainer";
-import Navigation from "@/components/Navigation/Navigation";
 import NavButton from "@/components/NavButton/NavButton";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
 import PlayButton from "@/components/PlaySound/PlayButton";
 import PlaySound from "@/components/PlaySound/PlaySound";
 import memory from "@/public/sounds/memory.mp3";
+import * as Styled from "@/components/Layout/Layout";
 
 export default function Flow() {
   const router = useRouter();
@@ -19,12 +17,7 @@ export default function Flow() {
     defaultValue: [],
   });
   const [experience, setExperience] = useState([]);
-
-  // state of the slider value
   const [sliderValue, setSliderValue] = useState(0);
-
-  // state to hold the selection of the second tag cloud
-
   const [reactions, setReactions] = useState([]);
   const [color, setColor] = useState("grey");
   const [page, setPage] = useState(0);
@@ -74,7 +67,7 @@ export default function Flow() {
   return (
     <>
       <Animation color={color} opacity={sliderValue} />
-      <FlowContainer>
+      <Styled.Container>
         {page > 0 && (
           <>
             {audioPlaying && (
@@ -92,7 +85,7 @@ export default function Flow() {
             audioPlaying={audioPlaying}
           />
         )}
-        <Page>
+        <Styled.Page>
           <PageDisplay
             guides={guides}
             experience={experience}
@@ -104,8 +97,8 @@ export default function Flow() {
             handleSelectExperience={handleSelectExperience}
             handleSelectReactions={handleSelectReactions}
           />
-        </Page>
-        <Navigation>
+        </Styled.Page>
+        <Styled.Navigation>
           {page === 0 && <NavButton disabled>login</NavButton>}
           {page <= 1 && (
             <NavButton
@@ -139,8 +132,8 @@ export default function Flow() {
               save
             </NavButton>
           )}
-        </Navigation>
-      </FlowContainer>
+        </Styled.Navigation>
+      </Styled.Container>
     </>
   );
 }
