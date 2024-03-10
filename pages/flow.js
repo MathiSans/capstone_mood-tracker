@@ -10,7 +10,7 @@ import Navigation from "@/components/Navigation/Navigation";
 import NavButton from "@/components/NavButton/NavButton";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
 
-export default function TestFlow() {
+export default function Flow() {
   const router = useRouter();
 
   // local storage state to save everything at the end
@@ -72,7 +72,7 @@ export default function TestFlow() {
 
   return (
     <>
-      <Animation color={color} opacity={sliderValue}/>
+      <Animation color={color} opacity={sliderValue} />
       <FlowContainer>
         <Page>
           <PageDisplay

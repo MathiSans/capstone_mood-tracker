@@ -13,5 +13,6 @@ export const Button = styled.button`
   color: white;
   border: 1px solid white;
   cursor: pointer;
+  text-shadow: black 2px 0 15px;
   background-color: ${({ active, color }) => (active ? color : "transparent")};
 `;
