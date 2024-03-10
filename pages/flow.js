@@ -9,29 +9,26 @@ import FlowContainer from "@/components/FlowContainer/FlowContainer";
 import Navigation from "@/components/Navigation/Navigation";
 import NavButton from "@/components/NavButton/NavButton";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
+import PlayButton from "@/components/PlaySound/PlayButton";
+import PlaySound from "@/components/PlaySound/PlaySound";
+import memory from "@/public/sounds/memory.mp3";
 
 export default function Flow() {
   const router = useRouter();
-
-  // local storage state to save everything at the end
   const [allEntries, setAllEntries] = useLocalStorageState("anonymous_moods", {
     defaultValue: [],
   });
-
-  // state to hold the selection of the first tag cloud
   const [experience, setExperience] = useState([]);
 
   // state of the slider value
   const [sliderValue, setSliderValue] = useState(0);
 
   // state to hold the selection of the second tag cloud
+
   const [reactions, setReactions] = useState([]);
-
-  // state that holds the color that is selected in the first tag cloud
   const [color, setColor] = useState("grey");
-
-  // state that hold the current page
   const [page, setPage] = useState(0);
+  const [audioPlaying, setAudioPlaying] = useState(false);
 
   const guides = [
     "share your emotions ...",
@@ -56,6 +53,10 @@ export default function Flow() {
     setSliderValue(event.target.value);
   }
 
+  function handleIsPlaying() {
+    setAudioPlaying(!audioPlaying);
+  }
+
   function handleSave() {
     setAllEntries([
       ...allEntries,
@@ -74,6 +75,23 @@ export default function Flow() {
     <>
       <Animation color={color} opacity={sliderValue} />
       <FlowContainer>
+        {page > 0 && (
+          <>
+            {audioPlaying && (
+              <PlaySound
+                src={memory}
+                audioPlaying={audioPlaying}
+                pageIndex={page}
+              />
+            )}
+          </>
+        )}
+        {page === 1 && (
+          <PlayButton
+            handleIsPlaying={handleIsPlaying}
+            audioPlaying={audioPlaying}
+          />
+        )}
         <Page>
           <PageDisplay
             guides={guides}
