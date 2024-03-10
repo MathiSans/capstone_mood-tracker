@@ -1,12 +1,18 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  display: flex;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const AnimationContainer = styled.div`
   width: 120px;
   height: 120px;
   position: relative;
   border-radius: 100px;
   overflow: hidden;
-  filter: blur(10px);
 `;
 
 export const Sentence = styled.p`

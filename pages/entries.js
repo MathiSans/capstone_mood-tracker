@@ -5,7 +5,7 @@ import FlowContainer from "@/components/FlowContainer/FlowContainer";
 import NavButton from "@/components/NavButton/NavButton";
 import Navigation from "@/components/Navigation/Navigation";
 import { useRouter } from "next/router";
-import EntriesList from "@/components/EntryList/EntryList";
+import EntriesList from "@/components/EntryList/EntriesList";
 
 export default function Entries() {
   const router = useRouter();

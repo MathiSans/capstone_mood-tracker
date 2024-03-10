@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import { experiences } from "@/experiences";
 import useLocalStorageState from "use-local-storage-state";
-import Animation from "@/components/Animation/Animation";
+import Animation from "@/components/3DAnimation/3DAnimation";
 import Page from "@/components/Page/Page";
 import FlowContainer from "@/components/FlowContainer/FlowContainer";
 import Navigation from "@/components/Navigation/Navigation";
@@ -13,13 +13,18 @@ import PlayButton from "@/components/PlaySound/PlayButton";
 import PlaySound from "@/components/PlaySound/PlaySound";
 import memory from "@/public/sounds/memory.mp3";
 
-export default function TestFlow() {
+export default function Flow() {
   const router = useRouter();
   const [allEntries, setAllEntries] = useLocalStorageState("anonymous_moods", {
     defaultValue: [],
   });
   const [experience, setExperience] = useState([]);
-  const [sliderValue, setSliderValue] = useState(0.5);
+
+  // state of the slider value
+  const [sliderValue, setSliderValue] = useState(0);
+
+  // state to hold the selection of the second tag cloud
+
   const [reactions, setReactions] = useState([]);
   const [color, setColor] = useState("grey");
   const [page, setPage] = useState(0);
