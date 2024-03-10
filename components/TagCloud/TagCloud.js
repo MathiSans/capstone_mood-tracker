@@ -1,5 +1,4 @@
 import * as Styled from "./TagCloud.styled";
-import { nanoid } from "nanoid";
 
 export default function TagCloud({
   onSelectTag,

@@ -1,6 +1,6 @@
 import Animation from "../3DAnimation/3DAnimation";
 import Intensity from "@/utils/intensity";
-import * as Styled from "./EntryList.styled";
+import * as Styled from "./EntriesList.styled";
 import useLocalStorageState from "use-local-storage-state";
 
 export default function EntriesList() {
@@ -13,16 +13,18 @@ export default function EntriesList() {
     setMoods(updatedMoods);
   }
 
+  const reversedMoods = moods.slice().reverse();
+
   return (
     <>
-      {moods.map((entry) => (
-        <>
-          <Styled.Container key={entry.id}>
+      {reversedMoods.map((entry) => (
+        <Styled.Container key={entry.id}>
+          <Styled.AnimationContainer>
             <Animation
               color={entry.experience[0].color}
-              opacity={1}
+              opacity={entry.slider}
             />
-          </Styled.Container>
+          </Styled.AnimationContainer>
           <Styled.Sentence>
             <Styled.StaticText>You felt</Styled.StaticText>{" "}
             {entry.experience[0].name}.{" "}
@@ -42,7 +44,7 @@ export default function EntriesList() {
           <Styled.Button onClick={() => handleDeleteEntry(entry.id)}>
             delete mood
           </Styled.Button>
-        </>
+        </Styled.Container>
       ))}
     </>
   );
