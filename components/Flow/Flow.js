@@ -10,6 +10,7 @@ import PlayButton from "@/components/PlaySound/PlayButton";
 import PlaySound from "@/components/PlaySound/PlaySound";
 import memory from "@/public/sounds/memory.mp3";
 import * as Styled from "@/components/Layout/Layout";
+import { motion } from "framer-motion";
 
 export default function Flow() {
   const router = useRouter();
@@ -64,6 +65,16 @@ export default function Flow() {
     router.push("entries");
   }
 
+  const button = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        delay: 8,
+      },
+    },
+  };
+
   return (
     <>
       <Animation color={color} opacity={sliderValue} />
@@ -100,14 +111,25 @@ export default function Flow() {
         </Styled.Page>
         <Styled.Navigation>
           {page === 0 && <NavButton disabled>login</NavButton>}
-          {page <= 1 && (
+          {page === 0 && (
             <NavButton
               handleClick={() => {
                 setPage((currPage) => currPage + 1);
               }}
             >
-              {page === 0 ? "anonymous" : "next"}
+              anonymous
             </NavButton>
+          )}
+          {page === 1 && (
+            <motion.div variants={button} initial="hidden" animate="show">
+              <NavButton
+                handleClick={() => {
+                  setPage((currPage) => currPage + 1);
+                }}
+              >
+                next
+              </NavButton>
+            </motion.div>
           )}
           {page > 2 && page <= 4 && (
             <NavButton handleClick={() => setPage((currPage) => currPage - 1)}>
