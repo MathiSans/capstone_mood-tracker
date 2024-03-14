@@ -11,9 +11,11 @@ import PlaySound from "@/components/PlaySound/PlaySound";
 import memory from "@/public/sounds/memory.mp3";
 import * as Styled from "@/components/Layout/Layout";
 import { motion } from "framer-motion";
+import useSWR from "swr";
 
 export default function Flow() {
   const router = useRouter();
+  const { mutate } = useSWR("/api/entries");
   const [allEntries, setAllEntries] = useLocalStorageState("anonymous_moods", {
     defaultValue: [],
   });
@@ -51,18 +53,34 @@ export default function Flow() {
     setAudioPlaying(!audioPlaying);
   }
 
-  function handleSave() {
-    setAllEntries([
-      ...allEntries,
-      {
-        id: nanoid(),
-        experience: experience,
-        reactions: reactions,
-        slider: sliderValue,
-        date: new Date().toLocaleString(),
-      },
-    ]);
-    router.push("entries");
+  async function handleSave() {
+    const entryData = {
+      experience: experience,
+      reactions: reactions,
+      slider: sliderValue,
+      date: new Date().toLocaleString(),
+    };
+
+    try {
+      const response = await fetch("/api/entries", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(entryData),
+      });
+
+      console.log(response.body);
+      if (!response.ok) {
+        throw new Error("Failed to save entry");
+      }
+      if (response.ok) {
+        mutate();
+        router.push("/entries");
+      }
+
+      console.error("Error saving entry:", error);
+    } catch (error) {}
   }
 
   const button = {
