@@ -8,7 +8,7 @@ export default function EntriesList() {
   const { mutate } = useSWRConfig();
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <p>Loading...</p>;
   }
 
   if (!data) {
@@ -34,11 +34,10 @@ export default function EntriesList() {
           <Styled.Sentence>
             <Styled.StaticText>You felt</Styled.StaticText> {entry.experience}.{" "}
             <Styled.StaticText>More specifically</Styled.StaticText>{" "}
-            {/* <Intensity
-              value={entry.intensity}
-              experience={entry.experience[0].intensity}
-            /> */}
-            <Styled.StaticText>. You selected these tags:</Styled.StaticText>{" "}
+            <Intensity value={entry.intensity} experience={entry.experience} />
+            <Styled.StaticText>
+              . You selected these tags:
+            </Styled.StaticText>{" "}
             {entry.reactions.map((reaction, index, array) => (
               <span key={index}>
                 {reaction}
