@@ -11,9 +11,11 @@ import PlaySound from "@/components/PlaySound/PlaySound";
 import memory from "@/public/sounds/memory.mp3";
 import * as Styled from "@/components/Layout/Layout";
 import { motion } from "framer-motion";
+import useSWR from "swr";
 
 export default function Flow() {
   const router = useRouter();
+  const { mutate } = useSWR("/api/entries");
   const [allEntries, setAllEntries] = useLocalStorageState("anonymous_moods", {
     defaultValue: [],
   });
@@ -51,18 +53,28 @@ export default function Flow() {
     setAudioPlaying(!audioPlaying);
   }
 
-  function handleSave() {
-    setAllEntries([
-      ...allEntries,
-      {
-        id: nanoid(),
-        experience: experience,
-        reactions: reactions,
-        slider: sliderValue,
-        date: new Date().toLocaleString(),
+  async function handleSave() {
+    const reactionsArray = reactions.map((reaction) => reaction.name);
+    const response = await fetch("/api/entries", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    ]);
-    router.push("entries");
+      body: JSON.stringify({
+        time: new Date().toLocaleString(),
+        user: "anonymous",
+        location: "unknown",
+        experience: experience[0].name,
+        color: experience[0].color,
+        intensity: sliderValue,
+        reactions: reactionsArray,
+      }),
+    });
+
+    if (response.ok) {
+      mutate();
+      router.push("entries");
+    }
   }
 
   const button = {
@@ -70,14 +82,14 @@ export default function Flow() {
     show: {
       opacity: 1,
       transition: {
-        delay: 8,
+        delay: 0,
       },
     },
   };
 
   return (
     <>
-      <Animation color={color} opacity={sliderValue} />
+      {/* <Animation color={color} opacity={sliderValue} /> */}
       <Styled.Container>
         {page > 0 && (
           <>
