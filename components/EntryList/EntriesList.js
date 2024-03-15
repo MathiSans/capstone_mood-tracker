@@ -1,47 +1,52 @@
 import Animation from "../3DAnimation/3DAnimation";
 import Intensity from "@/utils/intensity";
 import * as Styled from "./EntriesList.styled";
-import useLocalStorageState from "use-local-storage-state";
+import useSWR, { useSWRConfig } from "swr";
 
 export default function EntriesList() {
-  const [moods, setMoods] = useLocalStorageState("anonymous_moods", {
-    defaultValue: [],
-  });
+  const { data, isLoading } = useSWR("/api/entries");
+  const { mutate } = useSWRConfig();
 
-  function handleDeleteEntry(id) {
-    const updatedMoods = moods.filter((mood) => mood.id !== id);
-    setMoods(updatedMoods);
+  if (isLoading) {
+    return <h1>Loading...</h1>;
   }
 
-  const reversedMoods = moods.slice().reverse();
+  if (!data) {
+    return;
+  }
+
+  async function handleDeleteEntry(id) {
+    await fetch(`/api/entries/${id}`, {
+      method: "DELETE",
+    });
+    mutate("/api/entries");
+  }
+
+  const reversedMoods = data.slice().reverse();
 
   return (
     <>
       {reversedMoods.map((entry) => (
-        <Styled.Container key={entry.id}>
+        <Styled.Container key={entry._id}>
           <Styled.AnimationContainer>
-            <Animation
-              color={entry.experience[0].color}
-              opacity={entry.slider}
-            />
+            <Animation color={entry.color} opacity={entry.intensity} />
           </Styled.AnimationContainer>
           <Styled.Sentence>
-            <Styled.StaticText>You felt</Styled.StaticText>{" "}
-            {entry.experience[0].name}.{" "}
+            <Styled.StaticText>You felt</Styled.StaticText> {entry.experience}.{" "}
             <Styled.StaticText>More specifically</Styled.StaticText>{" "}
-            <Intensity
-              value={entry.slider}
+            {/* <Intensity
+              value={entry.intensity}
               experience={entry.experience[0].intensity}
-            />
+            /> */}
             <Styled.StaticText>. You selected these tags:</Styled.StaticText>{" "}
             {entry.reactions.map((reaction, index, array) => (
               <span key={index}>
-                {reaction.name}
+                {reaction}
                 {index < array.length - 1 && ", "}
               </span>
             ))}
           </Styled.Sentence>
-          <Styled.Button onClick={() => handleDeleteEntry(entry.id)}>
+          <Styled.Button onClick={() => handleDeleteEntry(entry._id)}>
             delete mood
           </Styled.Button>
         </Styled.Container>

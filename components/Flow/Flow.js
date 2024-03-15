@@ -54,33 +54,27 @@ export default function Flow() {
   }
 
   async function handleSave() {
-    const entryData = {
-      experience: experience,
-      reactions: reactions,
-      slider: sliderValue,
-      date: new Date().toLocaleString(),
-    };
+    const reactionsArray = reactions.map((reaction) => reaction.name);
+    const response = await fetch("/api/entries", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        time: new Date().toLocaleString(),
+        user: "anonymous",
+        location: "unknown",
+        experience: experience[0].name,
+        color: experience[0].color,
+        intensity: sliderValue,
+        reactions: reactionsArray,
+      }),
+    });
 
-    try {
-      const response = await fetch("/api/entries", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(entryData),
-      });
-
-      console.log(response.body);
-      if (!response.ok) {
-        throw new Error("Failed to save entry");
-      }
-      if (response.ok) {
-        mutate();
-        router.push("/entries");
-      }
-
-      console.error("Error saving entry:", error);
-    } catch (error) {}
+    if (response.ok) {
+      mutate();
+      router.push("entries");
+    }
   }
 
   const button = {
@@ -88,14 +82,14 @@ export default function Flow() {
     show: {
       opacity: 1,
       transition: {
-        delay: 8,
+        delay: 0,
       },
     },
   };
 
   return (
     <>
-      <Animation color={color} opacity={sliderValue} />
+      {/* <Animation color={color} opacity={sliderValue} /> */}
       <Styled.Container>
         {page > 0 && (
           <>
