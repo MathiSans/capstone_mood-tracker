@@ -29,7 +29,7 @@ export default function Animation({ color, opacity }) {
         <directionalLight intensity={2} position={[0, 3, 2]} />
         <AccumulativeShadows
           temporal
-          frames={200}
+          frames={20}
           color="red"
           colorBlend={0.5}
           opacity={1}
@@ -47,7 +47,7 @@ export default function Animation({ color, opacity }) {
 
         <Center>
           <mesh>
-            <sphereGeometry args={[1.2, 64, 64]} />
+            <sphereGeometry args={[1.2, 32, 32]} />
             {material}
           </mesh>
         </Center>

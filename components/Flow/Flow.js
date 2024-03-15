@@ -89,7 +89,7 @@ export default function Flow() {
 
   return (
     <>
-      {/* <Animation color={color} opacity={sliderValue} /> */}
+      <Animation color={color} opacity={sliderValue} />
       <Styled.Container>
         {page > 0 && (
           <>
