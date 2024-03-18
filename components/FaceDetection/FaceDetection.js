@@ -1,31 +1,24 @@
 import { useRef, useEffect, useState } from "react";
-// import "../FaceDetection/FaceDetection.css";
+import * as Styled from "./FaceDetection.styled";
 import * as faceapi from "face-api.js";
 import { nanoid } from "nanoid";
-import styled from "styled-components";
-// import { averageEmotions } from "../components/AverageEmotionValue";
-// import { averageEmotionsRounded } from "../components/AverageEmotionValue";
-// import EmotionAnalysisComponent from "@/components/FaceDetection/AverageEmotion";
-import SmileTrainer from "@/components/FaceDetection/SmileTrainer";
+import SmileTrainer from "@/components/SmileTrainer/SmileTrainer";
 
-function FaceDetection() {
+export default function FaceDetection() {
   // const [emotions, setEmotions] = useState([]);
-  const [facesDetected, setFacesDetected] = useState(false);
-
   const [emotionsArray, setEmotionsArray] = useState([]);
+
+  const [facesDetected, setFacesDetected] = useState(false);
   const videoRef = useRef();
   const canvasRef = useRef();
-  //EXPRESSION REF
   const expressionsRef = useRef({});
 
-  // LOAD FROM USEEFFECT
   useEffect(() => {
     startVideo();
     videoRef && loadModels();
-  }, []);
+  });
 
-  // OPEN YOU FACE WEBCAM
-  const startVideo = () => {
+  function startVideo() {
     navigator.mediaDevices
       .getUserMedia({ video: true })
       .then((currentStream) => {
@@ -34,12 +27,10 @@ function FaceDetection() {
       .catch((err) => {
         console.log(err);
       });
-  };
-  // LOAD MODELS FROM FACE API
+  }
 
-  const loadModels = () => {
+  function loadModels() {
     Promise.all([
-      // THIS FOR FACE DETECT AND LOAD FROM YOU PUBLIC/MODELS DIRECTORY
       faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
       faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
       faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
@@ -47,25 +38,21 @@ function FaceDetection() {
     ]).then(() => {
       faceMyDetect();
     });
-  };
+  }
 
-  const faceMyDetect = () => {
+  function faceMyDetect() {
     setInterval(async () => {
       const detections = await faceapi
         .detectAllFaces(videoRef.current, new faceapi.TinyFaceDetectorOptions())
         .withFaceLandmarks()
         .withFaceExpressions();
 
-      // Check if faces are detected
       const facesAreDetected = detections.length > 0;
-      // Update state to reflect whether faces are detected or not
       setFacesDetected(facesAreDetected);
 
-      //SAVE TO ARRAY OF 20 objects
       if (detections.length > 0) {
         const expressions = detections[0].expressions;
         expressionsRef.current = expressions;
-        // Use the functional form of setEmotionsArray to correctly update based on the previous state
         setEmotionsArray((prevEmotionsArray) => {
           const newEmotionsArray = [
             ...prevEmotionsArray.slice(-100 + 1),
@@ -79,7 +66,6 @@ function FaceDetection() {
         expressionsRef.current = expressions;
       }
 
-      // DRAW YOU FACE IN WEBCAM
       canvasRef.current.innerHtml = faceapi.createCanvasFromMedia(
         videoRef.current
       );
@@ -96,73 +82,33 @@ function FaceDetection() {
       faceapi.draw.drawDetections(canvasRef.current, resized);
       faceapi.draw.drawFaceLandmarks(canvasRef.current, resized);
       faceapi.draw.drawFaceExpressions(canvasRef.current, resized);
-    }, 200);
-  };
-  console.log("emotionArray", emotionsArray);
-  // console.log("averageEmotions", averageEmotions);
-  // console.log("averageEmotionsRounded", averageEmotionsRounded);
+    }, 1000);
+  }
+
   return (
-    <StyledMyAppDivContainer>
-      <h1>Facial Expression Detection</h1>
-      <StyledAppVideo>
-        <VideoHidden
+    <>
+      <Styled.redFrame />
+      <Styled.DisclaimerText>
+        we are looking at your face and estimate your current emotions
+      </Styled.DisclaimerText>
+      <Styled.HiddenDiv>
+        <Styled.HiddenVideo
           crossOrigin="anonymous"
           ref={videoRef}
           autoPlay
-        ></VideoHidden>
-      </StyledAppVideo>
-      <StyledAppCanvas
+        ></Styled.HiddenVideo>
+      </Styled.HiddenDiv>
+      <Styled.HiddenCanvas
         ref={canvasRef}
-        width="940"
-        height="650"
+        width="0"
+        height="0"
         className="appcanvas"
       />
-      {facesDetected ? (
-        <SmileTrainer x={expressionsRef} />
-      ) : (
-        <StyledNoFaceDetected>NO FACE DETECTED</StyledNoFaceDetected>
-      )}
-    </StyledMyAppDivContainer>
+
+      <SmileTrainer
+        smileThreshold={expressionsRef.current.happy}
+        facesDetected={facesDetected}
+      />
+    </>
   );
 }
-
-const StyledNoFaceDetected = styled.p`
-  background-color: red;
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-  padding: 1rem;
-  border: 2px dotted yellow;
-`;
-
-const VideoHidden = styled.video`
-  visibility: hidden;
-`;
-
-const StyledAppVideo = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const StyledAppCanvas = styled.canvas`
-  visibility: hidden;
-  position: absolute;
-  top: 100px;
-`;
-
-const StyledEmotionsBox = styled.div`
-  font-weight: bold;
-  display: flex;
-  flex-direction: column;
-`;
-
-const StyledMyAppDivContainer = styled.div`
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-export default FaceDetection;
