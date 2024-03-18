@@ -6,7 +6,6 @@ import useSWR, { useSWRConfig } from "swr";
 export default function EntriesList() {
   const { data, isLoading } = useSWR("/api/entries");
   const { mutate } = useSWRConfig();
-  const reversedMoods = data.slice().reverse();
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -22,6 +21,8 @@ export default function EntriesList() {
     });
     mutate("/api/entries");
   }
+
+  const reversedMoods = data.slice().reverse();
 
   return (
     <>
