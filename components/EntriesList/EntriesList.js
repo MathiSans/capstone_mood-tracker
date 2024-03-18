@@ -29,7 +29,14 @@ export default function EntriesList() {
       {reversedMoods.map((entry) => (
         <Styled.Container key={entry._id}>
           <Styled.AnimationContainer>
-            <Animation color={entry.color} opacity={entry.intensity} />
+            <div
+              style={{
+                backgroundColor: entry.color,
+                height: "100%",
+                width: "100%",
+              }}
+            ></div>
+            {/* <Animation color={entry.color} opacity={entry.intensity} /> */}
           </Styled.AnimationContainer>
           <Styled.Sentence>
             <Styled.StaticText>You felt</Styled.StaticText> {entry.experience}.{" "}
