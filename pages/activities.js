@@ -1,15 +1,14 @@
 import { TrackerContainer } from "@/styles";
 import ActivityList from "@/components/ActivityList/ActivityList";
 import styled from "styled-components";
+import { useState } from "react";
 
 export default function ActivityListRender() {
+  const [emotionSelected, setEmotionSelected] = useState();
   function handleChangeOfEmotion(event) {
     const selectedEmotion = event.target.value;
-    if (selectedEmotion == "enjoyment") {
-      console.log("YUHUU FIDELDII🕺🏻🥳");
-    } else {
-      console.log(event.target.value);
-    }
+    setEmotionSelected(selectedEmotion);
+    console.log(event.target.value);
   }
   return (
     <>
@@ -36,7 +35,7 @@ export default function ActivityListRender() {
             </form>
           </StyledHeadlineInline>
         </h1>
-        <ActivityList />
+        <ActivityList emotionSelected={emotionSelected} />
       </TrackerContainer>
     </>
   );

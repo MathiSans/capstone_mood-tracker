@@ -4,8 +4,9 @@ import { nanoid } from "nanoid";
 import { StyledList } from "./ActivityList.styled";
 import styled from "styled-components";
 import Link from "next/link";
+import { distDir } from "@/next.config";
 
-export default function ActivityList() {
+export default function ActivityList({ emotionSelected }) {
   const [activities, setActivities] = useState(initialActivities);
 
   function handleSubmit(event) {
@@ -19,13 +20,31 @@ export default function ActivityList() {
     console.log([...activities, submittedActivityForm]);
     event.target.reset();
   }
+  // const handleFilterForEmotion = (emotionSelected) => {
+  //   console.log("emotionSelected", emotionSelected);
+
+  //   if (emotionSelected == "fear") {
+  //     activities.filter((x) => {
+  //       console.log("handleFilterForEmotion+x", x);
+  //     });
+  //   }
+  // };
+  console.log("emotionSelected", emotionSelected);
+
+  console.log("activities", activities);
+  const filteredActivities = activities.filter(
+    (activity) =>
+      activity["for-emotion"] &&
+      activity["for-emotion"].includes(emotionSelected)
+  );
+  console.log("filteredActivities", filteredActivities);
 
   return (
     <DesignContainer>
       <NewEntryLink href="#newentry">Add your Own activity</NewEntryLink>
 
       <StyledList>
-        {activities.map((x) => (
+        {filteredActivities.map((x) => (
           <StyledListElement key={nanoid()}>
             <StyledH2>{x.activity}</StyledH2>
             <StyledEmoji>{x.emoji}</StyledEmoji>
@@ -33,6 +52,16 @@ export default function ActivityList() {
           </StyledListElement>
         ))}
       </StyledList>
+      {/*
+      {items.map((item, index) => (
+        <div key={index}>
+          {item.season.includes("summer") && <p>{item.name} is for summer.</p>}
+          {item.season.includes("winter") && <p>{item.name} is for winter.</p>}
+          {item.season.includes("spring") && <p>{item.name} is for spring.</p>}
+          {item.season.includes("autumn") && <p>{item.name} is for autumn.</p>}
+        </div>
+      ))}
+    */}
       <StyledForm onSubmit={handleSubmit} id="newentry">
         <label htmlFor="Activity">
           Activity:
