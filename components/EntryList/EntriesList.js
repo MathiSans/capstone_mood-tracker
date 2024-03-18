@@ -6,6 +6,7 @@ import useSWR, { useSWRConfig } from "swr";
 export default function EntriesList() {
   const { data, isLoading } = useSWR("/api/entries");
   const { mutate } = useSWRConfig();
+  const reversedMoods = data.slice().reverse();
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -22,22 +23,18 @@ export default function EntriesList() {
     mutate("/api/entries");
   }
 
-  const reversedMoods = data.slice().reverse();
-
   return (
     <>
       {reversedMoods.map((entry) => (
         <Styled.Container key={entry._id}>
           <Styled.AnimationContainer>
-            {/* <Animation color={entry.color} opacity={entry.intensity} /> */}
+            <Animation color={entry.color} opacity={entry.intensity} />
           </Styled.AnimationContainer>
           <Styled.Sentence>
             <Styled.StaticText>You felt</Styled.StaticText> {entry.experience}.{" "}
             <Styled.StaticText>More specifically</Styled.StaticText>{" "}
             <Intensity value={entry.intensity} experience={entry.experience} />
-            <Styled.StaticText>
-              . You selected these tags:
-            </Styled.StaticText>{" "}
+            <Styled.StaticText>You selected these tags:</Styled.StaticText>{" "}
             {entry.reactions.map((reaction, index, array) => (
               <span key={index}>
                 {reaction}
