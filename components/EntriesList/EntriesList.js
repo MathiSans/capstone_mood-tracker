@@ -42,7 +42,9 @@ export default function EntriesList() {
             <Styled.StaticText>You felt</Styled.StaticText> {entry.experience}.{" "}
             <Styled.StaticText>More specifically</Styled.StaticText>{" "}
             <Intensity value={entry.intensity} experience={entry.experience} />
-            <Styled.StaticText>You selected these tags:</Styled.StaticText>{" "}
+            <Styled.StaticText>
+              . You selected these tags:
+            </Styled.StaticText>{" "}
             {entry.reactions.map((reaction, index, array) => (
               <span key={index}>
                 {reaction}
