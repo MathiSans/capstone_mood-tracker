@@ -1,3 +1,5 @@
-export default function StyledGuide() {
-  return <h2 />;
+import * as Styled from "./Guide.styled";
+
+export default function Guide({ text, bigger }) {
+  return <Styled.Title bigger={bigger}>{text}</Styled.Title>;
 }

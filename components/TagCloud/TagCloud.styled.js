@@ -3,22 +3,16 @@ import styled from "styled-components";
 export const TagCloud = styled.div`
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
+  max-width: 400px;
+  justify-content: center;
+`;
 
-  label {
-    border: 1px solid white;
-    cursor: pointer;
-    border-radius: 12px;
-    padding: 0.5rem;
-
-    &:active {
-      background-color: green;
-    }
-  }
-
-  input {
-    display: none;
-    &:checked {
-      background-color: green;
-    }
-  }
+export const Button = styled.button`
+  padding: 10px 26px;
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
+  text-shadow: black 2px 0 15px;
+  background-color: ${({ active, color }) => (active ? color : "transparent")};
 `;

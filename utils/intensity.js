@@ -1,14 +1,15 @@
-export default function Intensity({ intensity }) {
-  if (intensity <= 51) {
-    return <span>very sad</span>;
+import { experiences } from "@/experiences";
+
+export default function Intensity({ value, experience }) {
+  const selectedExperience = experiences.find((exp) => exp.name === experience);
+
+  if (!experience) {
+    return null;
   }
-  if (intensity > 51 && intensity <= 102) {
-    return <span>sad</span>;
-  }
-  if (intensity > 102 && intensity <= 153) {
-    return <span>pleasant</span>;
-  }
-  if (intensity > 153 && intensity <= 255) {
-    return <span>extremely good</span>;
-  }
+
+  const step = 1 / (selectedExperience.intensity.length - 1);
+  let index = Math.floor(value / step);
+  index = Math.min(index, selectedExperience.intensity.length - 1);
+
+  return selectedExperience.intensity[index].name;
 }
