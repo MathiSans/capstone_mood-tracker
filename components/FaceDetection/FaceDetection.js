@@ -103,9 +103,13 @@ function FaceDetection() {
   // console.log("averageEmotionsRounded", averageEmotionsRounded);
   return (
     <StyledMyAppDivContainer>
-      <h1>Emotion Detection</h1>
+      <h1>Facial Expression Detection</h1>
       <StyledAppVideo>
-        <video crossOrigin="anonymous" ref={videoRef} autoPlay></video>
+        <VideoHidden
+          crossOrigin="anonymous"
+          ref={videoRef}
+          autoPlay
+        ></VideoHidden>
       </StyledAppVideo>
       <StyledAppCanvas
         ref={canvasRef}
@@ -122,13 +126,12 @@ function FaceDetection() {
         ))}
       </StyledEmotionsBox>
       {facesDetected ? (
-        <EmotionAnalysisComponent data={emotionsArray} />
+        <SmileTrainer x={expressionsRef} />
       ) : (
         <StyledNoFaceDetected>NO FACE DETECTED</StyledNoFaceDetected>
       )}
-
       {facesDetected ? (
-        <SmileTrainer x={expressionsRef} />
+        <EmotionAnalysisComponent data={emotionsArray} />
       ) : (
         <StyledNoFaceDetected>NO FACE DETECTED</StyledNoFaceDetected>
       )}
@@ -145,12 +148,17 @@ const StyledNoFaceDetected = styled.p`
   border: 2px dotted yellow;
 `;
 
+const VideoHidden = styled.video`
+  visibility: hidden;
+`;
+
 const StyledAppVideo = styled.div`
   display: flex;
   align-items: center;
 `;
 
 const StyledAppCanvas = styled.canvas`
+  visibility: hidden;
   position: absolute;
   top: 100px;
 `;

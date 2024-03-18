@@ -90,7 +90,7 @@ const EmotionAnalysisComponent = ({ data }) => {
     <>
       <div>
         {/* Render the rounded average values */}
-        <h3>Average Rounded Emotions for 20object with a 1000ms fetch</h3>
+        <h3>Average Rounded Emotions for 100object with a 200ms fetch</h3>
         <ul>
           {Object.keys(averageEmotionsRounded).map((emotion) => (
             <>
