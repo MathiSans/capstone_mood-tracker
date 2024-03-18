@@ -3,63 +3,44 @@ import styled, { keyframes } from "styled-components";
 export const Container = styled.div`
   position: absolute;
   z-index: -1;
-  background: black;
   width: 100%;
   height: 100%;
   overflow: hidden;
   filter: opacity(${(props) => props.opacity});
 
-  &:after {
+  /* &:after {
     content: "";
     width: 100%;
     height: 100%;
-    background-size: 200px;
+    background-size: 100%;
     mix-blend-mode: overlay;
     position: absolute;
     top: 0;
     left: 0;
-  }
+  } */
 `;
 
 export const circularAnimation = keyframes`
   0% {
-    transform: translate(0, -150px);
+    transform: translate(0, 50%);
   }
   25% {
-    transform: translate(150px, 0);
+    transform: translate(-50%, 0);
   }
   50% {
-    transform: translate(0, 150px);
+    transform: translate(0, -50%);
   }
   75% {
-    transform: translate(-150px, 0);
+    transform: translate(50%, 0);
   }
   100% {
-    transform: translate(0, -150px);
-  }
-`;
-
-export const circular2Animation = keyframes`
-  0% {
-    transform: translate(0, 150px);
-  }
-  25% {
-    transform: translate(-150px, 0);
-  }
-  50% {
-    transform: translate(0, -150px);
-  }
-  75% {
-    transform: translate(150px, 0);
-  }
-  100% {
-    transform: translate(0, 150px);
+    transform: translate(0, 50%);
   }
 `;
 
 export const BlobsContainer = styled.div`
-  width: 70%;
-  height: 70%;
+  width: 100%;
+  height: 100%;
   display: block;
   position: absolute;
   top: 50%;
@@ -72,8 +53,8 @@ export const Blob = styled.div`
   height: 100%;
   border-radius: 100%;
   position: absolute;
-  mix-blend-mode: multiply;
+  /* mix-blend-mode: multiply; */
   filter: blur(80px);
   background-color: ${(props) => props.color};
-  animation: ${circular2Animation} ${(props) => props.duration} linear infinite;
+  animation: ${circularAnimation} ${(props) => props.duration} linear infinite;
 `;

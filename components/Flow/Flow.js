@@ -12,6 +12,7 @@ import memory from "@/public/sounds/memory.mp3";
 import * as Styled from "@/components/Layout/Layout";
 import { motion } from "framer-motion";
 import useSWR from "swr";
+import LegacyAnimation from "../LegacyAnimation/LegacyAnimation";
 
 export default function Flow() {
   const router = useRouter();
@@ -73,7 +74,7 @@ export default function Flow() {
 
     if (response.ok) {
       mutate();
-      router.push("entries");
+      // router.push("entries");
     }
   }
 

@@ -1,36 +1,61 @@
 import React, { useEffect, useState, useRef } from "react";
+import useSWR from "swr";
+import { motion } from "framer-motion";
+import LegacyAnimation from "@/components/LegacyAnimation/LegacyAnimation";
+import Animation from "@/components/3DAnimation/3DAnimation";
+import ExperienceAnalyser from "@/utils/ExperienceAnalyser";
+import NavButton from "@/components/NavButton/NavButton";
 
-function Circle({ circleSize, name, colors }) {
-  let circleStyle;
-
-  if (colors.length === 1) {
-    circleStyle = {
-      width: circleSize,
-      height: circleSize,
-      borderRadius: "50%",
-      backgroundColor: colors[0],
-      margin: "5px",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      fontSize: circleSize / 10,
-    };
-  } else if (colors.length > 1) {
-    const gradient = `linear-gradient(to bottom, ${colors.join(",")})`;
-    circleStyle = {
-      width: circleSize,
-      height: circleSize,
-      borderRadius: "50%",
-      background: gradient,
-      margin: "5px",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      fontSize: circleSize / 10,
-    };
-  }
-
-  return <div style={circleStyle}>{name}</div>;
+function Circle({ circleSize, name, color, count }) {
+  return (
+    <motion.div
+      drag
+      initial={{ scale: 0.9 }}
+      dragTransition={{ bounceStiffness: 10, bounceDamping: 40 }}
+      whileTap={{ scale: 0.9 }}
+      animate={{ scale: 1 }}
+      transition={{ duration: 5 }}
+      whileHover={{ scale: 1.1, opacity: 1 }}
+      dragConstraints={{
+        top: -50,
+        left: -50,
+        right: 50,
+        bottom: 50,
+      }}
+      style={{
+        position: "relative",
+        width: circleSize,
+        overflow: "hidden",
+        height: circleSize,
+        borderRadius: "50%",
+        margin: "5px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        boxShadow: "10px 10px 50px black",
+      }}
+    >
+      <motion.div
+        style={{
+          position: "relative",
+          width: "100%",
+          overflow: "hidden",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        whileHover={{ scale: 1.1 }}
+      >
+        <LegacyAnimation color={color} opacity={circleSize} />
+        <h2 style={{ fontSize: circleSize / 10 }}>
+          {name} <br />
+          {count} entries
+        </h2>
+      </motion.div>
+    </motion.div>
+  );
 }
 
 export default function App() {
@@ -39,130 +64,72 @@ export default function App() {
 
   useEffect(() => {
     const handleResize = () => {
-      const containerWidth = containerRef.current.offsetWidth;
-      const containerHeight = containerRef.current.offsetHeight;
+      const containerWidth = containerRef.current
+        ? containerRef.current.offsetWidth
+        : window.innerWidth; // Use window.innerWidth as default
+      const containerHeight = containerRef.current
+        ? containerRef.current.offsetHeight
+        : window.innerHeight; // Use window.innerHeight as default
       setScreenSize({ width: containerWidth, height: containerHeight });
     };
 
-    handleResize(); // Call the function initially
-
+    handleResize();
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const objectsArray = [
-    {
-      name: "Schleswig-Holstein",
-      radius: 120,
-      colors: ["red", "blue"], // Example of an object with two colors
-    },
-    {
-      name: "Hamburg",
-      radius: 80,
-      colors: ["yellow"], // Example of an object with one color
-    },
-    {
-      name: "Bremen",
-      radius: 20,
-      colors: ["red", "blue", "yellow"], // Example of an object with three colors
-    },
-    {
-      name: "Lower Saxony",
-      radius: 100,
-      colors: ["blue"], // Example of an object with one color
-    },
-    {
-      name: "North Rhine-Westphalia",
-      radius: 30,
-      colors: ["red", "yellow"], // Example of an object with two colors
-    },
-    {
-      name: "Hesse",
-      radius: 35,
-      colors: ["yellow", "blue"], // Example of an object with two colors
-    },
-    {
-      name: "Rhineland-Palatinate",
-      radius: 40,
-      colors: ["red"], // Example of an object with one color
-    },
-    {
-      name: "Baden-Württemberg",
-      radius: 45,
-      colors: ["blue"], // Example of an object with one color
-    },
-    {
-      name: "Bavaria",
-      radius: 50,
-      colors: ["red", "blue", "yellow"], // Example of an object with three colors
-    },
-    {
-      name: "Saarland",
-      radius: 55,
-      colors: ["yellow", "blue"], // Example of an object with two colors
-    },
-    {
-      name: "Berlin",
-      radius: 60,
-      colors: ["red", "yellow"], // Example of an object with two colors
-    },
-    {
-      name: "Brandenburg",
-      radius: 65,
-      colors: ["yellow"], // Example of an object with one color
-    },
-    {
-      name: "Mecklenburg-Vorpommern",
-      radius: 70,
-      colors: ["red", "yellow"], // Example of an object with two colors
-    },
-    {
-      name: "Saxony",
-      radius: 75,
-      colors: ["red", "blue"], // Example of an object with two colors
-    },
-    {
-      name: "Saxony-Anhalt",
-      radius: 90,
-      colors: ["blue"], // Example of an object with one color
-    },
-    {
-      name: "Thuringia",
-      radius: 5,
-      colors: ["red"], // Example of an object with one color
-    },
-  ];
-
-  // Shuffle the array randomly
-  const shuffledArray = [...objectsArray].sort(() => Math.random() - 0.5);
-
-  const smallestDimension = Math.min(screenSize.width, screenSize.height);
-  const maxCircleSize = smallestDimension / 2 - 10; // Adjust padding
-  const circleSize = maxCircleSize / 80; // Scale factor
+  const { data, isLoading } = useSWR("/api/entries");
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+  if (!data) {
+    return;
+  }
 
   const gridStyle = {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center",
-    height: "50vh",
+    height: "100vh",
     width: "100vw",
   };
 
+  const result = ExperienceAnalyser(data);
+  console.log(result);
+
   return (
-    <>
+    <div style={{ position: "relative" }}>
       <div ref={containerRef} style={gridStyle}>
-        {shuffledArray.map((object, index) => (
+        {result.map((entry, index) => (
           <Circle
             key={index}
-            radius={object.radius}
-            circleSize={object.radius * circleSize}
-            name={object.name}
-            colors={object.colors}
+            index={index}
+            count={entry.count}
+            const
+            circleSize={Math.max(
+              Math.sqrt(entry.count) *
+                Math.min(screenSize.width, screenSize.height) *
+                (0.2 / Math.log(entry.count + 3)),
+              10
+            )}
+            name={entry.experience}
+            color={entry.color}
           />
         ))}
       </div>
-    </>
+      <div
+        style={{
+          zIndex: "10",
+          position: "fixed",
+          bottom: "6vh",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          boxShadow: "10px 10px 50px black",
+        }}
+      >
+        <NavButton>enter a mood</NavButton>
+      </div>
+    </div>
   );
 }
