@@ -82,5 +82,11 @@
     "emoji": "🌹",
     "text": "calm and gentle scent",
     "for-emotion": ["disgust"]
+  },
+  {
+    "activity": "Dancing",
+    "emoji": "🕺🏻💃",
+    "text": "express yourself",
+    "for-emotion": ["disgust, anger, enjoyment, fear, sadness"]
   }
 ]
