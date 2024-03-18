@@ -2,36 +2,73 @@
   {
     "activity": "go for a walk",
     "emoji": "🚶",
-    "text": "a long walk starts with a small step. A walk helps to shift your focus and get new ideas"
+    "text": "a long walk starts with a small step. A walk helps to shift your focus and get new ideas",
+    "for-emotions": ["sadness", "anger"]
   },
   {
     "activity": "swimming",
     "emoji": "🏊‍♂️",
-    "text": "for a lot of people swimming is very relaxing."
+    "text": "for a lot of people swimming is very relaxing.",
+    "for-emotions": ["sadness", "anger"]
   },
   {
     "activity": "call a friend",
     "emoji": "☎️",
-    "text": "connect ot old are newer friends, sharing is caring"
+    "text": "connect ot old are newer friends, sharing is caring",
+    "for-emotion": ["sadness", "anger", "fear"]
   },
   {
     "activity": "draw",
     "emoji": "👩‍🎨",
-    "text": "if words are not your language ro express yourself, drawing a image can shift your focus or just give you joy"
+    "text": "if words are not your language ro express yourself, drawing a image can shift your focus or just give you joy",
+    "for-emotion": ["sadness", "joy"]
   },
   {
     "activity": "drink a glass of water",
     "emoji": "💧",
-    "text": "in a ful life people might forget to drink water, just a glass of water can enjoy yourself"
+    "text": "in a ful life people might forget to drink water, just a glass of water can enjoy yourself",
+    "for-emotion": ["anger", "sadness", "fear"]
   },
   {
     "activity": "look out of the window into the far",
     "emoji": "🌅",
-    "text": "after a long day on the screen,  just a look out of the window for 5minutes and more relax yourself and help you reconnect to your environment"
+    "text": "after a long day on the screen,  just a look out of the window for 5minutes and more relax yourself and help you reconnect to your environment",
+    "for-emotion": ["sadness", "anger", "fear"]
   },
   {
-    "activity": "go for a walk",
-    "emoji": "🚶",
-    "text": "a long walk starts with a small step. A walk helps to shift your focus and get new ideas"
+    "activity": "write down your thoughts",
+    "emoji": "✍️",
+    "text": "What you express,you can reflect on. Some people feel relive or joy by doing so.",
+    "for-emotion": ["sadness", "anger"]
+  },
+  {
+    "activity": "drink a warm yummy tea",
+    "emoji": "🍵",
+    "text": "a cozy moment for yourself",
+    "for-emotion": ["sadness", "anger", "sadness", "fear"]
+  },
+  {
+    "activity": "make something you haven't done yet",
+    "emoji": "🦸‍♂️🦸‍♀️",
+    "text": "if you stay always in your comfort zone you won't progress.",
+    "for-emotion": ["joy"]
+  },
+  {
+    "activity": "engage in your community",
+    "emoji": "🏡🌳👩‍🌾👨‍👩‍👧",
+    "text": "sharing is caring. Building a strong community around us helps all of us",
+    "for-emotion": ["joy"]
+  },
+  {
+    "activity": "help in an animal shelter",
+    "emoji": "🐶🐈‍⬛🐷",
+    "text": "if you have a lot to give, why not share it. if you love animals, this activity might be for you",
+    "for-emotion": ["joy"]
+  },
+  {
+    "activity": "help in an homeless shelter",
+    "emoji": "⛺️",
+    "text": "if you have a lot to give, why not share it. If you wanna people in need this might be fitting for you",
+    "for-emotion": ["joy"]
   }
 ]
