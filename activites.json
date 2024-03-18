@@ -87,6 +87,6 @@
     "activity": "Dancing",
     "emoji": "🕺🏻💃",
     "text": "express yourself",
-    "for-emotion": ["disgust, anger, enjoyment, fear, sadness"]
+    "for-emotion": ["disgust", "anger", "enjoyment", "fear", "sadness"]
   }
 ]
