@@ -16,9 +16,6 @@ import useSWR from "swr";
 export default function Flow() {
   const router = useRouter();
   const { mutate } = useSWR("/api/entries");
-  const [allEntries, setAllEntries] = useLocalStorageState("anonymous_moods", {
-    defaultValue: [],
-  });
   const [experience, setExperience] = useState([]);
   const [sliderValue, setSliderValue] = useState(0);
   const [reactions, setReactions] = useState([]);
@@ -89,7 +86,7 @@ export default function Flow() {
 
   return (
     <>
-      {/* <Animation color={color} opacity={sliderValue} /> */}
+      <Animation color={color} opacity={sliderValue} />
       <Styled.Container>
         {page > 0 && (
           <>
