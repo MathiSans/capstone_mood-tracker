@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 import styled from "styled-components";
 // import { averageEmotions } from "../components/AverageEmotionValue";
 // import { averageEmotionsRounded } from "../components/AverageEmotionValue";
-import EmotionAnalysisComponent from "@/components/FaceDetection/AverageEmotion";
+// import EmotionAnalysisComponent from "@/components/FaceDetection/AverageEmotion";
 import SmileTrainer from "@/components/FaceDetection/SmileTrainer";
 
 function FaceDetection() {
@@ -117,21 +117,8 @@ function FaceDetection() {
         height="650"
         className="appcanvas"
       />
-      <StyledEmotionsBox>
-        {/* Display each key-value pair in a separate <span> */}
-        {Object.keys(expressionsRef.current).map((key) => (
-          <span className="keyValueSpan" key={nanoid()}>
-            {key}: {expressionsRef.current[key]},{" "}
-          </span>
-        ))}
-      </StyledEmotionsBox>
       {facesDetected ? (
         <SmileTrainer x={expressionsRef} />
-      ) : (
-        <StyledNoFaceDetected>NO FACE DETECTED</StyledNoFaceDetected>
-      )}
-      {facesDetected ? (
-        <EmotionAnalysisComponent data={emotionsArray} />
       ) : (
         <StyledNoFaceDetected>NO FACE DETECTED</StyledNoFaceDetected>
       )}
