@@ -1,5 +1,11 @@
 [
   {
+    "activity": "The Smile Trainer",
+    "emoji": "😃",
+    "text": "TOOL: hold your smile for 10 seoconds and uplift your mood",
+    "for-emotions": ["sadness", "fear", "anger"]
+  },
+  {
     "activity": "go for a walk",
     "emoji": "🚶",
     "text": "a long walk starts with a small step. A walk helps to shift your focus and get new ideas",
