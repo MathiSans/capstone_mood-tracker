@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import { experiences } from "@/experiences";
-import useLocalStorageState from "use-local-storage-state";
 import Animation from "@/components/3DAnimation/3DAnimation";
 import NavButton from "@/components/NavButton/NavButton";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
