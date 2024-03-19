@@ -12,6 +12,7 @@ import memory from "@/public/sounds/memory.mp3";
 import * as Styled from "@/components/Layout/Layout";
 import { motion } from "framer-motion";
 import useSWR from "swr";
+import fetchLocation from "@/utils/locationTracking";
 
 export default function Flow() {
   const router = useRouter();
@@ -52,6 +53,9 @@ export default function Flow() {
 
   async function handleSave() {
     const reactionsArray = reactions.map((reaction) => reaction.name);
+    const region = await fetchLocation();
+    console.log("Region:", region);
+
     const response = await fetch("/api/entries", {
       method: "POST",
       headers: {
@@ -60,7 +64,7 @@ export default function Flow() {
       body: JSON.stringify({
         time: new Date().toLocaleString(),
         user: "anonymous",
-        location: "unknown",
+        location: region,
         experience: experience[0].name,
         color: experience[0].color,
         intensity: sliderValue,
