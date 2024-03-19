@@ -8,7 +8,6 @@ export default function ActivityListRender() {
   function handleChangeOfEmotion(event) {
     const selectedEmotion = event.target.value;
     setEmotionSelected(selectedEmotion);
-    console.log(event.target.value);
   }
   return (
     <>

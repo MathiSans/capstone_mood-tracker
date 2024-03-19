@@ -1,9 +1,18 @@
 import initialActivities from "@/activites.json";
 import { useState } from "react";
 import { nanoid } from "nanoid";
-import { StyledList } from "./ActivityList.styled";
-import styled from "styled-components";
-import Link from "next/link";
+import {
+  StyledList,
+  StyledLink,
+  ToolSpan,
+  NewEntryLink,
+  StyledForm,
+  DesignContainer,
+  StyledH2,
+  StyledEmoji,
+  StyledListElement,
+  StyledText,
+} from "./ActivityList.styled";
 
 export default function ActivityList({ emotionSelected }) {
   const [selectedEmotions, setSelectedEmotions] = useState([]);
@@ -34,7 +43,6 @@ export default function ActivityList({ emotionSelected }) {
       Array.isArray(activity.forEmotion) &&
       activity.forEmotion.includes(emotionSelected)
   );
-  console.log("filteredActivities", filteredActivities);
 
   return (
     <DesignContainer>
@@ -129,74 +137,3 @@ export default function ActivityList({ emotionSelected }) {
     </DesignContainer>
   );
 }
-
-const DesignContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const StyledH2 = styled.h2`
-  font-weight: bold;
-  text-decoration: underline;
-  text-align: center;
-  padding: 0.8rem;
-`;
-const StyledEmoji = styled.p`
-  background-color: white;
-  font-size: 4rem;
-  text-align: center;
-  list-style-type: none;
-`;
-
-export const StyledListElement = styled.li`
-  border: 1px solid white;
-  border-radius: 12px;
-  list-style-type: none;
-  margin: 5rem;
-`;
-
-const StyledText = styled.p`
-  padding: 1.5rem;
-`;
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  border: 1px solid white;
-  padding: 1.5rem;
-  border-radius: 12px;
-`;
-
-const NewEntryLink = styled(Link)`
-  &:link {
-    color: yellow;
-  }
-  &:visited {
-    color: white;
-  }
-  &:hover {
-    color: hotpink;
-  }
-  &:active {
-    color: lightcyan;
-  }
-`;
-
-const ToolSpan = styled.span`
-  font-weight: bold;
-  background-color: white;
-  color: black;
-  padding: 0.1rem;
-  border-radius: 5px;
-`;
-const StyledLink = styled(Link)`
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #ffcc00;
-  }
-`;
