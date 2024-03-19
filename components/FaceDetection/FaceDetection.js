@@ -15,14 +15,22 @@ export default function FaceDetection() {
 
   useEffect(() => {
     startVideo();
-    videoRef && loadModels();
-  });
+  }, []);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      loadModels();
+    }
+  }, [videoRef]);
 
   function startVideo() {
     navigator.mediaDevices
       .getUserMedia({ video: true })
       .then((currentStream) => {
         videoRef.current.srcObject = currentStream;
+        videoRef.current.onloadedmetadata = () => {
+          loadModels();
+        };
       })
       .catch((err) => {
         console.log(err);

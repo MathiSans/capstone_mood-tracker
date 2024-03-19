@@ -18,7 +18,7 @@ export default function SmileTrainer({ smileThreshold, facesDetected }) {
     }, 100);
 
     return () => clearInterval(interval);
-  }, [smileThreshold, counter]);
+  });
 
   return (
     <>
