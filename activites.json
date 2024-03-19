@@ -3,7 +3,7 @@
     "activity": "The Smile Trainer",
     "emoji": "😃",
     "text": "TOOL: hold your smile for 10 seconds and uplift your mood",
-    "for-emotions": ["sadness", "fear", "anger"]
+    "for-emotion": ["sadness", "anger", "fear"]
   },
   {
     "activity": "go for a walk",
