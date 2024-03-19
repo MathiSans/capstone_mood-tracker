@@ -4,38 +4,35 @@ import { nanoid } from "nanoid";
 import { StyledList } from "./ActivityList.styled";
 import styled from "styled-components";
 import Link from "next/link";
-import { distDir } from "@/next.config";
 
 export default function ActivityList({ emotionSelected }) {
+  const [selectedEmotions, setSelectedEmotions] = useState([]);
   const [activities, setActivities] = useState(initialActivities);
 
+  function handleCheckboxChange(emotion, isChecked) {
+    if (isChecked) {
+      setSelectedEmotions([...selectedEmotions, emotion]);
+    } else {
+      setSelectedEmotions(selectedEmotions.filter((e) => e !== emotion));
+    }
+  }
   function handleSubmit(event) {
     event.preventDefault();
     const submittedActivityForm = {
       activity: event.target.elements.Activity.value,
       emoji: event.target.elements.Emoji.value,
       text: event.target.elements.Description.value,
+      forEmotion: selectedEmotions,
     };
     setActivities([...activities, submittedActivityForm]);
-    console.log([...activities, submittedActivityForm]);
     event.target.reset();
+    setSelectedEmotions([]);
   }
-  // const handleFilterForEmotion = (emotionSelected) => {
-  //   console.log("emotionSelected", emotionSelected);
 
-  //   if (emotionSelected == "fear") {
-  //     activities.filter((x) => {
-  //       console.log("handleFilterForEmotion+x", x);
-  //     });
-  //   }
-  // };
-  console.log("emotionSelected", emotionSelected);
-
-  console.log("activities", activities);
   const filteredActivities = activities.filter(
     (activity) =>
-      activity["for-emotion"] &&
-      activity["for-emotion"].includes(emotionSelected)
+      Array.isArray(activity.forEmotion) &&
+      activity.forEmotion.includes(emotionSelected)
   );
   console.log("filteredActivities", filteredActivities);
 
@@ -59,16 +56,6 @@ export default function ActivityList({ emotionSelected }) {
           </StyledListElement>
         ))}
       </StyledList>
-      {/*
-      {items.map((item, index) => (
-        <div key={index}>
-          {item.season.includes("summer") && <p>{item.name} is for summer.</p>}
-          {item.season.includes("winter") && <p>{item.name} is for winter.</p>}
-          {item.season.includes("spring") && <p>{item.name} is for spring.</p>}
-          {item.season.includes("autumn") && <p>{item.name} is for autumn.</p>}
-        </div>
-      ))}
-    */}
       <StyledForm onSubmit={handleSubmit} id="newentry">
         <label htmlFor="Activity">
           Activity:
@@ -92,6 +79,49 @@ export default function ActivityList({ emotionSelected }) {
             id="Description"
             name="Description"
             placeholder="describe details to this activity.."
+          ></input>
+        </label>
+        <p>For which emotional state do you recommend this activity?</p>
+        <label htmlFor="enjoyment">
+          for enjoyment
+          <input
+            type="checkbox"
+            id="enjoyment"
+            onChange={(e) =>
+              handleCheckboxChange("enjoyment", e.target.checked)
+            }
+          ></input>
+        </label>
+        <label htmlFor="fear">
+          for fear
+          <input
+            type="checkbox"
+            id="fear"
+            onChange={(e) => handleCheckboxChange("fear", e.target.checked)}
+          ></input>
+        </label>
+        <label htmlFor="anger">
+          for anger
+          <input
+            type="checkbox"
+            id="anger"
+            onChange={(e) => handleCheckboxChange("anger", e.target.checked)}
+          ></input>
+        </label>
+        <label htmlFor="disgust">
+          for Disgust
+          <input
+            type="checkbox"
+            id="disgust"
+            onChange={(e) => handleCheckboxChange("disgust", e.target.checked)}
+          ></input>
+        </label>
+        <label htmlFor="sadness">
+          for sadness
+          <input
+            type="checkbox"
+            id="sadness"
+            onChange={(e) => handleCheckboxChange("sadness", e.target.checked)}
           ></input>
         </label>
         <button type="submit">Submit</button>
