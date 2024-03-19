@@ -49,8 +49,8 @@ export default function ActivityList({ emotionSelected }) {
             <StyledH2>{x.activity}</StyledH2>
             <StyledEmoji>{x.emoji}</StyledEmoji>
             <StyledText>
-              {x.includes.tool === "TOOL" ? "TOOL" : ""}
-              {x.includes.tool === "TOOL" ? (
+              {x.tool === "TOOL" ? "TOOL" : ""}
+              {x.tool === "TOOL" ? (
                 <Link href="/smiletrainer">{x.text}</Link>
               ) : (
                 ""
