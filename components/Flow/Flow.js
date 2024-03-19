@@ -54,7 +54,6 @@ export default function Flow() {
   async function handleSave() {
     const reactionsArray = reactions.map((reaction) => reaction.name);
     const region = await fetchLocation();
-    console.log("Region:", region);
 
     const response = await fetch("/api/entries", {
       method: "POST",
