@@ -13,10 +13,8 @@ export default function ExperienceAnalyser(data) {
     }
   });
 
-  // Create an array to store the result objects
   const result = [];
 
-  // Loop through the experienceMap to calculate average intensity for each experience
   for (const experience in experienceMap) {
     const averageIntensity =
       experienceMap[experience].totalIntensity /

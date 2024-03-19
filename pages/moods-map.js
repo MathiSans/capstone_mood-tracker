@@ -6,6 +6,7 @@ import { Navigation } from "@/components/Layout/Layout";
 import styled from "styled-components";
 import Circle from "@/components/Circle/Circle";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 export default function App() {
   const router = useRouter();
@@ -40,6 +41,9 @@ export default function App() {
 
   return (
     <>
+      <motion.div animate={{ opacity: 0 }} transition={{ delay: 5 }}>
+        <DragInfo>click and drag the spheres ...</DragInfo>
+      </motion.div>
       <Grid ref={containerRef}>
         {result.map((entry, index) => (
           <Circle
@@ -74,4 +78,15 @@ const Grid = styled.div`
   align-items: center;
   height: 100vh;
   width: 100vw;
+`;
+
+const DragInfo = styled.div`
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 5vh;
+  text-align: center;
+  z-index: 21;
 `;
