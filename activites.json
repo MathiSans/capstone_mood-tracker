@@ -5,7 +5,7 @@
     "text": "hold your smile for 10 seconds and uplift your mood",
     "for-emotion": ["sadness", "anger", "fear"],
     "tool": "TOOL",
-    "link": "/smiletrainer"
+    "link": "https://mood-diary-git-feature-smiletrainer-mathis-santos-projects.vercel.app/smiletrainer"
   },
   {
     "activity": "go for a walk",
