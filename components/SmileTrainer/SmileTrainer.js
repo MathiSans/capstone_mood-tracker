@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function SmileTrainer({ smileThreshold, facesDetected }) {
-  // console.log("x", smileThreshold);
   const [counter, setCounter] = useState(10);
   const [done, setDone] = useState(false);
 
