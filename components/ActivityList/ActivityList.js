@@ -49,11 +49,11 @@ export default function ActivityList({ emotionSelected }) {
             <StyledH2>{x.activity}</StyledH2>
             <StyledEmoji>{x.emoji}</StyledEmoji>
             <StyledText>
-              {x.tool === "TOOL" ? "TOOL" : ""}
+              {x.tool === "TOOL" ? <ToolSpan>TOOL</ToolSpan> : ""}
               {x.tool === "TOOL" ? (
-                <Link href="/smiletrainer">{x.text}</Link>
+                <StyledLink href="/smiletrainer"> {x.text}</StyledLink>
               ) : (
-                ""
+                `${x.text}`
               )}
             </StyledText>
           </StyledListElement>
@@ -151,5 +151,22 @@ const NewEntryLink = styled(Link)`
   }
   &:active {
     color: lightcyan;
+  }
+`;
+
+const ToolSpan = styled.span`
+  font-weight: bold;
+  background-color: white;
+  color: black;
+  padding: 0.1rem;
+  border-radius: 5px;
+`;
+const StyledLink = styled(Link)`
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #ffcc00;
   }
 `;
