@@ -48,7 +48,14 @@ export default function ActivityList({ emotionSelected }) {
           <StyledListElement key={nanoid()}>
             <StyledH2>{x.activity}</StyledH2>
             <StyledEmoji>{x.emoji}</StyledEmoji>
-            <StyledText>{x.text}</StyledText>
+            <StyledText>
+              {x.includes.tool === "TOOL" ? "TOOL" : ""}
+              {x.includes.tool === "TOOL" ? (
+                <Link href="/smiletrainer">{x.text}</Link>
+              ) : (
+                ""
+              )}
+            </StyledText>
           </StyledListElement>
         ))}
       </StyledList>

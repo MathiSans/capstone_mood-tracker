@@ -3,7 +3,9 @@
     "activity": "The Smile Trainer",
     "emoji": "😃",
     "text": "TOOL: hold your smile for 10 seconds and uplift your mood",
-    "for-emotion": ["sadness", "anger", "fear"]
+    "for-emotion": ["sadness", "anger", "fear"],
+    "tool": "TOOL",
+    "link": "/smiletrainer"
   },
   {
     "activity": "go for a walk",
