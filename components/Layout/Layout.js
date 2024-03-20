@@ -6,6 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 100vh;
+  width: 100vw;
 `;
 
 export const Page = styled.div`
