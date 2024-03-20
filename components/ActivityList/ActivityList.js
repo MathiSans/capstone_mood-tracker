@@ -49,7 +49,7 @@ export default function ActivityList({ emotionSelected }) {
       <NewEntryLink href="#newentry">Add your Own activity</NewEntryLink>
 
       <StyledList>
-        {filteredActivities.map((x) => (
+        {activities.map((x) => (
           <StyledListElement key={nanoid()}>
             <StyledH2>{x.activity}</StyledH2>
             <StyledEmoji>{x.emoji}</StyledEmoji>
@@ -64,7 +64,7 @@ export default function ActivityList({ emotionSelected }) {
           </StyledListElement>
         ))}
       </StyledList>
-      <StyledForm onSubmit={handleSubmit} id="newentry">
+      {/* <StyledForm onSubmit={handleSubmit} id="newentry">
         <label htmlFor="Activity">
           Activity:
           <input
@@ -133,7 +133,7 @@ export default function ActivityList({ emotionSelected }) {
           ></input>
         </label>
         <button type="submit">Submit</button>
-      </StyledForm>
+      </StyledForm> */}
     </DesignContainer>
   );
 }

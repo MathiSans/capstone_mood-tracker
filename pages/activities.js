@@ -1,7 +1,9 @@
-import { TrackerContainer } from "@/styles";
+import { Container, Navigation, Page } from "@/components/Layout/Layout";
 import ActivityList from "@/components/ActivityList/ActivityList";
 import styled from "styled-components";
 import { useState } from "react";
+import Guide from "@/components/Guide/Guide";
+import NavButton from "@/components/NavButton/NavButton";
 
 export default function ActivityListRender() {
   const [emotionSelected, setEmotionSelected] = useState();
@@ -11,31 +13,37 @@ export default function ActivityListRender() {
   }
   return (
     <>
-      <TrackerContainer>
-        <h1>
-          <StyledHeadlineInline>
-            <StyledYourMood> List of activites for</StyledYourMood>
-            <form>
-              <label>
-                <StyledSelect
-                  name="emotions"
-                  size="5"
-                  onChange={(event) => {
-                    handleChangeOfEmotion(event);
-                  }}
-                >
-                  <option value={"fear"}>fear</option>
-                  <option value={"anger"}>anger</option>
-                  <option value={"enjoyment"}>enjoyment</option>
-                  <option value={"disgust"}>disgust</option>
-                  <option value={"sadness"}>sadness</option>
-                </StyledSelect>
-              </label>
-            </form>
-          </StyledHeadlineInline>
-        </h1>
-        <ActivityList emotionSelected={emotionSelected} />
-      </TrackerContainer>
+      <Container>
+        <Page>
+          <Guide text={"activities"} />
+          {/* <StyledYourMood> List of activites for</StyledYourMood> */}
+
+          {/* <form>
+          <label>
+            <StyledSelect
+              name="emotions"
+              size="5"
+              onChange={(event) => {
+                handleChangeOfEmotion(event);
+              }}
+            >
+              <option value={"fear"}>fear</option>
+              <option value={"anger"}>anger</option>
+              <option value={"enjoyment"}>enjoyment</option>
+              <option value={"disgust"}>disgust</option>
+              <option value={"sadness"}>sadness</option>
+            </StyledSelect>
+          </label>
+        </form> */}
+
+          <ActivityList emotionSelected={emotionSelected} />
+        </Page>
+        <Navigation>
+          <NavButton handleClick={() => router.push("/")}>
+            enter a mood
+          </NavButton>
+        </Navigation>
+      </Container>
     </>
   );
 }
