@@ -1,4 +1,4 @@
-export default function ExperienceAnalyser(data) {
+export default function experienceAnalyser(data) {
   const experienceMap = {};
   data.forEach((entry) => {
     if (!experienceMap[entry.experience]) {

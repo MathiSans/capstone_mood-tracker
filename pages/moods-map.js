@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import useSWR from "swr";
-import ExperienceAnalyser from "@/utils/ExperienceAnalyser";
+import experienceAnalyser from "@/utils/experienceAnalyser";
 import NavButton from "@/components/NavButton/NavButton";
 import { Navigation } from "@/components/Layout/Layout";
 import styled from "styled-components";
 import Circle from "@/components/Circle/Circle";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function App() {
   const router = useRouter();
@@ -37,7 +38,7 @@ export default function App() {
     return <p>no connection to database</p>;
   }
 
-  const result = ExperienceAnalyser(data);
+  const result = experienceAnalyser(data);
 
   return (
     <>
@@ -48,9 +49,7 @@ export default function App() {
         {result.map((entry, index) => (
           <Circle
             key={index}
-            index={index}
             count={entry.count}
-            const
             circleSize={Math.max(
               Math.sqrt(entry.count) *
                 Math.min(screenSize.width, screenSize.height) *
@@ -63,9 +62,7 @@ export default function App() {
         ))}
       </Grid>
       <Navigation>
-        <NavButton handleClick={() => router.push("entries")}>
-          list view
-        </NavButton>
+        <NavButton linkToPage="entries">list view</NavButton>
       </Navigation>
     </>
   );
