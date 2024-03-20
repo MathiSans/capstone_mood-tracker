@@ -63,4 +63,13 @@ const StyledButton = styled.button`
   color: white;
   padding: 1rem;
   border-radius: 12px;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px -5px;
+    transform: translate3d(0, 1px, 0);
+  }
+
+  &:focus {
+    box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 4px -6px;
+  }
 `;
