@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 
 export const Button = styled.button`
   padding: 10px 26px;
@@ -7,4 +8,9 @@ export const Button = styled.button`
   border: ${({ disabled }) =>
     disabled ? "1px solid grey" : "1px solid white"};
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+`;
+
+export const ButtonTextLink = styled(Link)`
+  color: ${({ disabled }) => (disabled ? "grey" : "white")};
+  text-decoration: none;
 `;
