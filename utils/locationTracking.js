@@ -5,7 +5,7 @@ export default async function fetchLocation() {
       throw new Error("Failed to fetch location information");
     }
     const data = await response.json();
-    const region = data.regionName || null;
+    const region = data.regionName || "unknown";
     return region;
   } catch (error) {
     console.error("Error fetching location:", error.message);
