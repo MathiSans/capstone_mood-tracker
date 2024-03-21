@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { nanoid } from "nanoid";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Quotes({ quotes }) {
   const [quoteState, setQuoteState] = useState({});
   const [nextQuote, setNextQuote] = useState(0);
-
+  console.log("quotes", quotes);
   const router = useRouter();
 
   function handleRandomQuote() {
@@ -16,6 +15,7 @@ export default function Quotes({ quotes }) {
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const randomQuote = quotes[randomIndex];
     setQuoteState(randomQuote);
+    setNextQuote(quotes);
   }
   useEffect(() => {
     handleRandomQuote();
@@ -23,30 +23,33 @@ export default function Quotes({ quotes }) {
   useEffect(() => {
     handleRandomQuote();
   }, [nextQuote]);
+
   return (
-    <>
-      {
-        <>
-          <StyledArticle>
-            <StyledH1>{quoteState.text}</StyledH1>
-            <p>- {quoteState.author}</p>
-          </StyledArticle>
-          <StyledButton
-            onClick={() => {
-              setNextQuote((currQuote) => currQuote + 1);
-            }}
-          >
-            new quote
-          </StyledButton>
-        </>
-      }
-    </>
+    <QuoteContainer>
+      <StyledArticle>
+        <StyledBlockquote>{quoteState.text}</StyledBlockquote>
+        <StyledFooter>{quoteState.author}</StyledFooter>
+      </StyledArticle>
+      <StyledButton
+        onClick={() => {
+          setNextQuote((currQuote) => currQuote + 1);
+        }}
+      >
+        new quote
+      </StyledButton>
+    </QuoteContainer>
   );
 }
 
+const QuoteContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 const StyledArticle = styled.article`
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-
+  font-size: 1rem;
   border: 2px solid white;
   border-radius: 12px;
   box-shadow: rgba(255, 255, 255, 0.359) 0px 10px 15px -3px,
@@ -54,8 +57,12 @@ const StyledArticle = styled.article`
   padding: 1.5rem;
 `;
 
-const StyledH1 = styled.h1`
+const StyledBlockquote = styled.blockquote`
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: large;
+`;
+const StyledFooter = styled.footer`
+  text-align: center;
 `;
 
 const StyledButton = styled.button`
