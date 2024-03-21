@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export default function MuteButton({ isMuted, setIsMuted, setCurrentVolume }) {
   function toggleMute() {
-    const toggle = isMuted ? 0.3 : 0;
-    setCurrentVolume(toggle);
+    const volume = isMuted ? 0.3 : 0;
+    setCurrentVolume(volume);
     setIsMuted(!isMuted);
   }
 
