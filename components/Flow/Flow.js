@@ -12,6 +12,8 @@ import { motion } from "framer-motion";
 import useSWR from "swr";
 import fetchLocation from "@/utils/locationTracking";
 import LegacyAnimation from "../LegacyAnimation/LegacyAnimation";
+import NavIcon from "../NavIcon/NavIcon";
+import { FiArrowRight } from "react-icons/fi";
 
 export default function Flow() {
   const router = useRouter();
@@ -88,7 +90,7 @@ export default function Flow() {
 
   return (
     <>
-      <Animation color={color} opacity={sliderValue} />
+      {/* <Animation color={color} opacity={sliderValue} /> */}
       <Styled.Container>
         {page > 0 && (
           <>
@@ -133,13 +135,14 @@ export default function Flow() {
           )}
           {page === 1 && (
             <motion.div variants={button} initial="hidden" animate="show">
-              <NavButton
+              <NavIcon
+                disabled
                 handleClick={() => {
                   setPage((currPage) => currPage + 1);
                 }}
               >
-                next
-              </NavButton>
+                <FiArrowRight />
+              </NavIcon>
             </motion.div>
           )}
           {page > 2 && page <= 4 && (

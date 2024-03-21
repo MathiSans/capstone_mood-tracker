@@ -19,21 +19,21 @@ export const Page = styled.div`
 `;
 
 export const Navigation = styled.div`
-  position: fixed;
+  position: relative;
   justify-content: center;
   align-items: center;
   bottom: 0;
   display: flex;
   gap: 20px;
   /* margin-bottom: 60px; */
-  background: rgb(0, 0, 0);
+  /* background: rgb(0, 0, 0);
   background: rgb(0, 0, 0);
   background: linear-gradient(
     0deg,
     rgba(0, 0, 0, 1) 0%,
     rgba(0, 0, 0, 1) 33%,
     rgba(0, 0, 0, 0) 100%
-  );
-  width: 100vw;
-  height: 20vh;
+  ); */
+  /* width: 100vw;
+  height: 20vh; */
 `;
