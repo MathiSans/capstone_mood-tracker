@@ -5,7 +5,6 @@ import Quotes from "@/components/Quotes/Quotes";
 import { useRouter } from "next/router";
 import * as Styled from "@/components/Layout/Layout";
 import useSWR from "swr";
-import { mutate } from "swr";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
