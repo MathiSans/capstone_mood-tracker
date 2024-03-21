@@ -8,6 +8,8 @@ import * as Styled from "@/components/Layout/Layout";
 import { motion } from "framer-motion";
 import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
+import fetchLocation from "@/utils/locationTracking";
+import LegacyAnimation from "../LegacyAnimation/LegacyAnimation";
 
 export default function Flow() {
   const router = useRouter();
@@ -44,6 +46,8 @@ export default function Flow() {
 
   async function handleSave() {
     const reactionsArray = reactions.map((reaction) => reaction.name);
+    const region = await fetchLocation();
+
     const response = await fetch("/api/entries", {
       method: "POST",
       headers: {
@@ -52,7 +56,7 @@ export default function Flow() {
       body: JSON.stringify({
         time: new Date().toLocaleString(),
         user: "anonymous",
-        location: "unknown",
+        location: region,
         experience: experience[0].name,
         color: experience[0].color,
         intensity: sliderValue,
@@ -62,7 +66,7 @@ export default function Flow() {
 
     if (response.ok) {
       mutate();
-      router.push("entries");
+      router.push("moods-map");
     }
   }
 

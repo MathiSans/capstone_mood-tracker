@@ -8,11 +8,13 @@ export const Container = styled.div`
 `;
 
 export const AnimationContainer = styled.div`
-  width: 120px;
-  height: 120px;
+  width: 60px;
+  height: 60px;
   position: relative;
   border-radius: 100px;
   overflow: hidden;
+  filter: blur(8px);
+  margin-bottom: 10px;
 `;
 
 export const Sentence = styled.p`

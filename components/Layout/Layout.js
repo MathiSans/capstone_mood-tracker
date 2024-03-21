@@ -5,8 +5,7 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh;
-  gap: 180px;
+  width: 100vw;
 `;
 
 export const Page = styled.div`
@@ -15,9 +14,12 @@ export const Page = styled.div`
   justify-content: center;
   align-items: center;
   gap: 40px;
+  margin-bottom: 10vh;
 `;
 
 export const Navigation = styled.div`
+  position: fixed;
+  bottom: 0;
   display: flex;
   gap: 20px;
   margin-bottom: 60px;
