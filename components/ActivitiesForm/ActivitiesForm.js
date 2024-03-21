@@ -3,6 +3,7 @@ import * as Styled from "./ActivitiesForm.styled";
 import NavButton from "../NavButton/NavButton";
 import { mutate } from "swr";
 import Picker from "emoji-picker-react";
+import styled from "styled-components";
 
 export default function ActivitiesForm({ handleShowForm }) {
   const [selectedEmotions, setSelectedEmotions] = useState([]);
@@ -13,6 +14,7 @@ export default function ActivitiesForm({ handleShowForm }) {
     // setInputString((prevInput) => prevInput + emoji);
     setInputString((prevInput) => [...prevInput, emoji]);
     setShowPicker(false);
+    window.scrollTo(0, 0);
   };
 
   useEffect(() => {
@@ -55,37 +57,37 @@ export default function ActivitiesForm({ handleShowForm }) {
     <>
       <Styled.Card>
         <Styled.Form onSubmit={handleSubmit} id="newentry">
-          <label htmlFor="emoji">
-            {/* <Styled.InputField
-              value={inputString}
-              onChange={(event) => setInputString(event.target.value)}
-              id="emoji"
-              name="emoji"
-              placeholder="☺️"
-              maxlength="2"
-              required
-            ></Styled.InputField> */}
-            <h3>{inputString}</h3>
+          <EmojiP>{inputString}</EmojiP>
 
-            <button onClick={() => setShowPicker((val) => !val)}>
-              Pick a Emoji ☺️
-            </button>
-            {showPicker && (
-              <Picker
-                pickerStyle={{ width: "100%" }}
-                onEmojiClick={(emojiObject) => {
-                  onEmojiClick(emojiObject.emoji);
+          {inputString.length !== 0 && (
+            <EmojiPickerDeleteButtons>
+              <BackspaceButton
+                onClick={() => {
+                  setInputString(inputString.slice(0, -1));
                 }}
-              />
-            )}
-            <button
-              onClick={() => {
-                setInputString(inputString.slice(0, -1));
+              >
+                ⌫
+              </BackspaceButton>
+              <ClearButton
+                onClick={() => {
+                  setInputString([]);
+                }}
+              >
+                ✘
+              </ClearButton>
+            </EmojiPickerDeleteButtons>
+          )}
+          <button onClick={() => setShowPicker((val) => !val)}>
+            Pick a Emoji ☺️
+          </button>
+          {showPicker && (
+            <Picker
+              pickerStyle={{ width: "100%" }}
+              onEmojiClick={(emojiObject) => {
+                onEmojiClick(emojiObject.emoji);
               }}
-            >
-              Delete Last Emoji
-            </button>
-          </label>
+            />
+          )}
           <label htmlFor="title">
             <Styled.InputField
               id="title"
@@ -160,3 +162,20 @@ export default function ActivitiesForm({ handleShowForm }) {
     </>
   );
 }
+
+const BackspaceButton = styled.button`
+  font-size: 1rem;
+`;
+
+const ClearButton = styled.button`
+  font-size: 1rem;
+`;
+
+const EmojiPickerDeleteButtons = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+const EmojiP = styled.p`
+  font-size: 4rem;
+`;
