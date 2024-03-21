@@ -39,14 +39,16 @@ export default function Activities() {
           </Header>
 
           {showForm ? (
-            <ActivitiesForm />
+            <ActivitiesForm handleShowForm={handleShowForm} />
           ) : (
             <ActivitiesList showForm={showForm} />
           )}
         </Page>
-        <Navigation>
-          <NavButton linkToPage={"/"}>enter a mood</NavButton>
-        </Navigation>
+        {showForm ? null : (
+          <Navigation>
+            <NavButton linkToPage={"/"}>enter a mood</NavButton>
+          </Navigation>
+        )}
       </Container>
     </>
   );

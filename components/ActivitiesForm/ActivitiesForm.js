@@ -2,11 +2,11 @@ import { useState } from "react";
 import initialActivities from "@/activities.json";
 import * as Styled from "./ActivitiesForm.styled";
 import NavButton from "../NavButton/NavButton";
+import { mutate } from "swr";
 
-export default function ActivitiesForm() {
+export default function ActivitiesForm({ handleShowForm }) {
   const [selectedEmotions, setSelectedEmotions] = useState([]);
   const [activities, setActivities] = useState(initialActivities);
-
   function handleCheckboxChange(emotion, isChecked) {
     if (isChecked) {
       setSelectedEmotions([...selectedEmotions, emotion]);
@@ -14,43 +14,67 @@ export default function ActivitiesForm() {
       setSelectedEmotions(selectedEmotions.filter((e) => e !== emotion));
     }
   }
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
+    // event.preventDefault();
+    // const submittedActivityForm = {
+    //   activity: event.target.elements.Activity.value,
+    //   emoji: event.target.elements.Emoji.value,
+    //   text: event.target.elements.Description.value,
+    //   forEmotion: selectedEmotions,
+    // };
+    // setActivities([...activities, submittedActivityForm]);
+    // event.target.reset();
+    // setSelectedEmotions([]);
+    // console.log(activities);
     event.preventDefault();
-    const submittedActivityForm = {
-      activity: event.target.elements.Activity.value,
-      emoji: event.target.elements.Emoji.value,
-      text: event.target.elements.Description.value,
-      forEmotion: selectedEmotions,
-    };
-    setActivities([...activities, submittedActivityForm]);
-    event.target.reset();
-    setSelectedEmotions([]);
+
+    const response = await fetch("/api/activities", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: event.target.elements.title.value,
+        emoji: event.target.elements.emoji.value,
+        description: event.target.elements.description.value,
+        forEmotion: selectedEmotions,
+      }),
+    });
+
+    if (response.ok) {
+      mutate();
+
+      event.target.reset();
+      setSelectedEmotions([]);
+      handleShowForm();
+    }
   }
+
   return (
     <>
       <Styled.Card>
         <Styled.Form onSubmit={handleSubmit} id="newentry">
-          <label htmlFor="Emoji">
+          <label htmlFor="emoji">
             <Styled.InputField
-              id="Emoji"
-              name="Emoji"
+              id="emoji"
+              name="emoji"
               placeholder="☺️"
               maxlength="2"
               required
             ></Styled.InputField>
           </label>
-          <label htmlFor="Activity">
+          <label htmlFor="title">
             <Styled.InputField
-              id="Activity"
-              name="Activity"
+              id="title"
+              name="title"
               placeholder="title"
               required
             ></Styled.InputField>
           </label>
-          <label htmlFor="Description">
+          <label htmlFor="description">
             <Styled.TextArea
-              id="Description"
-              name="Description"
+              id="description"
+              name="description"
               placeholder="description"
               rows="4"
               required
