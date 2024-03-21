@@ -23,25 +23,15 @@ export default function Activities() {
             <GradientText>
               <Guide text={"activities"} />
             </GradientText>
-            <NewActivity onClick={handleShowForm}>
-              <motion.div
-                animate={showForm ? { rotate: 45 } : {}}
-                style={{ height: "22px" }}
-              >
-                <Image
-                  width={22}
-                  height={22}
-                  src={PlusIcon}
-                  alt={"add new activity"}
-                />
-              </motion.div>
-            </NewActivity>
           </Header>
 
           {showForm ? (
             <ActivitiesForm handleShowForm={handleShowForm} />
           ) : (
-            <ActivitiesList showForm={showForm} />
+            <ActivitiesList
+              showForm={showForm}
+              handleShowForm={handleShowForm}
+            />
           )}
         </Page>
         {showForm ? null : (

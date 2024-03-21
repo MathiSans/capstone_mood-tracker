@@ -179,9 +179,12 @@ export default function ActivitiesForm({ handleShowForm }) {
               ></Styled.CheckboxInput>
             </Styled.CheckboxLabel>
           </Styled.CheckboxContainer>
-          <NavButton style={{ width: "200px" }} type="submit">
-            Save
-          </NavButton>
+          <Styled.ButtonArea>
+            <NavButton type="submit">Save</NavButton>
+            <NavButton type="button" handleClick={handleShowForm}>
+              Cancel
+            </NavButton>
+          </Styled.ButtonArea>
         </form>
       </Styled.Card>
     </>

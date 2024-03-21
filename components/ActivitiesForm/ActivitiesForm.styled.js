@@ -46,7 +46,7 @@ export const Card = styled.div`
   border-radius: 12px;
   margin: 1rem;
   max-width: 600px;
-  padding: 28px;
+  padding: 44px;
   position: relative;
 `;
 
@@ -66,6 +66,13 @@ export const TextArea = styled.textarea`
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
+`;
+
+export const ButtonArea = styled.div`
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
 `;
 
 export const CheckboxContainer = styled.div`
