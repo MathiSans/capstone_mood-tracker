@@ -1,70 +1,83 @@
 import { Container, Navigation, Page } from "@/components/Layout/Layout";
-import ActivityList from "@/components/ActivityList/ActivityList";
+import ActivitiesList from "@/components/ActivitiesList/ActivitiesList";
 import styled from "styled-components";
 import { useState } from "react";
 import Guide from "@/components/Guide/Guide";
 import NavButton from "@/components/NavButton/NavButton";
+import PlusIcon from "@/assets/plus.png";
+import Image from "next/image";
+import ActivitiesForm from "@/components/ActivitiesForm/ActivitiesForm";
+import { motion } from "framer-motion";
 
-export default function ActivityListRender() {
-  const [emotionSelected, setEmotionSelected] = useState();
-  function handleChangeOfEmotion(event) {
-    const selectedEmotion = event.target.value;
-    setEmotionSelected(selectedEmotion);
+export default function Activities() {
+  const [showForm, setShowForm] = useState(false);
+  function handleShowForm() {
+    setShowForm(!showForm);
   }
+
   return (
     <>
       <Container>
         <Page>
-          <Guide text={"activities"} />
-          {/* <StyledYourMood> List of activites for</StyledYourMood> */}
+          <Header>
+            <GradientText>
+              <Guide text={"activities"} />
+            </GradientText>
+            <NewActivity onClick={handleShowForm}>
+              <motion.div
+                animate={showForm ? { rotate: 45 } : {}}
+                style={{ height: "22px" }}
+              >
+                <Image
+                  width={22}
+                  height={22}
+                  src={PlusIcon}
+                  alt={"add new activity"}
+                />
+              </motion.div>
+            </NewActivity>
+          </Header>
 
-          {/* <form>
-          <label>
-            <StyledSelect
-              name="emotions"
-              size="5"
-              onChange={(event) => {
-                handleChangeOfEmotion(event);
-              }}
-            >
-              <option value={"fear"}>fear</option>
-              <option value={"anger"}>anger</option>
-              <option value={"enjoyment"}>enjoyment</option>
-              <option value={"disgust"}>disgust</option>
-              <option value={"sadness"}>sadness</option>
-            </StyledSelect>
-          </label>
-        </form> */}
-
-          <ActivityList emotionSelected={emotionSelected} />
+          {showForm ? (
+            <ActivitiesForm />
+          ) : (
+            <ActivitiesList showForm={showForm} />
+          )}
         </Page>
         <Navigation>
-          <NavButton handleClick={() => router.push("/")}>
-            enter a mood
-          </NavButton>
+          <NavButton linkToPage={"/"}>enter a mood</NavButton>
         </Navigation>
       </Container>
     </>
   );
 }
 
-const StyledYourMood = styled.span`
-  font-weight: 800;
-  background: -webkit-linear-gradient(#cdea80, #cdeaff);
+const Header = styled.div`
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100vw;
+`;
+
+const NewActivity = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 18px;
+  height: 38px;
+  width: 38px;
+  background-color: white;
+  border-radius: 100px;
+  cursor: pointer;
+`;
+
+const GradientText = styled.div`
+  align-self: center;
+  background: -webkit-linear-gradient(#e3f710, #ff0000);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-`;
-
-const StyledSelect = styled.select`
-  color: black;
-  padding: 0.2rem;
-`;
-
-const StyledHeadlineInline = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  &:active {
-    border: 0;
-  }
 `;
