@@ -57,7 +57,7 @@ export default function ActivitiesForm({ handleShowForm }) {
     <>
       <Styled.Card>
         <Styled.Form onSubmit={handleSubmit} id="newentry">
-          <EmojiP>{inputString}</EmojiP>
+          <EmojiP inputString={inputString}>{inputString}</EmojiP>
 
           {inputString.length !== 0 && (
             <EmojiPickerDeleteButtons>
@@ -177,5 +177,5 @@ const EmojiPickerDeleteButtons = styled.div`
 `;
 
 const EmojiP = styled.p`
-  font-size: 4rem;
+  font-size: ${(props) => (props.inputString.length === 0 ? "" : "4rem")};
 `;
