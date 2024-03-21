@@ -1,12 +1,24 @@
-import { useState } from "react";
-import initialActivities from "@/activities.json";
+import { useState, useEffect } from "react";
 import * as Styled from "./ActivitiesForm.styled";
 import NavButton from "../NavButton/NavButton";
 import { mutate } from "swr";
+import Picker from "emoji-picker-react";
 
 export default function ActivitiesForm({ handleShowForm }) {
   const [selectedEmotions, setSelectedEmotions] = useState([]);
-  const [activities, setActivities] = useState(initialActivities);
+  const [inputStr, setInputStr] = useState("");
+  const [showPicker, setShowPicker] = useState(false);
+
+  const onEmojiClick = (event, emojiObject) => {
+    console.log("emojiObject", emojiObject);
+    setInputStr((prevInput) => prevInput + emojiObject.emoji);
+    setShowPicker(false);
+  };
+
+  useEffect(() => {
+    console.log("inputStr", inputStr);
+  }, [inputStr]);
+
   function handleCheckboxChange(emotion, isChecked) {
     if (isChecked) {
       setSelectedEmotions([...selectedEmotions, emotion]);
@@ -15,17 +27,6 @@ export default function ActivitiesForm({ handleShowForm }) {
     }
   }
   async function handleSubmit(event) {
-    // event.preventDefault();
-    // const submittedActivityForm = {
-    //   activity: event.target.elements.Activity.value,
-    //   emoji: event.target.elements.Emoji.value,
-    //   text: event.target.elements.Description.value,
-    //   forEmotion: selectedEmotions,
-    // };
-    // setActivities([...activities, submittedActivityForm]);
-    // event.target.reset();
-    // setSelectedEmotions([]);
-    // console.log(activities);
     event.preventDefault();
 
     const response = await fetch("/api/activities", {
@@ -56,12 +57,23 @@ export default function ActivitiesForm({ handleShowForm }) {
         <Styled.Form onSubmit={handleSubmit} id="newentry">
           <label htmlFor="emoji">
             <Styled.InputField
+              value={inputStr}
+              onChange={(e) => setInputStr(e.target.value)}
               id="emoji"
               name="emoji"
               placeholder="☺️"
               maxlength="2"
               required
             ></Styled.InputField>
+            <button onClick={() => setShowPicker((val) => !val)}>
+              Pick a Emoji ☺️
+            </button>
+            {showPicker && (
+              <Picker
+                pickerStyle={{ width: "100%" }}
+                onEmojiClick={onEmojiClick}
+              />
+            )}
           </label>
           <label htmlFor="title">
             <Styled.InputField
