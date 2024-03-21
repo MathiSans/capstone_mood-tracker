@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 export default function Quotes({ quotes }) {
   const [quoteState, setQuoteState] = useState({});
   const [nextQuote, setNextQuote] = useState(0);
-  console.log("quotes", quotes);
   const router = useRouter();
 
   function handleRandomQuote() {
@@ -28,7 +27,7 @@ export default function Quotes({ quotes }) {
     <QuoteContainer>
       <StyledArticle>
         <StyledBlockquote>{quoteState.text}</StyledBlockquote>
-        <StyledFooter>{quoteState.author}</StyledFooter>
+        <StyledFooter>{quoteState.author.slice(0, -10)}</StyledFooter>
       </StyledArticle>
       <StyledButton
         onClick={() => {
