@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const activitySchema = new Schema({
   title: String,
-  emoji: String,
+  emoji: [String],
   description: String,
   forEmotion: [String],
   tool: Boolean,

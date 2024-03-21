@@ -6,18 +6,18 @@ import Picker from "emoji-picker-react";
 
 export default function ActivitiesForm({ handleShowForm }) {
   const [selectedEmotions, setSelectedEmotions] = useState([]);
-  const [inputStr, setInputStr] = useState("");
+  const [inputString, setInputString] = useState([]);
   const [showPicker, setShowPicker] = useState(false);
 
-  const onEmojiClick = (event, emojiObject) => {
-    console.log("emojiObject", emojiObject);
-    setInputStr((prevInput) => prevInput + emojiObject.emoji);
+  const onEmojiClick = (emoji) => {
+    // setInputString((prevInput) => prevInput + emoji);
+    setInputString((prevInput) => [...prevInput, emoji]);
     setShowPicker(false);
   };
 
   useEffect(() => {
-    console.log("inputStr", inputStr);
-  }, [inputStr]);
+    console.log("inputString", inputString);
+  }, [inputString]);
 
   function handleCheckboxChange(emotion, isChecked) {
     if (isChecked) {
@@ -36,7 +36,7 @@ export default function ActivitiesForm({ handleShowForm }) {
       },
       body: JSON.stringify({
         title: event.target.elements.title.value,
-        emoji: event.target.elements.emoji.value,
+        emoji: inputString,
         description: event.target.elements.description.value,
         forEmotion: selectedEmotions,
       }),
@@ -56,24 +56,35 @@ export default function ActivitiesForm({ handleShowForm }) {
       <Styled.Card>
         <Styled.Form onSubmit={handleSubmit} id="newentry">
           <label htmlFor="emoji">
-            <Styled.InputField
-              value={inputStr}
-              onChange={(e) => setInputStr(e.target.value)}
+            {/* <Styled.InputField
+              value={inputString}
+              onChange={(event) => setInputString(event.target.value)}
               id="emoji"
               name="emoji"
               placeholder="☺️"
               maxlength="2"
               required
-            ></Styled.InputField>
+            ></Styled.InputField> */}
+            <h3>{inputString}</h3>
+
             <button onClick={() => setShowPicker((val) => !val)}>
               Pick a Emoji ☺️
             </button>
             {showPicker && (
               <Picker
                 pickerStyle={{ width: "100%" }}
-                onEmojiClick={onEmojiClick}
+                onEmojiClick={(emojiObject) => {
+                  onEmojiClick(emojiObject.emoji);
+                }}
               />
             )}
+            <button
+              onClick={() => {
+                setInputString(inputString.slice(0, -1));
+              }}
+            >
+              Delete Last Emoji
+            </button>
           </label>
           <label htmlFor="title">
             <Styled.InputField
