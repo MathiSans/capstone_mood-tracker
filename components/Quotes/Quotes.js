@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Quotes({ quotes }) {
   const [quoteState, setQuoteState] = useState({});
   const [nextQuote, setNextQuote] = useState(0);
-  const router = useRouter();
 
   function handleRandomQuote() {
     if (!quotes || !Array.isArray(quotes) || quotes.length === 0) {
