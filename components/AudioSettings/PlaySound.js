@@ -12,7 +12,7 @@ export default function PlaySound({
 
   useEffect(() => {
     const audio = audioReference.current;
-    if (audioTrigger === true && audio) {
+    if (audioTrigger && audio) {
       audio.volume = currentVolume;
       audio.loop = true;
       audio.play();

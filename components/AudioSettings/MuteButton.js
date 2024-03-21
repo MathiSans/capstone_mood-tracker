@@ -9,22 +9,23 @@ export default function MuteButton({ isMuted, setIsMuted, setCurrentVolume }) {
 
   return (
     <StyledMuteButton type="button" onClick={toggleMute}>
-      <p>{isMuted ? "Unmute" : "Mute"}</p>
+      <StyledText>{isMuted ? "Unmute" : "Mute"}</StyledText>
     </StyledMuteButton>
   );
 }
 
 const StyledMuteButton = styled.button`
-  border: none;
-  box-shadow: none;
-  padding-inline: 1rem;
-  padding-block: 0.1rem;
+  padding: 10px 26px;
+  margin: 1rem;
+  border-radius: 0.5rem;
   background-color: transparent;
+  color: white;
+  border: 1px solid white;
   cursor: pointer;
+`;
 
-  p {
-    color: #fff;
-    font-size: 0.9rem;
-    text-align: center;
-  }
+const StyledText = styled.p`
+  color: white;
+  font-size: 0.5;
+  margin: 0;
 `;
