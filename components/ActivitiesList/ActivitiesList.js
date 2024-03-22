@@ -1,4 +1,3 @@
-import activities from "@/activities.json";
 import * as Styled from "./ActivitiesList.styled";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -7,13 +6,12 @@ import useSWR from "swr";
 import { FiPlus } from "react-icons/fi";
 
 export default function ActivitiesList({ handleShowForm }) {
-  const [filterPhrase, setFilter] = useState();
+  const [filterPhrase, setFilterPhrase] = useState();
 
   const { data: activities, isLoading } = useSWR("/api/activities");
-  // const { mutate } = useSWRConfig();
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p>loading...</p>;
   }
 
   if (!activities) {
@@ -31,7 +29,7 @@ export default function ActivitiesList({ handleShowForm }) {
   });
 
   function handleFilter(event) {
-    setFilter(event.target.value);
+    setFilterPhrase(event.target.value);
   }
 
   return (
@@ -57,6 +55,15 @@ export default function ActivitiesList({ handleShowForm }) {
         </label>
       </form>
       <Styled.Grid>
+        <motion.div whileHover={{ scale: 1.05 }}>
+          <Styled.Card
+            onClick={handleShowForm}
+            style={{ height: "250px", justifyContent: "center" }}
+          >
+            <FiPlus style={{ fontSize: "3rem" }} />
+            <Styled.Description>add a new activity</Styled.Description>
+          </Styled.Card>
+        </motion.div>
         {filteredActivities.map((activity, index) => (
           <motion.div key={index} whileHover={{ scale: 1.05 }}>
             <Styled.Card>
@@ -70,15 +77,6 @@ export default function ActivitiesList({ handleShowForm }) {
             </Styled.Card>
           </motion.div>
         ))}
-        <motion.div whileHover={{ scale: 1.05 }}>
-          <Styled.Card
-            onClick={handleShowForm}
-            style={{ height: "250px", justifyContent: "center" }}
-          >
-            <FiPlus style={{ fontSize: "3rem" }} />
-            <Styled.Description>add a new activity</Styled.Description>
-          </Styled.Card>
-        </motion.div>
       </Styled.Grid>
     </>
   );

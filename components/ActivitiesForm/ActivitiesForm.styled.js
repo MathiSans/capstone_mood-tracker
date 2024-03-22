@@ -56,6 +56,21 @@ export const Form = styled.form`
   gap: 20px;
 `;
 
+export const Emojis = styled.div`
+  font-size: ${(props) => (props.inputString.length > 2 ? "2.5rem" : "4rem")};
+`;
+
+export const DeleteButton = styled.button`
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  margin-top: 5px;
+  border: none;
+  font-size: 1.6rem;
+  background-color: transparent;
+  color: white;
+`;
+
 export const InputField = styled.input`
   width: 100%;
   padding: 12px 20px;

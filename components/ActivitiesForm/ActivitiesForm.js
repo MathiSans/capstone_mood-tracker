@@ -3,7 +3,6 @@ import * as Styled from "./ActivitiesForm.styled";
 import NavButton from "../NavButton/NavButton";
 import { mutate } from "swr";
 import Picker from "emoji-picker-react";
-import styled from "styled-components";
 import { FiPlus } from "react-icons/fi";
 import { FiDelete } from "react-icons/fi";
 
@@ -12,12 +11,11 @@ export default function ActivitiesForm({ handleShowForm }) {
   const [inputString, setInputString] = useState([]);
   const [showPicker, setShowPicker] = useState(false);
 
-  const onEmojiClick = (emoji) => {
-    // setInputString((prevInput) => prevInput + emoji);
+  function onEmojiClick(emoji) {
     setInputString((prevInput) => [...prevInput, emoji]);
     setShowPicker(false);
     window.scrollTo(0, 0);
-  };
+  }
 
   useEffect(() => {
     console.log("inputString", inputString);
@@ -27,7 +25,11 @@ export default function ActivitiesForm({ handleShowForm }) {
     if (isChecked) {
       setSelectedEmotions([...selectedEmotions, emotion]);
     } else {
-      setSelectedEmotions(selectedEmotions.filter((e) => e !== emotion));
+      setSelectedEmotions(
+        selectedEmotions.filter(
+          (selectedEmotion) => selectedEmotion !== emotion
+        )
+      );
     }
   }
   async function handleSubmit(event) {
@@ -58,18 +60,20 @@ export default function ActivitiesForm({ handleShowForm }) {
   return (
     <>
       <Styled.Card>
-        <form onSubmit={handleSubmit} id="newentry">
+        <form onSubmit={handleSubmit}>
           <Styled.EmojiContainer>
             {inputString.length !== 0 ? (
               <>
-                <Emojis inputString={inputString}>{inputString}</Emojis>
-                <DeleteButton
+                <Styled.Emojis inputString={inputString}>
+                  {inputString}
+                </Styled.Emojis>
+                <Styled.DeleteButton
                   onClick={() => {
                     setInputString(inputString.slice(0, -1));
                   }}
                 >
                   <FiDelete />
-                </DeleteButton>
+                </Styled.DeleteButton>
               </>
             ) : null}
             {inputString.length < 5 && (
@@ -130,7 +134,6 @@ export default function ActivitiesForm({ handleShowForm }) {
                 type="checkbox"
                 text="enjoyment"
                 id="enjoyment"
-                color="yellow"
                 onChange={(e) =>
                   handleCheckboxChange("enjoyment", e.target.checked)
                 }
@@ -141,7 +144,6 @@ export default function ActivitiesForm({ handleShowForm }) {
               <Styled.CheckboxInput
                 type="checkbox"
                 id="fear"
-                color="purple"
                 onChange={(e) => handleCheckboxChange("fear", e.target.checked)}
               ></Styled.CheckboxInput>
             </Styled.CheckboxLabel>
@@ -150,7 +152,6 @@ export default function ActivitiesForm({ handleShowForm }) {
               <Styled.CheckboxInput
                 type="checkbox"
                 id="anger"
-                color="red"
                 onChange={(e) =>
                   handleCheckboxChange("anger", e.target.checked)
                 }
@@ -161,7 +162,6 @@ export default function ActivitiesForm({ handleShowForm }) {
               <Styled.CheckboxInput
                 type="checkbox"
                 id="disgust"
-                color="green"
                 onChange={(e) =>
                   handleCheckboxChange("disgust", e.target.checked)
                 }
@@ -172,7 +172,6 @@ export default function ActivitiesForm({ handleShowForm }) {
               <Styled.CheckboxInput
                 type="checkbox"
                 id="sadness"
-                color="blue"
                 onChange={(e) =>
                   handleCheckboxChange("sadness", e.target.checked)
                 }
@@ -190,27 +189,3 @@ export default function ActivitiesForm({ handleShowForm }) {
     </>
   );
 }
-
-const BackspaceButton = styled.button`
-  font-size: 1rem;
-`;
-
-const DeleteButton = styled.button`
-  height: 36px;
-  width: 36px;
-  border-radius: 50%;
-  margin-top: 5px;
-  border: none;
-  font-size: 1.6rem;
-  background-color: transparent;
-  color: white;
-`;
-
-const EmojiPickerDeleteButtons = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-`;
-
-const Emojis = styled.div`
-  font-size: ${(props) => (props.inputString.length > 2 ? "2.5rem" : "4rem")};
-`;
