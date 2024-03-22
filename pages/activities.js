@@ -13,26 +13,22 @@ export default function Activities() {
   }
 
   return (
-      <Container>
-        <Page>
-          <GradientText>
-            <Guide text={"activities"} />
-          </GradientText>
-          {showForm ? (
-            <ActivitiesForm handleShowForm={handleShowForm} />
-          ) : (
-            <ActivitiesList
-              showForm={showForm}
-              handleShowForm={handleShowForm}
-            />
-          )}
-        </Page>
-        {showForm ? null : (
-          <Navigation>
-            <NavButton linkToPage={"/"}>enter a mood</NavButton>
-          </Navigation>
+    <Container>
+      <Page>
+        <GradientText>
+          <Guide text={"activities"} />
+        </GradientText>
+        {showForm ? (
+          <ActivitiesForm handleShowForm={handleShowForm} />
+        ) : (
+          <ActivitiesList showForm={showForm} handleShowForm={handleShowForm} />
         )}
       </Page>
+      {showForm ? null : (
+        <Navigation>
+          <NavButton linkToPage={"/"}>enter a mood</NavButton>
+        </Navigation>
+      )}
     </Container>
   );
 }
