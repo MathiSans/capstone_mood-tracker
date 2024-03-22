@@ -1,20 +1,23 @@
 import { useEffect } from "react";
 
-export default function DecreaseVolume({
+export default function VolumeFade({
   page,
+  experience,
   currentVolume,
   setCurrentVolume,
   isMuted,
 }) {
   useEffect(() => {
-    if (currentVolume > 0 && page === 2) {
+    if (currentVolume > 0 && experience.length === 0 && page === 2) {
       const decreaseVolume = setInterval(() => {
-        setCurrentVolume((previousVolume) =>
-          Math.max(0, previousVolume - 0.01)
-        );
+        setCurrentVolume((previousVolume) => {
+          const newVolume = Math.max(0, previousVolume - 0.01);
+          console.log("decreased:", newVolume);
+          return newVolume;
+        });
       }, 50);
       return () => clearInterval(decreaseVolume);
     }
-  }, [page, currentVolume, setCurrentVolume, isMuted]);
+  }, [page, experience, currentVolume, setCurrentVolume, isMuted]);
   return null;
 }

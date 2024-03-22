@@ -1,21 +1,31 @@
 import styled from "styled-components";
 
-export default function MuteButton({ isMuted, setIsMuted, setCurrentVolume }) {
+export default function MuteButton({
+  isMuted,
+  setIsMuted,
+  setCurrentVolume,
+  audioReference,
+}) {
   function toggleMute() {
-    const volume = isMuted ? 0.3 : 0;
-    setCurrentVolume(volume);
     setIsMuted(!isMuted);
+    const audio = audioReference.current;
+    if (audio) {
+      if (isMuted) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
   }
-
   return (
     <StyledMuteButton type="button" onClick={toggleMute}>
-      <StyledText>{isMuted ? "Unmute" : "Mute"}</StyledText>
+      <StyledText>{isMuted ? "🔈" : "🔊"}</StyledText>
     </StyledMuteButton>
   );
 }
 
 const StyledMuteButton = styled.button`
-  padding: 10px 26px;
+  padding: 0.5rem 0.7rem;
   margin: 1rem;
   border-radius: 0.5rem;
   background-color: transparent;

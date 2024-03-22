@@ -1,33 +1,41 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import MuteButton from "./MuteButton";
 import PlaySound from "./PlaySound";
 import DecreaseVolume from "./DecreaseVolume";
 
-export default function AudioSettings({ page, audioTrigger, setAudioTrigger }) {
+export default function AudioSettings({
+  page,
+  experience,
+  audioTrigger,
+  setAudioTrigger,
+}) {
   const [currentVolume, setCurrentVolume] = useState(0.3);
   const [isMuted, setIsMuted] = useState(false);
+  const audioReference = useRef(null);
 
   return (
     <>
       <MuteButton
-        page={page}
         isMuted={isMuted}
         setIsMuted={setIsMuted}
         setCurrentVolume={setCurrentVolume}
+        audioReference={audioReference}
       />
       <PlaySound
-        page={page}
+        experience={experience}
         audioTrigger={audioTrigger}
-        setAudioTrigger={setAudioTrigger}
         currentVolume={currentVolume}
         setCurrentVolume={setCurrentVolume}
+        audioReference={audioReference}
       />
       <DecreaseVolume
         page={page}
+        experience={experience}
         currentVolume={currentVolume}
         setCurrentVolume={setCurrentVolume}
         isMuted={isMuted}
       />
+      <audio ref={audioReference} />
     </>
   );
 }
