@@ -16,41 +16,39 @@ export default function Activities() {
   }
 
   return (
-    <>
-      <Container>
-        <Page>
-          <Header>
-            <GradientText>
-              <Guide text={"activities"} />
-            </GradientText>
-            <NewActivity onClick={handleShowForm}>
-              <motion.div
-                animate={showForm ? { rotate: 45 } : {}}
-                style={{ height: "22px" }}
-              >
-                <Image
-                  width={22}
-                  height={22}
-                  src={PlusIcon}
-                  alt={"add new activity"}
-                />
-              </motion.div>
-            </NewActivity>
-          </Header>
+    <Container>
+      <Page>
+        <Header>
+          <GradientText>
+            <Guide text={"activities"} />
+          </GradientText>
+          <NewActivity onClick={handleShowForm}>
+            <motion.div
+              animate={showForm ? { rotate: 45 } : {}}
+              style={{ height: "22px" }}
+            >
+              <Image
+                width={22}
+                height={22}
+                src={PlusIcon}
+                alt={"add new activity"}
+              />
+            </motion.div>
+          </NewActivity>
+        </Header>
 
-          {showForm ? (
-            <ActivitiesForm handleShowForm={handleShowForm} />
-          ) : (
+        {showForm ? (
+          <ActivitiesForm handleShowForm={handleShowForm} />
+        ) : (
+          <>
             <ActivitiesList showForm={showForm} />
-          )}
-        </Page>
-        {showForm ? null : (
-          <Navigation>
-            <NavButton linkToPage={"/"}>enter a mood</NavButton>
-          </Navigation>
+            <Navigation>
+              <NavButton linkToPage={"/"}>enter a mood</NavButton>
+            </Navigation>
+          </>
         )}
-      </Container>
-    </>
+      </Page>
+    </Container>
   );
 }
 

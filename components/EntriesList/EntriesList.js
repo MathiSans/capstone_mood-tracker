@@ -47,13 +47,7 @@ export default function EntriesList() {
             >
               <Styled.Card onClick={() => router.push(`${entry._id}`)}>
                 <Styled.AnimationContainer>
-                  <div
-                    style={{
-                      backgroundColor: entry.color,
-                      height: "100%",
-                      width: "100%",
-                    }}
-                  ></div>
+                  <Styled.ColoredShape color={entry.color} />
                 </Styled.AnimationContainer>
                 <Styled.Sentence>
                   <Styled.StaticText>Somebody </Styled.StaticText>
@@ -95,10 +89,6 @@ export default function EntriesList() {
                     </>
                   ) : (
                     <>
-                      {" "}
-                      {/* <Styled.RoundButton as="a" href={`${entry._id}`}>
-                        <FiEye />
-                      </Styled.RoundButton> */}
                       <Styled.RoundButton
                         as="a"
                         onClick={(event) =>

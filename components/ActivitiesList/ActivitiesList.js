@@ -1,4 +1,3 @@
-import activities from "@/activities.json";
 import * as Styled from "./ActivitiesList.styled";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -6,10 +5,9 @@ import NavButton from "../NavButton/NavButton";
 import useSWR from "swr";
 
 export default function ActivitiesList() {
-  const [filterPhrase, setFilter] = useState();
+  const [filterPhrase, setFilterPhrase] = useState();
 
   const { data: activities, isLoading } = useSWR("/api/activities");
-  // const { mutate } = useSWRConfig();
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -30,7 +28,7 @@ export default function ActivitiesList() {
   });
 
   function handleFilter(event) {
-    setFilter(event.target.value);
+    setFilterPhrase(event.target.value);
   }
 
   return (
