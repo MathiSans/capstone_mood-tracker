@@ -18,7 +18,9 @@ export default function ThemeTest({ handleToggleTheme }) {
         onClick={() => {
           handleToggleTheme();
         }}
-      ></button>
+      >
+        Toggle
+      </button>
     </>
   );
 }
