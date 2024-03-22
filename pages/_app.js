@@ -8,11 +8,13 @@ const darkTheme = {
   color: "white",
   backgroundColor: "black",
   bgColor2: "indigo",
+  borderColor: "lime",
 };
 const lightTheme = {
   color: "black",
   backgroundColor: "white",
   bgColor2: "lightblue",
+  borderColor: "pink",
 };
 
 export default function App({ Component, pageProps }) {
