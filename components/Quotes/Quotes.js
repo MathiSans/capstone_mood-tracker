@@ -25,7 +25,7 @@ export default function Quotes({ quotes }) {
     <QuoteContainer>
       <StyledArticle>
         <StyledBlockquote>{quoteState.text}</StyledBlockquote>
-        <StyledFooter>{quoteState.author.slice(0, -10)}</StyledFooter>
+        <StyledFooter>{quoteState.author}</StyledFooter>
       </StyledArticle>
       <StyledButton
         onClick={() => {
