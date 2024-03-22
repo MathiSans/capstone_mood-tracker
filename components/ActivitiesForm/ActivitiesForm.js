@@ -11,21 +11,14 @@ export default function ActivitiesForm({ handleShowForm }) {
     if (isChecked) {
       setSelectedEmotions([...selectedEmotions, emotion]);
     } else {
-      setSelectedEmotions(selectedEmotions.filter((e) => e !== emotion));
+      setSelectedEmotions(
+        selectedEmotions.filter(
+          (selectedEmotion) => selectedEmotion !== emotion
+        )
+      );
     }
   }
   async function handleSubmit(event) {
-    // event.preventDefault();
-    // const submittedActivityForm = {
-    //   activity: event.target.elements.Activity.value,
-    //   emoji: event.target.elements.Emoji.value,
-    //   text: event.target.elements.Description.value,
-    //   forEmotion: selectedEmotions,
-    // };
-    // setActivities([...activities, submittedActivityForm]);
-    // event.target.reset();
-    // setSelectedEmotions([]);
-    // console.log(activities);
     event.preventDefault();
 
     const response = await fetch("/api/activities", {

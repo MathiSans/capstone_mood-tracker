@@ -10,7 +10,7 @@
   {
     "title": "Inspirational Quotes",
     "emoji": "🌟📖",
-    "description": "hold your smile for 10 seconds and uplift your mood",
+    "description": "Inspirational quotes can uplift mood and motivation by providing a sense of hope, encouragement, and positivity. They serve as reminders of resilience and inner strength, fostering a mindset conducive to overcoming challenges and promoting overall mental well-being.",
     "forEmotion": ["sadness", "anger", "fear", "enjoyment"],
     "tool": true,
     "link": "https://mood-diary-git-feature-quotes-tool-mathis-santos-projects.vercel.app/tools/quotes"
