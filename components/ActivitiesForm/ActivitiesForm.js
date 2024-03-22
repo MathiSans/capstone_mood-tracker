@@ -1,12 +1,26 @@
-import { useState } from "react";
-import initialActivities from "@/activities.json";
+import { useState, useEffect } from "react";
 import * as Styled from "./ActivitiesForm.styled";
 import NavButton from "../NavButton/NavButton";
 import { mutate } from "swr";
+import Picker from "emoji-picker-react";
+import { FiPlus } from "react-icons/fi";
+import { FiDelete } from "react-icons/fi";
 
 export default function ActivitiesForm({ handleShowForm }) {
   const [selectedEmotions, setSelectedEmotions] = useState([]);
-  const [activities, setActivities] = useState(initialActivities);
+  const [inputString, setInputString] = useState([]);
+  const [showPicker, setShowPicker] = useState(false);
+
+  function onEmojiClick(emoji) {
+    setInputString((prevInput) => [...prevInput, emoji]);
+    setShowPicker(false);
+    window.scrollTo(0, 0);
+  }
+
+  useEffect(() => {
+    console.log("inputString", inputString);
+  }, [inputString]);
+
   function handleCheckboxChange(emotion, isChecked) {
     if (isChecked) {
       setSelectedEmotions([...selectedEmotions, emotion]);
@@ -28,7 +42,7 @@ export default function ActivitiesForm({ handleShowForm }) {
       },
       body: JSON.stringify({
         title: event.target.elements.title.value,
-        emoji: event.target.elements.emoji.value,
+        emoji: inputString,
         description: event.target.elements.description.value,
         forEmotion: selectedEmotions,
       }),
@@ -46,55 +60,95 @@ export default function ActivitiesForm({ handleShowForm }) {
   return (
     <>
       <Styled.Card>
-        <Styled.Form onSubmit={handleSubmit} id="newentry">
-          <label htmlFor="emoji">
-            <Styled.InputField
-              id="emoji"
-              name="emoji"
-              placeholder="☺️"
-              maxlength="2"
-              required
-            ></Styled.InputField>
-          </label>
-          <label htmlFor="title">
+        <form onSubmit={handleSubmit}>
+          <Styled.EmojiContainer>
+            {inputString.length !== 0 ? (
+              <>
+                <Styled.Emojis inputString={inputString}>
+                  {inputString}
+                </Styled.Emojis>
+                <Styled.DeleteButton
+                  onClick={() => {
+                    setInputString(inputString.slice(0, -1));
+                  }}
+                >
+                  <FiDelete />
+                </Styled.DeleteButton>
+              </>
+            ) : null}
+            {inputString.length < 5 && (
+              <>
+                <Styled.addButton
+                  type="button"
+                  onClick={() => setShowPicker(!showPicker)}
+                >
+                  <FiPlus />
+                </Styled.addButton>
+                {inputString.length === 0 && (
+                  <Styled.AddEmojisSentence>
+                    add emojis
+                  </Styled.AddEmojisSentence>
+                )}
+              </>
+            )}
+          </Styled.EmojiContainer>
+          {showPicker && (
+            <Picker
+              style={{
+                position: "absolute",
+                top: "90px",
+                left: "0",
+                zIndex: "10",
+              }}
+              pickerStyle={{ width: "100%" }}
+              onEmojiClick={(emojiObject) => {
+                onEmojiClick(emojiObject.emoji);
+              }}
+            />
+          )}
+
+          <Styled.Label htmlFor="title">
+            enter a title for your activity
             <Styled.InputField
               id="title"
               name="title"
-              placeholder="title"
+              maxLength={50}
               required
             ></Styled.InputField>
-          </label>
-          <label htmlFor="description">
+          </Styled.Label>
+          <Styled.Label htmlFor="description">
+            describe your activity in a short form
             <Styled.TextArea
               id="description"
               name="description"
-              placeholder="description"
+              maxLength={250}
               rows="4"
               required
             ></Styled.TextArea>
-          </label>
+          </Styled.Label>
           <p>For which experiences could this be?</p>
           <Styled.CheckboxContainer>
-            <label htmlFor="enjoyment">
-              for enjoyment
+            <Styled.CheckboxLabel htmlFor="enjoyment" color="#dabe39">
+              enjoyment
               <Styled.CheckboxInput
                 type="checkbox"
+                text="enjoyment"
                 id="enjoyment"
                 onChange={(e) =>
                   handleCheckboxChange("enjoyment", e.target.checked)
                 }
               ></Styled.CheckboxInput>
-            </label>
-            <label htmlFor="fear">
-              for fear
+            </Styled.CheckboxLabel>
+            <Styled.CheckboxLabel htmlFor="fear" color="purple">
+              fear
               <Styled.CheckboxInput
                 type="checkbox"
                 id="fear"
                 onChange={(e) => handleCheckboxChange("fear", e.target.checked)}
               ></Styled.CheckboxInput>
-            </label>
-            <label htmlFor="anger">
-              for anger
+            </Styled.CheckboxLabel>
+            <Styled.CheckboxLabel htmlFor="anger" color="red">
+              anger
               <Styled.CheckboxInput
                 type="checkbox"
                 id="anger"
@@ -102,9 +156,9 @@ export default function ActivitiesForm({ handleShowForm }) {
                   handleCheckboxChange("anger", e.target.checked)
                 }
               ></Styled.CheckboxInput>
-            </label>
-            <label htmlFor="disgust">
-              for Disgust
+            </Styled.CheckboxLabel>
+            <Styled.CheckboxLabel htmlFor="disgust" color="green">
+              disgust
               <Styled.CheckboxInput
                 type="checkbox"
                 id="disgust"
@@ -112,9 +166,9 @@ export default function ActivitiesForm({ handleShowForm }) {
                   handleCheckboxChange("disgust", e.target.checked)
                 }
               ></Styled.CheckboxInput>
-            </label>
-            <label htmlFor="sadness">
-              for sadness
+            </Styled.CheckboxLabel>
+            <Styled.CheckboxLabel htmlFor="sadness" color="blue">
+              sadness
               <Styled.CheckboxInput
                 type="checkbox"
                 id="sadness"
@@ -122,10 +176,15 @@ export default function ActivitiesForm({ handleShowForm }) {
                   handleCheckboxChange("sadness", e.target.checked)
                 }
               ></Styled.CheckboxInput>
-            </label>
+            </Styled.CheckboxLabel>
           </Styled.CheckboxContainer>
-          <NavButton type="submit">Submit</NavButton>
-        </Styled.Form>
+          <Styled.ButtonArea>
+            <NavButton type="submit">Save</NavButton>
+            <NavButton type="button" handleClick={handleShowForm}>
+              Cancel
+            </NavButton>
+          </Styled.ButtonArea>
+        </form>
       </Styled.Card>
     </>
   );

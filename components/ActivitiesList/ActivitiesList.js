@@ -3,14 +3,16 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import NavButton from "../NavButton/NavButton";
 import useSWR from "swr";
+import { FiPlus } from "react-icons/fi";
 
-export default function ActivitiesList() {
+export default function ActivitiesList({ handleShowForm }) {
+
   const [filterPhrase, setFilterPhrase] = useState();
 
   const { data: activities, isLoading } = useSWR("/api/activities");
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p>loading...</p>;
   }
 
   if (!activities) {
@@ -54,6 +56,15 @@ export default function ActivitiesList() {
         </label>
       </form>
       <Styled.Grid>
+        <motion.div whileHover={{ scale: 1.05 }}>
+          <Styled.Card
+            onClick={handleShowForm}
+            style={{ height: "250px", justifyContent: "center" }}
+          >
+            <FiPlus style={{ fontSize: "3rem" }} />
+            <Styled.Description>add a new activity</Styled.Description>
+          </Styled.Card>
+        </motion.div>
         {filteredActivities.map((activity, index) => (
           <motion.div key={index} whileHover={{ scale: 1.05 }}>
             <Styled.Card>
