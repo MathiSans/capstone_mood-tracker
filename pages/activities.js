@@ -13,7 +13,6 @@ export default function Activities() {
   }
 
   return (
-    <>
       <Container>
         <Page>
           <GradientText>
@@ -33,8 +32,8 @@ export default function Activities() {
             <NavButton linkToPage={"/"}>enter a mood</NavButton>
           </Navigation>
         )}
-      </Container>
-    </>
+      </Page>
+    </Container>
   );
 }
 
