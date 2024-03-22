@@ -16,13 +16,15 @@ export const Grid = styled.div`
 `;
 
 export const Card = styled.div`
-  background-color: #141414;
-  background: rgb(42, 42, 42);
-  background: radial-gradient(
-    circle,
-    rgba(42, 42, 42, 1) 0%,
-    rgba(13, 13, 13, 1) 100%
-  );
+  background-color: ${(prop) => {
+    prop.theme.ActivityCard.backgroundColor;
+  }};
+  background: ${(prop) => {
+    prop.theme.ActivityCard.backgroundColor2;
+  }};
+  background: ${(prop) => {
+    prop.theme.ActivityCard.backgroundGradient;
+  }};
   display: flex;
   flex-direction: column;
   align-items: center;

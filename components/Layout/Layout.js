@@ -26,14 +26,17 @@ export const Navigation = styled.div`
   display: flex;
   gap: 20px;
   /* margin-bottom: 60px; */
-  background: rgb(0, 0, 0);
-  background: rgb(0, 0, 0);
-  background: linear-gradient(
+  /* background: rgb(0, 0, 0);
+  background: rgb(0, 0, 0); */
+  background: ${(prop) => prop.theme.Navigation.backgroundGradient};
+  background: ${(prop) => prop.theme.Navigation.backgroundColor};
+
+  /* background: linear-gradient(
     0deg,
     rgba(0, 0, 0, 1) 0%,
     rgba(0, 0, 0, 1) 33%,
     rgba(0, 0, 0, 0) 100%
-  );
+  ); */
   width: 100vw;
   height: 20vh;
 `;

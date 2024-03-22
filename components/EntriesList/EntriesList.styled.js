@@ -34,13 +34,18 @@ export const ColoredShape = styled.div`
 `;
 
 export const Card = styled.div`
-  background-color: #141414;
-  background: rgb(42, 42, 42);
-  background: radial-gradient(
-    circle,
-    rgba(42, 42, 42, 1) 0%,
-    rgba(13, 13, 13, 1) 100%
-  );
+  background-color: ${(prop) => {
+    prop.theme.EntriesList.cardBackgroundColor;
+  }};
+  background: ${(prop) => {
+    prop.theme.EntriesList.cardBG2;
+  }};
+  background: ${(prop) => {
+    prop.theme.EntriesList.cardBackGroundGradient;
+  }};
+  box-shadow: ${(prop) => {
+    prop.theme.EntriesList.cardBoxShadow;
+  }};
   display: flex;
   flex-direction: column;
   align-items: center;
