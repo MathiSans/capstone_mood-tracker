@@ -26,6 +26,11 @@ export default function ThemeTest({ handleToggleTheme }) {
 }
 
 const Box = styled.div`
-  background-color: ${(prop) => prop.theme.backgroundColor};
+  background-color: ${(prop) => prop.theme.bgColor2};
   color: ${(prop) => prop.theme.color};
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

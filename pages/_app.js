@@ -7,10 +7,12 @@ import useLocalStorageState from "use-local-storage-state";
 const darkTheme = {
   color: "white",
   backgroundColor: "black",
+  bgColor2: "indigo",
 };
 const lightTheme = {
   color: "black",
   backgroundColor: "white",
+  bgColor2: "lightblue",
 };
 
 export default function App({ Component, pageProps }) {
