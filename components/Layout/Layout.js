@@ -25,7 +25,6 @@ export const Navigation = styled.div`
   bottom: 0;
   display: flex;
   gap: 20px;
-  margin-bottom: 60px;
   background: rgb(0, 0, 0);
   background: rgb(0, 0, 0);
   background: linear-gradient(
