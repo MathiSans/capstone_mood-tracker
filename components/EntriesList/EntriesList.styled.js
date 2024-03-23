@@ -27,6 +27,12 @@ export const Grid = styled.div`
   width: 100vw;
 `;
 
+export const ColoredShape = styled.div`
+  background-color: ${({ color }) => (color ? color : "white")};
+  height: 100%;
+  width: 100%;
+`;
+
 export const Card = styled.div`
   background-color: #141414;
   background: rgb(42, 42, 42);
