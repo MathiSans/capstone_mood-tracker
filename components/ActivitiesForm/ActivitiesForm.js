@@ -17,10 +17,6 @@ export default function ActivitiesForm({ handleShowForm }) {
     window.scrollTo(0, 0);
   }
 
-  useEffect(() => {
-    console.log("inputString", inputString);
-  }, [inputString]);
-
   function handleCheckboxChange(emotion, isChecked) {
     if (isChecked) {
       setSelectedEmotions([...selectedEmotions, emotion]);
