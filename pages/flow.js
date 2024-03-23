@@ -4,25 +4,34 @@ import { useRouter } from "next/router";
 import { experiences } from "@/experiences";
 import useLocalStorageState from "use-local-storage-state";
 import Animation from "@/components/3DAnimation/3DAnimation";
+import Page from "@/components/Page/Page";
+import FlowContainer from "@/components/FlowContainer/FlowContainer";
+import Navigation from "@/components/Navigation/Navigation";
 import NavButton from "@/components/NavButton/NavButton";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
-import PlayButton from "@/components/PlaySound/PlayButton";
-import PlaySound from "@/components/PlaySound/PlaySound";
-import memory from "@/public/sounds/memory.mp3";
-import * as Styled from "@/components/Layout/Layout";
-import { motion } from "framer-motion";
 
-export default function Flow() {
+export default function TestFlow() {
   const router = useRouter();
+
+  // local storage state to save everything at the end
   const [allEntries, setAllEntries] = useLocalStorageState("anonymous_moods", {
     defaultValue: [],
   });
+
+  // state to hold the selection of the first tag cloud
   const [experience, setExperience] = useState([]);
-  const [sliderValue, setSliderValue] = useState(0.1);
+
+  // state of the slider value
+  const [sliderValue, setSliderValue] = useState(0);
+
+  // state to hold the selection of the second tag cloud
   const [reactions, setReactions] = useState([]);
+
+  // state that holds the color that is selected in the first tag cloud
   const [color, setColor] = useState("grey");
+
+  // state that hold the current page
   const [page, setPage] = useState(0);
-  const [audioPlaying, setAudioPlaying] = useState(false);
 
   const guides = [
     "share your emotions ...",
@@ -47,10 +56,6 @@ export default function Flow() {
     setSliderValue(event.target.value);
   }
 
-  function handleIsPlaying() {
-    setAudioPlaying(!audioPlaying);
-  }
-
   function handleSave() {
     setAllEntries([
       ...allEntries,
@@ -65,38 +70,11 @@ export default function Flow() {
     router.push("entries");
   }
 
-  const button = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        delay: 8,
-      },
-    },
-  };
-
   return (
     <>
-      <Animation color={color} opacity={sliderValue} />
-      <Styled.Container>
-        {page > 0 && (
-          <>
-            {audioPlaying && (
-              <PlaySound
-                src={memory}
-                audioPlaying={audioPlaying}
-                pageIndex={page}
-              />
-            )}
-          </>
-        )}
-        {page === 1 && (
-          <PlayButton
-            handleIsPlaying={handleIsPlaying}
-            audioPlaying={audioPlaying}
-          />
-        )}
-        <Styled.Page>
+      <Animation color={color} opacity={sliderValue}/>
+      <FlowContainer>
+        <Page>
           <PageDisplay
             guides={guides}
             experience={experience}
@@ -108,28 +86,17 @@ export default function Flow() {
             handleSelectExperience={handleSelectExperience}
             handleSelectReactions={handleSelectReactions}
           />
-        </Styled.Page>
-        <Styled.Navigation>
+        </Page>
+        <Navigation>
           {page === 0 && <NavButton disabled>login</NavButton>}
-          {page === 0 && (
+          {page <= 1 && (
             <NavButton
               handleClick={() => {
                 setPage((currPage) => currPage + 1);
               }}
             >
-              anonymous
+              {page === 0 ? "anonymous" : "next"}
             </NavButton>
-          )}
-          {page === 1 && (
-            <motion.div variants={button} initial="hidden" animate="show">
-              <NavButton
-                handleClick={() => {
-                  setPage((currPage) => currPage + 1);
-                }}
-              >
-                next
-              </NavButton>
-            </motion.div>
           )}
           {page > 2 && page <= 4 && (
             <NavButton handleClick={() => setPage((currPage) => currPage - 1)}>
@@ -154,8 +121,8 @@ export default function Flow() {
               save
             </NavButton>
           )}
-        </Styled.Navigation>
-      </Styled.Container>
+        </Navigation>
+      </FlowContainer>
     </>
   );
 }

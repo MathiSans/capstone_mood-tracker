@@ -12,6 +12,11 @@ const nextConfig = {
         use: ["@svgr/webpack"],
       },
       {
+        test: /\.(glsl|vs|fs|vert|frag)$/,
+        exclude: /node_modules/,
+        use: ["raw-loader", "glslify-loader"],
+      },
+      {
         test: /\.(mp3)$/i, // Look for any file with the prefix `.mp3`
         use: [
           {
