@@ -1,4 +1,4 @@
-import { Container, Navigation, Page } from "@/components/Layout/Layout";
+import { Container, Navigation, Page } from "@/components/Layout/Layout.styled";
 import ActivitiesList from "@/components/ActivitiesList/ActivitiesList";
 import styled from "styled-components";
 import { useState } from "react";

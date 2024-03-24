@@ -7,7 +7,7 @@ import PageDisplay from "@/components/PageDisplay/PageDisplay";
 import PlayButton from "@/components/PlaySound/PlayButton";
 import PlaySound from "@/components/PlaySound/PlaySound";
 import memory from "@/public/sounds/memory.mp3";
-import * as Styled from "@/components/Layout/Layout";
+import * as Styled from "@/components/Layout/Layout.styled";
 import { motion } from "framer-motion";
 import useSWR from "swr";
 import fetchLocation from "@/utils/locationTracking";
