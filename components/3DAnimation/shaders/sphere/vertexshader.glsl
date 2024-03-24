@@ -1,11 +1,29 @@
+const float M_PI = 3.1415926535897932384626433832795;
+
+
+uniform vec3 uLightAColor;
+uniform vec3 uLightAPosition;
+uniform float uLightAIntensity;
+uniform vec3 uLightBColor;
+uniform vec3 uLightBPosition;
+uniform float uLightBIntensity;
+
+
 uniform float uDistortionFrequency;
 uniform float uDistortionStrength;
 uniform float uDisplacementFrequency;
 uniform float uDisplacementStrength;
+
+uniform float uFresnelOffset;
+uniform float uFresnelMultiplier;
+uniform float uFresnelPower;
+
 uniform float uTime;
 
 varying vec3 vNormal;
 varying float vPerlinStrength;
+varying vec3 vColor;
+attribute vec3 tangent;
 
 
 //	Classic Perlin 4D Noise 
@@ -152,20 +170,60 @@ float perlin4d(vec4 P){
 // End of Perlin 4D Noise Code
 
 
-void main()
+vec4 getDisplacedPosition(vec3 _position)
 {
 
-    vec3 displacementPosition = position;
+    vec3 displacementPosition = _position;
     displacementPosition += perlin4d(vec4(displacementPosition * uDistortionFrequency, uTime)) * uDistortionStrength;
 
     float perlinStrength = perlin4d(vec4(displacementPosition * uDisplacementFrequency, uTime));
 
-    vec3 newPosition = position;
-    newPosition += normal * perlinStrength * uDisplacementStrength;
+    vec3 displacedPosition = _position;
+    displacedPosition += normalize(_position) * perlinStrength * uDisplacementStrength;
 
-    vec4 viewPosition = viewMatrix * vec4(newPosition, 1.0);
+    return vec4(displacedPosition, perlinStrength);
+}
+
+void main()
+{
+    // Position
+    vec4 displacedPosition = getDisplacedPosition(position);
+    vec4 viewPosition = viewMatrix * vec4(displacedPosition.xyz, 1.0);
     gl_Position = projectionMatrix * viewPosition;
 
+    // Bi tangents
+    float distanceA = (M_PI * 2.0) / 512.0;
+    float distanceB = M_PI / 512.0;
+
+    vec3 biTangent = cross(normal, tangent.xyz);
+
+    vec3 positionA = position + tangent.xyz * distanceA;
+    vec3 displacedPositionA = getDisplacedPosition(positionA).xyz;
+
+    vec3 positionB = position + biTangent.xyz * distanceB;
+    vec3 displacedPositionB = getDisplacedPosition(positionB).xyz;
+
+    vec3 computedNormal = cross(displacedPositionA - displacedPosition.xyz, displacedPositionB - displacedPosition.xyz);
+    computedNormal = normalize(computedNormal);
+
+    // Fresnel
+    vec3 viewDirection = normalize(displacedPosition.xyz - cameraPosition);
+    float fresnel = uFresnelOffset + (1.0 + dot(viewDirection, computedNormal)) * uFresnelMultiplier;
+    fresnel = pow(fresnel, uFresnelPower);
+
+
+    // Color
+    float lightAIntensity = max(0.0, - dot(computedNormal.xyz, normalize(- uLightAPosition))) * uLightAIntensity;
+    float lightBIntensity = max(0.0, - dot(computedNormal.xyz, normalize(- uLightBPosition))) * uLightBIntensity;
+
+    vec3 color = vec3(0.0);
+    color = mix(color, uLightAColor, lightAIntensity * fresnel);
+    color = mix(color, uLightBColor, lightBIntensity * fresnel);
+    color = mix(color, vec3(1.0), clamp(pow(fresnel - 0.8, 3.0), 0.0, 1.0));
+
+    // Varying
+
     vNormal = normal;
-    vPerlinStrength = perlinStrength;
+    vPerlinStrength = displacedPosition.a;
+    vColor = color;
 }
