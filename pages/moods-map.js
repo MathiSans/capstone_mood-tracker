@@ -62,9 +62,6 @@ export default function App() {
             />
           ))}
         </Grid>
-        <Navigation>
-          <NavButton linkToPage="entries">list view</NavButton>
-        </Navigation>
       </Container>
     </>
   );
@@ -77,6 +74,7 @@ const Grid = styled.div`
   justify-content: center;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 `;
 
 const DragInfo = styled.div`

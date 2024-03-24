@@ -14,9 +14,6 @@ export default function Entries() {
         <Guide text={"emotion collection"} />
         <EntriesList />
       </Page>
-      <Navigation>
-        <NavButton linkToPage={"/"}>enter a mood</NavButton>
-      </Navigation>
     </Container>
   );
 }

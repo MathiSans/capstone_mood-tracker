@@ -6,7 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100vw;
-  min-height: 100vh;
+  min-height: 100dvh;
 `;
 
 export const Page = styled.div`
@@ -22,17 +22,6 @@ export const Navigation = styled.div`
   position: relative;
   justify-content: center;
   align-items: center;
-  bottom: 0;
   display: flex;
   gap: 20px;
-  background: rgb(0, 0, 0);
-  background: rgb(0, 0, 0);
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 1) 33%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  width: 100vw;
-  height: 20vh;
 `;

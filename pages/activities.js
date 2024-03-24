@@ -24,11 +24,6 @@ export default function Activities() {
           <ActivitiesList showForm={showForm} handleShowForm={handleShowForm} />
         )}
       </Page>
-      {showForm ? null : (
-        <Navigation>
-          <NavButton linkToPage={"/"}>enter a mood</NavButton>
-        </Navigation>
-      )}
     </Container>
   );
 }

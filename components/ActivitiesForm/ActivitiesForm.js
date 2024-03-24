@@ -53,6 +53,14 @@ export default function ActivitiesForm({ handleShowForm }) {
     }
   }
 
+  const checkboxes = [
+    { text: "enjoyment", color: "#dabe39" },
+    { text: "fear", color: "purple" },
+    { text: "anger", color: "red" },
+    { text: "disgust", color: "green" },
+    { text: "sadness", color: "blue" },
+  ];
+
   return (
     <>
       <Styled.Card>
@@ -123,56 +131,24 @@ export default function ActivitiesForm({ handleShowForm }) {
             ></Styled.TextArea>
           </Styled.Label>
           <p>For which experiences could this be?</p>
+
           <Styled.CheckboxContainer>
-            <Styled.CheckboxLabel htmlFor="enjoyment" color="#dabe39">
-              enjoyment
-              <Styled.CheckboxInput
-                type="checkbox"
-                text="enjoyment"
-                id="enjoyment"
-                onChange={(e) =>
-                  handleCheckboxChange("enjoyment", e.target.checked)
-                }
-              ></Styled.CheckboxInput>
-            </Styled.CheckboxLabel>
-            <Styled.CheckboxLabel htmlFor="fear" color="purple">
-              fear
-              <Styled.CheckboxInput
-                type="checkbox"
-                id="fear"
-                onChange={(e) => handleCheckboxChange("fear", e.target.checked)}
-              ></Styled.CheckboxInput>
-            </Styled.CheckboxLabel>
-            <Styled.CheckboxLabel htmlFor="anger" color="red">
-              anger
-              <Styled.CheckboxInput
-                type="checkbox"
-                id="anger"
-                onChange={(e) =>
-                  handleCheckboxChange("anger", e.target.checked)
-                }
-              ></Styled.CheckboxInput>
-            </Styled.CheckboxLabel>
-            <Styled.CheckboxLabel htmlFor="disgust" color="green">
-              disgust
-              <Styled.CheckboxInput
-                type="checkbox"
-                id="disgust"
-                onChange={(e) =>
-                  handleCheckboxChange("disgust", e.target.checked)
-                }
-              ></Styled.CheckboxInput>
-            </Styled.CheckboxLabel>
-            <Styled.CheckboxLabel htmlFor="sadness" color="blue">
-              sadness
-              <Styled.CheckboxInput
-                type="checkbox"
-                id="sadness"
-                onChange={(e) =>
-                  handleCheckboxChange("sadness", e.target.checked)
-                }
-              ></Styled.CheckboxInput>
-            </Styled.CheckboxLabel>
+            {checkboxes.map((checkbox, index) => (
+              <Styled.CheckboxLabel
+                key={index}
+                htmlFor={checkbox.text}
+                color={checkbox.color}
+              >
+                {checkbox.text}
+                <Styled.CheckboxInput
+                  type="checkbox"
+                  id={checkbox.text}
+                  onChange={(event) =>
+                    handleCheckboxChange(checkbox.text, event.target.checked)
+                  }
+                ></Styled.CheckboxInput>
+              </Styled.CheckboxLabel>
+            ))}
           </Styled.CheckboxContainer>
           <Styled.ButtonArea>
             <NavButton type="submit">Save</NavButton>
