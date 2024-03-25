@@ -23,7 +23,7 @@ export default function MuteButton({
   }
   return (
     <StyledContainer>
-      <StyledMuteButton type="button" onClick={toggleMute}>
+      <StyledMuteButton type="button" onClick={toggleMute} isMuted={isMuted}>
         <StyledText>{isMuted ? "🔈" : "🔊"}</StyledText>
       </StyledMuteButton>
     </StyledContainer>
@@ -42,12 +42,15 @@ const StyledContainer = styled.div`
 `;
 
 const StyledMuteButton = styled.button`
-  padding: 0.5rem 0.7rem;
+  background-color: white;
+  border: transparent;
+  box-shadow: ${({ isMuted }) =>
+    isMuted ? "inset 0px 0px 0px 2px red" : "none"};
+  border-radius: 50%;
+  padding: 0.85rem 1rem;
   margin-inline-end: 1.5rem;
-  border-radius: 0.5rem;
-  background-color: transparent;
-  color: white;
-  border: 1px solid white;
+  font-size: 1rem;
+  filter: drop-shadow(black 0rem 0rem 25px);
   cursor: pointer;
 `;
 
