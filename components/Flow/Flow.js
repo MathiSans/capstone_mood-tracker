@@ -4,12 +4,10 @@ import { experiences } from "@/experiences";
 import Animation from "@/components/3DAnimation/3DAnimation";
 import NavButton from "@/components/NavButton/NavButton";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
-import PlayButton from "@/components/PlaySound/PlayButton";
-import PlaySound from "@/components/PlaySound/PlaySound";
-import memory from "@/public/sounds/memory.mp3";
-import * as Styled from "@/components/Layout/Layout.styled";
+import * as Styled from "@/components/Layout/Layout";
 import { motion } from "framer-motion";
 import useSWR from "swr";
+import AudioSettings from "../AudioSettings/AudioSettings";
 import fetchLocation from "@/utils/locationTracking";
 import LegacyAnimation from "../LegacyAnimation/LegacyAnimation";
 import NavIcon from "../NavIcon/NavIcon";
@@ -23,7 +21,7 @@ export default function Flow() {
   const [reactions, setReactions] = useState([]);
   const [color, setColor] = useState("grey");
   const [page, setPage] = useState(0);
-  const [audioPlaying, setAudioPlaying] = useState(false);
+  const [audioTrigger, setAudioTrigger] = useState(false);
 
   const guides = [
     "share your emotions ...",
@@ -46,10 +44,6 @@ export default function Flow() {
 
   function handleSliderChange(event) {
     setSliderValue(event.target.value);
-  }
-
-  function handleIsPlaying() {
-    setAudioPlaying(!audioPlaying);
   }
 
   async function handleSave() {
@@ -90,25 +84,14 @@ export default function Flow() {
 
   return (
     <>
-      <Animation color={color} opacity={sliderValue} />
+      {/* <Animation color={color} opacity={sliderValue} /> */}
+      <AudioSettings
+        page={page}
+        experience={experience}
+        audioTrigger={audioTrigger}
+        setAudioTrigger={setAudioTrigger}
+      />
       <Styled.Container>
-        {page > 0 && (
-          <>
-            {audioPlaying && (
-              <PlaySound
-                src={memory}
-                audioPlaying={audioPlaying}
-                pageIndex={page}
-              />
-            )}
-          </>
-        )}
-        {page === 1 && (
-          <PlayButton
-            handleIsPlaying={handleIsPlaying}
-            audioPlaying={audioPlaying}
-          />
-        )}
         <Styled.Page>
           <PageDisplay
             guides={guides}
@@ -126,6 +109,7 @@ export default function Flow() {
           {page === 0 && (
             <NavButton
               handleClick={() => {
+                setAudioTrigger(true);
                 setPage((currPage) => currPage + 1);
               }}
             >
