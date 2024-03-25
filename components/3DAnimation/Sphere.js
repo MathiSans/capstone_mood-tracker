@@ -30,7 +30,7 @@ export default function Sphere({ color, opacity }) {
 
   lightB.spherical = new THREE.Spherical(1, 2.561, -1.844);
 
-  const defaultDisplacementFrequency = 2.12;
+  const defaultDisplacementFrequency = 10;
   const timeFrequency = 0.4;
 
   const uniforms = useMemo(
@@ -50,7 +50,7 @@ export default function Sphere({ color, opacity }) {
 
       uFresnelOffset: { value: 0.01 },
       uFresnelMultiplier: { value: 1.5 },
-      uFresnelPower: { value: 2 },
+      uFresnelPower: { value: 0.5 },
 
       uTime: {
         value: 0.0,

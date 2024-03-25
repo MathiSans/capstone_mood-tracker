@@ -71,7 +71,7 @@ export default function Flow() {
 
     if (response.ok) {
       mutate();
-      router.push("moods-map");
+      router.push("entries");
     }
   }
 
