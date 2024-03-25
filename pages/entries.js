@@ -3,7 +3,7 @@ import Guide from "@/components/Guide/Guide";
 import NavButton from "@/components/NavButton/NavButton";
 import { useRouter } from "next/router";
 import EntriesList from "@/components/EntriesList/EntriesList";
-import { Container, Navigation, Page } from "@/components/Layout/Layout";
+import { Container, Navigation, Page } from "@/components/Layout/Layout.styled";
 
 export default function Entries() {
   const router = useRouter();
@@ -14,9 +14,6 @@ export default function Entries() {
         <Guide text={"emotion collection"} />
         <EntriesList />
       </Page>
-      <Navigation>
-        <NavButton linkToPage={"/"}>enter a mood</NavButton>
-      </Navigation>
     </Container>
   );
 }

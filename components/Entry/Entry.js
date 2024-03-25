@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import Animation from "../3DAnimation/3DAnimation";
-import { Container, Page } from "../Layout/Layout";
+import { Container, Page } from "../Layout/Layout.styled";
 import {
   Sentence,
   StaticText,
