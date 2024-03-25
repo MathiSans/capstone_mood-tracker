@@ -6,7 +6,6 @@ import useSWR from "swr";
 import { FiPlus } from "react-icons/fi";
 
 export default function ActivitiesList({ handleShowForm }) {
-
   const [filterPhrase, setFilterPhrase] = useState();
 
   const { data: activities, isLoading } = useSWR("/api/activities");

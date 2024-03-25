@@ -1,4 +1,4 @@
-import { Container, Navigation, Page } from "@/components/Layout/Layout";
+import { Container, Navigation, Page } from "@/components/Layout/Layout.styled";
 import ActivitiesList from "@/components/ActivitiesList/ActivitiesList";
 import styled from "styled-components";
 import { useState } from "react";
@@ -24,11 +24,6 @@ export default function Activities() {
           <ActivitiesList showForm={showForm} handleShowForm={handleShowForm} />
         )}
       </Page>
-      {showForm ? null : (
-        <Navigation>
-          <NavButton linkToPage={"/"}>enter a mood</NavButton>
-        </Navigation>
-      )}
     </Container>
   );
 }

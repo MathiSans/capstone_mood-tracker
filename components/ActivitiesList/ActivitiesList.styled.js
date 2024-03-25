@@ -58,8 +58,8 @@ export const Title = styled.p`
 `;
 
 export const Description = styled.p`
+  color: grey;
   text-align: center;
-  font-size: 0.8rem;
   padding: 0;
   margin: 0;
 `;

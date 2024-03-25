@@ -5,7 +5,7 @@ export const DeleteQuestion = styled.p`
 `;
 
 export const DeleteAnswer = styled.p`
-  color: ${({ red }) => (red ? "red" : "")};
+  color: ${(props) => (props.red ? "red" : "")};
   cursor: pointer;
 `;
 
@@ -28,7 +28,7 @@ export const Grid = styled.div`
 `;
 
 export const ColoredShape = styled.div`
-  background-color: ${({ color }) => (color ? color : "white")};
+  background-color: ${(props) => (props.color ? props.color : "white")};
   height: 100%;
   width: 100%;
 `;
