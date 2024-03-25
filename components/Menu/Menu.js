@@ -10,12 +10,12 @@ export default function Menu({ handleShowMenu }) {
     whileHover: { scale: 1.05 },
     exit: {
       filter: "blur(10px)",
-      transition: { ease: "easeIn", duration: 0.7 },
+      transition: { duration: 0.7 },
     },
     initial: { filter: "blur(10px)" },
     animate: {
       filter: "blur(0px)",
-      transition: { type: "spring", duration: 0.7 },
+      transition: { duration: 0.7 },
     },
   };
 

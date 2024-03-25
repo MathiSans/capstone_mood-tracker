@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const TriggerContainer = styled.div`
   position: fixed;
@@ -12,9 +12,17 @@ export const TriggerContainer = styled.div`
 `;
 
 export const MenuTriggerButton = styled.button`
-  background-color: ${({ showMenu }) => (showMenu ? "transparent" : "white")};
-  border: ${({ showMenu }) => (showMenu ? "1px solid white" : "none")};
-  color: ${({ showMenu }) => (showMenu ? "white" : "black")};
+  background-color: white;
+  border: none;
+  color: black;
+  ${(props) =>
+    props.showMenu &&
+    css`
+      background-color: transparent;
+      border: 1px solid white;
+      color: white;
+    `}
+
   border-radius: 20px;
   padding: 12px 24px;
   font-size: 1rem;

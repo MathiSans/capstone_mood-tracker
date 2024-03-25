@@ -2,6 +2,7 @@ import Menu from "../Menu/Menu";
 import MenuTrigger from "../MenuTrigger/MenuTrigger";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { MenuContainer } from "./Layout.styled";
 
 export default function Layout({ children }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -10,12 +11,12 @@ export default function Layout({ children }) {
   }
   return (
     <>
-      <div style={{ position: "relative", zIndex: 9999 }}>
+      <MenuContainer>
         <AnimatePresence>
           {showMenu && <Menu handleShowMenu={handleShowMenu} />}
         </AnimatePresence>
         <MenuTrigger showMenu={showMenu} handleShowMenu={handleShowMenu} />
-      </div>
+      </MenuContainer>
       {children}
     </>
   );

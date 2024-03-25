@@ -105,7 +105,7 @@ export const CheckboxLabel = styled.label`
   border-radius: 20px;
   cursor: pointer;
   font-size: 1rem;
-  background-color: ${({ color }) => (color ? color : "grey")};
+  background-color: ${(props) => (props.color ? color : "grey")};
 `;
 
 export const CheckboxInput = styled.input`

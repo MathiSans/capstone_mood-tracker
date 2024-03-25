@@ -6,6 +6,12 @@ export const IconContainer = styled.button`
   border: none;
   font-size: 1.5rem;
   background-color: transparent;
-  color: ${({ disabled }) => (disabled ? "grey" : "white")};
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  color: white;
+  cursor: pointer;
+  ${(props) =>
+    props.disabled &&
+    css`
+      color: grey;
+      cursor: not-allowed;
+    `}
 `;

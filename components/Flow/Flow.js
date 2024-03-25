@@ -11,9 +11,6 @@ import * as Styled from "@/components/Layout/Layout.styled";
 import { motion } from "framer-motion";
 import useSWR from "swr";
 import fetchLocation from "@/utils/locationTracking";
-import LegacyAnimation from "../LegacyAnimation/LegacyAnimation";
-import NavIcon from "../NavIcon/NavIcon";
-import { FiArrowRight } from "react-icons/fi";
 
 export default function Flow() {
   const router = useRouter();

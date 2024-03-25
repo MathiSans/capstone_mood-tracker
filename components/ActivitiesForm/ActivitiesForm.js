@@ -146,7 +146,7 @@ export default function ActivitiesForm({ handleShowForm }) {
                   onChange={(event) =>
                     handleCheckboxChange(checkbox.text, event.target.checked)
                   }
-                ></Styled.CheckboxInput>
+                />
               </Styled.CheckboxLabel>
             ))}
           </Styled.CheckboxContainer>
