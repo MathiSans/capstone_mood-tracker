@@ -10,23 +10,40 @@ export default function MuteButton({
     setIsMuted(!isMuted);
     const audio = audioReference.current;
     if (audio) {
-      if (isMuted) {
-        audio.play();
-      } else {
+      if (!isMuted) {
         audio.pause();
+        audio.volume = 0;
+        console.log("mute:", audio.volume);
+      } else {
+        audio.play();
+        audio.volume = 0.3;
+        console.log("unmute:", audio.volume);
       }
     }
   }
   return (
-    <StyledMuteButton type="button" onClick={toggleMute}>
-      <StyledText>{isMuted ? "🔈" : "🔊"}</StyledText>
-    </StyledMuteButton>
+    <StyledContainer>
+      <StyledMuteButton type="button" onClick={toggleMute}>
+        <StyledText>{isMuted ? "🔈" : "🔊"}</StyledText>
+      </StyledMuteButton>
+    </StyledContainer>
   );
 }
 
+const StyledContainer = styled.div`
+  position: fixed;
+  justify-content: end;
+  align-items: end;
+  padding-bottom: 28px;
+  bottom: 0;
+  display: flex;
+  width: 100vw;
+  height: 60px;
+`;
+
 const StyledMuteButton = styled.button`
   padding: 0.5rem 0.7rem;
-  margin: 1rem;
+  margin-inline-end: 1.5rem;
   border-radius: 0.5rem;
   background-color: transparent;
   color: white;

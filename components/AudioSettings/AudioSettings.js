@@ -22,18 +22,13 @@ export default function AudioSettings({
         audioReference={audioReference}
       />
       <PlaySound
+        page={page}
+        isMuted={isMuted}
         experience={experience}
         audioTrigger={audioTrigger}
         currentVolume={currentVolume}
         setCurrentVolume={setCurrentVolume}
         audioReference={audioReference}
-      />
-      <DecreaseVolume
-        page={page}
-        experience={experience}
-        currentVolume={currentVolume}
-        setCurrentVolume={setCurrentVolume}
-        isMuted={isMuted}
       />
       <audio ref={audioReference} />
     </>
