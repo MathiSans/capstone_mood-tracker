@@ -9,10 +9,10 @@ export default createGlobalStyle`
   }
 
   body {
-    color: white;
+    color: ${(props) => props.theme.color}; 
     margin: 0 auto;
     font-family: system-ui;
-    background-color: black; 
+    background-color: ${(props) => props.theme.backgroundColor}; 
   }
 
   h1 {
