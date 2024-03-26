@@ -48,7 +48,7 @@ export const experiences = [
   },
   {
     name: "enjoyment",
-    color: "yellow",
+    color: "#FCCE65",
     intensity: [
       { name: "sensory pleasure" },
       { name: "rejoicing" },

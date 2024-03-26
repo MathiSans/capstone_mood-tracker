@@ -14,8 +14,8 @@ const darkTheme = {
     backgroundColor: "rgb(0, 0, 0)",
     backgroundGradient:
       "linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 33%, rgba(0, 0, 0, 0) 100%)",
-    button: "white",
-    buttonTextLink: "white",
+    button: "pink",
+    buttonTextLink: "pink",
   },
   ActivityCard: {
     backgroundColor: "#141414",
@@ -46,8 +46,8 @@ const lightTheme = {
     backgroundColor: "white",
     backgroundGradient:
       "linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 33%, rgba(0, 0, 0, 0) 100%)",
-    button: "white",
-    buttonTextLink: "white",
+    button: "pink",
+    buttonTextLink: "pink",
   },
   ActivityCard: {
     backgroundColor: "#efecec",
