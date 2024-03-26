@@ -1,7 +1,7 @@
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef, useEffect, useState } from "react";
-import vertexShader from "!!raw-loader!./shaders/sphere/vertexShader.glsl";
-import fragmentShader from "!!raw-loader!./shaders/sphere/fragmentShader.glsl";
+import vertexShader from "!!raw-loader!./shaders/sphere/vertexshader.glsl";
+import fragmentShader from "!!raw-loader!./shaders/sphere/fragmentshader.glsl";
 import * as THREE from "three";
 
 export default function Sphere({ color, opacity }) {
