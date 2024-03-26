@@ -105,7 +105,7 @@ export const CheckboxLabel = styled.label`
   border-radius: 20px;
   cursor: pointer;
   font-size: 1rem;
-  background-color: ${({ color }) => (color ? color : "grey")};
+  background-color: ${(props) => (props.color ? props.color : "grey")};
 `;
 
 export const CheckboxInput = styled.input`
@@ -118,6 +118,8 @@ export const CheckboxInput = styled.input`
   font-size: 1rem;
   border-radius: 20px;
   cursor: pointer;
+  top: -32px;
+  left: -14px;
 
   &:checked::after {
     content: "";
@@ -125,8 +127,6 @@ export const CheckboxInput = styled.input`
     position: absolute;
     height: 40px;
     width: 110px;
-    top: -32px;
-    left: -14px;
     border: 3.5px solid white;
     font-size: 1rem;
     color: #fff;
