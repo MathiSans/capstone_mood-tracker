@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const QuoteCard = styled.div`
-  background-color: #141414;
-  background: rgb(42, 42, 42);
   background: radial-gradient(
     circle,
     rgba(42, 42, 42, 1) 0%,

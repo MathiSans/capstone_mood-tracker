@@ -1,43 +1,30 @@
-import { AnimatePresence, motion, useSpring } from "framer-motion";
+import { motion, useSpring } from "framer-motion";
 import React, { useState, useRef, useEffect } from "react";
 import * as Styled from "./Quotes.styled";
 import { MdChangeCircle } from "react-icons/md";
 
-// Learn more: https://www.framer.com/docs/guides/overrides/
-
-//Spring animation parameters
 const spring = {
   type: "spring",
   stiffness: 60,
   damping: 10,
 };
 
-/**
- * 3D Flip
- * Created By Joshua Guo
- *
- * @framerSupportedLayoutWidth fixed
- * @framerSupportedLayoutHeight fixed
- */
-
-export default function WithClick({ quotes }) {
+export default function Quotes({ quote, refreshQuote, handleCouter }) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [quoteState, setQuoteState] = useState({});
-  const [nextQuote, setNextQuote] = useState(0);
 
-  const handleClick = () => {
+  function handleClick() {
     setIsFlipped((prevState) => !prevState);
     if (!isFlipped) {
-      setNextQuote((currQuote) => currQuote + 1);
-      handleRandomQuote();
+      refreshQuote();
+      handleCouter();
     }
-  };
+  }
 
   const [rotateXaxis, setRotateXaxis] = useState(0);
   const [rotateYaxis, setRotateYaxis] = useState(0);
   const ref = useRef(null);
 
-  const handleMouseMove = (event) => {
+  function handleMouseMove(event) {
     const element = ref.current;
     const elementRect = element.getBoundingClientRect();
     const elementWidth = elementRect.width;
@@ -46,16 +33,16 @@ export default function WithClick({ quotes }) {
     const elementCenterY = elementHeight / 2;
     const mouseX = event.clientY - elementRect.y - elementCenterY;
     const mouseY = event.clientX - elementRect.x - elementCenterX;
-    const degreeX = (mouseX / elementWidth) * 20; //The number is the rotation factor
-    const degreeY = (mouseY / elementHeight) * 20; //The number is the rotation factor
+    const degreeX = (mouseX / elementWidth) * 20;
+    const degreeY = (mouseY / elementHeight) * 20;
     setRotateXaxis(degreeX);
     setRotateYaxis(degreeY);
-  };
+  }
 
-  const handleMouseEnd = () => {
+  function handleMouseEnd() {
     setRotateXaxis(0);
     setRotateYaxis(0);
-  };
+  }
 
   const dx = useSpring(0, spring);
   const dy = useSpring(0, spring);
@@ -65,21 +52,17 @@ export default function WithClick({ quotes }) {
     dy.set(rotateYaxis);
   }, [rotateXaxis, rotateYaxis]);
 
-  function handleRandomQuote() {
-    if (!quotes || !Array.isArray(quotes) || quotes.length === 0) {
-      return <p>No quotes available</p>;
+  function getFontSize(quote) {
+    let baseSize = 40; // base font size in px
+    let maxLength = 60; // max characters count for base size
+    if (quote.length > maxLength) {
+      let diff = quote.length - maxLength;
+      let sizeDecrease = Math.floor(diff / 4); // decrease font size by 1px for each 4 characters over maxLength
+      return Math.max(baseSize - sizeDecrease, 19); // don't go below 16px
     }
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    const randomQuote = quotes[randomIndex];
-    setQuoteState(randomQuote);
-    setNextQuote(quotes);
+
+    return baseSize;
   }
-  // useEffect(() => {
-  //   handleRandomQuote();
-  // });
-  // useEffect(() => {
-  //   handleRandomQuote();
-  // }, [nextQuote]);
 
   return (
     <motion.div
@@ -88,8 +71,8 @@ export default function WithClick({ quotes }) {
       style={{
         perspective: "1200px",
         transformStyle: "preserve-3d",
-        width: "300px",
-        height: "440px",
+        width: "330px",
+        height: "400px",
       }}
     >
       <motion.div
@@ -146,8 +129,12 @@ export default function WithClick({ quotes }) {
             }}
           >
             <Styled.QuoteCard variant="Back">
-              <Styled.Quote>{quoteState.text}</Styled.Quote>
-              <p>{quoteState.author}</p>
+              <Styled.Quote
+                style={{ fontSize: `${getFontSize(quote[0].content)}px` }}
+              >
+                {quote[0].content}
+              </Styled.Quote>
+              <p>{quote[0].author}</p>
             </Styled.QuoteCard>
           </motion.div>
         </div>
@@ -155,45 +142,3 @@ export default function WithClick({ quotes }) {
     </motion.div>
   );
 }
-
-// import styled from "styled-components";
-// import { useEffect, useState } from "react";
-// import * as Styled from "./Quotes.styled";
-// import NavButton from "../NavButton/NavButton";
-
-// export default function Quotes({ quotes }) {
-//   const [quoteState, setQuoteState] = useState({});
-//   const [nextQuote, setNextQuote] = useState(0);
-
-//   function handleRandomQuote() {
-//     if (!quotes || !Array.isArray(quotes) || quotes.length === 0) {
-//       return <p>No quotes available</p>;
-//     }
-//     const randomIndex = Math.floor(Math.random() * quotes.length);
-//     const randomQuote = quotes[randomIndex];
-//     setQuoteState(randomQuote);
-//     setNextQuote(quotes);
-//   }
-//   useEffect(() => {
-//     handleRandomQuote();
-//   });
-//   useEffect(() => {
-//     handleRandomQuote();
-//   }, [nextQuote]);
-
-//   return (
-//     <>
-//       <NavButton
-//         handleClick={() => {
-//           setNextQuote((currQuote) => currQuote + 1);
-//         }}
-//       >
-//         new quote
-//       </NavButton>
-//       <Styled.QuoteCard>
-//         <Styled.Quote>{quoteState.text}</Styled.Quote>
-//         <p>{quoteState.author}</p>
-//       </Styled.QuoteCard>
-//     </>
-//   );
-// }

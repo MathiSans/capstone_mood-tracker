@@ -131,13 +131,12 @@ export default function ActivitiesForm({ handleShowForm }) {
             ></Styled.TextArea>
           </Styled.Label>
           <p>For which experiences could this be?</p>
-
           <Styled.CheckboxContainer>
             {checkboxes.map((checkbox, index) => (
               <Styled.CheckboxLabel
                 key={index}
                 htmlFor={checkbox.text}
-                color={checkbox.color}
+                $color={checkbox.color}
               >
                 {checkbox.text}
                 <Styled.CheckboxInput
