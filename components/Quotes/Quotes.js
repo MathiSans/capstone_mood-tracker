@@ -1,9 +1,69 @@
-import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useSpring } from "framer-motion";
+import React, { useState, useRef, useEffect } from "react";
+import * as Styled from "./Quotes.styled";
+import { MdChangeCircle } from "react-icons/md";
 
-export default function Quotes({ quotes }) {
+// Learn more: https://www.framer.com/docs/guides/overrides/
+
+//Spring animation parameters
+const spring = {
+  type: "spring",
+  stiffness: 60,
+  damping: 10,
+};
+
+/**
+ * 3D Flip
+ * Created By Joshua Guo
+ *
+ * @framerSupportedLayoutWidth fixed
+ * @framerSupportedLayoutHeight fixed
+ */
+
+export default function WithClick({ quotes }) {
+  const [isFlipped, setIsFlipped] = useState(false);
   const [quoteState, setQuoteState] = useState({});
   const [nextQuote, setNextQuote] = useState(0);
+
+  const handleClick = () => {
+    setIsFlipped((prevState) => !prevState);
+    if (!isFlipped) {
+      setNextQuote((currQuote) => currQuote + 1);
+      handleRandomQuote();
+    }
+  };
+
+  const [rotateXaxis, setRotateXaxis] = useState(0);
+  const [rotateYaxis, setRotateYaxis] = useState(0);
+  const ref = useRef(null);
+
+  const handleMouseMove = (event) => {
+    const element = ref.current;
+    const elementRect = element.getBoundingClientRect();
+    const elementWidth = elementRect.width;
+    const elementHeight = elementRect.height;
+    const elementCenterX = elementWidth / 2;
+    const elementCenterY = elementHeight / 2;
+    const mouseX = event.clientY - elementRect.y - elementCenterY;
+    const mouseY = event.clientX - elementRect.x - elementCenterX;
+    const degreeX = (mouseX / elementWidth) * 20; //The number is the rotation factor
+    const degreeY = (mouseY / elementHeight) * 20; //The number is the rotation factor
+    setRotateXaxis(degreeX);
+    setRotateYaxis(degreeY);
+  };
+
+  const handleMouseEnd = () => {
+    setRotateXaxis(0);
+    setRotateYaxis(0);
+  };
+
+  const dx = useSpring(0, spring);
+  const dy = useSpring(0, spring);
+
+  useEffect(() => {
+    dx.set(-rotateXaxis);
+    dy.set(rotateYaxis);
+  }, [rotateXaxis, rotateYaxis]);
 
   function handleRandomQuote() {
     if (!quotes || !Array.isArray(quotes) || quotes.length === 0) {
@@ -14,66 +74,126 @@ export default function Quotes({ quotes }) {
     setQuoteState(randomQuote);
     setNextQuote(quotes);
   }
-  useEffect(() => {
-    handleRandomQuote();
-  });
-  useEffect(() => {
-    handleRandomQuote();
-  }, [nextQuote]);
+  // useEffect(() => {
+  //   handleRandomQuote();
+  // });
+  // useEffect(() => {
+  //   handleRandomQuote();
+  // }, [nextQuote]);
 
   return (
-    <QuoteContainer>
-      <StyledArticle>
-        <StyledBlockquote>{quoteState.text}</StyledBlockquote>
-        <StyledFooter>{quoteState.author}</StyledFooter>
-      </StyledArticle>
-      <StyledButton
-        onClick={() => {
-          setNextQuote((currQuote) => currQuote + 1);
+    <motion.div
+      onClick={handleClick}
+      transition={spring}
+      style={{
+        perspective: "1200px",
+        transformStyle: "preserve-3d",
+        width: "300px",
+        height: "440px",
+      }}
+    >
+      <motion.div
+        ref={ref}
+        whileHover={{ scale: 1.1 }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseEnd}
+        transition={spring}
+        style={{
+          width: "100%",
+          height: "100%",
+          rotateX: dx,
+          rotateY: dy,
         }}
       >
-        new quote
-      </StyledButton>
-    </QuoteContainer>
+        <div
+          style={{
+            perspective: "1200px",
+            transformStyle: "preserve-3d",
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          <motion.div
+            animate={{
+              rotateY: isFlipped ? -180 : 0,
+            }}
+            transition={spring}
+            style={{
+              width: "100%",
+              height: "100%",
+              zIndex: isFlipped ? 0 : 1,
+              backfaceVisibility: "hidden",
+              position: "absolute",
+            }}
+          >
+            <Styled.QuoteCard variant="Front">
+              <MdChangeCircle style={{ fontSize: "2.5rem" }} />
+              click me
+            </Styled.QuoteCard>
+          </motion.div>
+          <motion.div
+            initial={{ rotateY: 180 }}
+            animate={{
+              rotateY: isFlipped ? 0 : 180,
+            }}
+            transition={spring}
+            style={{
+              width: "100%",
+              height: "100%",
+              zIndex: isFlipped ? 1 : 0,
+              backfaceVisibility: "hidden",
+              position: "absolute",
+            }}
+          >
+            <Styled.QuoteCard variant="Back">
+              <Styled.Quote>{quoteState.text}</Styled.Quote>
+              <p>{quoteState.author}</p>
+            </Styled.QuoteCard>
+          </motion.div>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
-const QuoteContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
+// import styled from "styled-components";
+// import { useEffect, useState } from "react";
+// import * as Styled from "./Quotes.styled";
+// import NavButton from "../NavButton/NavButton";
 
-const StyledArticle = styled.article`
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  font-size: 1rem;
-  border: 2px solid white;
-  border-radius: 12px;
-  box-shadow: rgba(255, 255, 255, 0.359) 0px 10px 15px -3px,
-    rgba(255, 255, 255, 0.776) 0px 4px 6px -2px;
-  padding: 1.5rem;
-`;
+// export default function Quotes({ quotes }) {
+//   const [quoteState, setQuoteState] = useState({});
+//   const [nextQuote, setNextQuote] = useState(0);
 
-const StyledBlockquote = styled.blockquote`
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  font-size: large;
-`;
-const StyledFooter = styled.footer`
-  text-align: center;
-`;
+//   function handleRandomQuote() {
+//     if (!quotes || !Array.isArray(quotes) || quotes.length === 0) {
+//       return <p>No quotes available</p>;
+//     }
+//     const randomIndex = Math.floor(Math.random() * quotes.length);
+//     const randomQuote = quotes[randomIndex];
+//     setQuoteState(randomQuote);
+//     setNextQuote(quotes);
+//   }
+//   useEffect(() => {
+//     handleRandomQuote();
+//   });
+//   useEffect(() => {
+//     handleRandomQuote();
+//   }, [nextQuote]);
 
-const StyledButton = styled.button`
-  background-color: transparent;
-  color: white;
-  padding: 1rem;
-  border-radius: 12px;
-
-  &:hover {
-    box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px -5px;
-    transform: translate3d(0, 1px, 0);
-  }
-
-  &:focus {
-    box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 4px -6px;
-  }
-`;
+//   return (
+//     <>
+//       <NavButton
+//         handleClick={() => {
+//           setNextQuote((currQuote) => currQuote + 1);
+//         }}
+//       >
+//         new quote
+//       </NavButton>
+//       <Styled.QuoteCard>
+//         <Styled.Quote>{quoteState.text}</Styled.Quote>
+//         <p>{quoteState.author}</p>
+//       </Styled.QuoteCard>
+//     </>
+//   );
+// }

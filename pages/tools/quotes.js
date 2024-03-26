@@ -3,7 +3,7 @@ import Guide from "@/components/Guide/Guide";
 import NavButton from "@/components/NavButton/NavButton";
 import Quotes from "@/components/Quotes/Quotes";
 import { useRouter } from "next/router";
-import * as Styled from "@/components/Layout/Layout";
+import * as Styled from "@/components/Layout/Layout.styled";
 import useSWR from "swr";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -22,12 +22,12 @@ export default function QuotesRender() {
   return (
     <Styled.Container>
       <Styled.Page>
-        <Guide text={"Quotes"} />
+        <Guide text={"Inspirational Quotes"} />
         <Quotes quotes={data} />
       </Styled.Page>
-      <Styled.Navigation>
+      {/* <Styled.Navigation>
         <NavButton handleClick={() => router.back()}>back</NavButton>
-      </Styled.Navigation>
+      </Styled.Navigation> */}
     </Styled.Container>
   );
 }
