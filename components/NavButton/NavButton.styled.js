@@ -5,7 +5,7 @@ export const Button = styled.button`
   padding: 10px 26px;
   background-color: transparent;
   color: ${({ disabled }) =>
-    disabled ? "grey" : `${(prop) => prop.theme.color}`};
+    disabled ? "grey" : `${(prop) => prop.theme.Navigation.button}`};
   border: ${({ disabled }) =>
     disabled
       ? "1px solid grey"

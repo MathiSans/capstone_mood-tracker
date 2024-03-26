@@ -14,6 +14,8 @@ const darkTheme = {
     backgroundColor: "rgb(0, 0, 0)",
     backgroundGradient:
       "linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 33%, rgba(0, 0, 0, 0) 100%)",
+    button: "white",
+    buttonTextLink: "white",
   },
   ActivityCard: {
     backgroundColor: "#141414",
@@ -44,8 +46,8 @@ const lightTheme = {
     backgroundColor: "white",
     backgroundGradient:
       "linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 33%, rgba(0, 0, 0, 0) 100%)",
-    button: "black",
-    buttonTextLink: "black",
+    button: "white",
+    buttonTextLink: "white",
   },
   ActivityCard: {
     backgroundColor: "#efecec",
@@ -83,17 +85,6 @@ export default function App({ Component, pageProps }) {
   };
   return (
     <>
-      <GlobalStyle />
-      <SWRConfig
-        value={{
-          fetcher: (resource, init) =>
-            fetch(resource, init).then((res) => res.json()),
-        }}
-      >
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </SWRConfig>
       <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
         <GlobalStyle />
         <SWRConfig
@@ -102,7 +93,9 @@ export default function App({ Component, pageProps }) {
               fetch(resource, init).then((res) => res.json()),
           }}
         >
-          <Component {...pageProps} handleToggleTheme={handleToggleTheme} />
+          <Layout>
+            <Component {...pageProps} handleToggleTheme={handleToggleTheme} />
+          </Layout>
         </SWRConfig>
       </ThemeProvider>
     </>

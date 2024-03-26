@@ -9,7 +9,8 @@ export default createGlobalStyle`
   }
 
   body {
-    color: ${(props) => props.theme.color}; 
+  
+    color: ${(props) => props.theme.color};
     margin: 0 auto;
     font-family: system-ui;
     background-color: ${(props) => props.theme.backgroundColor}; 

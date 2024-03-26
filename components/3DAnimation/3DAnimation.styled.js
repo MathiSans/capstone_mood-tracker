@@ -4,7 +4,7 @@ import { Canvas } from "@react-three/fiber";
 export const Container = styled.div`
   position: absolute;
   z-index: -1;
-  background: black;
+  background: ${(props) => props.theme.backgroundColor};
   width: 100%;
   height: 100%;
 
@@ -21,5 +21,5 @@ export const Container = styled.div`
 `;
 
 export const CustomCanvas = styled(Canvas)`
-  background-color: black;
+  background-color: ${(props) => props.theme.backgroundColor};
 `;
