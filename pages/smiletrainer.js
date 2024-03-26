@@ -14,9 +14,6 @@ export default function SmileTrainer() {
         <Guide text={"Smile Trainer"} />
         <FaceDetection />
       </Styled.Page>
-      <Styled.Navigation>
-        <NavButton handleClick={() => router.push("/")}>back</NavButton>
-      </Styled.Navigation>
     </Styled.Container>
   );
 }

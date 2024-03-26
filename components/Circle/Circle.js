@@ -5,10 +5,10 @@ export default function Circle({ circleSize, name, color, count }) {
   return (
     <motion.div
       drag
-      initial={{ scale: 0.9 }}
+      initial={{ scale: 0.6, opacity: 0 }}
       dragTransition={{ bounceStiffness: 10, bounceDamping: 40 }}
       whileTap={{ scale: 0.9 }}
-      animate={{ scale: 1 }}
+      animate={{ scale: 1.5, opacity: 1 }}
       transition={{ duration: 5 }}
       whileHover={{ scale: 1.1, opacity: 1 }}
       dragConstraints={{

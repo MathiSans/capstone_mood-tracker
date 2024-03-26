@@ -53,8 +53,7 @@ export const Blob = styled.div`
   height: 100%;
   border-radius: 100%;
   position: absolute;
-  /* mix-blend-mode: multiply; */
   filter: blur(80px);
-  background-color: ${(props) => props.color};
+  background-color: ${(props) => (props.color ? props.color : "white")};
   animation: ${circularAnimation} ${(props) => props.duration} linear infinite;
 `;

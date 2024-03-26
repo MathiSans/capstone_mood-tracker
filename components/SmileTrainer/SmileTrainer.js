@@ -32,9 +32,9 @@ export default function SmileTrainer({ smileThreshold, facesDetected }) {
         transition={{ duration: 10 }}
       >
         <Styled.Circle
-          facesDetected={facesDetected}
-          smileThreshold={smileThreshold}
-          done={done}
+          $facesDetected={facesDetected}
+          $smileThreshold={smileThreshold}
+          $done={done}
         >
           <Styled.conditionalTextContainer>
             {done ? (

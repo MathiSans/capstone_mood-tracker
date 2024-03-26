@@ -16,7 +16,7 @@ export const MenuTriggerButton = styled.button`
   border: none;
   color: black;
   ${(props) =>
-    props.showMenu &&
+    props.$showMenu &&
     css`
       background-color: transparent;
       border: 1px solid white;

@@ -39,15 +39,20 @@ export default function App() {
   }
 
   const result = experienceAnalyser(data);
+  console.log(result);
 
   return (
     <>
       <Container>
-        <motion.div animate={{ opacity: 0 }} transition={{ delay: 5 }}>
-          <DragInfo>click and drag the spheres ...</DragInfo>
+        <motion.div animate={{ opacity: 0 }} transition={{ delay: 8 }}>
+          <DragInfo>
+            {result[1].totalCount} entries in our collection at the moment.
+            <br />
+            click and drag the spheres
+          </DragInfo>
         </motion.div>
         <Grid ref={containerRef}>
-          {result.map((entry, index) => (
+          {result[0].map((entry, index) => (
             <Circle
               key={index}
               count={entry.count}
@@ -75,6 +80,11 @@ const Grid = styled.div`
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  background: radial-gradient(
+    circle,
+    rgba(42, 42, 42, 1) 0%,
+    rgba(13, 13, 13, 1) 100%
+  );
 `;
 
 const DragInfo = styled.div`
@@ -85,5 +95,6 @@ const DragInfo = styled.div`
   right: 0;
   top: 5vh;
   text-align: center;
-  z-index: 21;
+  z-index: 999;
+  filter: drop-shadow(0px 14px 25px #000000);
 `;
