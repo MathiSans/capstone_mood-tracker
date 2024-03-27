@@ -14,8 +14,8 @@ export const Circle = styled.div`
   position: relative;
   height: 300px;
   width: 300px;
-  border-radius: 1000px;
-  box-shadow: inset 0 0 60px #000000;
+  border-radius: 50%;
+  box-shadow: inset 0 0 60px ${(props) => props.theme.colors.dark};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,7 +39,7 @@ export const InnerCircle = styled.div`
   position: absolute;
   height: 90%;
   width: 90%;
-  border-radius: 1000px;
+  border-radius: 50%;
   box-shadow: inset 0 0 60px #000000;
   background-color: ${(props) =>
     props.done || props.smileThreshold > 0.5

@@ -12,20 +12,20 @@ export const TriggerContainer = styled.div`
 `;
 
 export const MenuTriggerButton = styled.button`
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.light};
   border: none;
-  color: black;
+  color: ${(props) => props.theme.colors.dark};
   ${(props) =>
     props.$showMenu &&
     css`
       background-color: transparent;
-      border: 1px solid white;
-      color: white;
+      border: 1px solid ${(props) => props.theme.colors.light};
+      color: ${(props) => props.theme.colors.light};
     `}
 
   border-radius: 20px;
   padding: 12px 24px;
-  font-size: 1rem;
-  filter: drop-shadow(black 0rem 0rem 25px);
+  font-size: ${(props) => props.theme.fontsize.default};
+  filter: drop-shadow(${(props) => props.theme.colors.dark} 0rem 0rem 25px);
   cursor: pointer;
 `;

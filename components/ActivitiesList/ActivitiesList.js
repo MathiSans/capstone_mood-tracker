@@ -59,8 +59,12 @@ export default function ActivitiesList({ handleShowForm }) {
           <Styled.Card
             onClick={handleShowForm}
             style={{ height: "250px", justifyContent: "center" }}
+            // !inline Styles
           >
-            <FiPlus style={{ fontSize: "3rem" }} />
+            <FiPlus
+              style={{ fontSize: "3rem" }}
+              // !inline Styles
+            />
             <Styled.Description>add a new activity</Styled.Description>
           </Styled.Card>
         </motion.div>

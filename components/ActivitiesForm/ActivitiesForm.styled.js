@@ -5,14 +5,14 @@ export const addButton = styled.button`
   width: 36px;
   border: none;
   font-size: 2rem;
-  color: white;
+  color: ${(props) => props.theme.colors.light};
   background-color: transparent;
   margin-left: -11px;
 `;
 
 export const Label = styled.label`
   position: relative;
-  font-size: 0.8rem;
+  font-size: ${(props) => props.theme.fontsize.small};
   color: #989898;
 `;
 
@@ -34,11 +34,7 @@ export const EmojiContainer = styled.div`
 export const Card = styled.div`
   background-color: #141414;
   background: rgb(42, 42, 42);
-  background: radial-gradient(
-    circle,
-    rgba(42, 42, 42, 1) 0%,
-    rgba(13, 13, 13, 1) 100%
-  );
+  background: ${(props) => props.theme.effects.radialGradient};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,7 +64,7 @@ export const DeleteButton = styled.button`
   border: none;
   font-size: 1.6rem;
   background-color: transparent;
-  color: white;
+  color: ${(props) => props.theme.colors.light};
 `;
 
 export const InputField = styled.input`
@@ -104,7 +100,7 @@ export const CheckboxLabel = styled.label`
   width: 110px;
   border-radius: 20px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: ${(props) => props.theme.fontsize.default};
   background-color: ${(props) => (props.$color ? props.$color : "grey")};
 `;
 
@@ -115,7 +111,7 @@ export const CheckboxInput = styled.input`
   height: 40px;
   width: 110px;
   outline: none;
-  font-size: 1rem;
+  font-size: ${(props) => props.theme.fontsize.default};
   border-radius: 20px;
   cursor: pointer;
   top: -32px;
@@ -127,8 +123,8 @@ export const CheckboxInput = styled.input`
     position: absolute;
     height: 40px;
     width: 110px;
-    border: 3.5px solid white;
-    font-size: 1rem;
+    border: 3.5px solid ${(props) => props.theme.colors.light};
+    font-size: ${(props) => props.theme.fontsize.default};
     color: #fff;
     border-radius: 20px;
   }

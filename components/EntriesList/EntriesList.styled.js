@@ -5,7 +5,7 @@ export const DeleteQuestion = styled.p`
 `;
 
 export const DeleteAnswer = styled.p`
-  color: ${(props) => (props.red ? "red" : "")};
+  color: ${(props) => (props.red ? props.theme.colors.danger : "")};
   cursor: pointer;
 `;
 
@@ -14,7 +14,7 @@ export const RoundButton = styled.button`
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: white;
+  color: ${(props) => props.theme.colors.light};
 `;
 
 export const Grid = styled.div`
@@ -28,7 +28,8 @@ export const Grid = styled.div`
 `;
 
 export const ColoredShape = styled.div`
-  background-color: ${(props) => (props.color ? props.color : "white")};
+  background-color: ${(props) =>
+    props.color ? props.color : props.theme.colors.light};
   height: 100%;
   width: 100%;
 `;
@@ -36,11 +37,7 @@ export const ColoredShape = styled.div`
 export const Card = styled.div`
   background-color: #141414;
   background: rgb(42, 42, 42);
-  background: radial-gradient(
-    circle,
-    rgba(42, 42, 42, 1) 0%,
-    rgba(13, 13, 13, 1) 100%
-  );
+  background: ${(props) => props.theme.effects.radialGradient};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,7 +73,7 @@ export const Sentence = styled.p`
 `;
 
 export const StaticText = styled.span`
-  color: grey;
+  color: ${(props) => props.theme.colors.light};
 `;
 
 export const Button = styled.button`

@@ -9,14 +9,14 @@ export default createGlobalStyle`
   }
 
   body {
-    color: white;
+    color: ${(props) => props.theme.colors.light}; 
     margin: 0 auto;
-    font-family: system-ui;
-    background-color: black; 
+    font-family: ${(props) => props.theme.fonts.body};
+    background-color: ${(props) => props.theme.colors.dark}; 
   }
 
   h1 {
-    font-size: 2rem;
+    font-size:${(props) => props.theme.fontsize.large};
     font-weight: 400;
     text-transform: uppercase;
     
@@ -39,7 +39,7 @@ export default createGlobalStyle`
   position: absolute;
   left: 50%;
   top: 50%;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.light}; 
   transition: left 400ms ease-in-out, top 400ms ease-in-out;
 }
 .boxes > .box.dim0 {
@@ -77,14 +77,16 @@ export default createGlobalStyle`
 }
 .controls > .control {
   white-space: pre-wrap;
-  font-family: monospace;
+  font-family: ${(props) => {
+    props.theme.fonts.controls;
+  }};
   font-size: 10px;
   cursor: pointer;
 }
 .controls > .control:hover,
 .controls > .control#activeControl {
   background-color: rgba(0, 0, 0, 0.5);
-  color: #ffffff;
+  color: ${(props) => props.theme.colors.light}; 
 }
 
 `;
