@@ -25,7 +25,7 @@ export const MenuTriggerButton = styled.button`
 
   border-radius: 20px;
   padding: 12px 24px;
-  font-size: 1rem;
+  font-size: ${(props) => props.theme.fontsize.default};
   filter: drop-shadow(black 0rem 0rem 25px);
   cursor: pointer;
 `;

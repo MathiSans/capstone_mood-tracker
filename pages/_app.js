@@ -14,6 +14,12 @@ const theme = {
     body: "system-ui",
     controls: "monospace",
   },
+  fontsize: {
+    default: "1rem",
+    small: "0.8rem",
+    large: "2rem",
+    xl: "3rem",
+  },
   breakpoints: {
     //just examples
     small: "576px",
@@ -28,10 +34,10 @@ const theme = {
     large: "24px",
   },
   effects: {
-    //just examples
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-    linearGradient: "linear-gradient(to right, #ff416c, #ff4b2b)",
-    radialGradient: "radial-gradient(circle, #00ff00, #0000ff)",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", //just example
+    linearGradient: "linear-gradient(to right, #ff416c, #ff4b2b)", //just example
+    radialGradient:
+      "radial-gradient(circle, rgba(42, 42, 42, 1) 0%, rgba(13, 13, 13, 1) 100%)", //in use
   },
   borders: {
     //just examples

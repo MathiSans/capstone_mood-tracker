@@ -18,17 +18,13 @@ export const Grid = styled.div`
 export const Card = styled.div`
   background-color: #141414;
   background: rgb(42, 42, 42);
-  background: radial-gradient(
-    circle,
-    rgba(42, 42, 42, 1) 0%,
-    rgba(13, 13, 13, 1) 100%
-  );
+  background: ${(props) => props.theme.effects.radialGradient};
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   border-radius: 12px;
-  margin: 1rem;
+  margin: ${(props) => props.theme.fontsize.default};
   width: 300px;
   padding: 28px;
   position: relative;
