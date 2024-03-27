@@ -53,7 +53,7 @@ export default function Flow() {
 
   async function handleSave() {
     const reactionsArray = reactions.map((reaction) => reaction.name);
-    const region = await fetchLocation();
+    const location = await fetchLocation();
 
     const response = await fetch("/api/entries", {
       method: "POST",
@@ -63,7 +63,10 @@ export default function Flow() {
       body: JSON.stringify({
         time: new Date().toLocaleString(),
         user: "anonymous",
-        location: region,
+        location: {
+          region: location.region,
+          city: location.city,
+        },
         experience: experience[0].name,
         color: experience[0].color,
         intensity: sliderValue,
