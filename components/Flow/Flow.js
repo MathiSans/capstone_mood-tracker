@@ -4,7 +4,7 @@ import { experiences } from "@/experiences";
 import Animation from "@/components/3DAnimation/3DAnimation";
 import NavButton from "@/components/NavButton/NavButton";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
-import * as Styled from "@/components/Layout/Layout";
+import * as Styled from "@/components/Layout/Layout.styled";
 import { motion } from "framer-motion";
 import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
