@@ -4,13 +4,12 @@ import { experiences } from "@/experiences";
 import Animation from "@/components/3DAnimation/3DAnimation";
 import NavButton from "@/components/NavButton/NavButton";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
-import PlaySound from "@/components/PlaySound/PlaySound";
-import memory from "@/public/sounds/memory.mp3";
-import * as Styled from "@/components/Layout/Layout.styled";
+import * as Styled from "@/components/Layout/Layout";
 import { motion } from "framer-motion";
 import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
 import fetchLocation from "@/utils/locationTracking";
+import LegacyAnimation from "../LegacyAnimation/LegacyAnimation";
 
 export default function Flow() {
   const router = useRouter();
@@ -67,7 +66,7 @@ export default function Flow() {
 
     if (response.ok) {
       mutate();
-      router.push("entries");
+      router.push("moods-map");
     }
   }
 
@@ -83,7 +82,7 @@ export default function Flow() {
 
   return (
     <>
-      {/* <Animation color={color} opacity={sliderValue} /> */}
+      <Animation color={color} opacity={sliderValue} />
       <AudioSettings
         page={page}
         experience={experience}
@@ -105,19 +104,15 @@ export default function Flow() {
           />
         </Styled.Page>
         <Styled.Navigation>
-          {page === 0 && (
+          {page === 0 && <NavButton disabled>login</NavButton>}
+          {page < 1 && (
             <NavButton
               handleClick={() => {
                 setAudioTrigger(true);
                 setPage((currPage) => currPage + 1);
               }}
             >
-              enter a mood
-            </NavButton>
-          )}
-          {page > 0 && page <= 4 && (
-            <NavButton handleClick={() => setPage((currPage) => currPage - 1)}>
-              prev
+              anonymous
             </NavButton>
           )}
           {page === 1 && (
@@ -130,6 +125,11 @@ export default function Flow() {
                 next
               </NavButton>
             </motion.div>
+          )}
+          {page > 2 && page <= 4 && (
+            <NavButton handleClick={() => setPage((currPage) => currPage - 1)}>
+              prev
+            </NavButton>
           )}
           {page >= 2 && page <= 3 && (
             <NavButton
