@@ -6,7 +6,7 @@ export default function MenuTrigger({ handleShowMenu, showMenu }) {
     <Styled.TriggerContainer>
       <motion.div whileHover={{ scale: 1.05 }}>
         <Styled.MenuTriggerButton
-          showMenu={showMenu}
+          $showMenu={showMenu}
           onClick={() => handleShowMenu()}
         >
           {showMenu ? "close" : "menu"}

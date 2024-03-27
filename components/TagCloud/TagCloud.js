@@ -21,15 +21,15 @@ export default function TagCloud({
 
   return (
     <Styled.TagCloud>
-      {tags.map((tag) => (
+      {tags.map((tag, index) => (
         <Styled.Button
-          key={tag.index}
+          key={index}
           onClick={() => toggleTag(tag)}
-          active={
+          $active={
             colorSelected &&
             selectedTags.some((selectedTag) => selectedTag.name === tag.name)
           }
-          color={
+          $color={
             colorSelected &&
             selectedTags.some((selectedTag) => selectedTag.name === tag.name)
               ? tag.color || "rgba(255, 255, 255, 0.2)"

@@ -30,6 +30,12 @@ export default function ActivitiesForm({ handleShowForm }) {
   }
   async function handleSubmit(event) {
     event.preventDefault();
+    const title = event.target.elements.title.value.trim();
+    const description = event.target.elements.description.value.trim();
+    if (!title || !description || inputString.length === 0) {
+      alert("Title, description or emoji cannot be empty or just spaces.");
+      return;
+    }
 
     const response = await fetch("/api/activities", {
       method: "POST",
@@ -68,7 +74,7 @@ export default function ActivitiesForm({ handleShowForm }) {
           <Styled.EmojiContainer>
             {inputString.length !== 0 ? (
               <>
-                <Styled.Emojis inputString={inputString}>
+                <Styled.Emojis $inputString={inputString}>
                   {inputString}
                 </Styled.Emojis>
                 <Styled.DeleteButton
@@ -137,7 +143,7 @@ export default function ActivitiesForm({ handleShowForm }) {
               <Styled.CheckboxLabel
                 key={index}
                 htmlFor={checkbox.text}
-                color={checkbox.color}
+                $color={checkbox.color}
               >
                 {checkbox.text}
                 <Styled.CheckboxInput

@@ -7,9 +7,9 @@ export default function NavButton({
   linkToPage,
 }) {
   return (
-    <Styled.Button onClick={handleClick} disabled={disabled}>
+    <Styled.Button onClick={handleClick} $disabled={disabled}>
       {linkToPage ? (
-        <Styled.ButtonTextLink disabled={disabled} href={linkToPage}>
+        <Styled.ButtonTextLink $disabled={disabled} href={linkToPage}>
           {children}
         </Styled.ButtonTextLink>
       ) : (

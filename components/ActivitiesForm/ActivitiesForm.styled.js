@@ -57,7 +57,7 @@ export const Form = styled.form`
 `;
 
 export const Emojis = styled.div`
-  font-size: ${(props) => (props.inputString.length > 2 ? "2.5rem" : "4rem")};
+  font-size: ${(props) => (props.$inputString.length > 2 ? "2.5rem" : "4rem")};
 `;
 
 export const DeleteButton = styled.button`
@@ -105,7 +105,7 @@ export const CheckboxLabel = styled.label`
   border-radius: 20px;
   cursor: pointer;
   font-size: 1rem;
-  background-color: ${(props) => (props.color ? props.color : "grey")};
+  background-color: ${(props) => (props.$color ? props.$color : "grey")};
 `;
 
 export const CheckboxInput = styled.input`
