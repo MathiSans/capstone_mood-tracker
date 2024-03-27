@@ -56,5 +56,7 @@ export default function PageDisplay({
           />
         </>
       );
+    case 5:
+      return <Guide text={guides[7]} />;
   }
 }

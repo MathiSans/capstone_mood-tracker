@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
 import fetchLocation from "@/utils/locationTracking";
-import LegacyAnimation from "../LegacyAnimation/LegacyAnimation";
+import Entries from "@/pages/entries";
 
 export default function Flow() {
   const router = useRouter();
@@ -29,6 +29,7 @@ export default function Flow() {
     "what do you feel right now?",
     "how intense is this feeling for you?",
     "what's your reaction?",
+    "Thank you for sharing",
   ];
 
   function handleSelectExperience(tags) {
@@ -66,7 +67,7 @@ export default function Flow() {
 
     if (response.ok) {
       mutate();
-      router.push("moods-map");
+      setPage((currPage) => currPage + 1);
     }
   }
 
@@ -146,7 +147,12 @@ export default function Flow() {
               disabled={reactions.length === 0}
               handleClick={handleSave}
             >
-              save
+              next
+            </NavButton>
+          )}
+          {page === 5 && (
+            <NavButton linkToPage={"./entries"}>
+              go to emotion entries
             </NavButton>
           )}
         </Styled.Navigation>
