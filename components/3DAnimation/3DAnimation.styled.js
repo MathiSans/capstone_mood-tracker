@@ -21,5 +21,5 @@ export const Container = styled.div`
 `;
 
 export const CustomCanvas = styled(Canvas)`
-  background-color: black;
+  background-color: ${(props) => props.theme.colors.dark};
 `;

@@ -5,18 +5,15 @@ import { ThemeProvider } from "styled-components";
 
 const theme = {
   colors: {
-    primary: "#1e90ff",
-    secondary: "#ff69b4",
-    background: "#212121",
-    text: "#ffffff",
-    accent: "#ff9800",
-    error: "#ff3d00",
+    dark: "black",
+    light: "white",
+    tertiary: "grey",
+    danger: "red",
     success: "#4caf50",
-    warning: "#ffeb3b",
   },
   fonts: {
-    body: "Roboto, sans-serif",
-    heading: "Montserrat, sans-serif",
+    body: "system-ui",
+    controls: "monospace",
   },
   breakpoints: {
     small: "576px",

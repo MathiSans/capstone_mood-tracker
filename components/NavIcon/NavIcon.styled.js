@@ -6,12 +6,12 @@ export const IconContainer = styled.button`
   border: none;
   font-size: 1.5rem;
   background-color: transparent;
-  color: white;
+  color: ${(props) => props.theme.colors.light};
   cursor: pointer;
   ${(props) =>
     props.disabled &&
     css`
-      color: grey;
+      color: ${(props) => props.theme.colors.tertiary};
       cursor: not-allowed;
     `}
 `;

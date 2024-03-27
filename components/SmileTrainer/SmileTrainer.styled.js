@@ -15,7 +15,7 @@ export const Circle = styled.div`
   height: 300px;
   width: 300px;
   border-radius: 1000px;
-  box-shadow: inset 0 0 60px #000000;
+  box-shadow: inset 0 0 60px ${(props) => props.theme.colors.dark};
   display: flex;
   align-items: center;
   justify-content: center;

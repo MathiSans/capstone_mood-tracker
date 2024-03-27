@@ -5,7 +5,7 @@ export const DeleteQuestion = styled.p`
 `;
 
 export const DeleteAnswer = styled.p`
-  color: ${(props) => (props.red ? "red" : "")};
+  color: ${(props) => (props.red ? props.theme.colors.danger : "")};
   cursor: pointer;
 `;
 
@@ -14,7 +14,7 @@ export const RoundButton = styled.button`
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: white;
+  color: ${(props) => props.theme.colors.light};
 `;
 
 export const Grid = styled.div`
@@ -76,7 +76,7 @@ export const Sentence = styled.p`
 `;
 
 export const StaticText = styled.span`
-  color: grey;
+  color: ${(props) => props.theme.colors.light};
 `;
 
 export const Button = styled.button`

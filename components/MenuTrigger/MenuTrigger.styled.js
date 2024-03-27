@@ -12,15 +12,15 @@ export const TriggerContainer = styled.div`
 `;
 
 export const MenuTriggerButton = styled.button`
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.light};
   border: none;
-  color: black;
+  color: ${(props) => props.theme.colors.dark};
   ${(props) =>
     props.$showMenu &&
     css`
       background-color: transparent;
-      border: 1px solid white;
-      color: white;
+      border: 1px solid ${(props) => props.theme.colors.light};
+      color: ${(props) => props.theme.colors.light};
     `}
 
   border-radius: 20px;

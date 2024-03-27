@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Select = styled.select`
-  color: black;
+  color: ${(props) => props.theme.colors.dark};
   padding: 0.2rem;
 `;
 
@@ -37,7 +37,7 @@ export const Card = styled.div`
 export const Tag = styled.div`
   right: 20px;
   top: 22px;
-  background-color: white;
+  background-color: ${(props) => props.theme.light};
   color: #3a3a3a;
   padding: 5px 12px;
   border-radius: 10px;
@@ -58,7 +58,7 @@ export const Title = styled.p`
 `;
 
 export const Description = styled.p`
-  color: grey;
+  color: ${(props) => props.theme.tertiary};
   text-align: center;
   padding: 0;
   margin: 0;

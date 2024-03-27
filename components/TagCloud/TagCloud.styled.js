@@ -10,7 +10,7 @@ export const TagCloud = styled.div`
 
 export const Button = styled.button`
   padding: 10px 26px;
-  color: white;
+  color: ${(props) => props.themelight};
   border: 1px solid white;
   cursor: pointer;
   text-shadow: black 2px 0 15px;
