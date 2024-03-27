@@ -41,6 +41,7 @@ const theme = {
   },
   borders: {
     //just examples
+    radius: "",
     strength: "2px",
     color: "#333333",
   },

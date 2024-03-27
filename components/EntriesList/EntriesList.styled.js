@@ -28,7 +28,8 @@ export const Grid = styled.div`
 `;
 
 export const ColoredShape = styled.div`
-  background-color: ${(props) => (props.color ? props.color : "white")};
+  background-color: ${(props) =>
+    props.color ? props.color : props.theme.colors.light};
   height: 100%;
   width: 100%;
 `;

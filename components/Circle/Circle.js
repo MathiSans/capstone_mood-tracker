@@ -28,6 +28,7 @@ export default function Circle({ circleSize, name, color, count }) {
         justifyContent: "center",
         alignItems: "center",
         boxShadow: "10px 10px 50px black",
+        //inline Style
       }}
     >
       <motion.div

@@ -5,7 +5,7 @@ export const addButton = styled.button`
   width: 36px;
   border: none;
   font-size: 2rem;
-  color: white;
+  color: ${(props) => props.theme.colors.light};
   background-color: transparent;
   margin-left: -11px;
 `;
@@ -64,7 +64,7 @@ export const DeleteButton = styled.button`
   border: none;
   font-size: 1.6rem;
   background-color: transparent;
-  color: white;
+  color: ${(props) => props.theme.colors.light};
 `;
 
 export const InputField = styled.input`
@@ -123,7 +123,7 @@ export const CheckboxInput = styled.input`
     position: absolute;
     height: 40px;
     width: 110px;
-    border: 3.5px solid white;
+    border: 3.5px solid ${(props) => props.theme.colors.light};
     font-size: ${(props) => props.theme.fontsize.default};
     color: #fff;
     border-radius: 20px;
