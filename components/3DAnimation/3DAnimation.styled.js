@@ -7,7 +7,6 @@ export const Container = styled.div`
   background: black;
   width: 100%;
   height: 100%;
-  filter: blur(2px);
 
   &:after {
     content: "";

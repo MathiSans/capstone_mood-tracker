@@ -1,0 +1,108 @@
+[
+  {
+    "title": "The Smile Trainer",
+    "emoji": "😃",
+    "description": "hold your smile for 10 seconds and uplift your mood",
+    "forEmotion": ["sadness", "anger", "fear"],
+    "tool": true,
+    "link": "/smiletrainer"
+  },
+  {
+    "title": "Inspirational Quotes",
+    "emoji": "🌟📖",
+    "description": "Inspirational quotes can uplift mood and motivation by providing a sense of hope, encouragement, and positivity. They serve as reminders of resilience and inner strength, fostering a mindset conducive to overcoming challenges and promoting overall mental well-being.",
+    "forEmotion": ["sadness", "anger", "fear", "enjoyment"],
+    "tool": true,
+    "link": "https://mood-diary-git-feature-quotes-tool-mathis-santos-projects.vercel.app/tools/quotes"
+  },
+  {
+    "title": "go for a walk",
+    "emoji": "🚶",
+    "description": "a long walk starts with a small step. A walk helps to shift your focus and get new ideas",
+    "forEmotions": ["sadness", "anger"]
+  },
+  {
+    "title": "swimming",
+    "emoji": "🏊‍♂️",
+    "description": "for a lot of people swimming is very relaxing.",
+    "forEmotions": ["sadness", "anger"]
+  },
+  {
+    "title": "call a friend",
+    "emoji": "☎️",
+    "description": "connect ot old are newer friends, sharing is caring",
+    "forEmotion": ["sadness", "anger", "fear"]
+  },
+  {
+    "title": "draw",
+    "emoji": "👩‍🎨",
+    "description": "if words are not your language ro express yourself, drawing a image can shift your focus or just give you joy",
+    "forEmotion": ["sadness", "enjoyment"]
+  },
+  {
+    "title": "drink a glass of water",
+    "emoji": "💧",
+    "description": "in a ful life people might forget to drink water, just a glass of water can enjoy yourself",
+    "forEmotion": ["anger", "sadness", "fear"]
+  },
+  {
+    "title": "look out of the window into the far",
+    "emoji": "🌅",
+    "description": "after a long day on the screen,  just a look out of the window for 5minutes and more relax yourself and help you reconnect to your environment",
+    "forEmotion": ["sadness", "anger", "fear"]
+  },
+  {
+    "title": "write down your thoughts",
+    "emoji": "✍️",
+    "description": "What you express,you can reflect on. Some people feel relive or joy by doing so.",
+    "forEmotion": ["sadness", "anger"]
+  },
+  {
+    "title": "drink a warm yummy tea",
+    "emoji": "🍵",
+    "description": "a cozy moment for yourself",
+    "forEmotion": ["sadness", "anger"]
+  },
+  {
+    "title": "make something you haven't done yet",
+    "emoji": "🦸‍♂️🦸‍♀️",
+    "description": "if you stay always in your comfort zone you won't progress.",
+    "forEmotion": ["enjoyment"]
+  },
+  {
+    "title": "engage in your community",
+    "emoji": "🏡🌳👩‍🌾👨‍👩‍👧",
+    "description": "sharing is caring. Building a strong community around us helps all of us",
+    "forEmotion": ["enjoyment"]
+  },
+  {
+    "title": "help in an animal shelter",
+    "emoji": "🐶🐈‍⬛🐷",
+    "description": "if you have a lot to give, why not share it. if you love animals, this title might be for you",
+    "forEmotion": ["enjoyment"]
+  },
+  {
+    "title": "help in an homeless shelter",
+    "emoji": "⛺️",
+    "description": "if you have a lot to give, why not share it. If you wanna people in need this might be fitting for you",
+    "forEmotion": ["enjoyment"]
+  },
+  {
+    "title": "drink ginger tea",
+    "emoji": "🫚🫖",
+    "description": "if you stomache trouble ease it with some ginger tea",
+    "forEmotion": ["disgust"]
+  },
+  {
+    "title": "smell roses",
+    "emoji": "🌹",
+    "description": "calm and gentle scent",
+    "forEmotion": ["disgust"]
+  },
+  {
+    "title": "Dancing",
+    "emoji": "🕺🏻💃",
+    "description": "express yourself",
+    "forEmotion": ["disgust", "anger", "enjoyment", "fear", "sadness"]
+  }
+]

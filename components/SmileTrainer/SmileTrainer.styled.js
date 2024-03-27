@@ -19,14 +19,20 @@ export const Circle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${({ facesDetected, smileThreshold, done }) =>
+  background-color: ${(props) =>
+    props.done || props.smileThreshold > 0.5
+      ? "#00FF00"
+      : props.facesDetected
+      ? "#6C6C6C"
+      : "#262626"};
+  /* background-color: ${({ facesDetected, smileThreshold, done }) =>
     done
       ? "#00FF00"
       : smileThreshold > 0.5
       ? "#00FF00"
       : facesDetected
       ? "#6C6C6C"
-      : "#262626"};
+      : "#262626"}; */
 `;
 
 export const InnerCircle = styled.div`
@@ -35,12 +41,18 @@ export const InnerCircle = styled.div`
   width: 90%;
   border-radius: 1000px;
   box-shadow: inset 0 0 60px #000000;
-  background-color: ${({ facesDetected, smileThreshold, done }) =>
+  background-color: ${(props) =>
+    props.done || props.smileThreshold > 0.5
+      ? "#00FF00"
+      : props.facesDetected
+      ? "#6C6C6C"
+      : "#262626"};
+  /* background-color: ${({ facesDetected, smileThreshold, done }) =>
     done
       ? "#00FF00"
       : smileThreshold > 0.5
       ? "#00FF00"
       : facesDetected
       ? "#6C6C6C"
-      : "#262626"};
+      : "#262626"}; */
 `;

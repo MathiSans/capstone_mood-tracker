@@ -1,26 +1,23 @@
-import styled from "styled-components";
+import Menu from "../Menu/Menu";
+import MenuTrigger from "../MenuTrigger/MenuTrigger";
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { MenuContainer } from "./Layout.styled";
 
-export const Container = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  width: 100vw;
-`;
-
-export const Page = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  margin-bottom: 10vh;
-`;
-
-export const Navigation = styled.div`
-  position: fixed;
-  bottom: 0;
-  display: flex;
-  gap: 20px;
-  margin-bottom: 60px;
-`;
+export default function Layout({ children }) {
+  const [showMenu, setShowMenu] = useState(false);
+  function handleShowMenu() {
+    setShowMenu(!showMenu);
+  }
+  return (
+    <>
+      <MenuContainer>
+        <AnimatePresence>
+          {showMenu && <Menu handleShowMenu={handleShowMenu} />}
+        </AnimatePresence>
+        <MenuTrigger showMenu={showMenu} handleShowMenu={handleShowMenu} />
+      </MenuContainer>
+      {children}
+    </>
+  );
+}
