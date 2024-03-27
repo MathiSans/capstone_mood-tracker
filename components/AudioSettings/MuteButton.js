@@ -1,36 +1,48 @@
 import styled from "styled-components";
 
-export default function MuteButton({
-  isMuted,
-  setIsMuted,
-  setCurrentVolume,
-  audioReference,
-}) {
+export default function MuteButton({ isMuted, setIsMuted, audioReference }) {
   function toggleMute() {
     setIsMuted(!isMuted);
     const audio = audioReference.current;
-    if (audio) {
-      if (isMuted) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
+
+    if (!isMuted) {
+      audio.volume = 0;
+      audio.pause();
+    } else {
+      audio.volume = 0.3;
     }
   }
+
   return (
-    <StyledMuteButton type="button" onClick={toggleMute}>
-      <StyledText>{isMuted ? "🔈" : "🔊"}</StyledText>
-    </StyledMuteButton>
+    <StyledContainer>
+      <StyledMuteButton type="button" onClick={toggleMute} $isMuted={isMuted}>
+        <StyledText>{!isMuted ? "🔊" : "🔈"}</StyledText>
+      </StyledMuteButton>
+    </StyledContainer>
   );
 }
 
+const StyledContainer = styled.div`
+  position: fixed;
+  justify-content: end;
+  align-items: end;
+  padding-bottom: 28px;
+  bottom: 0;
+  display: flex;
+  width: 100vw;
+  height: 60px;
+`;
+
 const StyledMuteButton = styled.button`
-  padding: 0.5rem 0.7rem;
-  margin: 1rem;
-  border-radius: 0.5rem;
-  background-color: transparent;
-  color: white;
-  border: 1px solid white;
+  background-color: white;
+  border: transparent;
+  box-shadow: ${(props) =>
+    props.$isMuted ? "inset 0px 0px 0px 2px red" : "none"};
+  border-radius: 50%;
+  padding: 0.85rem 1rem;
+  margin-inline-end: 1.5rem;
+  font-size: 1rem;
+  filter: drop-shadow(black 0rem 0rem 25px);
   cursor: pointer;
 `;
 
@@ -39,3 +51,5 @@ const StyledText = styled.p`
   font-size: 0.5;
   margin: 0;
 `;
+
+// background-color: ${(props) => (props.color ? props.color : "grey")};

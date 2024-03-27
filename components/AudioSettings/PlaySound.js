@@ -7,6 +7,7 @@ import disgust from "@/public/sounds/disgust.mp3";
 import sadness from "@/public/sounds/sadness.mp3";
 
 export default function PlaySound({
+  isMuted,
   experience,
   audioTrigger,
   currentVolume,
@@ -15,40 +16,65 @@ export default function PlaySound({
   const audio = audioReference.current;
 
   useEffect(() => {
-    if (audioTrigger && experience.length === 0) {
+    if (audioTrigger && isMuted === false && experience.length === 0) {
       audio.volume = currentVolume;
       audio.loop = true;
       audio.src = neutral;
       audio.play();
     }
-    if (audio && experience.some((exp) => exp.name === "anger")) {
+    if (
+      audio &&
+      isMuted === false &&
+      experience.some((exp) => exp.name === "anger")
+    ) {
       audio.volume = currentVolume;
+      audio.loop = true;
       audio.src = anger;
       audio.play();
     }
-    if (audio && experience.some((exp) => exp.name === "fear")) {
+    if (
+      audio &&
+      isMuted === false &&
+      experience.some((exp) => exp.name === "fear")
+    ) {
       audio.volume = currentVolume;
+      audio.loop = true;
       audio.src = fear;
       audio.play();
     }
-    if (audio && experience.some((exp) => exp.name === "enjoyment")) {
+    if (
+      audio &&
+      isMuted === false &&
+      experience.some((exp) => exp.name === "enjoyment")
+    ) {
       audio.volume = currentVolume;
+      audio.loop = true;
       audio.src = enjoyment;
       audio.play();
     }
-    if (audio && experience.some((exp) => exp.name === "disgust")) {
+    if (
+      audio &&
+      isMuted === false &&
+      experience.some((exp) => exp.name === "disgust")
+    ) {
       audio.volume = currentVolume;
+      audio.loop = true;
       audio.src = disgust;
       audio.play();
     }
-    if (audio && experience.some((exp) => exp.name === "sadness")) {
+    if (
+      audio &&
+      isMuted === false &&
+      experience.some((exp) => exp.name === "sadness")
+    ) {
       audio.volume = currentVolume;
+      audio.loop = true;
       audio.src = sadness;
       audio.play();
-    } else if (experience.some((exp) => exp.name === "")) {
+    } else if (audio === undefined) {
       audio.pause();
     }
-  }, [audio, experience, audioTrigger, currentVolume]);
+  }, [audio, isMuted, experience, audioTrigger, currentVolume]);
 
   return null;
 }
