@@ -1,24 +1,15 @@
 import Intensity from "@/utils/intensity";
 import * as Styled from "./EntriesList.styled";
-import useSWR, { useSWRConfig } from "swr";
+import { useSWRConfig } from "swr";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiTrash2 } from "react-icons/fi";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-export default function EntriesList() {
+export default function EntriesList({ data }) {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState(null);
-  const { data, isLoading } = useSWR("/api/entries");
   const { mutate } = useSWRConfig();
-
-  if (isLoading) {
-    return <p>loading...</p>;
-  }
-
-  if (!data) {
-    return;
-  }
 
   function handleDeleteDialog(event, id) {
     event.stopPropagation();
