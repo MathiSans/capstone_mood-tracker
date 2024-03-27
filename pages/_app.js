@@ -36,7 +36,7 @@ const darkTheme = {
   },
 };
 const lightTheme = {
-  color: "black",
+  color: darkTheme.backgroundColor,
   backgroundColor: "white",
   bgColor2: "lightblue",
   borderColor: "pink",
@@ -83,17 +83,6 @@ export default function App({ Component, pageProps }) {
   };
   return (
     <>
-      <GlobalStyle />
-      <SWRConfig
-        value={{
-          fetcher: (resource, init) =>
-            fetch(resource, init).then((res) => res.json()),
-        }}
-      >
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </SWRConfig>
       <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
         <GlobalStyle />
         <SWRConfig
@@ -102,7 +91,9 @@ export default function App({ Component, pageProps }) {
               fetch(resource, init).then((res) => res.json()),
           }}
         >
-          <Component {...pageProps} handleToggleTheme={handleToggleTheme} />
+          <Layout>
+            <Component {...pageProps} handleToggleTheme={handleToggleTheme} />
+          </Layout>
         </SWRConfig>
       </ThemeProvider>
     </>

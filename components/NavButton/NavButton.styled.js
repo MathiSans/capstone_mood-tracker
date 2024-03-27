@@ -4,8 +4,7 @@ import Link from "next/link";
 export const Button = styled.button`
   padding: 10px 26px;
   background-color: transparent;
-  color: ${({ disabled }) =>
-    disabled ? "grey" : `${(prop) => prop.theme.color}`};
+  color: ${({ disabled }) => (disabled ? "grey" : `white`)};
   border: ${({ disabled }) =>
     disabled
       ? "1px solid grey"
@@ -14,7 +13,6 @@ export const Button = styled.button`
 `;
 
 export const ButtonTextLink = styled(Link)`
-  color: ${({ disabled }) =>
-    disabled ? "grey" : ` ${(prop) => prop.theme.Navigation.buttonTextLink}`};
+  color: ${({ disabled }) => (disabled ? "grey" : ` white`)};
   text-decoration: none;
 `;
