@@ -51,7 +51,9 @@ export default function EntriesList() {
                 </Styled.AnimationContainer>
                 <Styled.Sentence>
                   <Styled.StaticText>Somebody </Styled.StaticText>
-                  {entry.location === "unknown" ? "" : `in ${entry.location}`}
+                  {entry.location === "unknown"
+                    ? ""
+                    : `in ${entry.location.region}`}
                   <Styled.StaticText> felt</Styled.StaticText>{" "}
                   {entry.experience}.{" "}
                   <Styled.StaticText>More specifically</Styled.StaticText>{" "}
