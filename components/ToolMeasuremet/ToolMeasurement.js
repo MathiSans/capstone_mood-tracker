@@ -1,95 +1,47 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
+import QuotesPage from "@/pages/tools/quotes";
 
 const ToolMeasurement = () => {
-  const [meterValue, setMeterValue] = useState({});
-  const [meter, setMeter] = useState([]);
-  const [isBeforeTrue, setIsBeforeTrue] = useState(true);
-  const [message, setMessage] = useState("");
+  const [before, setBefore] = useState(0);
+  const [after, setAfter] = useState(0);
+  const [page, setPage] = useState(0);
 
   function handleOnChange(event) {
-    setMeterValue(event.target.value);
-    console.log("meterValue", meterValue);
-  }
-  function handleOnSubmit(event) {
-    event.preventDefault();
-    setMeter([
-      ...meter,
-      {
-        value: meterValue,
-        isBeforeTrue: isBeforeTrue,
-      },
-    ]);
-  }
-
-  function handleBetterOrWorse() {
-    const filteredArray = meter.filter((obj, index, arr) => {
-      if (index >= arr.length - 2) {
-        // Check if it's one of the last two objects
-        return (
-          (obj.flag === true && arr[arr.length - 2].flag === false) || // Check for true/false combination
-          (obj.flag === false && arr[arr.length - 2].flag === true)
-        );
-      }
-      return false;
-    });
-    // Check if filteredArray has at least two elements
-    if (filteredArray.length >= 2) {
-      const betterOrWorse = filteredArray[0].value < filteredArray[1].value;
-      console.log("betterOrWorse", betterOrWorse);
-
-      if (filteredArray[0] !== filteredArray[1] && betterOrWorse) {
-        setMessage("You Improved your Mood");
-      } else {
-        setMessage("I wish you all the best");
-      }
+    if (page === 0) {
+      setBefore(event.target.value);
     } else {
-      // Handle case when filteredArray doesn't have enough elements
-      setMessage("Not enough data to compare");
+      setAfter(event.target.value);
     }
   }
-  //   function handleBetterOrWorse() {
-  //     // Filter the array for the last two objects with one true and one false flag
-  //     const filteredArray = meter.filter((obj, index, arr) => {
-  //       if (index >= arr.length - 2) {
-  //         // Check if it's one of the last two objects
-  //         return (
-  //           (obj.flag === true && arr[arr.length - 2].flag === false) || // Check for true/false combination
-  //           (obj.flag === false && arr[arr.length - 2].flag === true)
-  //         );
-  //       }
-  //       return false;
-  //     });
-  //     console.log("filteredArray", filteredArray);
-
-  //     const betterOrWorse = filteredArray[0].value < filteredArray[1].value;
-  //     console.log("betterOrWorse", betterOrWorse);
-  //     if ((filteredArray[0] !== filteredArray[1]) & betterOrWorse) {
-  //       setMessage("You Improved your Mood");
-  //     } else {
-  //       setMessage("I wish you all the best");
-  //     }
-  //   }
-
-  useEffect(() => {
-    handleBetterOrWorse(); // Call handleBetterOrWorse when the component renders
-  }, [meter]); // Add meter as a dependency so that handleBetterOrWorse is called when meter changes
-
-  console.log("meter", meter);
 
   return (
     <div>
-      <form onSubmit={handleOnSubmit}>
-        <label htmlFor="measure"></label>
-        <Meter id="measure" type="range" onChange={handleOnChange}></Meter>
-        <BigButton type="submit">subb it</BigButton>
-        <button onClick={() => setIsBeforeTrue(!isBeforeTrue)}>change</button>
-      </form>
-      <P>you {message}</P>
+      <BigButton
+        onClick={() => {
+          setPage((currPage) => currPage + 1);
+        }}
+      >
+        Next
+      </BigButton>
+      {(page === 0 || page === 2) && (
+        <Meter
+          id="measure"
+          type="range"
+          onChange={(event) => handleOnChange(event)}
+        ></Meter>
+      )}
+      {page == 1 && <QuotesPage />}
+
+      {page === 3 && (
+        <P>
+          {before - after < 0 ? "Your mood increased" : "Your mood decreased"}
+        </P>
+      )}
     </div>
   );
 };
-
+// before: 40 after: 60 = 40-60=-20
 const P = styled.p`
   position: absolute;
   top: 30rem;
