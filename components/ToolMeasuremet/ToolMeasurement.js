@@ -1,11 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
-import QuotesPage from "@/pages/tools/quotes";
+// import QuotesPage from "@/pages/tools/quotes";
 
-const ToolMeasurement = () => {
+const ToolMeasurement = ({ page, setPage }) => {
   const [before, setBefore] = useState(0);
   const [after, setAfter] = useState(0);
-  const [page, setPage] = useState(0);
 
   function handleOnChange(event) {
     if (page === 0) {
@@ -31,7 +30,6 @@ const ToolMeasurement = () => {
           onChange={(event) => handleOnChange(event)}
         ></Meter>
       )}
-      {page == 1 && <QuotesPage />}
 
       {page === 3 && (
         <P>

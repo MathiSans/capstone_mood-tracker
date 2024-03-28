@@ -20,19 +20,19 @@ export const Circle = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${(props) =>
-    props.done || props.smileThreshold > 0.5
-      ? "#00FF00"
-      : props.facesDetected
+    props.done || props.$smileThreshold > 0.5
+      ? "#18a924"
+      : props.$facesDetected
       ? "#6C6C6C"
       : "#262626"};
-  /* background-color: ${({ facesDetected, smileThreshold, done }) =>
-    done
-      ? "#00FF00"
-      : smileThreshold > 0.5
-      ? "#00FF00"
-      : facesDetected
-      ? "#6C6C6C"
-      : "#262626"}; */
+  background-color: ${({ $facesDetected, $smileThreshold, $done }) =>
+    $done
+      ? "#18a924"
+      : $smileThreshold > 0.5
+      ? "#18a924"
+      : $facesDetected
+      ? "#330aea"
+      : "#262626"};
 `;
 
 export const InnerCircle = styled.div`
