@@ -1,9 +1,8 @@
 import { useState, useRef } from "react";
 import MuteButton from "./MuteButton";
 import PlaySound from "./PlaySound";
-import DecreaseVolume from "./DecreaseVolume";
 
-export default function AudioSettings({ page, experience, audioTrigger }) {
+export default function AudioSettings({ experience, audioTrigger }) {
   const [currentVolume, setCurrentVolume] = useState(0.3);
   const [isMuted, setIsMuted] = useState(false);
   const audioReference = useRef(null);
@@ -12,8 +11,8 @@ export default function AudioSettings({ page, experience, audioTrigger }) {
     <>
       <MuteButton
         isMuted={isMuted}
+        currentVolume={currentVolume}
         setIsMuted={setIsMuted}
-        setCurrentVolume={setCurrentVolume}
         audioReference={audioReference}
       />
       <PlaySound
@@ -21,7 +20,6 @@ export default function AudioSettings({ page, experience, audioTrigger }) {
         experience={experience}
         audioTrigger={audioTrigger}
         currentVolume={currentVolume}
-        setCurrentVolume={setCurrentVolume}
         audioReference={audioReference}
       />
       <audio ref={audioReference} />

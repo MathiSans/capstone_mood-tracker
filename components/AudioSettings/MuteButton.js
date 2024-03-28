@@ -1,15 +1,20 @@
 import styled from "styled-components";
 
-export default function MuteButton({ isMuted, setIsMuted, audioReference }) {
+export default function MuteButton({
+  isMuted,
+  setIsMuted,
+  currentVolume,
+  audioReference,
+}) {
   function toggleMute() {
     setIsMuted(!isMuted);
     const audio = audioReference.current;
+    const volume = currentVolume;
 
     if (!isMuted) {
-      audio.volume = 0;
       audio.pause();
     } else {
-      audio.volume = 0.3;
+      volume;
     }
   }
 
@@ -30,7 +35,6 @@ const StyledContainer = styled.div`
   bottom: 0;
   display: flex;
   width: 100vw;
-  height: 60px;
 `;
 
 const StyledMuteButton = styled.button`

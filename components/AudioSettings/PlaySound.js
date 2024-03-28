@@ -16,63 +16,34 @@ export default function PlaySound({
   const audio = audioReference.current;
 
   useEffect(() => {
-    if (audioTrigger && isMuted === false && experience.length === 0) {
-      audio.volume = currentVolume;
-      audio.loop = true;
-      audio.src = neutral;
-      audio.play();
+    const playAudio = (src) => {
+      if (!isMuted) {
+        audio.volume = currentVolume;
+        audio.loop = true;
+        audio.src = src;
+        audio.play();
+      }
+    };
+
+    if (audioTrigger && !isMuted && experience.length === 0) {
+      playAudio(neutral);
     }
-    if (
-      audio &&
-      isMuted === false &&
-      experience.some((exp) => exp.name === "anger")
-    ) {
-      audio.volume = currentVolume;
-      audio.loop = true;
-      audio.src = anger;
-      audio.play();
-    }
-    if (
-      audio &&
-      isMuted === false &&
-      experience.some((exp) => exp.name === "fear")
-    ) {
-      audio.volume = currentVolume;
-      audio.loop = true;
-      audio.src = fear;
-      audio.play();
-    }
-    if (
-      audio &&
-      isMuted === false &&
-      experience.some((exp) => exp.name === "enjoyment")
-    ) {
-      audio.volume = currentVolume;
-      audio.loop = true;
-      audio.src = enjoyment;
-      audio.play();
-    }
-    if (
-      audio &&
-      isMuted === false &&
-      experience.some((exp) => exp.name === "disgust")
-    ) {
-      audio.volume = currentVolume;
-      audio.loop = true;
-      audio.src = disgust;
-      audio.play();
-    }
-    if (
-      audio &&
-      isMuted === false &&
-      experience.some((exp) => exp.name === "sadness")
-    ) {
-      audio.volume = currentVolume;
-      audio.loop = true;
-      audio.src = sadness;
-      audio.play();
-    } else if (audio === undefined) {
-      audio.pause();
+
+    const experienceMap = {
+      anger: anger,
+      fear: fear,
+      enjoyment: enjoyment,
+      disgust: disgust,
+      sadness: sadness,
+    };
+
+    experience.forEach((exp) => {
+      if (experienceMap[exp.name]) {
+        playAudio(experienceMap[exp.name]);
+      }
+    });
+
+    if (audio === undefined) {
     }
   }, [audio, isMuted, experience, audioTrigger, currentVolume]);
 
