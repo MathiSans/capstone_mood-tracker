@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import useSWR from "swr";
-import experienceAnalyser from "@/utils/ExperienceAnalyser";
+import experienceAnalyser from "@/utils/experienceAnalyser";
 import NavButton from "@/components/NavButton/NavButton";
 import { Navigation, Container } from "@/components/Layout/Layout.styled";
 import styled from "styled-components";

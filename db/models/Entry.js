@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const entrySchema = new Schema({
   time: String,
   user: String,
-  location: String,
+  location: { region: String, city: String },
   experience: String,
   color: String,
   intensity: Number,
