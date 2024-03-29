@@ -1,4 +1,4 @@
-export default function experienceAnalyser(data) {
+export default function experienceAnalyser({ data }) {
   const experienceMap = {};
   let totalCount = 0;
   data.forEach((entry) => {
