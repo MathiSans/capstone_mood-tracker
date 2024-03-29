@@ -20,108 +20,77 @@ export default function Maps({}) {
   const locations = locationAnalyser(data);
   const experiences = experienceAnalyser(data);
 
-  console.log(experiences);
-
   function handleMapsToggle() {
     setMapsToggle(!mapsToggle);
   }
 
+  const spring = {
+    type: "spring",
+    stiffness: 300,
+    damping: 20,
+  };
+
   return (
     <>
       <Container>
-        <Toggle mapsToggle={mapsToggle} handleMapsToggle={handleMapsToggle} />
-
-        <DragInfo>
-          {locations[1].totalCount} entries in our collection at the moment.
-          <br />
-          click and drag the spheres
-        </DragInfo>
+        <Header>
+          <DragInfo>
+            {locations[1].totalCount} entries in our collection at the moment.
+            <br />
+            click and drag the spheres 👾
+          </DragInfo>
+          <Switch $right={mapsToggle} onClick={() => handleMapsToggle()}>
+            <motion.div // styled-components police, be aware: motion.divs are kind of incompatible with styled-components and must be styled like this 🤓
+              style={{
+                width: "80px",
+                height: "32px",
+                backgroundColor: "white",
+                borderRadius: "40px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "black",
+              }}
+              layout
+              transition={spring}
+            >
+              <SwitchText>{mapsToggle ? "emotions" : "locations"}</SwitchText>
+            </motion.div>
+          </Switch>
+        </Header>
       </Container>
       <MapOfCircles data={mapsToggle ? experiences : locations} />
     </>
   );
 }
 
-function Toggle({ mapsToggle, handleMapsToggle }) {
-  const variants = {
-    open: { scale: 1 },
-    closed: { scale: 1 },
-  };
-
-  return (
-    <SwitcherContainer>
-      <ToggleContainer>
-        <Option
-          onClick={() => handleMapsToggle()}
-          $mapsToggle={!mapsToggle}
-          animate={!mapsToggle ? "open" : "closed"}
-          variants={variants}
-        >
-          location
-        </Option>
-
-        <Option
-          onClick={() => handleMapsToggle()}
-          $right
-          $mapsToggle={mapsToggle}
-          animate={mapsToggle ? "open" : "closed"}
-          variants={variants}
-        >
-          experience
-        </Option>
-      </ToggleContainer>
-    </SwitcherContainer>
-  );
-}
-
-const Option = styled(motion.div)`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: grey;
-  border-radius: ${(props) =>
-    props.$right ? "0px 14px 14px 0px" : "14px 0px 0px 14px"};
-  z-index: 999;
-
-  &::after {
-    position: absolute;
-    content: "";
-    width: 116px;
-    height: 40px;
-    border: ${(props) => (props.$mapsToggle ? "3px solid white" : "none")};
-    border-radius: 14px;
-  }
+const SwitchText = styled.p`
+  font-size: 0.8rem;
 `;
 
-const ToggleContainer = styled.div`
-  padding: 4px;
-  width: 240px;
-  height: 49px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-`;
-
-const SwitcherContainer = styled.div`
+const Header = styled.div`
   position: absolute;
-  top: 100px;
-  width: 100%;
-  height: 50px;
+  top: 5vh;
+  gap: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 900;
+`;
+
+const Switch = styled.div`
+  width: 160px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: ${(props) => (props.$right ? "flex-end" : "flex-start")};
+  border-radius: 50px;
+  padding: 8px;
+  cursor: pointer;
+  z-index: 999;
 `;
 
 const DragInfo = styled.div`
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  top: 5vh;
   text-align: center;
   z-index: 999;
   filter: drop-shadow(0px 14px 25px #000000);
