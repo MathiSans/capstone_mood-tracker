@@ -2,8 +2,8 @@ import { Container } from "@/components/Layout/Layout.styled";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import useSWR from "swr";
-import locationAnalyser from "@/utils/IUHUHIUlocationAnalyser.js";
-import experienceAnalyser from "@/utils/HIHIHexperienceAnalyser.js";
+import locationAnalyser from "@/utils/locationAnalyser.js";
+import experienceAnalyser from "@/utils/experienceAnalyser.js";
 import { useState } from "react";
 import MapOfCircles from "@/components/MapOfCircles/MapOfCircles";
 
