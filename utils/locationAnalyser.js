@@ -1,4 +1,4 @@
-export default function locationAnalyser({ data }) {
+export default function locationAnalyser(data) {
   let locationMap = {};
   let totalCount = 0;
 
