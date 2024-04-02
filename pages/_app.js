@@ -30,7 +30,8 @@ const theme = {
     xxxl: "44px",
   },
   effects: {
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", //just example
+    boxShadow: "",
+    dropShadow: "",
     linearGradient: "-webkit-linear-gradient(#e3f710, #ff0000)",
     radialGradient:
       "radial-gradient(circle, rgba(42, 42, 42, 1) 0%, rgba(13, 13, 13, 1) 100%)",

@@ -96,5 +96,5 @@ const Switch = styled.div`
 const DragInfo = styled.div`
   text-align: center;
   z-index: 999;
-  filter: drop-shadow(0px 14px 25px #000000);
+  filter: drop-shadow(0px 14px 25px ${(props) => props.theme.colors.dark});
 `;
