@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { IoVolumeHighSharp } from "react-icons/io5";
+import { IoVolumeMute } from "react-icons/io5";
 
 export default function MuteButton({
   isMuted,
@@ -21,7 +23,8 @@ export default function MuteButton({
   return (
     <StyledContainer>
       <StyledMuteButton type="button" onClick={toggleMute} $isMuted={isMuted}>
-        <StyledText>{!isMuted ? "🔊" : "🔈"}</StyledText>
+        {isMuted ? <IoVolumeMute /> : <IoVolumeHighSharp />}
+        {/* <StyledText>{!isMuted ? "🔊" : "🔈"}</StyledText> */}
       </StyledMuteButton>
     </StyledContainer>
   );
@@ -34,20 +37,27 @@ const StyledContainer = styled.div`
   padding-bottom: 28px;
   bottom: 0;
   display: flex;
-  width: 100vw;
+  right: 0;
 `;
 
 const StyledMuteButton = styled.button`
-  background-color: white;
-  border: transparent;
-  box-shadow: ${(props) =>
-    props.$isMuted ? "inset 0px 0px 0px 2px red" : "none"};
+  /* background-color: ${(props) => (props.$isMuted ? "grey" : "white")}; */
+  background-color: transparent;
+  color: ${(props) => (props.$isMuted ? "grey" : "white")};
+  border: 1px solid ${(props) => (props.$isMuted ? "grey" : "white")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
-  padding: 0.85rem 1rem;
   margin-inline-end: 1.5rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  height: 42px;
+  width: 42px;
   filter: drop-shadow(black 0rem 0rem 25px);
   cursor: pointer;
+  /* box-shadow: ${(props) =>
+    props.$isMuted ? "inset 0px 0px 0px 2px red" : "none"}; */
+  /* padding: 0.85rem 1rem; */
 `;
 
 const StyledText = styled.p`
@@ -55,5 +65,3 @@ const StyledText = styled.p`
   font-size: 0.5;
   margin: 0;
 `;
-
-// background-color: ${(props) => (props.color ? props.color : "grey")};
