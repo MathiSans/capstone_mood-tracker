@@ -12,4 +12,5 @@ export const MenuContainer = styled.div`
   flex-direction: column;
   gap: 18px;
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 `;
