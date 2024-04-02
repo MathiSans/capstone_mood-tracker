@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const IconContainer = styled.button`
-  padding: 4px;
+  padding: ${(props) => props.theme.spacing.xs};
   border-radius: ${(props) => props.theme.borders.radiusLarge};
   border: none;
   font-size: 1.5rem;

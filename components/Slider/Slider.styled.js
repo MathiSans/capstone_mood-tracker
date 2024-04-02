@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const IntensityContainer = styled.div`
   display: flex;
-  gap: 10px;
+  gap: ${(props) => props.theme.spacing.m};
 `;
 
 export const Intensity = styled.p`
@@ -19,7 +19,7 @@ export const RangeInput = styled.input`
   height: 56px;
   background-color: transparent;
   -webkit-appearance: none;
-  margin: 10 0;
+  margin: ${(props) => props.theme.spacing.m} 0;
   width: 300px;
 
   &:focus {

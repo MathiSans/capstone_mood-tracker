@@ -4,7 +4,7 @@ export const TriggerContainer = styled.div`
   position: fixed;
   justify-content: center;
   align-items: end;
-  padding-bottom: 28px;
+  padding-bottom: ${(props) => props.theme.spacing.xl};
   bottom: 0;
   display: flex;
   left: 50%;
@@ -24,7 +24,7 @@ export const MenuTriggerButton = styled.button`
     `}
 
   border-radius: ${(props) => props.theme.borders.radiusMedium};
-  padding: 12px 24px;
+  padding: ${(props) => props.theme.spacing.m} 24px;
   font-size: ${(props) => props.theme.fontsize.default};
   filter: drop-shadow(${(props) => props.theme.colors.dark} 0rem 0rem 25px);
   cursor: pointer;

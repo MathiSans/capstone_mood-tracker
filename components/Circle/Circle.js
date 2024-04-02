@@ -23,12 +23,11 @@ export default function Circle({ circleSize, name, color, count }) {
         overflow: "hidden",
         height: circleSize,
         borderRadius: "50%",
-        margin: "5px",
+        margin: "4px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         boxShadow: "10px 10px 50px black",
-        //inline Style
       }}
     >
       <motion.div

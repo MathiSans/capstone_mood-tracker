@@ -3,13 +3,13 @@ import styled from "styled-components";
 export const TagCloud = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: ${(props) => props.theme.spacing.m};
   max-width: 400px;
   justify-content: center;
 `;
 
 export const Button = styled.button`
-  padding: 10px 26px;
+  padding: ${(props) => props.theme.spacing.m} 26px;
   color: ${(props) => props.theme.colors.light};
   border: 1px solid ${(props) => props.theme.colors.light};
   cursor: pointer;

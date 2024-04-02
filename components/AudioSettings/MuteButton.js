@@ -34,7 +34,7 @@ const StyledContainer = styled.div`
   position: fixed;
   justify-content: end;
   align-items: end;
-  padding-bottom: 28px;
+  padding-bottom: ${(props) => props.theme.spacing.xl};
   bottom: 0;
   display: flex;
   right: 0;
@@ -55,9 +55,6 @@ const StyledMuteButton = styled.button`
   width: 42px;
   filter: drop-shadow(black 0rem 0rem 25px);
   cursor: pointer;
-  /* box-shadow: ${(props) =>
-    props.$isMuted ? "inset 0px 0px 0px 2px red" : "none"}; */
-  /* padding: 0.85rem 1rem; */
 `;
 
 const StyledText = styled.p`

@@ -10,7 +10,7 @@ export const MenuContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 18px;
+  gap: ${(props) => props.theme.spacing.l};
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 `;

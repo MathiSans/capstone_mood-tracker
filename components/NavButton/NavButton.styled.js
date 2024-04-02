@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Link from "next/link";
 
 export const Button = styled.button`
-  padding: 10px 26px;
+  padding: ${(props) => props.theme.spacing.m} 26px;
   background-color: transparent;
   color: ${(props) =>
     props.$disabled ? props.theme.colors.neutral : props.theme.colors.light};

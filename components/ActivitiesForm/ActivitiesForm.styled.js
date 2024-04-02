@@ -7,7 +7,7 @@ export const addButton = styled.button`
   font-size: 2rem;
   color: ${(props) => props.theme.colors.light};
   background-color: transparent;
-  margin-left: -11px;
+  margin-left: -12px;
 `;
 
 export const Label = styled.label`
@@ -17,18 +17,18 @@ export const Label = styled.label`
 `;
 
 export const AddEmojisSentence = styled.p`
-  margin-top: 11px;
-  margin-left: 8px;
+  margin-top: ${(props) => props.theme.spacing.m};
+  margin-left: ${(props) => props.theme.spacing.s};
 `;
 
 export const EmojiContainer = styled.div`
   position: relative;
   display: flex;
-  gap: 4px;
+  gap: ${(props) => props.theme.spacing.xs};
   align-items: center;
   justify-content: start;
   height: 40px;
-  margin-bottom: 20px;
+  margin-bottom: ${(props) => props.theme.spacing.l};
 `;
 
 export const Card = styled.div`
@@ -38,18 +38,18 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: ${(props) => props.theme.spacing.l};
   border-radius: ${(props) => props.theme.borders.radiusSmall};
   margin: 1rem;
   max-width: 600px;
-  padding: 44px;
+  padding: ${(props) => props.theme.spacing.xxxl};
   position: relative;
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: ${(props) => props.theme.spacing.l};
 `;
 
 export const Emojis = styled.div`
@@ -60,7 +60,7 @@ export const DeleteButton = styled.button`
   height: 36px;
   width: 36px;
   border-radius: ${(props) => props.theme.borders.radiusRound};
-  margin-top: 5px;
+  margin-top: ${(props) => props.theme.spacing.xs};
   border: none;
   font-size: 1.6rem;
   background-color: transparent;
@@ -69,19 +69,19 @@ export const DeleteButton = styled.button`
 
 export const InputField = styled.input`
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  padding: ${(props) => `${props.theme.spacing.m} ${props.theme.spacing.l}`};
+  margin: ${(props) => props.theme.spacing.s} 0;
 `;
 
 export const TextArea = styled.textarea`
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  padding: ${(props) => `${props.theme.spacing.m} ${props.theme.spacing.l}`};
+  margin: ${(props) => props.theme.spacing.s} 0;
 `;
 
 export const ButtonArea = styled.div`
   display: flex;
-  gap: 20px;
+  gap: ${(props) => props.theme.spacing.l};
   justify-content: center;
   width: 100%;
 `;
@@ -89,13 +89,13 @@ export const ButtonArea = styled.div`
 export const CheckboxContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 30px;
+  gap: ${(props) => props.theme.spacing.l};
+  margin-bottom: ${(props) => props.theme.spacing.xxl};
 `;
 
 export const CheckboxLabel = styled.label`
   height: 40px;
-  padding: 10px;
+  padding: ${(props) => props.theme.spacing.m};
   text-align: center;
   width: 110px;
   border-radius: ${(props) => props.theme.borders.radiusMedium};
@@ -119,7 +119,8 @@ export const CheckboxInput = styled.input`
 
   &:checked::after {
     content: "";
-    padding: 4px 20px 10px 20px;
+    padding: ${(props) =>
+      `${props.theme.spacing.xs} ${props.theme.spacing.l} ${props.theme.spacing.s} ${props.theme.spacing.l}`};
     position: absolute;
     height: 40px;
     width: 110px;

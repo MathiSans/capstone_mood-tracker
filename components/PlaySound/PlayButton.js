@@ -20,7 +20,6 @@ export default function PlayButton({ handleIsPlaying, audioPlaying }) {
 
 const StyledPlayButton = styled.button`
   border: none;
-  box-shadow: none;
   padding-inline: 1rem;
   padding-block: 0.1rem;
   background-color: transparent;

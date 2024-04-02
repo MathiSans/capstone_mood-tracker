@@ -12,7 +12,6 @@ const theme = {
   },
   fonts: {
     body: "system-ui",
-    controls: "monospace",
     serif: "Cambria, Cochin, Georgia, Times, serif",
   },
   fontsize: {
@@ -21,22 +20,18 @@ const theme = {
     large: "2rem",
     xl: "3rem",
   },
-  breakpoints: {
-    //just examples
-    small: "576px",
-    medium: "768px",
-    large: "992px",
-    xlarge: "1200px",
-  },
   spacing: {
-    //just examples
-    small: "8px",
-    medium: "16px",
-    large: "24px",
+    xs: "4px",
+    s: "8px",
+    m: "12px",
+    l: "20px",
+    xl: "28px",
+    xxl: "32px",
+    xxxl: "44px",
   },
   effects: {
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", //just example
-    linearGradient: "linear-gradient(to right, #ff416c, #ff4b2b)", //just example
+    linearGradient: "-webkit-linear-gradient(#e3f710, #ff0000)",
     radialGradient:
       "radial-gradient(circle, rgba(42, 42, 42, 1) 0%, rgba(13, 13, 13, 1) 100%)", //in use
   },

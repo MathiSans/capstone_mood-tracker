@@ -20,8 +20,8 @@ export const RoundButton = styled.button`
 export const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 30px;
-  padding: 30px;
+  grid-gap: ${(props) => props.theme.spacing.xxl};
+  padding: ${(props) => props.theme.spacing.xxl};
   justify-items: center;
   align-items: center;
   width: 100vw;
@@ -41,11 +41,11 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: ${(props) => props.theme.spacing.l};
   border-radius: ${(props) => props.theme.borders.radiusSmall};
   margin: 1rem;
   width: 300px;
-  padding: 28px;
+  padding: ${(props) => props.theme.spacing.xl};
   position: relative;
   cursor: pointer;
 `;
@@ -64,7 +64,7 @@ export const AnimationContainer = styled.div`
   border-radius: ${(props) => props.theme.borders.radiusLarge};
   overflow: hidden;
   filter: blur(8px);
-  margin-bottom: 10px;
+  margin-bottom: ${(props) => props.theme.spacing.m};
 `;
 
 export const Sentence = styled.p`
@@ -80,12 +80,12 @@ export const Button = styled.button`
   color: red;
   background-color: transparent;
   border: 0.5px solid red;
-  padding: 6px 16px;
+  padding: ${(props) => `${props.theme.spacing.xs} ${props.theme.spacing.l}`};
   font-size: 0.5rem;
   cursor: pointer;
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
-  gap: 20px;
+  gap: ${(props) => props.theme.spacing.l};
 `;

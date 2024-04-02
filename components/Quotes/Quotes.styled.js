@@ -10,11 +10,11 @@ export const QuoteCard = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: ${(props) => props.theme.spacing.l};
   border-radius: ${(props) => props.theme.borders.radiusSmall};
   width: 100%;
   height: 100%;
-  padding: 28px;
+  padding: ${(props) => props.theme.spacing.xl};
   position: relative;
   cursor: pointer;
 `;

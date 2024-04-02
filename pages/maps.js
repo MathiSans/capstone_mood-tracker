@@ -74,7 +74,7 @@ const SwitchText = styled.p`
 const Header = styled.div`
   position: absolute;
   top: 5vh;
-  gap: 20px;
+  gap: ${(props) => props.theme.spacing.l};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -88,7 +88,7 @@ const Switch = styled.div`
   display: flex;
   justify-content: ${(props) => (props.$right ? "flex-end" : "flex-start")};
   border-radius: 3.125rem;
-  padding: 8px;
+  padding: ${(props) => props.theme.spacing.s};
   cursor: pointer;
   z-index: 999;
 `;
