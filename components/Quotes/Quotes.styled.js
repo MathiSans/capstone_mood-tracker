@@ -22,5 +22,5 @@ export const QuoteCard = styled.div`
 export const Quote = styled.p`
   font-size: 2.5rem;
   text-align: center;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-family: ${(props) => props.theme.fonts.serif};
 `;

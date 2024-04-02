@@ -13,6 +13,7 @@ const theme = {
   fonts: {
     body: "system-ui",
     controls: "monospace",
+    serif: "Cambria, Cochin, Georgia, Times, serif",
   },
   fontsize: {
     default: "1rem",
