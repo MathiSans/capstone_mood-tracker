@@ -17,8 +17,8 @@ export default function Maps({}) {
     return <p>no connection to database</p>;
   }
 
-  const locations = locationAnalyser(data);
-  const experiences = experienceAnalyser(data);
+  const { locations, totalCount } = locationAnalyser(data);
+  const { experiences } = experienceAnalyser(data);
 
   function handleMapsToggle() {
     setMapsToggle(!mapsToggle);
@@ -30,12 +30,15 @@ export default function Maps({}) {
     damping: 20,
   };
 
+  console.log("locations: ", locations);
+  console.log("experiences", experiences);
+
   return (
     <>
       <Container>
         <Header>
           <DragInfo>
-            {locations[1].totalCount} entries in our collection at the moment.
+            {totalCount} entries in our collection at the moment.
             <br />
             click and drag the spheres 👾
           </DragInfo>

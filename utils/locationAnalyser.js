@@ -1,5 +1,5 @@
 export default function locationAnalyser(data) {
-  let locationMap = {};
+  const locationMap = {};
   let totalCount = 0;
 
   function getRandomColor() {
@@ -27,7 +27,7 @@ export default function locationAnalyser(data) {
     totalCount++;
   });
 
-  let result = [];
+  const result = [];
 
   for (const region in locationMap) {
     result.push({
@@ -37,6 +37,8 @@ export default function locationAnalyser(data) {
       color: locationMap[region].color,
     });
   }
-
-  return [result, { totalCount: totalCount }];
+  return {
+    locations: result,
+    totalCount,
+  };
 }
