@@ -14,7 +14,6 @@ export default function ToolMoodMeasurer({ page, setPage }) {
     } else {
       setAfter(event.target.value);
     }
-    console.log(event.target.value);
   }
 
   return (

@@ -13,11 +13,13 @@ export default function Quotes({ quote, refreshQuote, handleCounter }) {
   const [isFlipped, setIsFlipped] = useState(false);
 
   function handleClick() {
-    setIsFlipped((prevState) => !prevState);
-    if (!isFlipped) {
-      refreshQuote();
-      handleCounter();
-    }
+    setIsFlipped((prevState) => {
+      if (!prevState) {
+        refreshQuote();
+        handleCounter();
+      }
+      return !prevState;
+    });
   }
 
   const [rotateXaxis, setRotateXaxis] = useState(0);

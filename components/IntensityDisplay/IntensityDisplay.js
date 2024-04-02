@@ -1,7 +1,7 @@
 import * as Styled from "./IntensityDisplay.styled";
 
 export default function IntensityDisplay({ sliderValue, experience }) {
-  function Intensity(value) {
+  function calculateIntensity(value) {
     const step = 1 / (experience[0].intensity.length - 1);
     let index = Math.floor(value / step);
     index = Math.min(index, experience[0].intensity.length - 1);
@@ -16,14 +16,12 @@ export default function IntensityDisplay({ sliderValue, experience }) {
   }
 
   return (
-    <>
-      <Styled.IntensityContainer>
-        {Intensity(sliderValue).map((intensity, index) => (
-          <Styled.Intensity index={index} key={index}>
-            {intensity}
-          </Styled.Intensity>
-        ))}
-      </Styled.IntensityContainer>
-    </>
+    <Styled.IntensityContainer>
+      {calculateIntensity(sliderValue).map((intensity, index) => (
+        <Styled.Intensity index={index} key={`${intensity}-${index}`}>
+          {intensity}
+        </Styled.Intensity>
+      ))}
+    </Styled.IntensityContainer>
   );
 }

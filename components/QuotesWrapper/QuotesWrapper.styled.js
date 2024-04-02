@@ -13,7 +13,6 @@ export const Counter = styled.p`
   display: flex;
   justify-content: center;
   margin: 0;
-
   align-items: center;
   border-radius: 50%;
   background-color: white;

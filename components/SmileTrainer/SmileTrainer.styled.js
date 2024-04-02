@@ -8,27 +8,20 @@ export const conditionalTextContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 10;
 `;
 
 export const Circle = styled.div`
   position: relative;
   height: 300px;
   width: 300px;
-  border-radius: 1000px;
+  border-radius: 50%;
   box-shadow: inset 0 0 60px #000000;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) =>
-    props.done || props.$smileThreshold > 0.5
-      ? "#18a924"
-      : props.$facesDetected
-      ? "#6C6C6C"
-      : "#262626"};
   background-color: ${({ $facesDetected, $smileThreshold, $done }) =>
-    $done
-      ? "#18a924"
-      : $smileThreshold > 0.5
+    $done || $smileThreshold > 0.5
       ? "#18a924"
       : $facesDetected
       ? "#330aea"
@@ -39,20 +32,12 @@ export const InnerCircle = styled.div`
   position: absolute;
   height: 90%;
   width: 90%;
-  border-radius: 1000px;
+  border-radius: 50%;
   box-shadow: inset 0 0 60px #000000;
-  background-color: ${(props) =>
-    props.done || props.smileThreshold > 0.5
-      ? "#00FF00"
-      : props.facesDetected
-      ? "#6C6C6C"
+  background-color: ${({ $facesDetected, $smileThreshold, $done }) =>
+    $done || $smileThreshold > 0.5
+      ? "#18a924"
+      : $facesDetected
+      ? "#330aea"
       : "#262626"};
-  /* background-color: ${({ facesDetected, smileThreshold, done }) =>
-    done
-      ? "#00FF00"
-      : smileThreshold > 0.5
-      ? "#00FF00"
-      : facesDetected
-      ? "#6C6C6C"
-      : "#262626"}; */
 `;

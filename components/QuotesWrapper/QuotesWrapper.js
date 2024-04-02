@@ -34,7 +34,6 @@ export default function QuotesPage({ fetcher }) {
 
   return (
     <>
-      {/* <Guide text={"Inspirational Quotes"} /> */}
       <Quotes
         handleCounter={handleCounter}
         quote={data}
