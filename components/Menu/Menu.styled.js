@@ -15,6 +15,26 @@ export const MenuContainer = styled.div`
   -webkit-backdrop-filter: blur(16px);
 `;
 
+// import styled from 'styled-components';
+
+// const Element = styled.div`
+//   position: relative;
+
+//   &::before {
+//     content: '';
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     bottom: 0;
+//     left: 0;
+//     background: rgba(255, 255, 255, 0.5); /* Adjust the alpha value to control the blur intensity */
+//     backdrop-filter: blur(16px);
+//     z-index: -1;
+//   }
+// `;
+
+// Then use the Element component in your React application
+
 // For Safari on iOS, which doesn't support `backdrop-filter` directly, you can achieve a similar effect using CSS masks. Here's an alternative approach:
 
 // ```css
@@ -39,3 +59,20 @@ export const MenuContainer = styled.div`
 // ```
 
 // This code applies a blur effect to the background using `filter` and `mask-image` properties, which are supported by Safari on iOS. Adjust the blur radius and background image as needed. This technique essentially creates a blurred overlay with a gradient mask to mimic the `backdrop-filter` effect.
+
+// or this
+// .element {
+//   position: relative;
+// }
+
+// .element::before {
+//   content: '';
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   left: 0;
+//   background: rgba(255, 255, 255, 0.5); /* Adjust the alpha value to control the blur intensity */
+//   backdrop-filter: blur(16px);
+//   z-index: -1;
+// }
