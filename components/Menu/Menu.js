@@ -36,7 +36,7 @@ export default function Menu({ handleShowMenu }) {
           { text: "login", link: "" },
           { text: "enter a mood", link: "/" },
           { text: "moods collection", link: "/entries" },
-          { text: "moods map", link: "/moods-map" },
+          { text: "moods map", link: "/maps" },
           { text: "activities", link: "/activities" },
         ].map((page, index) => (
           <motion.div key={index} {...buttonAnimation}>

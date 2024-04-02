@@ -54,7 +54,9 @@ export default function Entry() {
               <Page>
                 <Sentence>
                   <StaticText>Somebody </StaticText>
-                  {entry.location === "unknown" ? "" : `in ${entry.location}`}
+                  {entry.location === "unknown"
+                    ? ""
+                    : `in ${entry.location.city}/${entry.location.region}`}
                   <StaticText> felt</StaticText> {entry.experience}.{" "}
                   <StaticText>More specifically</StaticText>{" "}
                   <Intensity

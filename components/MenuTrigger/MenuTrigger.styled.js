@@ -7,8 +7,8 @@ export const TriggerContainer = styled.div`
   padding-bottom: 28px;
   bottom: 0;
   display: flex;
-  width: 100vw;
-  height: 60px;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 export const MenuTriggerButton = styled.button`
