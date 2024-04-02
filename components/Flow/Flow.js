@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import { experiences } from "@/experiences";
 import Animation from "@/components/3DAnimation/3DAnimation";
 import NavButton from "@/components/NavButton/NavButton";
@@ -9,10 +9,8 @@ import { motion } from "framer-motion";
 import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
 import fetchLocation from "@/utils/locationTracking";
-import Entries from "@/pages/entries";
 
 export default function Flow() {
-  const router = useRouter();
   const { mutate } = useSWR("/api/entries");
   const [experience, setExperience] = useState([]);
   const [sliderValue, setSliderValue] = useState(0);
@@ -20,6 +18,9 @@ export default function Flow() {
   const [color, setColor] = useState("grey");
   const [page, setPage] = useState(0);
   const [audioTrigger, setAudioTrigger] = useState(false);
+
+  const session = useSession();
+  const userId = session.data?.user.id;
 
   const guides = [
     "share your emotions ...",
@@ -49,6 +50,13 @@ export default function Flow() {
     const reactionsArray = reactions.map((reaction) => reaction.name);
     const location = await fetchLocation();
 
+    let userValue;
+    if (session.status === "unauthenticated") {
+      userValue = "anonymous";
+    } else {
+      userValue = userId;
+    }
+
     const response = await fetch("/api/entries", {
       method: "POST",
       headers: {
@@ -56,7 +64,7 @@ export default function Flow() {
       },
       body: JSON.stringify({
         time: new Date().toLocaleString(),
-        user: "anonymous",
+        user: userValue,
         location: {
           region: location.region,
           city: location.city,
