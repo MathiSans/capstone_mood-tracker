@@ -34,7 +34,7 @@ export default function ToolMoodMeasurer({ page, setPage }) {
               handleSliderChange={handleSliderChange}
               sliderValue={page === 0 ? before : after}
             />
-            <p>feeling low</p>
+            <p>feeling high</p>
           </Styled.SliderContainer>
         </>
       )}
