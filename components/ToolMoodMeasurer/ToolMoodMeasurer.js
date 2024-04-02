@@ -1,8 +1,8 @@
 import { useState } from "react";
-import styled from "styled-components";
 import Slider from "../Slider/Slider";
 import NavButton from "../NavButton/NavButton";
 import Guide from "../Guide/Guide";
+import * as Styled from "./ToolMoodMeasurer.styled";
 
 export default function ToolMoodMeasurer({ page, setPage }) {
   const [before, setBefore] = useState(0.5);
@@ -21,28 +21,38 @@ export default function ToolMoodMeasurer({ page, setPage }) {
     <>
       {(page === 0 || page === 2) && (
         <>
+          <Guide text={page === 0 ? "1/3" : "2/3"} />
           <Guide
             text={
               page === 0
-                ? "Tell us how you feel before you use the tool"
-                : "Tell us how you feel after using the tool"
+                ? "How are you feeling right now?"
+                : "How do you feel after using the tool?"
             }
           />
-          <Slider
-            handleSliderChange={handleSliderChange}
-            sliderValue={page === 0 ? before : after}
-          />
+          <Styled.SliderContainer>
+            <p>feeling low</p>
+            <Slider
+              handleSliderChange={handleSliderChange}
+              sliderValue={page === 0 ? before : after}
+            />
+            <p>feeling low</p>
+          </Styled.SliderContainer>
         </>
       )}
 
       {page === 3 && (
-        <p>
-          {before - after < 0
-            ? "Your mood has increased!"
-            : before - after > 0
-            ? "Your mood has decreased."
-            : "Your mood stayed the same."}
-        </p>
+        <>
+          <Guide text="3/3" />
+          <Guide
+            text={
+              before - after < 0
+                ? "Your mood has increased!"
+                : before - after > 0
+                ? "Your mood has decreased."
+                : "Your mood stayed the same."
+            }
+          />
+        </>
       )}
       {page <= 2 && (
         <NavButton
@@ -51,10 +61,10 @@ export default function ToolMoodMeasurer({ page, setPage }) {
           }}
         >
           {page === 0
-            ? "1/3 go and use the tool"
+            ? "use the tool"
             : page === 1
-            ? "2/3 how do you feel after?"
-            : "3/3 see results"}
+            ? "how do you feel now?"
+            : "see results"}
         </NavButton>
       )}
       {page === 3 && (

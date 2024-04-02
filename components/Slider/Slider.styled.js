@@ -5,7 +5,7 @@ export const RangeInput = styled.input`
   background-color: transparent;
   -webkit-appearance: none;
   margin: 10 0;
-  width: 300px;
+  width: 100%;
 
   &:focus {
     outline: none;
