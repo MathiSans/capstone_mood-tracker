@@ -23,7 +23,7 @@ export const Card = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  border-radius: 12px;
+  border-radius: ${(props) => props.theme.borders.radiusSmall};
   margin: ${(props) => props.theme.fontsize.default};
   width: 300px;
   padding: 28px;
@@ -36,7 +36,7 @@ export const Tag = styled.div`
   background-color: ${(props) => props.theme.light};
   color: #3a3a3a;
   padding: 5px 12px;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   font-size: 0.9rem;
 `;
 
@@ -54,7 +54,7 @@ export const Title = styled.p`
 `;
 
 export const Description = styled.p`
-  color: ${(props) => props.theme.tertiary};
+  color: ${(props) => props.theme.neutral};
   text-align: center;
   padding: 0;
   margin: 0;

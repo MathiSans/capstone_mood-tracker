@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const IconContainer = styled.button`
   padding: 4px;
-  border-radius: 100px;
+  border-radius: ${(props) => props.theme.borders.radiusLarge};
   border: none;
   font-size: 1.5rem;
   background-color: transparent;
@@ -11,7 +11,7 @@ export const IconContainer = styled.button`
   ${(props) =>
     props.disabled &&
     css`
-      color: ${(props) => props.theme.colors.tertiary};
+      color: ${(props) => props.theme.colors.neutral};
       cursor: not-allowed;
     `}
 `;

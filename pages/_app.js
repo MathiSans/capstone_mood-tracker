@@ -7,7 +7,7 @@ const theme = {
   colors: {
     dark: "black",
     light: "white",
-    tertiary: "grey",
+    neutral: "grey",
     danger: "red",
   },
   fonts: {
@@ -41,8 +41,10 @@ const theme = {
       "radial-gradient(circle, rgba(42, 42, 42, 1) 0%, rgba(13, 13, 13, 1) 100%)", //in use
   },
   borders: {
-    //just examples
-    radius: "",
+    radiusSmall: "0.75rem",
+    radiusMedium: "1.25rem",
+    radiusLarge: "6.25rem",
+    radiusRound: "50%",
     strength: "2px",
     color: "#333333",
   },

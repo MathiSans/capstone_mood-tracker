@@ -48,7 +48,7 @@ const StyledMuteButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
+  border-radius: ${(props) => props.theme.borders.radiusRound};
   margin-inline-end: 1.5rem;
   font-size: 1.2rem;
   height: 42px;

@@ -10,7 +10,7 @@ export const DeleteAnswer = styled.p`
 `;
 
 export const RoundButton = styled.button`
-  border-radius: 100px;
+  border-radius: ${(props) => props.theme.borders.radiusLarge};
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
@@ -42,7 +42,7 @@ export const Card = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  border-radius: 12px;
+  border-radius: ${(props) => props.theme.borders.radiusSmall};
   margin: 1rem;
   width: 300px;
   padding: 28px;
@@ -61,7 +61,7 @@ export const AnimationContainer = styled.div`
   width: 60px;
   height: 60px;
   position: relative;
-  border-radius: 100px;
+  border-radius: ${(props) => props.theme.borders.radiusLarge};
   overflow: hidden;
   filter: blur(8px);
   margin-bottom: 10px;

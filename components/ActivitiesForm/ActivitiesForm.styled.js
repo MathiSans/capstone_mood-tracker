@@ -39,7 +39,7 @@ export const Card = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  border-radius: 12px;
+  border-radius: ${(props) => props.theme.borders.radiusSmall};
   margin: 1rem;
   max-width: 600px;
   padding: 44px;
@@ -59,7 +59,7 @@ export const Emojis = styled.div`
 export const DeleteButton = styled.button`
   height: 36px;
   width: 36px;
-  border-radius: 50%;
+  border-radius: ${(props) => props.theme.borders.radiusRound};
   margin-top: 5px;
   border: none;
   font-size: 1.6rem;
@@ -98,7 +98,7 @@ export const CheckboxLabel = styled.label`
   padding: 10px;
   text-align: center;
   width: 110px;
-  border-radius: 20px;
+  border-radius: ${(props) => props.theme.borders.radiusMedium};
   cursor: pointer;
   font-size: ${(props) => props.theme.fontsize.default};
   background-color: ${(props) => (props.$color ? props.$color : "grey")};
@@ -112,7 +112,7 @@ export const CheckboxInput = styled.input`
   width: 110px;
   outline: none;
   font-size: ${(props) => props.theme.fontsize.default};
-  border-radius: 20px;
+  border-radius: ${(props) => props.theme.borders.radiusMedium};
   cursor: pointer;
   top: -32px;
   left: -14px;
@@ -126,6 +126,6 @@ export const CheckboxInput = styled.input`
     border: 3.5px solid ${(props) => props.theme.colors.light};
     font-size: ${(props) => props.theme.fontsize.default};
     color: #fff;
-    border-radius: 20px;
+    border-radius: ${(props) => props.theme.borders.radiusMedium};
   }
 `;

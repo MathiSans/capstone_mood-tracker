@@ -87,7 +87,7 @@ const Switch = styled.div`
   background-color: rgba(255, 255, 255, 0.4);
   display: flex;
   justify-content: ${(props) => (props.$right ? "flex-end" : "flex-start")};
-  border-radius: 50px;
+  border-radius: 3.125rem;
   padding: 8px;
   cursor: pointer;
   z-index: 999;

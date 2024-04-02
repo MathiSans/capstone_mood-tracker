@@ -11,7 +11,7 @@ export const QuoteCard = styled.div`
   align-items: center;
   justify-content: center;
   gap: 20px;
-  border-radius: 12px;
+  border-radius: ${(props) => props.theme.borders.radiusSmall};
   width: 100%;
   height: 100%;
   padding: 28px;
