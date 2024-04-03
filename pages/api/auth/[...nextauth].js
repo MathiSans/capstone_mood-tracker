@@ -14,6 +14,26 @@ export default NextAuth({
 
       clientSecret: process.env.GITHUB_SECRET,
     }),
+    CredentialsProvider({
+      name: "credentials",
+      credentials: {
+        username: { label: "Username", type: "text", placeholder: "username" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        // this is only here in order to make it easier for people to test the application
+        const testUser = await User.findOne({ email: "testuser@example.com" });
+
+        if (
+          credentials.username === "test" &&
+          credentials.password === "test"
+        ) {
+          return testUser;
+        } else {
+          return null;
+        }
+      },
+    }),
   ],
 
   adapter: MongoDBAdapter(clientPromise),
