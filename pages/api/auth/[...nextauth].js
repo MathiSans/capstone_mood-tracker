@@ -42,15 +42,6 @@ export default NextAuth({
   callbacks: {
     async session({ session, user }) {
       dbConnect();
-
-      //   const currentUser = await User.findById(user.id);
-
-      //   if (currentUser) {
-      //     console.log(currentUser);
-
-      //     currentUser.save();
-      //   }
-
       return { ...session, user: { ...session.user, id: user.id } };
     },
   },
