@@ -3,27 +3,51 @@ import * as Styled from "./EntriesList.styled";
 import useSWR, { useSWRConfig } from "swr";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiTrash2 } from "react-icons/fi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
 export default function EntriesList() {
-  const router = useRouter();
   const [deletingId, setDeletingId] = useState(null);
   const { data, isLoading } = useSWR("/api/entries");
   const { mutate } = useSWRConfig();
+  const [filtered, setFiltered] = useState([]);
+  const router = useRouter();
 
   const { data: session } = useSession();
   const userID = session?.user.id;
   console.log(userID);
+
+  useEffect(() => {
+    if (!data) return; // Exit early if data is not available
+
+    // Reverse the data array
+    const reversedData = [...data].reverse();
+
+    // Filter the reversed data based on session and userID
+    const filteredData = session
+      ? reversedData.filter((entry) => entry.user === userID)
+      : reversedData;
+
+    setFiltered(filteredData);
+  }, [data, session, userID]);
 
   if (isLoading) {
     return <p>loading...</p>;
   }
 
   if (!data) {
-    return;
+    return <p>no data available</p>;
   }
+
+  // useEffect(() => {
+  //   const reversedMoods = data.slice().reverse();
+  //   if (session) {
+  //     setFiltered(reversedMoods.filter((object) => userID === object.user));
+  //   } else {
+  //     setFiltered(reversedMoods);
+  //   }
+  // }, [data, session, userID]);
 
   function handleDeleteDialog(event, id) {
     event.stopPropagation();
@@ -38,13 +62,11 @@ export default function EntriesList() {
     mutate("/api/entries");
   }
 
-  const reversedMoods = data.slice().reverse();
-
   return (
     <>
       <Styled.Grid>
         <AnimatePresence>
-          {reversedMoods.map((entry) => (
+          {filtered.map((entry) => (
             <motion.div
               key={entry._id}
               whileHover={{ scale: 1.05 }}
