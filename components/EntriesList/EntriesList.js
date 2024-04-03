@@ -3,7 +3,7 @@ import * as Styled from "./EntriesList.styled";
 import { useSWRConfig } from "swr";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiTrash2 } from "react-icons/fi";
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Circle from "../Circle/Circle";
 
@@ -11,6 +11,24 @@ export default function EntriesList({ filtered, filter }) {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState(null);
   const { mutate } = useSWRConfig();
+  const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const containerWidth = containerRef.current
+        ? containerRef.current.offsetWidth
+        : window.innerWidth;
+      const containerHeight = containerRef.current
+        ? containerRef.current.offsetHeight
+        : window.innerHeight;
+      setScreenSize({ width: containerWidth, height: containerHeight });
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   function handleDeleteDialog(event, id) {
     event.stopPropagation();
@@ -28,7 +46,22 @@ export default function EntriesList({ filtered, filter }) {
   return (
     <>
       {filter == "value 3" ? (
-        <h1>Moin!</h1>
+        <div>
+          {filtered.map((entry, index) => (
+            <Circle
+              key={index}
+              count={entry.count}
+              circleSize={Math.max(
+                Math.sqrt(entry.count) *
+                  Math.min(screenSize.width, screenSize.height) *
+                  (0.2 / Math.log(entry.count + 3)),
+                10
+              )}
+              name={entry.experience}
+              color={entry.color}
+            />
+          ))}
+        </div>
       ) : (
         <Styled.Grid>
           <AnimatePresence>
