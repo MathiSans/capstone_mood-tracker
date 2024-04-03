@@ -30,9 +30,6 @@ export default function Maps({}) {
     damping: 20,
   };
 
-  console.log("locations: ", locations);
-  console.log("experiences", experiences);
-
   return (
     <>
       <Container>

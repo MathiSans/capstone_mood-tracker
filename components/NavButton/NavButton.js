@@ -8,7 +8,6 @@ export default function NavButton({
   linkToPage,
 }) {
   const theme = useTheme();
-  console.log("THEME-NAVBUTTON", theme);
   return (
     <Styled.Button onClick={handleClick} $disabled={disabled} theme={theme}>
       {linkToPage ? (
