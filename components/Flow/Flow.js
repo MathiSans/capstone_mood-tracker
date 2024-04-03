@@ -50,13 +50,6 @@ export default function Flow() {
     const reactionsArray = reactions.map((reaction) => reaction.name);
     const location = await fetchLocation();
 
-    let userValue;
-    if (session.status === "unauthenticated") {
-      userValue = "anonymous";
-    } else {
-      userValue = userId;
-    }
-
     const response = await fetch("/api/entries", {
       method: "POST",
       headers: {
@@ -64,7 +57,7 @@ export default function Flow() {
       },
       body: JSON.stringify({
         time: new Date().toLocaleString(),
-        user: userValue,
+        user: session ? userId : null,
         location: {
           region: location.region,
           city: location.city,

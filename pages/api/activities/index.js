@@ -17,7 +17,7 @@ export default async function handler(request, response) {
     try {
       const activityData = request.body;
       await Activity.create(activityData);
-
+      console.log(activityData);
       response.status(201).json({ status: "Entry created" });
     } catch (error) {
       response.status(400).json({ error: error.message });

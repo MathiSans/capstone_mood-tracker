@@ -8,20 +8,18 @@ export default function App({
   pageProps: { session, ...pageProps },
 }) {
   return (
-    <>
-      <SessionProvider session={session}>
-        <GlobalStyle />
-        <SWRConfig
-          value={{
-            fetcher: (resource, init) =>
-              fetch(resource, init).then((res) => res.json()),
-          }}
-        >
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </SWRConfig>
-      </SessionProvider>
-    </>
+    <SessionProvider session={session}>
+      <GlobalStyle />
+      <SWRConfig
+        value={{
+          fetcher: (resource, init) =>
+            fetch(resource, init).then((res) => res.json()),
+        }}
+      >
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </SWRConfig>
+    </SessionProvider>
   );
 }

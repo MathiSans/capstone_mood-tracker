@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
+import "./User";
 
 const { Schema } = mongoose;
 
 const activitySchema = new Schema({
-  user: String,
+  user: { type: Schema.Types.ObjectId, ref: "User" },
   title: String,
   emoji: [String],
   description: String,
