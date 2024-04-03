@@ -4,6 +4,7 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/db/mongodb";
 import dbConnect from "@/db/models/connect";
 import User from "@/db/models/User";
+import { CredentialsProvider } from "next-auth/providers/credentials";
 
 export default NextAuth({
   // Configure one or more authentication providers
