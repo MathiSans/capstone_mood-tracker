@@ -2,6 +2,7 @@ import Guide from "../Guide/Guide";
 import GuideAnimator from "../GuideAnimator/GuideAnimator";
 import TagCloud from "../TagCloud/TagCloud";
 import Slider from "../Slider/Slider";
+import IntensityDisplay from "../IntensityDisplay/IntensityDisplay";
 
 export default function PageDisplay({
   guides,
@@ -41,6 +42,7 @@ export default function PageDisplay({
             sliderValue={sliderValue}
             handleSliderChange={handleSliderChange}
           />
+          <IntensityDisplay experience={experience} sliderValue={sliderValue} />
         </>
       );
     case 4:
