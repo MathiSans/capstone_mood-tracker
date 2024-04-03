@@ -98,6 +98,14 @@ export default function EntriesList({ filtered, filter }) {
                       </span>
                     ))}
                   </Styled.Sentence>
+                  <div>
+                    {filter === "value 2" ? (
+                      <Styled.Sentence>{entry.time}</Styled.Sentence>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+
                   <Styled.ButtonContainer>
                     {deletingId === entry._id ? (
                       <>
