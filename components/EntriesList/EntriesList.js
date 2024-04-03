@@ -5,12 +5,17 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FiTrash2 } from "react-icons/fi";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 export default function EntriesList() {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState(null);
   const { data, isLoading } = useSWR("/api/entries");
   const { mutate } = useSWRConfig();
+
+  const { data: session } = useSession();
+  const userID = session?.user.id;
+  console.log(userID);
 
   if (isLoading) {
     return <p>loading...</p>;
