@@ -6,6 +6,8 @@ import { FiTrash2 } from "react-icons/fi";
 import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Circle from "../Circle/Circle";
+import { Grid } from "./EntriesList.styled";
+import experienceAnalyser from "@/utils/ExperienceAnalyser";
 
 export default function EntriesList({ filtered, filter }) {
   const router = useRouter();
@@ -42,12 +44,13 @@ export default function EntriesList({ filtered, filter }) {
     });
     mutate("/api/entries");
   }
-
+  const data = filtered;
+  const result = experienceAnalyser(data);
   return (
     <>
       {filter == "value 3" ? (
-        <div>
-          {filtered.map((entry, index) => (
+        <Grid>
+          {result[0].map((entry, index) => (
             <Circle
               key={index}
               count={entry.count}
@@ -61,7 +64,7 @@ export default function EntriesList({ filtered, filter }) {
               color={entry.color}
             />
           ))}
-        </div>
+        </Grid>
       ) : (
         <Styled.Grid>
           <AnimatePresence>
