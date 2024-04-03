@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  name: { type: String, require: true },
-  email: { type: String, require: true },
+  name: { type: String, required: true },
+  email: { type: String, required: true },
 });
 
-const Entry = mongoose.models.User || mongoose.model("User", userSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);

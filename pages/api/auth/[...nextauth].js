@@ -2,9 +2,8 @@ import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/db/mongodb";
-import dbConnect from "@/db/models/connect";
+import CredentialsProvider from "next-auth/providers/credentials";
 import User from "@/db/models/User";
-import { CredentialsProvider } from "next-auth/providers/credentials";
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -12,7 +11,6 @@ export default NextAuth({
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID,
-
       clientSecret: process.env.GITHUB_SECRET,
     }),
     CredentialsProvider({
@@ -22,15 +20,24 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        // this is only here in order to make it easier for people to test the application
-        const testUser = await User.findOne({ email: "testuser@example.com" });
+        try {
+          console.log("test");
+          const testUser = await User.findOne({
+            email: "testuser@example.com",
+          });
 
-        if (
-          credentials.username === "test" &&
-          credentials.password === "test"
-        ) {
-          return testUser;
-        } else {
+          if (
+            credentials.username === "test" &&
+            credentials.password === "test"
+          ) {
+            console.log("testUser", testUser);
+            return testUser;
+          } else {
+            console.log("error");
+            return null;
+          }
+        } catch (error) {
+          console.error("Error accessing User model:", error);
           return null;
         }
       },
@@ -38,11 +45,28 @@ export default NextAuth({
   ],
 
   adapter: MongoDBAdapter(clientPromise),
+  session: {
+    strategy: "jwt",
+  },
 
   callbacks: {
-    async session({ session, user }) {
-      dbConnect();
-      return { ...session, user: { ...session.user, id: user.id } };
+    async jwt({ token, user }) {
+      if (user) {
+        token.accessToken = user.access_token;
+        token.id = user.id;
+      }
+
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.accessToken = token.accessToken;
+        session.user.id = token.id;
+
+        return session;
+      } else {
+        return null;
+      }
     },
   },
 });
