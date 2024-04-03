@@ -5,7 +5,7 @@ export default async function handler(request, response) {
   await dbConnect();
 
   const { id } = request.query;
-  const user = await User.findById(id).populate("favoritePonies");
+  const user = await User.findById(id);
 
   if (request.method === "GET") {
     if (!user) {
@@ -15,15 +15,15 @@ export default async function handler(request, response) {
     }
   }
 
-  if (request.method === "POST") {
-    user.favoritePonies.push(request.body.id);
-    await user.save();
-    return response.status(200).json({ message: "User updated " });
-  }
-
-  if (request.method === "PATCH") {
-    user.favoritePonies.pull(request.body.id);
-    await user.save();
-    return response.status(200).json({ message: "User updated " });
+  if (req.method === "POST") {
+    try {
+      const { name, email, userId } = req.body;
+      const user = await User.create({ name, email, userId });
+      res.status(201).json({ success: true, data: user });
+    } catch (error) {
+      res.status(400).json({ success: false });
+    }
+  } else {
+    res.status(405).json({ success: false });
   }
 }

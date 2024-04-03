@@ -43,6 +43,7 @@ export default function ActivitiesForm({ handleShowForm }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        user: "anonymous",
         title: event.target.elements.title.value,
         emoji: inputString,
         description: event.target.elements.description.value,

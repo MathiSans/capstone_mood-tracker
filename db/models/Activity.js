@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const activitySchema = new Schema({
+  user: String,
   title: String,
   emoji: [String],
   description: String,

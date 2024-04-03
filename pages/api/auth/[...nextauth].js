@@ -22,13 +22,13 @@ export default NextAuth({
     async session({ session, user }) {
       dbConnect();
 
-      const currentUser = await User.findById(user.id);
+      //   const currentUser = await User.findById(user.id);
 
-      if (currentUser.favoritePonies == null) {
-        currentUser.favoritePonies = [];
+      //   if (currentUser) {
+      //     console.log(currentUser);
 
-        currentUser.save();
-      }
+      //     currentUser.save();
+      //   }
 
       return { ...session, user: { ...session.user, id: user.id } };
     },
