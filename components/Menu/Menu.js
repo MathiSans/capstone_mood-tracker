@@ -2,8 +2,10 @@ import NavButton from "../NavButton/NavButton";
 import * as Styled from "./Menu.styled";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 export default function Menu({ handleShowMenu }) {
+  const { data: session } = useSession();
   const router = useRouter();
 
   const buttonAnimation = {
@@ -41,7 +43,7 @@ export default function Menu({ handleShowMenu }) {
         ].map((page, index) => (
           <motion.div key={index} {...buttonAnimation}>
             <NavButton
-              disabled={page.text === "login"}
+              disabled={!session}
               handleClick={() => handleMenuButtonClick(page.link)}
             >
               {page.text}
