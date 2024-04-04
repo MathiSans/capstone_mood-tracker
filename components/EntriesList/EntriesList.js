@@ -49,27 +49,46 @@ export default function EntriesList({ filtered, filter }) {
   console.log("result", result);
   console.log("filtered", filtered);
 
+  function calculatePercentage(array, key, value) {
+    let count = 0;
+    for (let i = 0; i < array.length; i++) {
+      if (array[i][key] === value) {
+        count++;
+      }
+    }
+    return (count / array.length) * 100;
+  }
+
   return (
     <>
       {filter == "value 3" ? (
-        <Grid>
-          {result[0].map((entry, index) => (
-            <Circle
-              key={index}
-              count={entry.count}
-              circleSize={Math.max(
-                Math.sqrt(entry.count) *
-                  Math.min(screenSize.width, screenSize.height) *
-                  (0.2 / Math.log(entry.count + 3)),
-                10
-              )}
-              name={entry.experience}
-              color={entry.color}
-            />
-          ))}
-        </Grid>
+        <>
+          <p>This are your moods of the last week</p>
+          <Grid>
+            {result[0].map((entry, index) => (
+              <Circle
+                key={index}
+                count={entry.count}
+                percentage={calculatePercentage(
+                  result,
+                  "experience",
+                  entry.experience
+                )}
+                circleSize={Math.max(
+                  Math.sqrt(entry.count) *
+                    Math.min(screenSize.width, screenSize.height) *
+                    (0.2 / Math.log(entry.count + 3)),
+                  10
+                )}
+                name={entry.experience}
+                color={entry.color}
+              />
+            ))}
+          </Grid>
+        </>
       ) : (
         <Styled.Grid>
+          {filter === "value 2" && <p>This are your moods of the last week</p>}
           <AnimatePresence>
             {filtered.map((entry) => (
               <motion.div

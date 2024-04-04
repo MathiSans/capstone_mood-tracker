@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import LegacyAnimation from "../LegacyAnimation/LegacyAnimation";
 
-export default function Circle({ circleSize, name, color, count }) {
+export default function Circle({ circleSize, name, color, count, percentage }) {
   return (
     <motion.div
       drag
@@ -47,6 +47,7 @@ export default function Circle({ circleSize, name, color, count }) {
         <h2 style={{ fontSize: circleSize / 10 }}>
           {name} <br />
           {count} entries
+          {percentage}%
         </h2>
       </motion.div>
     </motion.div>
