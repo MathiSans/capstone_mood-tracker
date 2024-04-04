@@ -32,7 +32,7 @@ export default function Entries() {
         lastSevenDays.push(`${formattedDate1}, ${formattedDate2}`);
       }
       console.log("Last seven days:", lastSevenDays);
-      if (filter === "value 2") {
+      if (filter === "value 2" || "value 3") {
         const lastSevenDaysEntries = reversedData.filter((entry) => {
           const entryDate = entry.time.split(",")[0].trim(); // Get the date part of the entry's time
           const match = lastSevenDays.some((dates) => {
