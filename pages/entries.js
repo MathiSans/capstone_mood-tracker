@@ -43,7 +43,8 @@ export default function Entries() {
         });
         console.log("Last seven days entries:", lastSevenDaysEntries);
         setFiltered(lastSevenDaysEntries);
-      } else {
+      }
+      if (filter === "value 1") {
         setFiltered(reversedData); // Set filtered to reversedData for other cases
       }
     } else {

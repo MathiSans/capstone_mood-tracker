@@ -44,7 +44,7 @@ export default function EntriesList({ filtered, filter }) {
     });
     mutate("/api/entries");
   }
-  const data = filtered;
+
   const result = experienceAnalyser(filtered);
   console.log("result", result);
   console.log("filtered", filtered);
