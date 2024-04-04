@@ -77,7 +77,11 @@ export default function EntriesList() {
                   <Styled.ColoredShape color={entry.color} />
                 </Styled.AnimationContainer>
                 <Styled.Sentence>
-                  <Styled.StaticText>Somebody </Styled.StaticText>
+                  {session ? (
+                    <Styled.StaticText>{session.user.name} </Styled.StaticText>
+                  ) : (
+                    <Styled.StaticText>Somebody </Styled.StaticText>
+                  )}{" "}
                   {entry.location === "unknown"
                     ? ""
                     : `in ${entry.location.region}`}
