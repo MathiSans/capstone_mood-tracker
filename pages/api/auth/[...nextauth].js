@@ -21,7 +21,6 @@ export default NextAuth({
       },
       async authorize(credentials) {
         try {
-          console.log("test");
           const testUser = await User.findOne({
             email: "testuser@example.com",
           });
@@ -30,10 +29,8 @@ export default NextAuth({
             credentials.username === "test" &&
             credentials.password === "test"
           ) {
-            console.log("testUser", testUser);
             return testUser;
           } else {
-            console.log("error");
             return null;
           }
         } catch (error) {

@@ -4,7 +4,6 @@ import Image from "next/image";
 export default function LoginButton() {
   const { data: session } = useSession();
   const userId = session?.user.id;
-  console.log(userId);
 
   if (session) {
     return (

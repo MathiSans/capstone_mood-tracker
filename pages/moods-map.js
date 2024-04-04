@@ -39,7 +39,6 @@ export default function App() {
   }
 
   const result = experienceAnalyser(data);
-  console.log(result);
 
   return (
     <>

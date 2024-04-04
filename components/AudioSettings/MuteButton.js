@@ -55,5 +55,3 @@ const StyledText = styled.p`
   font-size: 0.5;
   margin: 0;
 `;
-
-// background-color: ${(props) => (props.color ? props.color : "grey")};
