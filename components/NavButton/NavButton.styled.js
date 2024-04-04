@@ -2,21 +2,19 @@ import styled from "styled-components";
 import Link from "next/link";
 
 export const Button = styled.button`
-  padding: ${(props) => props.theme.spacing.m} 26px;
+  padding: var(--spacing-m) 26px;
   background-color: transparent;
   color: ${(props) =>
-    props.$disabled ? props.theme.colors.neutral : props.theme.colors.light};
+    props.$disabled ? `var(--color-neutral)` : `var(--color-main-alt)`};
   border: ${(props) =>
     props.$disabled
-      ? `1px solid ${props.theme.colors.neutral}`
-      : `1px solid ${props.theme.colors.light}`};
+      ? `1px solid var(--color-neutral)`
+      : `1px solid var(--color-main-alt)`};
   cursor: ${(props) => (props.$disabled ? "not-allowed" : "pointer")};
 `;
 
 export const ButtonTextLink = styled(Link)`
   color: ${(props) =>
-    props.$disabled
-      ? `${props.theme.colors.neutral}`
-      : `${props.theme.colors.light}`};
+    props.$disabled ? `var(--color-neutral)` : `var(--color-main-alt)`};
   text-decoration: none;
 `;

@@ -52,6 +52,6 @@ export const Blob = styled.div`
   position: absolute;
   filter: blur(80px);
   background-color: ${(props) =>
-    props.color ? props.color : props.theme.colors.light};
+    props.color ? props.color : `var(--color-main-alt)`};
   animation: ${circularAnimation} ${(props) => props.duration} linear infinite;
 `;

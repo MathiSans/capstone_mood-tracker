@@ -44,12 +44,12 @@ export default function Maps({}) {
               style={{
                 width: "80px",
                 height: "32px",
-                backgroundColor: "white",
-                borderRadius: "40px",
+                backgroundColor: `var(--color-main-alt)`,
+                borderRadius: `var(--border-radius-medium)`,
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                color: "black",
+                color: `var(--color-main)`,
               }}
               layout
               transition={spring}
@@ -71,7 +71,7 @@ const SwitchText = styled.p`
 const Header = styled.div`
   position: absolute;
   top: 5vh;
-  gap: ${(props) => props.theme.spacing.l};
+  gap: var(--spacing-l);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -84,8 +84,8 @@ const Switch = styled.div`
   background-color: rgba(255, 255, 255, 0.4);
   display: flex;
   justify-content: ${(props) => (props.$right ? "flex-end" : "flex-start")};
-  border-radius: 3.125rem;
-  padding: ${(props) => props.theme.spacing.s};
+  border-radius: var(--border-radius-large);
+  padding: var(--spacing-s);
   cursor: pointer;
   z-index: 999;
 `;
@@ -93,5 +93,5 @@ const Switch = styled.div`
 const DragInfo = styled.div`
   text-align: center;
   z-index: 999;
-  filter: drop-shadow(0px 14px 25px ${(props) => props.theme.colors.dark});
+  filter: drop-shadow(0px 14px 25px var(--color-main));
 `;

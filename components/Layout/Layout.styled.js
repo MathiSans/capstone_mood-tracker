@@ -19,7 +19,7 @@ export const Page = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: ${(props) => props.theme.spacing.xxxl};
+  gap: var(--spacing-xxxl);
   margin-bottom: 10vh;
 `;
 
@@ -28,5 +28,5 @@ export const Navigation = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
-  gap: ${(props) => props.theme.spacing.l};
+  gap: var(--spacing-l);
 `;

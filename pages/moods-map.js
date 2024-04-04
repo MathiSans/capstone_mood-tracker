@@ -79,7 +79,7 @@ const Grid = styled.div`
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background: ${(props) => props.theme.effects.radialGradient};
+  background: var(--effect-radial-gradient);
 `;
 
 const DragInfo = styled.div`
@@ -91,5 +91,5 @@ const DragInfo = styled.div`
   top: 5vh;
   text-align: center;
   z-index: 999;
-  filter: drop-shadow(0px 14px 25px ${(props) => props.theme.colors.dark});
+  filter: drop-shadow(0px 14px 25px var(--color-main);
 `;

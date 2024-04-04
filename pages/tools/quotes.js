@@ -66,9 +66,8 @@ const Counter = styled.p`
   display: flex;
   justify-content: center;
   margin: 0;
-
   align-items: center;
-  border-radius: ${(props) => props.theme.borders.radiusRound};
-  background-color: white;
-  color: black;
+  border-radius: var(--border-radius-round);
+  background-color: var(--color-main-alt);
+  color: var(--color-main);
 `;

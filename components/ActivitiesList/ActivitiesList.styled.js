@@ -1,40 +1,40 @@
 import styled from "styled-components";
 
 export const Select = styled.select`
-  color: ${(props) => props.theme.colors.dark};
+  color: var(--color-main);
   padding: 0.2rem;
 `;
 
 export const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: ${(props) => props.theme.spacing.xl};
-  padding: ${(props) => props.theme.spacing.xl};
+  grid-gap: var(--spacing-xl);
+  padding: var(--spacing-xl);
   justify-items: center;
   align-items: center;
   width: 100vw;
 `;
 
 export const Card = styled.div`
-  background: ${(props) => props.theme.effects.radialGradient};
+  background: var(--effect-radial-gradient);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: ${(props) => props.theme.spacing.l};
-  border-radius: ${(props) => props.theme.borders.radiusSmall};
+  gap: var(--spacing-l);
+  border-radius: var(--radius-small);
   width: 300px;
-  padding: ${(props) => props.theme.spacing.xl};
+  padding: var(--spacing-xl);
   position: relative;
 `;
 
 export const Tag = styled.div`
   right: 20px;
   top: 22px;
-  background-color: ${(props) => props.theme.colors.light};
+  background-color: var(--color-main-alt);
   color: #3a3a3a;
-  padding: ${(props) => `${props.theme.spacing.xs} ${props.theme.spacing.m}`};
+  padding: var(--spacing-s);
   border-radius: 0.625rem;
-  font-size: ${(props) => props.theme.fontsize.small};
+  font-size: var(--font-size-small);
 `;
 
 export const Emoji = styled.p`
@@ -45,13 +45,13 @@ export const Emoji = styled.p`
 
 export const Title = styled.p`
   text-align: center;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   padding: 0;
   margin: 0;
 `;
 
 export const Description = styled.p`
-  color: ${(props) => props.theme.colors.neutral};
+  color: var(--color-neutral);
   text-align: center;
   padding: 0;
   margin: 0;

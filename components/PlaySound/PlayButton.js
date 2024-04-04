@@ -26,7 +26,7 @@ const StyledPlayButton = styled.button`
   cursor: pointer;
 
   p {
-    color: ${(props) => props.themelight};
+    color: var(--color-main-alt);
     font-size: 0.9rem;
     text-align: center;
   }

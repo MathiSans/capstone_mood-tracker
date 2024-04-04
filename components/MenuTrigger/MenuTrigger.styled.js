@@ -4,7 +4,7 @@ export const TriggerContainer = styled.div`
   position: fixed;
   justify-content: center;
   align-items: end;
-  padding-bottom: ${(props) => props.theme.spacing.xl};
+  padding-bottom: var(--spacing-xl);
   bottom: 0;
   display: flex;
   left: 50%;
@@ -12,20 +12,20 @@ export const TriggerContainer = styled.div`
 `;
 
 export const MenuTriggerButton = styled.button`
-  background-color: ${(props) => props.theme.colors.light};
+  background-color: var(--color-main-alt);
   border: none;
-  color: ${(props) => props.theme.colors.dark};
+  color: var(--color-main);
   ${(props) =>
     props.$showMenu &&
     css`
       background-color: transparent;
-      border: 1px solid ${(props) => props.theme.colors.light};
-      color: ${(props) => props.theme.colors.light};
+      border: 1px solid var(--color-main-alt);
+      color: var(--color-main-alt);
     `}
 
-  border-radius: ${(props) => props.theme.borders.radiusMedium};
-  padding: ${(props) => props.theme.spacing.m} 24px;
-  font-size: ${(props) => props.theme.fontsize.default};
-  filter: drop-shadow(${(props) => props.theme.colors.dark} 0rem 0rem 25px);
+  border-radius: var(--border-radius-medium);
+  padding: var(--spacing-m) 24px;
+  font-size: var(--font-size-default);
+  filter: drop-shadow(var(--color-main) 0rem 0rem 25px);
   cursor: pointer;
 `;

@@ -9,7 +9,6 @@ import { motion } from "framer-motion";
 import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
 import fetchLocation from "@/utils/locationTracking";
-import Entries from "@/pages/entries";
 
 export default function Flow() {
   const router = useRouter();

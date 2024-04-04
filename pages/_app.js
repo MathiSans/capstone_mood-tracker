@@ -11,14 +11,19 @@ const theme = {
     danger: "red",
   },
   fonts: {
-    body: "system-ui",
+    main: "system-ui",
     serif: "Cambria, Cochin, Georgia, Times, serif",
   },
-  fontsize: {
+  fontSize: {
     default: "1rem",
     small: "0.8rem",
     large: "2rem",
     xl: "3rem",
+  },
+  fontWeight: {
+    light: "200",
+    normal: "400",
+    bold: "700",
   },
   spacing: {
     xs: "4px",
@@ -42,7 +47,6 @@ const theme = {
     radiusLarge: "6.25rem",
     radiusRound: "50%",
     strength: "2px",
-    color: "#333333",
   },
 };
 

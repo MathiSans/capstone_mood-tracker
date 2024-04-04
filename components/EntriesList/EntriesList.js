@@ -46,9 +46,9 @@ export default function EntriesList() {
               exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.3 } }}
             >
               <Styled.Card onClick={() => router.push(`${entry._id}`)}>
-                <Styled.AnimationContainer>
+                <Styled.ColoredShapeContainer>
                   <Styled.ColoredShape color={entry.color} />
-                </Styled.AnimationContainer>
+                </Styled.ColoredShapeContainer>
                 <Styled.Sentence>
                   <Styled.StaticText>Somebody </Styled.StaticText>
                   {entry.location === "unknown"
@@ -71,7 +71,7 @@ export default function EntriesList() {
                     </span>
                   ))}
                 </Styled.Sentence>
-                <Styled.ButtonContainer>
+                <Styled.DeleteContainer>
                   {deletingId === entry._id ? (
                     <>
                       <Styled.DeleteQuestion>
@@ -91,17 +91,17 @@ export default function EntriesList() {
                     </>
                   ) : (
                     <>
-                      <Styled.RoundButton
+                      <Styled.DeleteButton
                         as="a"
                         onClick={(event) =>
                           handleDeleteDialog(event, entry._id)
                         }
                       >
                         <FiTrash2 />
-                      </Styled.RoundButton>
+                      </Styled.DeleteButton>
                     </>
                   )}
-                </Styled.ButtonContainer>
+                </Styled.DeleteContainer>
               </Styled.Card>
             </motion.div>
           ))}
