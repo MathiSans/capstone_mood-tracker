@@ -5,7 +5,7 @@ import Animation from "@/components/3DAnimation/3DAnimation";
 import NavButton from "@/components/NavButton/NavButton";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
 import * as Styled from "@/components/Layout/Layout.styled";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
 import fetchLocation from "@/utils/locationTracking";
@@ -96,7 +96,7 @@ export default function Flow() {
 
   return (
     <>
-      {/* <Animation color={color} opacity={sliderValue} /> */}
+      <Animation color={color} opacity={sliderValue} />
       <AudioSettings
         page={page}
         experience={experience}
@@ -119,27 +119,50 @@ export default function Flow() {
         </Styled.Page>
         <Styled.Navigation>
           {!session && page === 0 && (
-            <NavButton
-              disabled={session}
-              handleClick={() => {
-                handleLoginButton();
-              }}
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ duration: 1.5 }}
             >
-              {session ? "" : "Login"}
-            </NavButton>
+              <NavButton
+                disabled={session}
+                handleClick={() => {
+                  handleLoginButton();
+                }}
+              >
+                {session ? "" : "Login"}
+              </NavButton>
+            </motion.div>
           )}
           {page < 1 && (
-            <NavButton
-              handleClick={() => {
-                setAudioTrigger(true);
-                setPage((currPage) => currPage + 1);
-              }}
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ duration: 1.5 }}
             >
-              {!session ? "anonymous" : "start your journey"}
-            </NavButton>
+              <NavButton
+                handleClick={() => {
+                  setAudioTrigger(true);
+                  setPage((currPage) => currPage + 1);
+                }}
+              >
+                {!session ? "anonymous" : "start your journey"}
+              </NavButton>
+            </motion.div>
           )}
           {page === 1 && (
-            <motion.div variants={button} initial="hidden" animate="show">
+            <motion.div
+              variants={button}
+              initial="hidden"
+              animate="show"
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ duration: 1.5 }}
+            >
+              <motion.div></motion.div>
               <NavButton
                 handleClick={() => {
                   setPage((currPage) => currPage + 1);
@@ -150,32 +173,63 @@ export default function Flow() {
             </motion.div>
           )}
           {page > 2 && page <= 4 && (
-            <NavButton handleClick={() => setPage((currPage) => currPage - 1)}>
-              prev
-            </NavButton>
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ duration: 1.5 }}
+            >
+              <NavButton
+                handleClick={() => setPage((currPage) => currPage - 1)}
+              >
+                prev
+              </NavButton>
+            </motion.div>
           )}
           {page >= 2 && page <= 3 && (
-            <NavButton
-              disabled={experience.length === 0}
-              handleClick={() => {
-                setPage((currPage) => currPage + 1);
-              }}
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ duration: 1.5 }}
             >
-              next
-            </NavButton>
+              <NavButton
+                disabled={experience.length === 0}
+                handleClick={() => {
+                  setPage((currPage) => currPage + 1);
+                }}
+              >
+                next
+              </NavButton>
+            </motion.div>
           )}
           {page === 4 && (
-            <NavButton
-              disabled={reactions.length === 0}
-              handleClick={handleSave}
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ duration: 1.5 }}
             >
-              next
-            </NavButton>
+              <NavButton
+                disabled={reactions.length === 0}
+                handleClick={handleSave}
+              >
+                next
+              </NavButton>
+            </motion.div>
           )}
+
           {page === 5 && (
-            <NavButton linkToPage={"./entries"}>
-              go to emotion entries
-            </NavButton>
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ duration: 1.5 }}
+            >
+              <NavButton linkToPage={"./entries"}>
+                go to emotion entries
+              </NavButton>
+            </motion.div>
           )}
         </Styled.Navigation>
       </Styled.Container>

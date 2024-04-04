@@ -20,7 +20,7 @@
     "eslint-config-next": "13.4.8",
     "face-api.js": "^0.22.2",
     "file-loader": "^6.2.0",
-    "framer-motion": "^11.0.8",
+    "framer-motion": "^11.0.24",
     "glslify-loader": "^2.0.0",
     "mongodb": "^6.5.0",
     "mongoose": "^8.2.1",
