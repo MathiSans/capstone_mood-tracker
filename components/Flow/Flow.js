@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
 import fetchLocation from "@/utils/locationTracking";
-import Entries from "@/pages/entries";
+import AnimationWrapper from "../AnimationWrapper/AnimationWrapper";
 
 export default function Flow() {
   const router = useRouter();
@@ -74,19 +74,11 @@ export default function Flow() {
     }
   }
 
-  const button = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        delay: 0,
-      },
-    },
-  };
-
   return (
     <>
-      <Animation color={color} opacity={sliderValue} />
+      <AnimationWrapper>
+        <Animation color={color} opacity={sliderValue} />
+      </AnimationWrapper>
       <AudioSettings
         page={page}
         experience={experience}
@@ -95,70 +87,76 @@ export default function Flow() {
       />
       <Styled.Container>
         <Styled.Page>
-          <PageDisplay
-            guides={guides}
-            experience={experience}
-            experiences={experiences}
-            page={page}
-            reactions={reactions}
-            sliderValue={sliderValue}
-            handleSliderChange={handleSliderChange}
-            handleSelectExperience={handleSelectExperience}
-            handleSelectReactions={handleSelectReactions}
-          />
+          <AnimationWrapper delay>
+            <PageDisplay
+              guides={guides}
+              experience={experience}
+              experiences={experiences}
+              page={page}
+              reactions={reactions}
+              sliderValue={sliderValue}
+              handleSliderChange={handleSliderChange}
+              handleSelectExperience={handleSelectExperience}
+              handleSelectReactions={handleSelectReactions}
+            />
+          </AnimationWrapper>
         </Styled.Page>
-        <Styled.Navigation>
-          {page === 0 && <NavButton disabled>login</NavButton>}
-          {page < 1 && (
-            <NavButton
-              handleClick={() => {
-                setAudioTrigger(true);
-                setPage((currPage) => currPage + 1);
-              }}
-            >
-              anonymous
-            </NavButton>
-          )}
-          {page === 1 && (
-            <motion.div variants={button} initial="hidden" animate="show">
+        <AnimationWrapper delay>
+          <Styled.Navigation>
+            {page === 0 && <NavButton disabled>login</NavButton>}
+            {page < 1 && (
               <NavButton
+                handleClick={() => {
+                  setAudioTrigger(true);
+                  setPage((currPage) => currPage + 1);
+                }}
+              >
+                anonymous
+              </NavButton>
+            )}
+            {page === 1 && (
+              <motion.div variants={animations} initial="hidden" animate="show">
+                <NavButton
+                  handleClick={() => {
+                    setPage((currPage) => currPage + 1);
+                  }}
+                >
+                  next
+                </NavButton>
+              </motion.div>
+            )}
+            {page > 2 && page <= 4 && (
+              <NavButton
+                handleClick={() => setPage((currPage) => currPage - 1)}
+              >
+                prev
+              </NavButton>
+            )}
+            {page >= 2 && page <= 3 && (
+              <NavButton
+                disabled={experience.length === 0}
                 handleClick={() => {
                   setPage((currPage) => currPage + 1);
                 }}
               >
                 next
               </NavButton>
-            </motion.div>
-          )}
-          {page > 2 && page <= 4 && (
-            <NavButton handleClick={() => setPage((currPage) => currPage - 1)}>
-              prev
-            </NavButton>
-          )}
-          {page >= 2 && page <= 3 && (
-            <NavButton
-              disabled={experience.length === 0}
-              handleClick={() => {
-                setPage((currPage) => currPage + 1);
-              }}
-            >
-              next
-            </NavButton>
-          )}
-          {page === 4 && (
-            <NavButton
-              disabled={reactions.length === 0}
-              handleClick={handleSave}
-            >
-              next
-            </NavButton>
-          )}
-          {page === 5 && (
-            <NavButton linkToPage={"./entries"}>
-              go to emotion entries
-            </NavButton>
-          )}
-        </Styled.Navigation>
+            )}
+            {page === 4 && (
+              <NavButton
+                disabled={reactions.length === 0}
+                handleClick={handleSave}
+              >
+                next
+              </NavButton>
+            )}
+            {page === 5 && (
+              <NavButton linkToPage={"./entries"}>
+                go to emotion entries
+              </NavButton>
+            )}
+          </Styled.Navigation>
+        </AnimationWrapper>
       </Styled.Container>
     </>
   );
