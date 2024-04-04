@@ -81,7 +81,7 @@ export default function EntriesList() {
                     <Styled.StaticText>{session.user.name} </Styled.StaticText>
                   ) : (
                     <Styled.StaticText>Somebody </Styled.StaticText>
-                  )}
+                  )}{" "}
                   {entry.location === "unknown"
                     ? ""
                     : `in ${entry.location.region}`}
