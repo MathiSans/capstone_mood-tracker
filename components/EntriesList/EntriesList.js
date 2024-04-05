@@ -7,8 +7,7 @@ import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Circle from "../Circle/Circle";
 import { Grid } from "./EntriesList.styled";
-import Link from "next/link";
-import experienceAnalyser from "@/utils/ExperienceAnalyser";
+import experienceAnalyser from "@/utils/experienceAnalyser";
 
 export default function EntriesList({ filtered, filter }) {
   const router = useRouter();
@@ -49,10 +48,10 @@ export default function EntriesList({ filtered, filter }) {
   }
 
   const result = experienceAnalyser(filtered);
-  const totalCount = result[1].totalCount;
+  const totalCount = result.totalCount;
   console.log("result", result);
   console.log("totalCount", totalCount);
-  const experiences = !isExperiencePage ? filtered : result[0];
+  const experiences = !isExperiencePage ? filtered : result.experiences;
   const sortedExperiences = experiences.sort((a, b) => b.count - a.count);
   console.log("sortedExperiences", sortedExperiences);
 
