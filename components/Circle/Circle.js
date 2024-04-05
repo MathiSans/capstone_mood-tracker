@@ -45,9 +45,9 @@ export default function Circle({ circleSize, name, color, count, percentage }) {
       >
         <LegacyAnimation color={color} opacity={circleSize} />
         <h2 style={{ fontSize: circleSize / 10 }}>
+          {percentage}%<br />
           {name} <br />
           {count} entries
-          {percentage}%
         </h2>
       </motion.div>
     </motion.div>

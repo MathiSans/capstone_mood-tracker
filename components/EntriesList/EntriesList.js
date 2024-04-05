@@ -46,18 +46,9 @@ export default function EntriesList({ filtered, filter }) {
   }
 
   const result = experienceAnalyser(filtered);
+  const totalCount = result[1].totalCount;
   console.log("result", result);
-  console.log("filtered", filtered);
-
-  function calculatePercentage(array, key, value) {
-    let count = 0;
-    for (let i = 0; i < array.length; i++) {
-      if (array[i][key] === value) {
-        count++;
-      }
-    }
-    return (count / array.length) * 100;
-  }
+  console.log("totalCount", totalCount);
 
   return (
     <>
@@ -69,11 +60,7 @@ export default function EntriesList({ filtered, filter }) {
               <Circle
                 key={index}
                 count={entry.count}
-                percentage={calculatePercentage(
-                  result,
-                  "experience",
-                  entry.experience
-                )}
+                percentage={Math.floor((entry.count / totalCount) * 100)}
                 circleSize={Math.max(
                   Math.sqrt(entry.count) *
                     Math.min(screenSize.width, screenSize.height) *
