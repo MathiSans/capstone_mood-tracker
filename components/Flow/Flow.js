@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { experiences } from "@/experiences";
 import Animation from "@/components/3DAnimation/3DAnimation";
 import NavButton from "@/components/NavButton/NavButton";
@@ -9,10 +9,9 @@ import { motion } from "framer-motion";
 import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
 import fetchLocation from "@/utils/locationTracking";
-import Entries from "@/pages/entries";
+import LoginButton from "../LoginButton/LoginButton";
 
 export default function Flow() {
-  const router = useRouter();
   const { mutate } = useSWR("/api/entries");
   const [experience, setExperience] = useState([]);
   const [sliderValue, setSliderValue] = useState(0);
@@ -20,6 +19,9 @@ export default function Flow() {
   const [color, setColor] = useState("grey");
   const [page, setPage] = useState(0);
   const [audioTrigger, setAudioTrigger] = useState(false);
+
+  const { data: session } = useSession();
+  const userId = session?.user.id;
 
   const guides = [
     "share your emotions ...",
@@ -56,7 +58,7 @@ export default function Flow() {
       },
       body: JSON.stringify({
         time: new Date().toLocaleString(),
-        user: "anonymous",
+        user: session ? userId : null,
         location: {
           region: location.region,
           city: location.city,
@@ -84,9 +86,17 @@ export default function Flow() {
     },
   };
 
+  const handleLoginButton = () => {
+    if (session) {
+      signOut();
+    } else {
+      signIn();
+    }
+  };
+
   return (
     <>
-      <Animation color={color} opacity={sliderValue} />
+      {/* <Animation color={color} opacity={sliderValue} /> */}
       <AudioSettings
         page={page}
         experience={experience}
@@ -108,7 +118,16 @@ export default function Flow() {
           />
         </Styled.Page>
         <Styled.Navigation>
-          {page === 0 && <NavButton disabled>login</NavButton>}
+          {!session && page === 0 && (
+            <NavButton
+              disabled={session}
+              handleClick={() => {
+                handleLoginButton();
+              }}
+            >
+              {session ? "" : "Login"}
+            </NavButton>
+          )}
           {page < 1 && (
             <NavButton
               handleClick={() => {
@@ -116,7 +135,7 @@ export default function Flow() {
                 setPage((currPage) => currPage + 1);
               }}
             >
-              anonymous
+              {!session ? "anonymous" : "start your journey"}
             </NavButton>
           )}
           {page === 1 && (
