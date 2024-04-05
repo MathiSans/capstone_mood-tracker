@@ -1,9 +1,17 @@
 import { motion } from "framer-motion";
 import LegacyAnimation from "../LegacyAnimation/LegacyAnimation";
 
-export default function Circle({ circleSize, name, color, count, percentage }) {
+export default function Circle({
+  circleSize,
+  name,
+  color,
+  count,
+  percentage,
+  handleExperienceClick,
+}) {
   return (
     <motion.div
+      onClick={handleExperienceClick}
       drag
       initial={{ scale: 0.6, opacity: 0 }}
       dragTransition={{ bounceStiffness: 10, bounceDamping: 40 }}
