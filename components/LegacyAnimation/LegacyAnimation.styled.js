@@ -43,9 +43,6 @@ export const BlobsContainer = styled.div`
   height: 100%;
   display: block;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 `;
 
 export const Blob = styled.div`

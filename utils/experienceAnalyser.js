@@ -28,6 +28,8 @@ export default function experienceAnalyser(data) {
       count: experienceMap[experience].count,
     });
   }
-
-  return [result, { totalCount: totalCount }];
+  return {
+    experiences: result,
+    totalCount,
+  };
 }

@@ -9,15 +9,17 @@ const spring = {
   damping: 10,
 };
 
-export default function Quotes({ quote, refreshQuote, handleCouter }) {
+export default function Quotes({ quote, refreshQuote, handleCounter }) {
   const [isFlipped, setIsFlipped] = useState(false);
 
   function handleClick() {
-    setIsFlipped((prevState) => !prevState);
-    if (!isFlipped) {
-      refreshQuote();
-      handleCouter();
-    }
+    setIsFlipped((prevState) => {
+      if (!prevState) {
+        refreshQuote();
+        handleCounter();
+      }
+      return !prevState;
+    });
   }
 
   const [rotateXaxis, setRotateXaxis] = useState(0);
