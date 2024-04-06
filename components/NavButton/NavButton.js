@@ -1,4 +1,5 @@
 import * as Styled from "./NavButton.styled";
+import { useTheme } from "styled-components";
 
 export default function NavButton({
   handleClick,
@@ -6,10 +7,11 @@ export default function NavButton({
   children,
   linkToPage,
 }) {
+  const theme = useTheme();
   return (
     <Styled.Button onClick={handleClick} disabled={disabled}>
       {linkToPage ? (
-        <Styled.ButtonTextLink $disabled={disabled} href={linkToPage}>
+        <Styled.ButtonTextLink $disabled href={linkToPage} theme={theme}>
           {children}
         </Styled.ButtonTextLink>
       ) : (

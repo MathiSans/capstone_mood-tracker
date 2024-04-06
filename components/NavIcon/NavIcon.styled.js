@@ -1,17 +1,17 @@
 import styled from "styled-components";
 
 export const IconContainer = styled.button`
-  padding: 4px;
-  border-radius: 100px;
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius-large);
   border: none;
   font-size: 1.5rem;
   background-color: transparent;
-  color: white;
+  color: var(--color-main-alt);
   cursor: pointer;
   ${(props) =>
     props.disabled &&
     css`
-      color: grey;
+      color: var(--color-neutral);
       cursor: not-allowed;
     `}
 `;
