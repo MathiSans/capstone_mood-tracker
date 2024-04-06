@@ -2,6 +2,7 @@ import GlobalStyle from "../styles";
 import { SWRConfig } from "swr";
 import Layout from "@/components/Layout/Layout";
 import { ThemeProvider } from "styled-components";
+import { SessionProvider } from "next-auth/react";
 
 const theme = {
   colors: {
@@ -64,9 +65,11 @@ export default function App({
               fetch(resource, init).then((res) => res.json()),
           }}
         >
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <SessionProvider session={session}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </SessionProvider>
         </SWRConfig>
       </ThemeProvider>
     </>
