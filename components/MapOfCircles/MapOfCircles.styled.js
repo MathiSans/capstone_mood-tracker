@@ -11,9 +11,5 @@ export const Grid = styled.div`
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background: radial-gradient(
-    circle,
-    rgba(42, 42, 42, 1) 0%,
-    rgba(13, 13, 13, 1) 100%
-  );
+  background: var(--effect-radial-gradient);
 `;

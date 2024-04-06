@@ -10,6 +10,7 @@
     "test": "jest --watchAll"
   },
   "dependencies": {
+    "@auth/mongodb-adapter": "^2.5.2",
     "@react-spring/three": "^9.7.3",
     "@react-three/drei": "^9.101.0",
     "@react-three/fiber": "^8.15.19",
@@ -21,17 +22,19 @@
     "file-loader": "^6.2.0",
     "framer-motion": "^11.0.8",
     "glslify-loader": "^2.0.0",
+    "mongodb": "^6.5.0",
     "mongoose": "^8.2.1",
     "nanoid": "^5.0.6",
     "next": "13.4.8",
+    "next-auth": "^4.24.7",
+    "raw-loader": "^4.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^5.0.1",
     "styled-components": "^6.0.2",
     "swr": "^2.2.5",
     "three": "^0.162.0",
-    "use-local-storage-state": "^19.1.0",
-    "raw-loader": "^4.0.2"
+    "use-local-storage-state": "^19.1.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",

@@ -14,11 +14,13 @@ import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa6";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useSession } from "next-auth/react";
 
 export default function Entry() {
   const [showSentence, setShowSentence] = useState(true);
   const router = useRouter();
   const { id } = router.query;
+  const { data: session } = useSession();
 
   const { data: entry, isLoading } = useSWR(`/api/entries/${id}`);
 
@@ -53,10 +55,14 @@ export default function Entry() {
               {" "}
               <Page>
                 <Sentence>
-                  <StaticText>Somebody </StaticText>
+                  {session ? (
+                    <StaticText>{session.user.name} </StaticText>
+                  ) : (
+                    <StaticText>Somebody </StaticText>
+                  )}{" "}
                   {entry.location === "unknown"
                     ? ""
-                    : `in ${entry.location.city}/${entry.location.region}`}
+                    : `in ${entry.location.region}`}
                   <StaticText> felt</StaticText> {entry.experience}.{" "}
                   <StaticText>More specifically</StaticText>{" "}
                   <Intensity

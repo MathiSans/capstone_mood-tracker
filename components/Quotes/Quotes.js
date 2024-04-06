@@ -132,11 +132,11 @@ export default function Quotes({ quote, refreshQuote, handleCounter }) {
           >
             <Styled.QuoteCard variant="Back">
               <Styled.Quote
-                style={{ fontSize: `${getFontSize(quote[0].content)}px` }}
+                style={{ fontSize: `${getFontSize(quote.quote)}px` }}
               >
-                {quote[0].content}
+                {quote.quote}
               </Styled.Quote>
-              <p>{quote[0].author}</p>
+              <p>{quote.author}</p>
             </Styled.QuoteCard>
           </motion.div>
         </div>
