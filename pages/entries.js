@@ -61,15 +61,15 @@ export default function Entries() {
   }
 
   function handleEntryFilter(event) {
-    if (event.target.value === "1") {
-      setFilter("value 1");
+    if (event.target.value === "showAll") {
+      setFilter("showAll");
       setFiltered([...data].reverse());
     }
-    if (event.target.value === "2") {
-      setFilter("value 2");
+    if (event.target.value === "lastWeek") {
+      setFilter("lastWeek");
     }
-    if (event.target.value === "3") {
-      setFilter("value 3");
+    if (event.target.value === "moodsMap") {
+      setFilter("moodsMap");
     }
   }
   //End
@@ -80,9 +80,9 @@ export default function Entries() {
       <Page>
         <Guide text={"emotion collection"} />
         <select onChange={handleEntryFilter}>
-          <option value="1">Show All</option>
-          <option value="2">Show Emotion of the Last Week</option>
-          <option value="3">Visualize</option>
+          <option value="showAll">Show All</option>
+          <option value="lastWeek">Show Emotion of the Last Week</option>
+          <option value="moodsMap">Visualize</option>
         </select>
         <EntriesList filtered={filtered} filter={filter} />
       </Page>
