@@ -8,41 +8,48 @@ export default createGlobalStyle`
   }
 
   :root {
-    --color-main: ${(props) => props.theme.colors.dark};
-    --color-main-alt: ${(props) => props.theme.colors.light};
-    --color-neutral: ${(props) => props.theme.colors.neutral};
-    --color-danger: ${(props) => props.theme.colors.danger};
+    ${(props) => {
+      const { colors, fonts, fontSize, fontWeight, spacing, effects, borders } =
+        props.theme;
 
-    --font-main: ${(props) => props.theme.fonts.main};
-    --font-serif: ${(props) => props.theme.fonts.serif};
+      return `
+        --color-main: ${colors.dark};
+        --color-main-alt: ${colors.light};
+        --color-neutral: ${colors.neutral};
+        --color-danger: ${colors.danger};
 
-    --font-size-default: ${(props) => props.theme.fontSize.default};
-    --font-size-small: ${(props) => props.theme.fontSize.small};
-    --font-size-large: ${(props) => props.theme.fontSize.large};
-    --font-size-xl: ${(props) => props.theme.fontSize.xl};
+        --font-main: ${fonts.main};
+        --font-serif: ${fonts.serif};
 
-    --font-weight-light: ${(props) => props.theme.fontWeight.light};
-    --font-weight-normal: ${(props) => props.theme.fontWeight.normal};
-    --font-weight-bold: ${(props) => props.theme.fontWeight.bold};
+        --font-size-default: ${fontSize.default};
+        --font-size-small: ${fontSize.small};
+        --font-size-large: ${fontSize.large};
+        --font-size-xl: ${fontSize.xl};
 
-    --spacing-xs: ${(props) => props.theme.spacing.xs};
-    --spacing-s: ${(props) => props.theme.spacing.s};
-    --spacing-m: ${(props) => props.theme.spacing.m};
-    --spacing-l: ${(props) => props.theme.spacing.l};
-    --spacing-xl: ${(props) => props.theme.spacing.xl};
-    --spacing-xxl: ${(props) => props.theme.spacing.xxl};
-    --spacing-xxxl: ${(props) => props.theme.spacing.xxxl};
+        --font-weight-light: ${fontWeight.light};
+        --font-weight-normal: ${fontWeight.normal};
+        --font-weight-bold: ${fontWeight.bold};
 
-    --effect-box-shadow: ${(props) => props.theme.effects.boxShadow};
-    --effect-drop-shadow: ${(props) => props.theme.effects.dropShadow};
-    --effect-linear-gradient: ${(props) => props.theme.effects.linearGradient};
-    --effect-radial-gradient: ${(props) => props.theme.effects.radialGradient};
+        --spacing-xs: ${spacing.xs};
+        --spacing-s: ${spacing.s};
+        --spacing-m: ${spacing.m};
+        --spacing-l: ${spacing.l};
+        --spacing-xl: ${spacing.xl};
+        --spacing-xxl: ${spacing.xxl};
+        --spacing-xxxl: ${spacing.xxxl};
 
-    --border-radius-small: ${(props) => props.theme.borders.radiusSmall};
-    --border-radius-medium: ${(props) => props.theme.borders.radiusMedium};
-    --border-radius-large: ${(props) => props.theme.borders.radiusLarge};
-    --border-radius-round: ${(props) => props.theme.borders.radiusRound};
-    --border-strength: ${(props) => props.theme.borders.strength};
+        --effect-box-shadow: ${effects.boxShadow};
+        --effect-drop-shadow: ${effects.dropShadow};
+        --effect-linear-gradient: ${effects.linearGradient};
+        --effect-radial-gradient: ${effects.radialGradient};
+
+        --border-radius-small: ${borders.radiusSmall};
+        --border-radius-medium: ${borders.radiusMedium};
+        --border-radius-large: ${borders.radiusLarge};
+        --border-radius-round: ${borders.radiusRound};
+        --border-strength: ${borders.strength};
+      `;
+    }}
   }
 
   body {

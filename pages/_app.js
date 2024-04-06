@@ -42,9 +42,9 @@ const theme = {
       "radial-gradient(circle, rgba(42, 42, 42, 1) 0%, rgba(13, 13, 13, 1) 100%)",
   },
   borders: {
-    radiusSmall: "0.75rem",
-    radiusMedium: "1.25rem",
-    radiusLarge: "6.25rem",
+    radiusSmall: "12px",
+    radiusMedium: "20px",
+    radiusLarge: "100px",
     radiusRound: "50%",
     strength: "2px",
   },

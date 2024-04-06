@@ -9,14 +9,14 @@ const spring = {
   damping: 10,
 };
 
-export default function Quotes({ quote, refreshQuote, handleCouter }) {
+export default function Quotes({ quote, refreshQuote, handleCounter }) {
   const [isFlipped, setIsFlipped] = useState(false);
 
   function handleClick() {
     setIsFlipped((prevState) => !prevState);
     if (!isFlipped) {
       refreshQuote();
-      handleCouter();
+      handleCounter();
     }
   }
 
@@ -130,11 +130,11 @@ export default function Quotes({ quote, refreshQuote, handleCouter }) {
           >
             <Styled.QuoteCard variant="Back">
               <Styled.Quote
-                style={{ fontSize: `${getFontSize(quote[0].content)}px` }}
+                style={{ fontSize: `${getFontSize(quote.quote)}px` }}
               >
-                {quote[0].content}
+                {quote.quote}
               </Styled.Quote>
-              <p>{quote[0].author}</p>
+              <p>{quote.author}</p>
             </Styled.QuoteCard>
           </motion.div>
         </div>

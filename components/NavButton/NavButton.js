@@ -11,11 +11,7 @@ export default function NavButton({
   return (
     <Styled.Button onClick={handleClick} $disabled={disabled} theme={theme}>
       {linkToPage ? (
-        <Styled.ButtonTextLink
-          $disabled={disabled}
-          href={linkToPage}
-          theme={theme}
-        >
+        <Styled.ButtonTextLink $disabled href={linkToPage} theme={theme}>
           {children}
         </Styled.ButtonTextLink>
       ) : (

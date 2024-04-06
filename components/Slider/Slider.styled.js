@@ -7,7 +7,7 @@ export const IntensityContainer = styled.div`
 
 export const Intensity = styled.p`
   color: ${(props) =>
-    props.index === 1 ? `var(--color-main-alt)` : ` var(--color-neutral)`};
+    props.highlighted ? `var(--color-main-alt)` : ` var(--color-neutral)`};
   text-align: center;
   min-width: 80px;
   text-shadow: var(--color-main) 2px 0 25px;

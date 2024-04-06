@@ -32,7 +32,7 @@ export default function Slider({
       />
       <Styled.IntensityContainer>
         {Intensity(sliderValue).map((intensity, index) => (
-          <Styled.Intensity index={index} key={index}>
+          <Styled.Intensity highlighted={index === 1} key={index}>
             {intensity}
           </Styled.Intensity>
         ))}
