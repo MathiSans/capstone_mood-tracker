@@ -8,7 +8,7 @@ export default function LoginButton() {
   if (session) {
     return (
       <>
-        Hello, {session.user.name}! <br />
+        {/* Hello, {session.user.name}! <br />
         <button type="button" onClick={() => signOut()}>
           Sign out
         </button>
@@ -27,7 +27,7 @@ export default function LoginButton() {
         Not signed in <br />
         <button type="button" onClick={() => signIn()}>
           Sign in
-        </button>
+        </button> */}
       </>
     );
   }
