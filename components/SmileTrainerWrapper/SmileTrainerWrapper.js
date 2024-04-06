@@ -8,11 +8,9 @@ export default function SmileTrainer() {
   const router = useRouter();
 
   return (
-    <Styled.Container>
-      <Styled.Page>
-        <Guide text={"Smile Trainer"} />
-        <FaceDetection />
-      </Styled.Page>
-    </Styled.Container>
+    <>
+      <Guide text={"Smile Trainer"} />
+      <FaceDetection />
+    </>
   );
 }

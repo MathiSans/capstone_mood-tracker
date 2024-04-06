@@ -9,7 +9,7 @@ export default function NavButton({
 }) {
   const theme = useTheme();
   return (
-    <Styled.Button onClick={handleClick} $disabled={disabled} theme={theme}>
+    <Styled.Button onClick={handleClick} disabled={disabled}>
       {linkToPage ? (
         <Styled.ButtonTextLink $disabled href={linkToPage} theme={theme}>
           {children}
