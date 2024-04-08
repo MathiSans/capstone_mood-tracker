@@ -49,25 +49,21 @@ export default function EntriesList({ filtered, filter }) {
 
   const result = experienceAnalyser(filtered);
   const totalCount = result.totalCount;
-  console.log("result", result);
-  console.log("totalCount", totalCount);
+
   const experiences = !isExperiencePage ? filtered : result.experiences;
   const sortedExperiences = experiences.sort((a, b) => b.count - a.count);
-  console.log("sortedExperiences", sortedExperiences);
 
   const singleEmotionEntryList = experiences.filter(
     (experience) => experience.experience === targetExperience
   );
   const handleExperienceClick = (experience) => {
-    console.log("click");
     setTargetExperience(experience);
     setIsExperiencePage(!isExperiencePage);
   };
-  console.log("singleEmotionEntryList", singleEmotionEntryList);
 
   return (
     <>
-      {filter == "value 3" ? (
+      {filter == "moodsMap" ? (
         <>
           <p>This are your moods of the last week</p>
           {!isExperiencePage ? (
@@ -84,24 +80,22 @@ export default function EntriesList({ filtered, filter }) {
           <Grid>
             {isExperiencePage ? (
               sortedExperiences.map((entry, index) => (
-                <>
-                  <Circle
-                    key={index}
-                    count={entry.count}
-                    percentage={Math.floor((entry.count / totalCount) * 100)}
-                    circleSize={Math.max(
-                      Math.sqrt(entry.count) *
-                        Math.min(screenSize.width, screenSize.height) *
-                        (0.2 / Math.log(entry.count + 3)),
-                      10
-                    )}
-                    name={entry.experience}
-                    color={entry.color}
-                    handleExperienceClick={() =>
-                      handleExperienceClick(entry.experience)
-                    }
-                  />
-                </>
+                <Circle
+                  key={entry._id}
+                  count={entry.count}
+                  percentage={Math.floor((entry.count / totalCount) * 100)}
+                  circleSize={Math.max(
+                    Math.sqrt(entry.count) *
+                      Math.min(screenSize.width, screenSize.height) *
+                      (0.2 / Math.log(entry.count + 3)),
+                    10
+                  )}
+                  name={entry.experience}
+                  color={entry.color}
+                  handleExperienceClick={() =>
+                    handleExperienceClick(entry.experience)
+                  }
+                />
               ))
             ) : (
               <AnimatePresence>
@@ -117,14 +111,14 @@ export default function EntriesList({ filtered, filter }) {
                       }}
                     >
                       <Styled.Card onClick={() => router.push(`${entry._id}`)}>
-                        <Styled.AnimationContainer>
+                        <Styled.ColoredShapeContainer>
                           <Styled.ColoredShape color={entry.color} />
-                        </Styled.AnimationContainer>
+                        </Styled.ColoredShapeContainer>
                         <Styled.Sentence>
                           <Styled.StaticText>Somebody </Styled.StaticText>
                           {entry.location === "unknown"
                             ? ""
-                            : `in ${entry.location}`}
+                            : `in ${entry.location.region}`}
                           <Styled.StaticText> felt</Styled.StaticText>{" "}
                           {entry.experience}.{" "}
                           <Styled.StaticText>
@@ -152,7 +146,7 @@ export default function EntriesList({ filtered, filter }) {
                           )}
                         </div>
 
-                        <Styled.ButtonContainer>
+                        <Styled.DeleteContainer>
                           {deletingId === entry._id ? (
                             <>
                               <Styled.DeleteQuestion>
@@ -176,17 +170,17 @@ export default function EntriesList({ filtered, filter }) {
                             </>
                           ) : (
                             <>
-                              <Styled.RoundButton
+                              <Styled.DeleteButton
                                 as="a"
                                 onClick={(event) =>
                                   handleDeleteDialog(event, entry._id)
                                 }
                               >
                                 <FiTrash2 />
-                              </Styled.RoundButton>
+                              </Styled.DeleteButton>
                             </>
                           )}
-                        </Styled.ButtonContainer>
+                        </Styled.DeleteContainer>
                       </Styled.Card>
                     </motion.div>
                   </>
@@ -197,7 +191,7 @@ export default function EntriesList({ filtered, filter }) {
         </>
       ) : (
         <>
-          {filter === "value 2" && <p>This are your moods of the last week</p>}
+          {filter === "lastWeek" && <p>This are your moods of the last week</p>}
           <Styled.Grid>
             <AnimatePresence>
               {filtered.map((entry) => (
@@ -211,14 +205,14 @@ export default function EntriesList({ filtered, filter }) {
                   }}
                 >
                   <Styled.Card onClick={() => router.push(`${entry._id}`)}>
-                    <Styled.AnimationContainer>
+                    <Styled.ColoredShapeContainer>
                       <Styled.ColoredShape color={entry.color} />
-                    </Styled.AnimationContainer>
+                    </Styled.ColoredShapeContainer>
                     <Styled.Sentence>
                       <Styled.StaticText>Somebody </Styled.StaticText>
                       {entry.location === "unknown"
                         ? ""
-                        : `in ${entry.location}`}
+                        : `in ${entry.location.region}`}
                       <Styled.StaticText> felt</Styled.StaticText>{" "}
                       {entry.experience}.{" "}
                       <Styled.StaticText>More specifically</Styled.StaticText>{" "}
@@ -237,14 +231,14 @@ export default function EntriesList({ filtered, filter }) {
                       ))}
                     </Styled.Sentence>
                     <div>
-                      {filter === "value 2" ? (
+                      {filter === "lastWeek" ? (
                         <Styled.Sentence>{entry.time}</Styled.Sentence>
                       ) : (
                         ""
                       )}
                     </div>
 
-                    <Styled.ButtonContainer>
+                    <Styled.DeleteContainer>
                       {deletingId === entry._id ? (
                         <>
                           <Styled.DeleteQuestion>
@@ -266,17 +260,17 @@ export default function EntriesList({ filtered, filter }) {
                         </>
                       ) : (
                         <>
-                          <Styled.RoundButton
+                          <Styled.DeleteButton
                             as="a"
                             onClick={(event) =>
                               handleDeleteDialog(event, entry._id)
                             }
                           >
                             <FiTrash2 />
-                          </Styled.RoundButton>
+                          </Styled.DeleteButton>
                         </>
                       )}
-                    </Styled.ButtonContainer>
+                    </Styled.DeleteContainer>
                   </Styled.Card>
                 </motion.div>
               ))}

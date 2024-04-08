@@ -9,14 +9,12 @@ export default function Entries() {
   const { data, isLoading } = useSWR("/api/entries");
   const [filter, setFilter] = useState(""); //Filter Entries State
   const [filtered, setFiltered] = useState([]);
-
-  console.log("Data received:", data);
+  const reversedData = Array.isArray(data) ? [...data].reverse() : [];
 
   useEffect(() => {
     if (Array.isArray(data)) {
       const currentDate = new Date();
-      const reversedData = [...data].reverse();
-      console.log("Reversed data:", reversedData);
+      // const reversedData = [...data].reverse();
       // Create an array to store the last 7 days' dates
       const lastSevenDays = [];
 
@@ -31,8 +29,8 @@ export default function Entries() {
         }.${date.getFullYear()}`;
         lastSevenDays.push(`${formattedDate1}, ${formattedDate2}`);
       }
-      console.log("Last seven days:", lastSevenDays);
-      if (filter === "value 2" || "value 3") {
+
+      if (filter === "lastWeek" || "moodsMap") {
         const lastSevenDaysEntries = reversedData.filter((entry) => {
           const entryDate = entry.time.split(",")[0].trim(); // Get the date part of the entry's time
           const match = lastSevenDays.some((dates) => {
@@ -41,14 +39,14 @@ export default function Entries() {
           });
           return match;
         });
-        console.log("Last seven days entries:", lastSevenDaysEntries);
+
         setFiltered(lastSevenDaysEntries);
       }
-      if (filter === "value 1") {
-        setFiltered(reversedData); // Set filtered to reversedData for other cases
+      if (filter === "showAll") {
+        setFiltered(reversedData);
       }
     } else {
-      console.error("Data is not iterable (not an array)");
+      setFiltered(reversedData);
     }
   }, [data, filter]);
 
@@ -74,7 +72,6 @@ export default function Entries() {
   }
   //End
 
-  console.log(filter);
   return (
     <Container>
       <Page>
