@@ -8,13 +8,9 @@ import { useRouter } from "next/router";
 import Circle from "../Circle/Circle";
 import { Grid } from "./EntriesList.styled";
 import experienceAnalyser from "@/utils/experienceAnalyser";
+import MapOfCircles from "../MapOfCircles/MapOfCircles";
 
-export default function EntriesList({
-  filtered,
-  filter,
-  isVisualized,
-  handleIsVisualized,
-}) {
+export default function EntriesList({ filtered, filter, isVisualized }) {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState(null);
   const { mutate } = useSWRConfig();
@@ -84,25 +80,31 @@ export default function EntriesList({
           )}
           <Grid>
             {isExperiencePage ? (
-              sortedExperiences.map((entry, index) => (
-                <Circle
-                  key={entry._id}
-                  count={entry.count}
-                  percentage={Math.floor((entry.count / totalCount) * 100)}
-                  circleSize={Math.max(
-                    Math.sqrt(entry.count) *
-                      Math.min(screenSize.width, screenSize.height) *
-                      (0.2 / Math.log(entry.count + 3)),
-                    10
-                  )}
-                  name={entry.experience}
-                  color={entry.color}
-                  handleExperienceClick={() =>
-                    handleExperienceClick(entry.experience)
-                  }
-                />
-              ))
+              <MapOfCircles
+                data={sortedExperiences}
+                handleExperienceClick={handleExperienceClick}
+                totalCount={totalCount}
+                isEntriesListStyle={true}
+              />
             ) : (
+              // sortedExperiences.map((entry, index) => (
+              //   <Circle
+              //     key={entry._id}
+              //     count={entry.count}
+              //     percentage={Math.floor((entry.count / totalCount) * 100)}
+              //     circleSize={Math.max(
+              //       Math.sqrt(entry.count) *
+              //         Math.min(screenSize.width, screenSize.height) *
+              //         (0.2 / Math.log(entry.count + 3)),
+              //       10
+              //     )}
+              //     name={entry.experience}
+              //     color={entry.color}
+              //     handleExperienceClick={() =>
+              //       handleExperienceClick(entry.experience)
+              //     }
+              //   />
+              // ))
               <AnimatePresence>
                 {singleEmotionEntryList.map((entry) => (
                   <>

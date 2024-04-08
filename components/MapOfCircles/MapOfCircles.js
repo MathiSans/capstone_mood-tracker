@@ -8,6 +8,7 @@ export default function MapOfCircles({
   handleExperienceClick,
   totalCount,
   mapsPage,
+  isEntriesListStyle,
 }) {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
   const containerRef = useRef(null);
@@ -28,7 +29,7 @@ export default function MapOfCircles({
   }, []);
 
   return (
-    <Styled.Grid ref={containerRef} showControls={showControls}>
+    <Styled.Grid ref={containerRef} isEntriesListStyle={isEntriesListStyle}>
       {data.map((entry, index) => (
         <Circle
           key={index}
