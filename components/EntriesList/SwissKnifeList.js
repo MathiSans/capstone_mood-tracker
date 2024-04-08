@@ -2,8 +2,16 @@ import Intensity from "@/utils/intensity";
 import * as Styled from "./EntriesList.styled";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiTrash2 } from "react-icons/fi";
+import { useRouter } from "next/router";
 
-export default function SwissKnifeList({ outputData }) {
+export default function SwissKnifeList({
+  outputData,
+  filter,
+  deletingId,
+  handleDeleteDialog,
+  handleDeleteEntry,
+}) {
+  const router = useRouter();
   return (
     <>
       <>
@@ -19,7 +27,7 @@ export default function SwissKnifeList({ outputData }) {
                   transition: { duration: 0.3 },
                 }}
               >
-                <Styled.Card onClick={() => router.push(`${entry._id}`)}>
+                <Styled.Card onClick={() => router.push(`/${entry._id}`)}>
                   <Styled.ColoredShapeContainer>
                     <Styled.ColoredShape color={entry.color} />
                   </Styled.ColoredShapeContainer>
