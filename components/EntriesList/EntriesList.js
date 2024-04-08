@@ -84,13 +84,15 @@ export default function EntriesList({
           />
         </label>
       )}
+
       {/*Der Block geht sehr lang und rendert Entweder die ShowAll Liste oder Die Circle*/}
-      {isVisualized ? (
+      {isVisualized || filter === "lastWeek" ? (
         <>
           <p>
-            This are your{isExperiencePage && ` ${targetExperience}`} moods of
-            the last week
+            This are your{isExperiencePage && ` ${targetExperience}`} moods
+            {filter === "lastWeek" && " of the last week"}
           </p>
+
           {/*Nur der Button wird eingeblendet auf der Liste der einzelen Emotion*/}
           {isExperiencePage ? (
             <button
