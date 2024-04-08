@@ -86,7 +86,7 @@ export default function EntriesList({
       )}
 
       {/*Der Block geht sehr lang und rendert Entweder die ShowAll Liste oder Die Circle*/}
-      {isVisualized || filter === "lastWeek" ? (
+      {isVisualized ? (
         <>
           <p>
             This are your{isExperiencePage && ` ${targetExperience}`} moods
