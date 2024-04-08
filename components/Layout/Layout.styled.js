@@ -6,12 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100vw;
-  min-height: 100dvh;
-`;
-
-export const MenuContainer = styled.div`
-  position: relative;
-  z-index: 9999;
+  min-height: 90dvh;
 `;
 
 export const Page = styled.div`

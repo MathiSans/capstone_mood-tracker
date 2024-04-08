@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-export const MenuTriggerButton = styled.button`
+export const SettingsTriggerButton = styled.button`
   display: flex;
   background-color: white;
   border: none;
@@ -12,10 +12,10 @@ export const MenuTriggerButton = styled.button`
   cursor: pointer;
 
   ${(props) =>
-    props.$showMenu &&
+    props.$showSettings &&
     css`
       background-color: transparent;
-      box-shadow: inset 0 0 0 1px white;
+      box-shadow: inset 0 0 0 1px white; /* Border inside the button */
       color: white;
     `}
 `;
