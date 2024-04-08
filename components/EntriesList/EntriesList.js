@@ -9,6 +9,7 @@ import Circle from "../Circle/Circle";
 import { Grid } from "./EntriesList.styled";
 import experienceAnalyser from "@/utils/experienceAnalyser";
 import MapOfCircles from "../MapOfCircles/MapOfCircles";
+import SingleEmotionList from "./SingleEmotionList";
 
 export default function EntriesList({
   filtered,
@@ -128,7 +129,12 @@ export default function EntriesList({
               //   />
               // ))
               <AnimatePresence>
-                {singleEmotionEntryList.map((entry) => (
+                <SingleEmotionList
+                  singleEmotionEntryList={singleEmotionEntryList}
+                  filter={filter}
+                  deletingId={deletingId}
+                />
+                {/* {singleEmotionEntryList.map((entry) => (
                   <>
                     <motion.div
                       key={entry._id}
@@ -213,7 +219,7 @@ export default function EntriesList({
                       </Styled.Card>
                     </motion.div>
                   </>
-                ))}
+                ))} */}
               </AnimatePresence>
             )}
           </div>

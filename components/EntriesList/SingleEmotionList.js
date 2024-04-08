@@ -2,6 +2,7 @@ import * as Styled from "./EntriesList.styled";
 import { motion } from "framer-motion";
 import Intensity from "@/utils/intensity";
 import { FiTrash2 } from "react-icons/fi";
+import { useRouter } from "next/router";
 
 export default function SingleEmotionList({
   singleEmotionEntryList,
