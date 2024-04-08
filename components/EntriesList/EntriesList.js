@@ -23,7 +23,7 @@ export default function EntriesList({
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
   const containerRef = useRef(null);
   const [targetExperience, setTargetExperience] = useState(null);
-  const [isExperiencePage, setIsExperiencePage] = useState(true);
+  const [isExperiencePage, setIsExperiencePage] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -57,7 +57,7 @@ export default function EntriesList({
   const result = experienceAnalyser(filtered);
   const totalCount = result.totalCount;
 
-  const experiences = !isExperiencePage ? filtered : result.experiences;
+  const experiences = isExperiencePage ? filtered : result.experiences;
   const sortedExperiences = experiences.sort((a, b) => b.count - a.count);
 
   const singleEmotionEntryList = experiences.filter(
@@ -68,10 +68,12 @@ export default function EntriesList({
     setIsExperiencePage(!isExperiencePage);
   };
 
+  console.log("isExperiencePage", isExperiencePage);
+
   return (
     <>
       {/*Checkbox wird auf der Liste von der Einzelnen Emotion ausgeblendet*/}
-      {isExperiencePage && (
+      {!isExperiencePage && (
         <label htmlFor="visualize">
           Visualize
           <input
@@ -86,11 +88,11 @@ export default function EntriesList({
       {isVisualized ? (
         <>
           <p>
-            This are your{!isExperiencePage && ` ${targetExperience}`} moods of
+            This are your{isExperiencePage && ` ${targetExperience}`} moods of
             the last week
           </p>
           {/*Nur der Button wird eingeblendet auf der Liste der einzelen Emotion*/}
-          {!isExperiencePage ? (
+          {isExperiencePage ? (
             <button
               onClick={() => {
                 setIsExperiencePage(!isExperiencePage);
@@ -102,7 +104,7 @@ export default function EntriesList({
             ""
           )}
           <div>
-            {isExperiencePage ? (
+            {!isExperiencePage ? (
               <MapOfCircles
                 data={sortedExperiences}
                 handleExperienceClick={handleExperienceClick}
