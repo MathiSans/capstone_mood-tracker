@@ -85,15 +85,6 @@ export default function Entries() {
           <option value="lastWeek">Show Emotion of the Last Week</option>
           {/* <option value="moodsMap">Visualize</option> */}
         </select>
-        <label htmlFor="visualize">
-          Visualize
-          <input
-            id="visualize"
-            type="checkbox"
-            checked={isVisualized}
-            onChange={handleIsVisualized}
-          />
-        </label>
         <EntriesList
           filtered={filtered}
           filter={filter}

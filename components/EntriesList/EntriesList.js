@@ -10,7 +10,12 @@ import { Grid } from "./EntriesList.styled";
 import experienceAnalyser from "@/utils/experienceAnalyser";
 import MapOfCircles from "../MapOfCircles/MapOfCircles";
 
-export default function EntriesList({ filtered, filter, isVisualized }) {
+export default function EntriesList({
+  filtered,
+  filter,
+  isVisualized,
+  handleIsVisualized,
+}) {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState(null);
   const { mutate } = useSWRConfig();
@@ -64,9 +69,23 @@ export default function EntriesList({ filtered, filter, isVisualized }) {
 
   return (
     <>
+      {isExperiencePage && (
+        <label htmlFor="visualize">
+          Visualize
+          <input
+            id="visualize"
+            type="checkbox"
+            checked={isVisualized}
+            onChange={handleIsVisualized}
+          />
+        </label>
+      )}
       {isVisualized ? (
         <>
-          <p>This are your moods of the last week</p>
+          <p>
+            This are your{!isExperiencePage && ` ${targetExperience}`} moods of
+            the last week
+          </p>
           {!isExperiencePage ? (
             <button
               onClick={() => {
@@ -78,7 +97,7 @@ export default function EntriesList({ filtered, filter, isVisualized }) {
           ) : (
             ""
           )}
-          <Grid>
+          <div>
             {isExperiencePage ? (
               <MapOfCircles
                 data={sortedExperiences}
@@ -194,7 +213,7 @@ export default function EntriesList({ filtered, filter, isVisualized }) {
                 ))}
               </AnimatePresence>
             )}
-          </Grid>
+          </div>
         </>
       ) : (
         <>
