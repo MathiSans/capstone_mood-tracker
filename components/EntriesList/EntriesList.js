@@ -69,6 +69,7 @@ export default function EntriesList({
 
   return (
     <>
+      {/*Checkbox wird auf der Liste von der Einzelnen Emotion ausgeblendet*/}
       {isExperiencePage && (
         <label htmlFor="visualize">
           Visualize
@@ -80,12 +81,14 @@ export default function EntriesList({
           />
         </label>
       )}
+      {/*Der Block geht sehr lang und rendert Entweder die ShowAll Liste oder Die Circle*/}
       {isVisualized ? (
         <>
           <p>
             This are your{!isExperiencePage && ` ${targetExperience}`} moods of
             the last week
           </p>
+          {/*Nur der Button wird eingeblendet auf der Liste der einzelen Emotion*/}
           {!isExperiencePage ? (
             <button
               onClick={() => {
