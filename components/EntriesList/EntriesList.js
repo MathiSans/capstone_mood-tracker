@@ -110,24 +110,6 @@ export default function EntriesList({
                 isEntriesListStyle={true}
               />
             ) : (
-              // sortedExperiences.map((entry, index) => (
-              //   <Circle
-              //     key={entry._id}
-              //     count={entry.count}
-              //     percentage={Math.floor((entry.count / totalCount) * 100)}
-              //     circleSize={Math.max(
-              //       Math.sqrt(entry.count) *
-              //         Math.min(screenSize.width, screenSize.height) *
-              //         (0.2 / Math.log(entry.count + 3)),
-              //       10
-              //     )}
-              //     name={entry.experience}
-              //     color={entry.color}
-              //     handleExperienceClick={() =>
-              //       handleExperienceClick(entry.experience)
-              //     }
-              //   />
-              // ))
               <AnimatePresence>
                 <SingleEmotionList
                   singleEmotionEntryList={singleEmotionEntryList}
