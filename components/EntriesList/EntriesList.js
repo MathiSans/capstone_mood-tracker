@@ -9,7 +9,12 @@ import Circle from "../Circle/Circle";
 import { Grid } from "./EntriesList.styled";
 import experienceAnalyser from "@/utils/experienceAnalyser";
 
-export default function EntriesList({ filtered, filter }) {
+export default function EntriesList({
+  filtered,
+  filter,
+  isVisualized,
+  handleIsVisualized,
+}) {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState(null);
   const { mutate } = useSWRConfig();
@@ -63,7 +68,7 @@ export default function EntriesList({ filtered, filter }) {
 
   return (
     <>
-      {filter == "moodsMap" ? (
+      {isVisualized ? (
         <>
           <p>This are your moods of the last week</p>
           {!isExperiencePage ? (

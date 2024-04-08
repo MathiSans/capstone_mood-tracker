@@ -7,8 +7,9 @@ import useSWR from "swr";
 
 export default function Entries() {
   const { data, isLoading } = useSWR("/api/entries");
-  const [filter, setFilter] = useState(""); //Filter Entries State
+  const [filter, setFilter] = useState("showAll"); //Filter Entries State
   const [filtered, setFiltered] = useState([]);
+  const [isVisualized, setIsVisualized] = useState(false);
   const reversedData = Array.isArray(data) ? [...data].reverse() : [];
 
   useEffect(() => {
@@ -66,11 +67,14 @@ export default function Entries() {
     if (event.target.value === "lastWeek") {
       setFilter("lastWeek");
     }
-    if (event.target.value === "moodsMap") {
-      setFilter("moodsMap");
-    }
+    // if (event.target.value === "moodsMap") {
+    //   setFilter("moodsMap");
+    // }
   }
-  //End
+
+  function handleIsVisualized() {
+    setIsVisualized(!isVisualized);
+  }
 
   return (
     <Container>
@@ -79,9 +83,23 @@ export default function Entries() {
         <select onChange={handleEntryFilter}>
           <option value="showAll">Show All</option>
           <option value="lastWeek">Show Emotion of the Last Week</option>
-          <option value="moodsMap">Visualize</option>
+          {/* <option value="moodsMap">Visualize</option> */}
         </select>
-        <EntriesList filtered={filtered} filter={filter} />
+        <label htmlFor="visualize">
+          Visualize
+          <input
+            id="visualize"
+            type="checkbox"
+            checked={isVisualized}
+            onChange={handleIsVisualized}
+          />
+        </label>
+        <EntriesList
+          filtered={filtered}
+          filter={filter}
+          handleIsVisualized={handleIsVisualized}
+          isVisualized={isVisualized}
+        />
       </Page>
     </Container>
   );
