@@ -73,17 +73,7 @@ export default function EntriesList({
   return (
     <>
       {/*Checkbox wird auf der Liste von der Einzelnen Emotion ausgeblendet*/}
-      {!isExperiencePage && (
-        <label htmlFor="visualize">
-          Visualize
-          <input
-            id="visualize"
-            type="checkbox"
-            checked={isVisualized}
-            onChange={handleIsVisualized}
-          />
-        </label>
-      )}
+
       {/*Der Block geht sehr lang und rendert Entweder die ShowAll Liste oder Die Circle*/}
       {isVisualized ? (
         <>
@@ -210,6 +200,7 @@ export default function EntriesList({
         </>
       ) : (
         <>
+          {filter === "lastWeek" && <p>This are your moods of the last week</p>}
           <Styled.Grid>
             <AnimatePresence>
               {filtered.map((entry) => (
