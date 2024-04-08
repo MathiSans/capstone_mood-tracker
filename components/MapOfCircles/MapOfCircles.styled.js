@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Grid = styled.div`
-  position: absolute;
+  position: ${(props) => (props.showControls ? "relative" : "absolute")};
   top: 0;
   left: 0;
   display: flex;
@@ -11,5 +11,6 @@ export const Grid = styled.div`
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background: var(--effect-radial-gradient);
+  background: ${(props) =>
+    props.showControls ? "var(--color-main)" : "var(--effect-radial-gradient)"};
 `;

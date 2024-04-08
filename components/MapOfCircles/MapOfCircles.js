@@ -2,7 +2,13 @@ import { useEffect, useState, useRef } from "react";
 import Circle from "@/components/Circle/Circle";
 import * as Styled from "./MapOfCircles.styled";
 
-export default function MapOfCircles({ data }) {
+export default function MapOfCircles({
+  data,
+  showControls,
+  handleExperienceClick,
+  totalCount,
+  mapsPage,
+}) {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
   const containerRef = useRef(null);
   useEffect(() => {
@@ -22,11 +28,13 @@ export default function MapOfCircles({ data }) {
   }, []);
 
   return (
-    <Styled.Grid ref={containerRef}>
+    <Styled.Grid ref={containerRef} showControls={showControls}>
       {data.map((entry, index) => (
         <Circle
           key={index}
           count={entry.count}
+          percentage={Math.floor((entry.count / totalCount) * 100)}
+          mapsPage={mapsPage}
           circleSize={Math.max(
             Math.sqrt(entry.count) *
               Math.min(screenSize.width, screenSize.height) *
@@ -35,6 +43,11 @@ export default function MapOfCircles({ data }) {
           )}
           name={entry.experience || entry.region}
           color={entry.color}
+          handleExperienceClick={
+            handleExperienceClick
+              ? () => handleExperienceClick(entry.experience)
+              : null
+          }
         />
       ))}
     </Styled.Grid>

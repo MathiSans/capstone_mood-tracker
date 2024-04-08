@@ -8,6 +8,7 @@ export default function Circle({
   count,
   percentage,
   handleExperienceClick,
+  mapsPage,
 }) {
   return (
     <motion.div
@@ -54,7 +55,7 @@ export default function Circle({
       >
         <LegacyAnimation color={color} opacity={circleSize} />
         <h2 style={{ fontSize: circleSize / 10 }}>
-          {percentage}%<br />
+          {mapsPage ? "" : `${percentage} % `}
           {name} <br />
           {count} entries
         </h2>
