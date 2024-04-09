@@ -8,6 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import AnimationWrapper from "../AnimationWrapper/AnimationWrapper";
 
 export default function PageDisplay({
+  hideInterface,
   guides,
   experience,
   experiences,
@@ -38,11 +39,15 @@ export default function PageDisplay({
           case 2:
             return (
               <>
-                <AnimationWrapper fadeIn>
+                <AnimationWrapper hideInterface={hideInterface} fadeIn>
                   <Guide text={guides[4]} />
                 </AnimationWrapper>
                 <AnimatePresence mode="wait">
-                  <AnimationWrapper leftToRight key={page}>
+                  <AnimationWrapper
+                    hideInterface={hideInterface}
+                    leftToRight
+                    key={page}
+                  >
                     <TagCloud
                       tags={experiences}
                       colorSelected={true}
@@ -57,11 +62,19 @@ export default function PageDisplay({
           case 3:
             return (
               <>
-                <AnimationWrapper fadeIn key={`3-${guides[5]}`}>
+                <AnimationWrapper
+                  hideInterface={hideInterface}
+                  fadeIn
+                  key={`3-${guides[5]}`}
+                >
                   <Guide text={guides[5]} />
                 </AnimationWrapper>
                 <AnimatePresence mode="wait">
-                  <AnimationWrapper leftToRight key={page}>
+                  <AnimationWrapper
+                    hideInterface={hideInterface}
+                    leftToRight
+                    key={page}
+                  >
                     <Slider
                       experience={experience}
                       sliderValue={sliderValue}
@@ -78,11 +91,19 @@ export default function PageDisplay({
           case 4:
             return (
               <>
-                <AnimationWrapper fadeIn key={`fadeIn-4`}>
+                <AnimationWrapper
+                  hideInterface={hideInterface}
+                  fadeIn
+                  key={`fadeIn-4`}
+                >
                   <Guide text={guides[6]} />
                 </AnimationWrapper>
                 <AnimatePresence mode="wait">
-                  <AnimationWrapper leftToRight key={page}>
+                  <AnimationWrapper
+                    hideInterface={hideInterface}
+                    leftToRight
+                    key={page}
+                  >
                     <TagCloud
                       selectedTags={reactions}
                       tags={experience[0].reactions}
@@ -97,7 +118,11 @@ export default function PageDisplay({
           case 5:
             return (
               <AnimatePresence mode="wait">
-                <AnimationWrapper fadeIn key={page}>
+                <AnimationWrapper
+                  hideInterface={hideInterface}
+                  fadeIn
+                  key={page}
+                >
                   <Guide text={guides[7]} />
                 </AnimationWrapper>
               </AnimatePresence>

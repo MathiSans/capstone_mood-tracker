@@ -5,12 +5,13 @@ import Animation from "@/components/3DAnimation/3DAnimation";
 import NavButton from "@/components/NavButton/NavButton";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
 import * as Styled from "@/components/Layout/Layout.styled";
-import { AnimatePresence, motion } from "framer-motion";
 import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
 import fetchLocation from "@/utils/locationTracking";
-import LoginButton from "../LoginButton/LoginButton";
 import AnimationWrapper from "../AnimationWrapper/AnimationWrapper";
+import Settings from "../Settings/Settings";
+import SettingsTrigger from "../SettingsTrigger/SettingsTrigger";
+import { SettingsTriggerContainer } from "@/components/Overlay/Overlay.styled";
 
 export default function Flow() {
   const { mutate } = useSWR("/api/entries");
@@ -20,6 +21,8 @@ export default function Flow() {
   const [color, setColor] = useState("grey");
   const [page, setPage] = useState(0);
   const [audioTrigger, setAudioTrigger] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [hideInterface, setHideInterface] = useState(false);
 
   const { data: session } = useSession();
   const userId = session?.user.id;
@@ -34,6 +37,14 @@ export default function Flow() {
     "what's your reaction?",
     "Thank you for sharing",
   ];
+
+  function handleShowSettings() {
+    setShowSettings(!showSettings);
+  }
+
+  function handleHideInterface() {
+    setHideInterface(!hideInterface);
+  }
 
   function handleSelectExperience(tags) {
     setExperience(tags);
@@ -94,17 +105,37 @@ export default function Flow() {
       signIn();
     }
   };
+
+  console.log(hideInterface);
   return (
     <>
-      <Animation color={color} opacity={sliderValue} />
+      <Animation
+        color={color}
+        opacity={sliderValue}
+        hideInterface={hideInterface}
+      />
       <AudioSettings
+        showSettings={showSettings}
         experience={experience}
         audioTrigger={audioTrigger}
         setAudioTrigger={setAudioTrigger}
       />
+      <SettingsTriggerContainer>
+        <SettingsTrigger
+          showSettings={showSettings}
+          handleShowSettings={handleShowSettings}
+        />
+      </SettingsTriggerContainer>
+      {showSettings && (
+        <Settings
+          hideInterface={hideInterface}
+          handleHideInterface={handleHideInterface}
+        />
+      )}
       <Styled.Container>
         <Styled.Page>
           <PageDisplay
+            hideInterface={hideInterface}
             guides={guides}
             experience={experience}
             experiences={experiences}
@@ -116,8 +147,8 @@ export default function Flow() {
             handleSelectReactions={handleSelectReactions}
           />
         </Styled.Page>
-        <Styled.Navigation>
-          <AnimationWrapper fadeIn key={page}>
+        <AnimationWrapper hideInterface={hideInterface} fadeIn key={page}>
+          <Styled.Navigation>
             {!session && page === 0 && (
               <NavButton handleClick={handleLoginButton}>login</NavButton>
             )}
@@ -173,8 +204,8 @@ export default function Flow() {
                 go to emotion entries
               </NavButton>
             )}
-          </AnimationWrapper>
-        </Styled.Navigation>
+          </Styled.Navigation>
+        </AnimationWrapper>
       </Styled.Container>
     </>
   );

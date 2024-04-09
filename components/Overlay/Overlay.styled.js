@@ -18,6 +18,7 @@ export const MenuTriggerContainer = styled.div`
 `;
 
 export const SettingsTriggerContainer = styled.div`
+  z-index: 10000;
   position: fixed;
   display: flex;
   padding-block-end: 1.5rem;

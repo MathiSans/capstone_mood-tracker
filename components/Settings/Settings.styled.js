@@ -11,4 +11,5 @@ export const SettingsContainer = styled.div`
   padding-inline-end: 1.5rem;
   padding-block-end: 5.5rem;
   backdrop-filter: blur(16px);
+  z-index: 100;
 `;

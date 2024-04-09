@@ -7,6 +7,7 @@ export default function MuteButton({
   setIsMuted,
   currentVolume,
   audioReference,
+  showSettings,
 }) {
   function toggleMute() {
     setIsMuted(!isMuted);
@@ -22,7 +23,12 @@ export default function MuteButton({
 
   return (
     <StyledContainer>
-      <StyledMuteButton type="button" onClick={toggleMute} $isMuted={isMuted}>
+      <StyledMuteButton
+        $showSettings={showSettings}
+        type="button"
+        onClick={toggleMute}
+        $isMuted={isMuted}
+      >
         {isMuted ? <IoVolumeMute /> : <IoVolumeHighSharp />}
       </StyledMuteButton>
     </StyledContainer>
@@ -30,6 +36,7 @@ export default function MuteButton({
 }
 
 const StyledContainer = styled.div`
+  z-index: 900;
   position: fixed;
   display: flex;
   justify-content: end;
@@ -49,9 +56,11 @@ const StyledMuteButton = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: var(--border-radius-round);
-  margin-inline-end: 5rem;
-  margin-block-end: 1.5rem;
+  margin-inline-end: 1.5rem;
+  margin-block-end: 9rem;
   font-size: 1.2rem;
   height: 40px;
   width: 40px;
+  cursor: pointer;
+  display: ${(props) => (props.$showSettings ? "show" : "none")};
 `;

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export const animations = {
   hidden: { opacity: 0 },
@@ -25,11 +26,23 @@ export const animations = {
   },
 };
 
-export default function AnimationWrapper({ children, leftToRight }) {
+export default function AnimationWrapper({
+  children,
+  leftToRight,
+  hideInterface,
+}) {
+  const [animation, setAnimation] = useState(
+    leftToRight ? "leftToRightAnimate" : "fadeIn"
+  );
+  const triggerAnimation = () => {
+    setAnimation(
+      animation === "leftToRightAnimate" ? "fadeIn" : "leftToRightAnimate"
+    );
+  };
   return (
     <motion.div
       initial={leftToRight ? "leftToRightInitial" : "hidden"}
-      animate={leftToRight ? "leftToRightAnimate" : "fadeIn"}
+      animate={hideInterface ? null : animation}
       exit={leftToRight ? "leftToRightExit" : "hidden"}
       variants={animations}
     >
