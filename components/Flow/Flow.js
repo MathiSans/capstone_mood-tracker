@@ -97,7 +97,6 @@ export default function Flow() {
     <>
       <Animation color={color} opacity={sliderValue} />
       <AudioSettings
-        page={page}
         experience={experience}
         audioTrigger={audioTrigger}
         setAudioTrigger={setAudioTrigger}
