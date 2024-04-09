@@ -95,19 +95,17 @@ export default function Sphere({ color, opacity }) {
     mesh.current.material.uniforms.uLightBColor.value = new THREE.Color(color);
   });
   return (
-    <>
-      <mesh
-        ref={mesh}
-        onPointerOver={() => (hover.current = true)}
-        onPointerOut={() => (hover.current = false)}
-      >
-        <sphereGeometry args={[1.4, 512, 512]} />
-        <shaderMaterial
-          fragmentShader={fragmentShader}
-          vertexShader={vertexShader}
-          uniforms={uniforms}
-        />
-      </mesh>
-    </>
+    <mesh
+      ref={mesh}
+      onPointerOver={() => (hover.current = true)}
+      onPointerOut={() => (hover.current = false)}
+    >
+      <sphereGeometry args={[1.4, 512, 512]} />
+      <shaderMaterial
+        fragmentShader={fragmentShader}
+        vertexShader={vertexShader}
+        uniforms={uniforms}
+      />
+    </mesh>
   );
 }
