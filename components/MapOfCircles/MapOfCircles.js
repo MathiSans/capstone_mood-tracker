@@ -4,7 +4,6 @@ import * as Styled from "./MapOfCircles.styled";
 
 export default function MapOfCircles({
   data,
-  showControls,
   handleExperienceClick,
   totalCount,
   mapsPage,
