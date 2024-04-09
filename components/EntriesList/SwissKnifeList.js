@@ -12,6 +12,7 @@ export default function SwissKnifeList({
   handleDeleteEntry,
 }) {
   const router = useRouter();
+  console.log(outputData);
   return (
     <>
       <>
