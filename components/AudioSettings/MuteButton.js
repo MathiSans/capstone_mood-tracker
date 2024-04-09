@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { IoVolumeHighSharp } from "react-icons/io5";
 import { IoVolumeMute } from "react-icons/io5";
-import { IoVolumeHighSharp } from "react-icons/io5";
-import { IoVolumeMute } from "react-icons/io5";
 
 export default function MuteButton({
   isMuted,
@@ -26,7 +24,6 @@ export default function MuteButton({
     <StyledContainer>
       <StyledMuteButton type="button" onClick={toggleMute} $isMuted={isMuted}>
         {isMuted ? <IoVolumeMute /> : <IoVolumeHighSharp />}
-        {/* <StyledText>{!isMuted ? "🔊" : "🔈"}</StyledText> */}
         {isMuted ? <IoVolumeMute /> : <IoVolumeHighSharp />}
       </StyledMuteButton>
     </StyledContainer>
