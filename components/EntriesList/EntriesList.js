@@ -9,8 +9,8 @@ import Circle from "../Circle/Circle";
 import { Grid } from "./EntriesList.styled";
 import experienceAnalyser from "@/utils/experienceAnalyser";
 import MapOfCircles from "../MapOfCircles/MapOfCircles";
-import SingleEmotionList from "./SingleEmotionList";
 import SwissKnifeList from "./SwissKnifeList";
+import styled from "styled-components";
 
 export default function EntriesList({
   filtered,
@@ -75,15 +75,15 @@ export default function EntriesList({
     <>
       {/*Checkbox wird auf der Liste von der Einzelnen Emotion ausgeblendet*/}
       {!isExperiencePage && (
-        <label htmlFor="visualize">
+        <CheckboxLabel htmlFor="visualize">
           Visualize
-          <input
+          <CheckboxInput
             id="visualize"
             type="checkbox"
             checked={isVisualized}
             onChange={handleIsVisualized}
           />
-        </label>
+        </CheckboxLabel>
       )}
 
       {/*Der Block geht sehr lang und rendert Entweder die ShowAll Liste oder Die Circle*/}
@@ -108,12 +108,34 @@ export default function EntriesList({
           )}
           <div>
             {!isExperiencePage ? (
-              <MapOfCircles
-                data={sortedExperiences}
-                handleExperienceClick={handleExperienceClick}
-                totalCount={totalCount}
-                isEntriesListStyle={true}
-              />
+              <Styled.Grid>
+                {sortedExperiences.map((entry, index) => (
+                  <Circle
+                    key={index}
+                    count={entry.count}
+                    percentage={Math.floor((entry.count / totalCount) * 100)}
+                    circleSize={Math.max(
+                      Math.sqrt(entry.count) *
+                        Math.min(screenSize.width, screenSize.height) *
+                        (0.2 / Math.log(entry.count + 3)),
+                      10
+                    )}
+                    name={entry.experience || entry.region}
+                    color={entry.color}
+                    handleExperienceClick={
+                      handleExperienceClick
+                        ? () => handleExperienceClick(entry.experience)
+                        : null
+                    }
+                  />
+                ))}
+                {/* <MapOfCircles
+                  data={sortedExperiences}
+                  handleExperienceClick={handleExperienceClick}
+                  totalCount={totalCount}
+                  isEntriesListStyle={true}
+                /> */}
+              </Styled.Grid>
             ) : (
               <SwissKnifeList
                 outputData={singleEmotionEntryList}
@@ -137,3 +159,39 @@ export default function EntriesList({
     </>
   );
 }
+
+export const CheckboxLabel = styled.label`
+  height: 40px;
+  padding: 10px;
+  text-align: center;
+  width: 110px;
+  border-radius: var(--border-radius-medium);
+  font-size: var(--font-size-default);
+  background-color: ${(props) =>
+    props.$color ? props.$color : `var(--color-neutral)`};
+`;
+
+export const CheckboxInput = styled.input`
+  appearance: none;
+  position: relative;
+  -webkit-appearance: none;
+  height: 40px;
+  width: 110px;
+  outline: none;
+  font-size: var(--font-size-default);
+  border-radius: var(--border-radius-medium);
+  cursor: pointer;
+  top: -32px;
+  left: -14px;
+
+  &:checked::after {
+    content: "";
+    position: absolute;
+    height: 40px;
+    width: 110px;
+    border: 3.5px solid var(--color-main-alt);
+    font-size: var(--font-size-default);
+    color: var(--color-main-alt);
+    border-radius: var(--border-radius-medium);
+  }
+`;
