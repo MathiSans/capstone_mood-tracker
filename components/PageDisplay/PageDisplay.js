@@ -4,7 +4,8 @@ import TagCloud from "../TagCloud/TagCloud";
 import Slider from "../Slider/Slider";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
-import NavButton from "@/components/NavButton/NavButton";
+import { AsideAnimationWrapper } from "../SiteStepAnimation/SiteStepAnimation";
+import AnimationWrapper from "../SiteStepAnimation/SiteStepAnimation";
 
 export default function PageDisplay({
   guides,
@@ -18,32 +19,30 @@ export default function PageDisplay({
   handleSelectReactions,
 }) {
   return (
-    <AnimatePresence mode="wait">
-      {(() => {
-        switch (page) {
-          case 0:
-            return <Guide bigger={true} text={"komm zur Ruh"} />;
-          case 1:
-            return <GuideAnimator guides={guides} />;
-          case 2:
-            return (
-              <>
-                <Guide text={guides[4]} />
-                <motion.div
-                  key={page}
-                  initial={{ opacity: 0, x: -100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 100 }}
-                  transition={{ duration: 2 }}
-                >
-                  <TagCloud
-                    tags={experiences}
-                    colorSelected={true}
-                    allowMultiple={false}
-                    onSelectTag={handleSelectExperience}
-                    selectedTags={experience}
-                  />
-                  {/* <NavButton
+    <>
+      <AnimatePresence mode="wait">
+        {(() => {
+          switch (page) {
+            case 0:
+              return <Guide bigger={true} text={"komm zur Ruh"} />;
+            case 1:
+              return <GuideAnimator guides={guides} />;
+            case 2:
+              return (
+                <>
+                  <AnimationWrapper fadeIn>
+                    <Guide text={guides[4]} />
+                  </AnimationWrapper>
+                  <AnimatePresence mode="wait">
+                    <AnimationWrapper leftToRight key={page}>
+                      <TagCloud
+                        tags={experiences}
+                        colorSelected={true}
+                        allowMultiple={false}
+                        onSelectTag={handleSelectExperience}
+                        selectedTags={experience}
+                      />
+                      {/* <NavButton
                     disabled={experience.length === 0}
                     handleClick={() => {
                       setPage((currPage) => currPage + 1);
@@ -51,53 +50,57 @@ export default function PageDisplay({
                   >
                     next
                   </NavButton> */}
-                </motion.div>
-              </>
-            );
-          case 3:
-            return (
-              <>
-                <Guide text={guides[5]} />
-                <motion.div
-                  key={page}
-                  initial={{ opacity: 0, x: -100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 100 }}
-                  transition={{ duration: 2 }}
-                >
-                  <Slider
-                    experience={experience}
-                    sliderValue={sliderValue}
-                    handleSliderChange={handleSliderChange}
-                  />
-                </motion.div>
-              </>
-            );
-          case 4:
-            return (
-              <>
-                <Guide text={guides[6]} />
-                <motion.div
-                  key={page}
-                  initial={{ opacity: 0, x: -100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 100 }}
-                  transition={{ duration: 2 }}
-                >
-                  <TagCloud
-                    selectedTags={reactions}
-                    tags={experience[0].reactions}
-                    colorSelected={true}
-                    allowMultiple={true}
-                    onSelectTag={handleSelectReactions}
-                  />
-                </motion.div>
-              </>
-            );
-          case 5:
-            return <Guide text={guides[7]} />;
-        }
-      })()}
-    </AnimatePresence>
+                    </AnimationWrapper>
+                  </AnimatePresence>
+                </>
+              );
+            case 3:
+              return (
+                <>
+                  <AnimationWrapper fadeIn key={`3-${guides[5]}`}>
+                    <Guide text={guides[5]} />
+                  </AnimationWrapper>
+                  <AnimatePresence mode="wait">
+                    <AnimationWrapper leftToRight key={page}>
+                      <Slider
+                        experience={experience}
+                        sliderValue={sliderValue}
+                        handleSliderChange={handleSliderChange}
+                      />
+                    </AnimationWrapper>
+                  </AnimatePresence>
+                </>
+              );
+            case 4:
+              return (
+                <>
+                  <AnimationWrapper fadeIn key={`fadeIn-4`}>
+                    <Guide text={guides[6]} />
+                  </AnimationWrapper>
+                  <AnimatePresence mode="wait">
+                    <AnimationWrapper leftToRight key={page}>
+                      <TagCloud
+                        selectedTags={reactions}
+                        tags={experience[0].reactions}
+                        colorSelected={true}
+                        allowMultiple={true}
+                        onSelectTag={handleSelectReactions}
+                      />
+                    </AnimationWrapper>
+                  </AnimatePresence>
+                </>
+              );
+            case 5:
+              return (
+                <AnimatePresence mode="wait">
+                  <AnimationWrapper fadeIn key={page}>
+                    <Guide text={guides[7]} />
+                  </AnimationWrapper>
+                </AnimatePresence>
+              );
+          }
+        })()}
+      </AnimatePresence>
+    </>
   );
 }

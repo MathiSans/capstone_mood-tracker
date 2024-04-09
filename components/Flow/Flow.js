@@ -10,6 +10,7 @@ import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
 import fetchLocation from "@/utils/locationTracking";
 import LoginButton from "../LoginButton/LoginButton";
+import AnimationWrapper from "../SiteStepAnimation/SiteStepAnimation";
 
 export default function Flow() {
   const { mutate } = useSWR("/api/entries");
@@ -118,13 +119,8 @@ export default function Flow() {
           />
         </Styled.Page>
         <Styled.Navigation>
-          {!session && page === 0 && (
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 100 }}
-              transition={{ duration: 1.5 }}
-            >
+          <AnimationWrapper fadeIn key={page}>
+            {!session && page === 0 && (
               <NavButton
                 disabled={session}
                 handleClick={() => {
@@ -133,15 +129,8 @@ export default function Flow() {
               >
                 {session ? "" : "Login"}
               </NavButton>
-            </motion.div>
-          )}
-          {page < 1 && (
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 100 }}
-              transition={{ duration: 1.5 }}
-            >
+            )}
+            {page < 1 && (
               <NavButton
                 handleClick={() => {
                   setAudioTrigger(true);
@@ -150,19 +139,8 @@ export default function Flow() {
               >
                 {!session ? "anonymous" : "start your journey"}
               </NavButton>
-            </motion.div>
-          )}
-          {page === 1 && (
-            <motion.div
-              variants={button}
-              initial="hidden"
-              animate="show"
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 100 }}
-              transition={{ duration: 1.5 }}
-            >
-              <motion.div></motion.div>
+            )}
+            {page === 1 && (
               <NavButton
                 handleClick={() => {
                   setPage((currPage) => currPage + 1);
@@ -170,29 +148,15 @@ export default function Flow() {
               >
                 next
               </NavButton>
-            </motion.div>
-          )}
-          {page > 2 && page <= 4 && (
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 100 }}
-              transition={{ duration: 1.5 }}
-            >
+            )}
+            {page > 2 && page <= 4 && (
               <NavButton
                 handleClick={() => setPage((currPage) => currPage - 1)}
               >
                 prev
               </NavButton>
-            </motion.div>
-          )}
-          {page >= 2 && page <= 3 && (
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 100 }}
-              transition={{ duration: 1.5 }}
-            >
+            )}
+            {page >= 2 && page <= 3 && (
               <NavButton
                 disabled={experience.length === 0}
                 handleClick={() => {
@@ -201,36 +165,22 @@ export default function Flow() {
               >
                 next
               </NavButton>
-            </motion.div>
-          )}
-          {page === 4 && (
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 100 }}
-              transition={{ duration: 1.5 }}
-            >
+            )}
+            {page === 4 && (
               <NavButton
                 disabled={reactions.length === 0}
                 handleClick={handleSave}
               >
                 next
               </NavButton>
-            </motion.div>
-          )}
+            )}
 
-          {page === 5 && (
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 100 }}
-              transition={{ duration: 1.5 }}
-            >
+            {page === 5 && (
               <NavButton linkToPage={"./entries"}>
                 go to emotion entries
               </NavButton>
-            </motion.div>
-          )}
+            )}
+          </AnimationWrapper>
         </Styled.Navigation>
       </Styled.Container>
     </>
