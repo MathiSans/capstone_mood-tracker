@@ -1,5 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
 
 export default function GuidedMeditation() {
   return (
@@ -16,11 +18,22 @@ export default function GuidedMeditation() {
         </article>
         <br />
 
-        <iframe
-          frameborder="0"
-          width={300}
-          src="https://content.libsyn.com/p/d/e/9/de98f386edbc4f63/2023-10-11-Meditation-Living-Presence-with-Body-Scan-2016-05-25-TaraBrach.mp3?c_id=162738893&cs_id=162738893&response-content-type=audio%2Fmpeg&Expires=1712703716&Signature=TAAy3dPD17cr3OQDJ7wkrBkUzS0jnC9ZL70zL02znwLcBHxlQed0K0VbqbOnuwAmFmC0Y62oLXQYuuaZH-Jxly7NY-rPa1QuUFXyDrxmDxhiJ~EjcycUarCMPsZblZ3NEgXaseX1z8NWxdLkjUCaW1e1EnA6SeMqUPM64DjxiUzJIwCtVHUGNYujflXVHhMF6a6qagNoe6tP52uRt7k9347A7lB4nXAmaMnrSIht51Bpi~LeCPnVZTya3kiKs~nGRcg9PyJU4Mrdmq0It1ZmMfdF-buEl2GQ7QE0dJGUCONHaz4MUMp4t1ZVc-DGKAw8jKMiDGpqnpjm-XvHsW1Hzg__&Key-Pair-Id=K1YS7LZGUP96OI"
+        <AudioPlayer
+          autoPlay
+          src="https://traffic.libsyn.com/tarabrach/2023-10-11-Meditation-Living-Presence-with-Body-Scan-2016-05-25-TaraBrach.mp3?_=1"
+          onPlay={(e) => console.log("onPlay")}
+          // other props here
         />
+        {/* <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube-nocookie.com/embed/iHGj23psLNY?si=jhMt3-acuO-B3lBu&amp;controls=0"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe> */}
         <br />
         <br />
 
