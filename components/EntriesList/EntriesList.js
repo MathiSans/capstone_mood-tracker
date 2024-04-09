@@ -1,4 +1,5 @@
 import Intensity from "@/utils/intensity";
+
 import * as Styled from "./EntriesList.styled";
 import { useSWRConfig } from "swr";
 import { AnimatePresence, motion } from "framer-motion";
@@ -20,6 +21,8 @@ export default function EntriesList({
 }) {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState(null);
+  const [mapsToggle, setMapsToggle] = useState(true);
+
   const { mutate } = useSWRConfig();
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
   const containerRef = useRef(null);
@@ -71,19 +74,44 @@ export default function EntriesList({
 
   console.log("isExperiencePage", isExperiencePage);
   const outputData = filtered;
+
+  const spring = {
+    type: "spring",
+    stiffness: 300,
+    damping: 20,
+  };
   return (
     <>
       {/*Checkbox wird auf der Liste von der Einzelnen Emotion ausgeblendet*/}
       {!isExperiencePage && (
-        <CheckboxLabel htmlFor="visualize">
-          Visualize
-          <CheckboxInput
-            id="visualize"
-            type="checkbox"
-            checked={isVisualized}
-            onChange={handleIsVisualized}
-          />
-        </CheckboxLabel>
+        <Switch $right={isVisualized} onClick={() => handleIsVisualized()}>
+          <motion.div // styled-components police, be aware: motion.divs are kind of incompatible with styled-components and must be styled like this 🤓
+            style={{
+              width: "80px",
+              height: "32px",
+              backgroundColor: `var(--color-main-alt)`,
+              borderRadius: `var(--border-radius-medium)`,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: `var(--color-main)`,
+            }}
+            layout
+            transition={spring}
+          >
+            <SwitchText>{isVisualized ? "Circles" : "List View"}</SwitchText>
+          </motion.div>
+        </Switch>
+
+        // <CheckboxLabel htmlFor="visualize">
+        //   {isVisualized ? "Listview" : "Visualize"}
+        //   <CheckboxInput
+        //     id="visualize"
+        //     type="checkbox"
+        //     checked={isVisualized}
+        //     onChange={handleIsVisualized}
+        //   />
+        // </CheckboxLabel>
       )}
 
       {/*Der Block geht sehr lang und rendert Entweder die ShowAll Liste oder Die Circle*/}
@@ -194,4 +222,19 @@ export const CheckboxInput = styled.input`
     color: var(--color-main-alt);
     border-radius: var(--border-radius-medium);
   }
+`;
+
+const SwitchText = styled.p`
+  font-size: 0.8rem;
+`;
+const Switch = styled.div`
+  width: 160px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: ${(props) => (props.$right ? "flex-end" : "flex-start")};
+  border-radius: var(--border-radius-large);
+  padding: var(--spacing-s);
+  cursor: pointer;
+  z-index: 999;
 `;
