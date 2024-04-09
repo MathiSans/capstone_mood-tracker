@@ -26,7 +26,7 @@ export default function QuotesPage({ fetcher }) {
     );
 
   function refreshQuote() {
-    mutate(URL3);
+    mutate(URL5);
   }
 
   function handleCounter() {
