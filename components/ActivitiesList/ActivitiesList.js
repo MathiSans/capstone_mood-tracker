@@ -60,17 +60,19 @@ export default function ActivitiesList({ handleShowForm }) {
         </label>
       </form>
       <Styled.Grid>
-        {session && (
-          <motion.div whileHover={{ scale: 1.05 }}>
-            <Styled.Card
-              onClick={handleShowForm}
-              style={{ height: "250px", justifyContent: "center" }}
-            >
-              <FiPlus style={{ fontSize: "3rem" }} />
-              <Styled.Description>add a new activity</Styled.Description>
-            </Styled.Card>
-          </motion.div>
-        )}
+        <motion.div whileHover={{ scale: 1.05 }}>
+          <Styled.Card
+            onClick={handleShowForm}
+            style={{ height: "250px", justifyContent: "center" }}
+            // !inline Styles
+          >
+            <FiPlus
+              style={{ fontSize: "3rem" }}
+              // !inline Styles
+            />
+            <Styled.Description>add a new activity</Styled.Description>
+          </Styled.Card>
+        </motion.div>
         {filteredActivities.map((activity, index) => (
           <motion.div key={index} whileHover={{ scale: 1.05 }}>
             <Styled.Card>

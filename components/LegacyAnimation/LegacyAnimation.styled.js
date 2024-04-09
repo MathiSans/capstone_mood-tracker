@@ -43,9 +43,6 @@ export const BlobsContainer = styled.div`
   height: 100%;
   display: block;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 `;
 
 export const Blob = styled.div`
@@ -54,6 +51,7 @@ export const Blob = styled.div`
   border-radius: 100%;
   position: absolute;
   filter: blur(80px);
-  background-color: ${(props) => (props.color ? props.color : "white")};
+  background-color: ${(props) =>
+    props.color ? props.color : `var(--color-main-alt)`};
   animation: ${circularAnimation} ${(props) => props.duration} linear infinite;
 `;

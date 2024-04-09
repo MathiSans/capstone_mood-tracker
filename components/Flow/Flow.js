@@ -94,9 +94,9 @@ export default function Flow() {
       signIn();
     }
   };
-
   return (
     <>
+      <Animation color={color} opacity={sliderValue} />
       <Animation color={color} opacity={sliderValue} />
       <AudioSettings
         page={page}
@@ -127,7 +127,7 @@ export default function Flow() {
                   handleLoginButton();
                 }}
               >
-                {session ? "" : "Login"}
+                login
               </NavButton>
             )}
             {page < 1 && (
@@ -137,7 +137,9 @@ export default function Flow() {
                   setPage((currPage) => currPage + 1);
                 }}
               >
-                {!session ? "anonymous" : "start your journey"}
+                {!session
+                  ? "log your mood anonymously"
+                  : "log your current mood"}
               </NavButton>
             )}
             {page === 1 && (
@@ -149,14 +151,14 @@ export default function Flow() {
                 next
               </NavButton>
             )}
-            {page > 2 && page <= 4 && (
+            {(page === 3 || page === 4) && (
               <NavButton
                 handleClick={() => setPage((currPage) => currPage - 1)}
               >
                 prev
               </NavButton>
             )}
-            {page >= 2 && page <= 3 && (
+            {(page === 2 || page === 3) && (
               <NavButton
                 disabled={experience.length === 0}
                 handleClick={() => {

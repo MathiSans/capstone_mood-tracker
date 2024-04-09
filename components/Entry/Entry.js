@@ -5,8 +5,8 @@ import { Container, Page } from "../Layout/Layout.styled";
 import {
   Sentence,
   StaticText,
-  ButtonContainer,
-  RoundButton,
+  DeleteContainer,
+  DeleteButton,
 } from "../EntriesList/EntriesList.styled";
 import Intensity from "@/utils/intensity";
 import { FiArrowLeft } from "react-icons/fi";
@@ -82,22 +82,22 @@ export default function Entry() {
             </motion.div>
           )}
         </AnimatePresence>
-        <ButtonContainer>
-          <RoundButton as="a" onClick={() => router.back()}>
+        <DeleteContainer>
+          <DeleteButton as="a" onClick={() => router.back()}>
             {showSentence ? (
               <FiArrowLeft />
             ) : (
               <FiArrowLeft style={{ color: "grey", opacity: "0.5" }} />
             )}
-          </RoundButton>
-          <RoundButton as="a" onClick={() => handleShowSentence()}>
+          </DeleteButton>
+          <DeleteButton as="a" onClick={() => handleShowSentence()}>
             {showSentence ? (
               <FaRegEyeSlash />
             ) : (
               <FaRegEye style={{ color: "grey", opacity: "0.5" }} />
             )}
-          </RoundButton>
-        </ButtonContainer>
+          </DeleteButton>
+        </DeleteContainer>
       </Container>
     </>
   );

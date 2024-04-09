@@ -2,6 +2,8 @@ import Guide from "../Guide/Guide";
 import GuideAnimator from "../GuideAnimator/GuideAnimator";
 import TagCloud from "../TagCloud/TagCloud";
 import Slider from "../Slider/Slider";
+import IntensityDisplay from "../IntensityDisplay/IntensityDisplay";
+import { useSession } from "next-auth/react";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import { AsideAnimationWrapper } from "../SiteStepAnimation/SiteStepAnimation";
@@ -18,13 +20,22 @@ export default function PageDisplay({
   handleSelectExperience,
   handleSelectReactions,
 }) {
+  const { data: session } = useSession();
+
   return (
     <>
       <AnimatePresence mode="wait">
         {(() => {
           switch (page) {
             case 0:
-              return <Guide bigger={true} text={"komm zur Ruh"} />;
+              return (
+                <>
+                  <Guide bigger={true} text={"komm zur Ruh"} />
+                  {session && (
+                    <Guide text={`Welcome back, ${session.user.name}`} />
+                  )}
+                </>
+              );
             case 1:
               return <GuideAnimator guides={guides} />;
             case 2:
@@ -42,14 +53,6 @@ export default function PageDisplay({
                         onSelectTag={handleSelectExperience}
                         selectedTags={experience}
                       />
-                      {/* <NavButton
-                    disabled={experience.length === 0}
-                    handleClick={() => {
-                      setPage((currPage) => currPage + 1);
-                    }}
-                  >
-                    next
-                  </NavButton> */}
                     </AnimationWrapper>
                   </AnimatePresence>
                 </>
@@ -66,6 +69,10 @@ export default function PageDisplay({
                         experience={experience}
                         sliderValue={sliderValue}
                         handleSliderChange={handleSliderChange}
+                      />
+                      <IntensityDisplay
+                        experience={experience}
+                        sliderValue={sliderValue}
                       />
                     </AnimationWrapper>
                   </AnimatePresence>

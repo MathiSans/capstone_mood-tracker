@@ -16,15 +16,12 @@ export default function EntriesList() {
 
   const { data: session } = useSession();
   const userID = session?.user.id;
-  console.log(userID);
 
   useEffect(() => {
-    if (!data) return; // Exit early if data is not available
+    if (!data) return;
 
-    // Reverse the data array
     const reversedData = [...data].reverse();
 
-    // Filter the reversed data based on session and userID
     const filteredData = session
       ? reversedData.filter((entry) => entry.user === userID)
       : reversedData;
@@ -39,15 +36,6 @@ export default function EntriesList() {
   if (!data) {
     return <p>no data available</p>;
   }
-
-  // useEffect(() => {
-  //   const reversedMoods = data.slice().reverse();
-  //   if (session) {
-  //     setFiltered(reversedMoods.filter((object) => userID === object.user));
-  //   } else {
-  //     setFiltered(reversedMoods);
-  //   }
-  // }, [data, session, userID]);
 
   function handleDeleteDialog(event, id) {
     event.stopPropagation();
@@ -73,9 +61,9 @@ export default function EntriesList() {
               exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.3 } }}
             >
               <Styled.Card onClick={() => router.push(`${entry._id}`)}>
-                <Styled.AnimationContainer>
+                <Styled.ColoredShapeContainer>
                   <Styled.ColoredShape color={entry.color} />
-                </Styled.AnimationContainer>
+                </Styled.ColoredShapeContainer>
                 <Styled.Sentence>
                   {session ? (
                     <Styled.StaticText>{session.user.name} </Styled.StaticText>
@@ -102,7 +90,7 @@ export default function EntriesList() {
                     </span>
                   ))}
                 </Styled.Sentence>
-                <Styled.ButtonContainer>
+                <Styled.DeleteContainer>
                   {deletingId === entry._id ? (
                     <>
                       <Styled.DeleteQuestion>
@@ -122,17 +110,17 @@ export default function EntriesList() {
                     </>
                   ) : (
                     <>
-                      <Styled.RoundButton
+                      <Styled.DeleteButton
                         as="a"
                         onClick={(event) =>
                           handleDeleteDialog(event, entry._id)
                         }
                       >
                         <FiTrash2 />
-                      </Styled.RoundButton>
+                      </Styled.DeleteButton>
                     </>
                   )}
-                </Styled.ButtonContainer>
+                </Styled.DeleteContainer>
               </Styled.Card>
             </motion.div>
           ))}

@@ -1,4 +1,4 @@
-import dbConnect from "@/db/dbConnect";
+import dbConnect from "@/db/connect";
 import User from "@/db/models/User";
 
 export default async function handler(request, response) {
@@ -15,15 +15,15 @@ export default async function handler(request, response) {
     }
   }
 
-  if (req.method === "POST") {
+  if (request.method === "POST") {
     try {
-      const { name, email, userId } = req.body;
+      const { name, email, userId } = request.body;
       const user = await User.create({ name, email, userId });
-      res.status(201).json({ success: true, data: user });
+      response.status(201).json({ success: true, data: user });
     } catch (error) {
-      res.status(400).json({ success: false });
+      response.status(400).json({ success: false });
     }
   } else {
-    res.status(405).json({ success: false });
+    response.status(405).json({ success: false });
   }
 }
