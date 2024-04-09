@@ -5,11 +5,12 @@ import Animation from "@/components/3DAnimation/3DAnimation";
 import NavButton from "@/components/NavButton/NavButton";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
 import * as Styled from "@/components/Layout/Layout.styled";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
 import fetchLocation from "@/utils/locationTracking";
 import LoginButton from "../LoginButton/LoginButton";
+import AnimationWrapper from "../AnimationWrapper/AnimationWrapper";
 
 export default function Flow() {
   const { mutate } = useSWR("/api/entries");
@@ -116,28 +117,23 @@ export default function Flow() {
           />
         </Styled.Page>
         <Styled.Navigation>
-          {!session && page === 0 && (
-            <NavButton
-              disabled={session}
-              handleClick={() => {
-                handleLoginButton();
-              }}
-            >
-              login
-            </NavButton>
-          )}
-          {page === 0 && (
-            <NavButton
-              handleClick={() => {
-                setAudioTrigger(true);
-                setPage((currPage) => currPage + 1);
-              }}
-            >
-              {!session ? "log your mood anonymously" : "log your current mood"}
-            </NavButton>
-          )}
-          {page === 1 && (
-            <motion.div variants={button} initial="hidden" animate="show">
+          <AnimationWrapper fadeIn key={page}>
+            {!session && page === 0 && (
+              <NavButton handleClick={handleLoginButton}>login</NavButton>
+            )}
+            {page < 1 && (
+              <NavButton
+                handleClick={() => {
+                  setAudioTrigger(true);
+                  setPage((currPage) => currPage + 1);
+                }}
+              >
+                {!session
+                  ? "log your mood anonymously"
+                  : "log your current mood"}
+              </NavButton>
+            )}
+            {page === 1 && (
               <NavButton
                 handleClick={() => {
                   setPage((currPage) => currPage + 1);
@@ -145,36 +141,39 @@ export default function Flow() {
               >
                 next
               </NavButton>
-            </motion.div>
-          )}
-          {(page === 3 || page === 4) && (
-            <NavButton handleClick={() => setPage((currPage) => currPage - 1)}>
-              prev
-            </NavButton>
-          )}
-          {(page === 2 || page === 3) && (
-            <NavButton
-              disabled={experience.length === 0}
-              handleClick={() => {
-                setPage((currPage) => currPage + 1);
-              }}
-            >
-              next
-            </NavButton>
-          )}
-          {page === 4 && (
-            <NavButton
-              disabled={reactions.length === 0}
-              handleClick={handleSave}
-            >
-              next
-            </NavButton>
-          )}
-          {page === 5 && (
-            <NavButton linkToPage={"./entries"}>
-              go to emotion entries
-            </NavButton>
-          )}
+            )}
+            {(page === 3 || page === 4) && (
+              <NavButton
+                handleClick={() => setPage((currPage) => currPage - 1)}
+              >
+                prev
+              </NavButton>
+            )}
+            {(page === 2 || page === 3) && (
+              <NavButton
+                disabled={experience.length === 0}
+                handleClick={() => {
+                  setPage((currPage) => currPage + 1);
+                }}
+              >
+                next
+              </NavButton>
+            )}
+            {page === 4 && (
+              <NavButton
+                disabled={reactions.length === 0}
+                handleClick={handleSave}
+              >
+                next
+              </NavButton>
+            )}
+
+            {page === 5 && (
+              <NavButton linkToPage={"./entries"}>
+                go to emotion entries
+              </NavButton>
+            )}
+          </AnimationWrapper>
         </Styled.Navigation>
       </Styled.Container>
     </>
