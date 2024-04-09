@@ -1,9 +1,18 @@
 import { motion } from "framer-motion";
 import LegacyAnimation from "../LegacyAnimation/LegacyAnimation";
 
-export default function Circle({ circleSize, name, color, count }) {
+export default function Circle({
+  circleSize,
+  name,
+  color,
+  count,
+  percentage,
+  handleExperienceClick,
+  mapsPage,
+}) {
   return (
     <motion.div
+      onClick={handleExperienceClick}
       drag
       initial={{ scale: 0.6, opacity: 0 }}
       dragTransition={{ bounceStiffness: 10, bounceDamping: 40 }}
@@ -44,8 +53,9 @@ export default function Circle({ circleSize, name, color, count }) {
         }}
         whileHover={{ scale: 1.05 }}
       >
-        <LegacyAnimation color={color} opacity={1} />
-        <h2 style={{ fontSize: circleSize / 12 }}>
+        <LegacyAnimation color={color} opacity={circleSize} />
+        <h2 style={{ fontSize: circleSize / 10 }}>
+          {mapsPage ? "" : `${percentage} % `}
           {name} <br />
           {count} entries
         </h2>

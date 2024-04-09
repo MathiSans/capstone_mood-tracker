@@ -59,7 +59,10 @@ export default function Maps({}) {
           </Switch>
         </Header>
       </Container>
-      <MapOfCircles data={mapsToggle ? experiences : locations} />
+      <MapOfCircles
+        data={mapsToggle ? experiences : locations}
+        mapsPage={true}
+      />
     </>
   );
 }
