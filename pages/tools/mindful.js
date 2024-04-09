@@ -9,14 +9,11 @@ export default function Entries() {
   const router = useRouter();
 
   return (
-    <Styled.Container>
-      <Styled.Page>
-        <Guide text={"Guided Meditation"} />
-        <GuidedMeditation />
-      </Styled.Page>
-      <Styled.Navigation>
-        <NavButton handleClick={() => router.back}>back</NavButton>
-      </Styled.Navigation>
-    </Styled.Container>
+    <>
+      <Guide text={"Guided Meditation"} />
+      <GuidedMeditation />
+
+      <NavButton handleClick={() => router.back}>back</NavButton>
+    </>
   );
 }
