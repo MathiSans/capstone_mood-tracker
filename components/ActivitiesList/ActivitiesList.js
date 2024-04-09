@@ -4,10 +4,11 @@ import { motion } from "framer-motion";
 import NavButton from "../NavButton/NavButton";
 import useSWR from "swr";
 import { FiPlus } from "react-icons/fi";
+import { useSession } from "next-auth/react";
 
 export default function ActivitiesList({ handleShowForm }) {
   const [filterPhrase, setFilterPhrase] = useState();
-
+  const { data: session } = useSession();
   const { data: activities, isLoading } = useSWR("/api/activities");
 
   if (isLoading) {
@@ -21,6 +22,8 @@ export default function ActivitiesList({ handleShowForm }) {
   const filteredActivities = activities.filter((activity) => {
     if (!filterPhrase || filterPhrase === "all") {
       return true;
+    } else if (filterPhrase === "myActivities") {
+      return activity.hasOwnProperty("user") && typeof activity.user !== null;
     } else if (filterPhrase === "tools") {
       return activity.hasOwnProperty("tool");
     } else if (Array.isArray(activity.forEmotion)) {
@@ -51,6 +54,8 @@ export default function ActivitiesList({ handleShowForm }) {
             <option value={"enjoyment"}>handle enjoyment</option>
             <option value={"disgust"}>handle disgust</option>
             <option value={"sadness"}>handle sadness</option>
+            <option disabled>------</option>
+            {session && <option value={"myActivities"}>my activities</option>}
           </Styled.Select>
         </label>
       </form>
@@ -59,8 +64,12 @@ export default function ActivitiesList({ handleShowForm }) {
           <Styled.Card
             onClick={handleShowForm}
             style={{ height: "250px", justifyContent: "center" }}
+            // !inline Styles
           >
-            <FiPlus style={{ fontSize: "3rem" }} />
+            <FiPlus
+              style={{ fontSize: "3rem" }}
+              // !inline Styles
+            />
             <Styled.Description>add a new activity</Styled.Description>
           </Styled.Card>
         </motion.div>

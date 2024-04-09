@@ -5,7 +5,6 @@ import { nanoid } from "nanoid";
 import SmileTrainer from "@/components/SmileTrainer/SmileTrainer";
 
 export default function FaceDetection() {
-  // const [emotions, setEmotions] = useState([]);
   const [emotionsArray, setEmotionsArray] = useState([]);
 
   const [facesDetected, setFacesDetected] = useState(false);
@@ -33,7 +32,7 @@ export default function FaceDetection() {
         };
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 

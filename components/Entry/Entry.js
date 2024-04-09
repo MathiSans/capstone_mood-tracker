@@ -5,8 +5,8 @@ import { Container, Page } from "../Layout/Layout.styled";
 import {
   Sentence,
   StaticText,
-  ButtonContainer,
-  RoundButton,
+  DeleteContainer,
+  DeleteButton,
 } from "../EntriesList/EntriesList.styled";
 import Intensity from "@/utils/intensity";
 import { FiArrowLeft } from "react-icons/fi";
@@ -14,11 +14,13 @@ import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa6";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useSession } from "next-auth/react";
 
 export default function Entry() {
   const [showSentence, setShowSentence] = useState(true);
   const router = useRouter();
   const { id } = router.query;
+  const { data: session } = useSession();
 
   const { data: entry, isLoading } = useSWR(`/api/entries/${id}`);
 
@@ -53,8 +55,14 @@ export default function Entry() {
               {" "}
               <Page>
                 <Sentence>
-                  <StaticText>Somebody </StaticText>
-                  {entry.location === "unknown" ? "" : `in ${entry.location}`}
+                  {session ? (
+                    <StaticText>{session.user.name} </StaticText>
+                  ) : (
+                    <StaticText>Somebody </StaticText>
+                  )}{" "}
+                  {entry.location === "unknown"
+                    ? ""
+                    : `in ${entry.location.region}`}
                   <StaticText> felt</StaticText> {entry.experience}.{" "}
                   <StaticText>More specifically</StaticText>{" "}
                   <Intensity
@@ -74,22 +82,22 @@ export default function Entry() {
             </motion.div>
           )}
         </AnimatePresence>
-        <ButtonContainer>
-          <RoundButton as="a" onClick={() => router.back()}>
+        <DeleteContainer>
+          <DeleteButton as="a" onClick={() => router.back()}>
             {showSentence ? (
               <FiArrowLeft />
             ) : (
               <FiArrowLeft style={{ color: "grey", opacity: "0.5" }} />
             )}
-          </RoundButton>
-          <RoundButton as="a" onClick={() => handleShowSentence()}>
+          </DeleteButton>
+          <DeleteButton as="a" onClick={() => handleShowSentence()}>
             {showSentence ? (
               <FaRegEyeSlash />
             ) : (
               <FaRegEye style={{ color: "grey", opacity: "0.5" }} />
             )}
-          </RoundButton>
-        </ButtonContainer>
+          </DeleteButton>
+        </DeleteContainer>
       </Container>
     </>
   );
