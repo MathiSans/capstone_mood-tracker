@@ -15,14 +15,7 @@ export default function Settings({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 0.1 } }}
     >
-      <Styled.SettingsContainer>
-        <MuteButton
-          currentVolume={currentVolume}
-          isMuted={isMuted}
-          audioReference={audioReference}
-          setIsMuted={setIsMuted}
-        />
-      </Styled.SettingsContainer>
+      <Styled.SettingsContainer></Styled.SettingsContainer>
     </motion.div>
   );
 }
