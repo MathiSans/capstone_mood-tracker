@@ -10,7 +10,7 @@ import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
 import fetchLocation from "@/utils/locationTracking";
 import LoginButton from "../LoginButton/LoginButton";
-import AnimationWrapper from "../SiteStepAnimation/SiteStepAnimation";
+import AnimationWrapper from "../AnimationWrapper/AnimationWrapper";
 
 export default function Flow() {
   const { mutate } = useSWR("/api/entries");
@@ -97,7 +97,6 @@ export default function Flow() {
   return (
     <>
       <Animation color={color} opacity={sliderValue} />
-      <Animation color={color} opacity={sliderValue} />
       <AudioSettings
         page={page}
         experience={experience}
@@ -121,14 +120,7 @@ export default function Flow() {
         <Styled.Navigation>
           <AnimationWrapper fadeIn key={page}>
             {!session && page === 0 && (
-              <NavButton
-                disabled={session}
-                handleClick={() => {
-                  handleLoginButton();
-                }}
-              >
-                login
-              </NavButton>
+              <NavButton handleClick={handleLoginButton}>login</NavButton>
             )}
             {page < 1 && (
               <NavButton
