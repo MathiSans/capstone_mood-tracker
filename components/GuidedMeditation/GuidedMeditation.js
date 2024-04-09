@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 export default function GuidedMeditation() {
   return (
     <div>
