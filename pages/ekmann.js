@@ -18,18 +18,14 @@ function EmotionAnalysis() {
     8: "",
     9: "",
   });
-  // const [inputText, setInputText] = useState("");
   const [emotionResult, setEmotionResult] = useState("");
   const [language, setLanguage] = useState("en");
   const [page, setPage] = useState(0);
   const [predictionsState, setPredictionsState] = useState(false);
   const [showList, setShowList] = useState(false);
+  const [emptyFieldsError, setEmptyFieldsError] = useState("");
 
   const handleChange = (event) => {
-    console.log("name", event.target.name);
-    console.log("value", event.target.value);
-
-    // setInputText(event.target.value);
     const { name, value } = event.target;
     setFormData({
       ...formData,
@@ -38,7 +34,6 @@ function EmotionAnalysis() {
   };
 
   const handleLanguageSelect = (event) => {
-    console.log("event-Target", event.target.value);
     if (event.target.value == "english") {
       setLanguage("en");
     }
@@ -57,15 +52,17 @@ function EmotionAnalysis() {
         const value = formData[key].trim(); // Trim whitespace from value
         if (!value) {
           // If any field is empty, log error and exit early
-          console.log(`Field '${key}' is empty. Please enter some text.`);
+          setEmptyFieldsError(
+            `Field '${key}' is empty. Please enter some text in "EVERY" field.`
+          );
+
           return;
         }
       }
     }
     event.preventDefault();
-
+    //here you can log the data which is saved before it i processed very well
     const inputText = JSON.stringify(formData);
-    console.log("inputText in submit", inputText);
 
     const url =
       "https://ekman-emotion-analysis.p.rapidapi.com/ekman-emotion?all=true";
@@ -122,12 +119,9 @@ function EmotionAnalysis() {
     "9. What can you do to feel calmer?",
     "10. What are you grateful for today?",
   ];
-  console.log("emotionResult", emotionResult);
-  console.log(question);
 
   const predictions =
     emotionResult && emotionResult[0] && emotionResult[0].predictions;
-  console.log(predictions);
 
   const transformedPredictions =
     predictions &&
@@ -160,11 +154,7 @@ function EmotionAnalysis() {
         return "lightgrey"; // Default color for unknown emotions
     }
   }
-  // console.log("inputText", inputText);
 
-  // if (!predictions || predictions.length === 0) {
-  //   return <div>No predictions available</div>; // Render a message or fallback content
-  // }
   return (
     <Container>
       <Page>
@@ -173,7 +163,12 @@ function EmotionAnalysis() {
           <option value="german">german</option>
           <option value="espanol">espanol</option>
         </select>
-
+        {page === 0 && (
+          <StyledH3>
+            Important! Please fill out all fields, otherwise the Analyzer does
+            not work!
+          </StyledH3>
+        )}
         <p>
           {page === 0 && question[0]}
           {page === 1 && question[1]}
@@ -269,19 +264,19 @@ function EmotionAnalysis() {
           />
         )}
         {page === 9 && (
-          <StyledTextarea
-            type="text"
-            name="9"
-            value={formData["9"]}
-            onChange={handleChange}
-            placeholder="write here..."
-            required
-          />
+          <>
+            <StyledTextarea
+              type="text"
+              name="9"
+              value={formData["9"]}
+              onChange={handleChange}
+              placeholder="write here..."
+              required
+            />
+            <p>{emptyFieldsError}</p>
+          </>
         )}
 
-        {/* {page === 4 && (
-          <NavButton onClick={handleSubmit}>Analyze Emotion</NavButton>
-        )} */}
         {page !== 9 && (
           <NavButton
             handleClick={() => {
@@ -350,4 +345,8 @@ const ContainerFlex = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+`;
+
+const StyledH3 = styled.h3`
+  color: red;
 `;
