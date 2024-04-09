@@ -19,7 +19,7 @@ export default function GuidedMeditation() {
         <iframe
           frameborder="0"
           width={300}
-          src="https://content.libsyn.com/p/d/e/9/de98f386edbc4f63/2023-10-11-Meditation-Living-Presence-with-Body-Scan-2016-05-25-TaraBrach.mp3?c_id=162738893&cs_id=162738893&response-content-type=audio%2Fmpeg&Expires=1712702163&Signature=gLgkP7nmqDF7IJUDFpRwtyEMi42anbxTyyA1-oxn4VLaLY~L30~WwoFfD4awjXzcz~W-kgHngAHTBz6QKdK0RslS2ri4gsAcd~JzNH8XlvzisXRvoFth70YLer---C1nAqYqchTvghWVvDbh8KuaZ3QSFTCJH-kesSZd48OEcn~g6suTNxv-LOur-CpSbvpMF2RxpbuAtBQjTgmJt0zY6fqenbCn3L1KtTbpIrkYyL4Ho6UntqUPT7gQfrRnRYz5oq5L2~OGGPvI-YMQl8itERWDNko3ULBbly-hbyvFguUdTpm2THBpBj8LWHA~VBtriYN9DNcI-PYB6DZFIumCBg__&Key-Pair-Id=K1YS7LZGUP96OI"
+          src="https://content.libsyn.com/p/d/e/9/de98f386edbc4f63/2023-10-11-Meditation-Living-Presence-with-Body-Scan-2016-05-25-TaraBrach.mp3?c_id=162738893&cs_id=162738893&response-content-type=audio%2Fmpeg&Expires=1712703716&Signature=TAAy3dPD17cr3OQDJ7wkrBkUzS0jnC9ZL70zL02znwLcBHxlQed0K0VbqbOnuwAmFmC0Y62oLXQYuuaZH-Jxly7NY-rPa1QuUFXyDrxmDxhiJ~EjcycUarCMPsZblZ3NEgXaseX1z8NWxdLkjUCaW1e1EnA6SeMqUPM64DjxiUzJIwCtVHUGNYujflXVHhMF6a6qagNoe6tP52uRt7k9347A7lB4nXAmaMnrSIht51Bpi~LeCPnVZTya3kiKs~nGRcg9PyJU4Mrdmq0It1ZmMfdF-buEl2GQ7QE0dJGUCONHaz4MUMp4t1ZVc-DGKAw8jKMiDGpqnpjm-XvHsW1Hzg__&Key-Pair-Id=K1YS7LZGUP96OI"
         />
         <br />
         <br />
