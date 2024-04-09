@@ -64,7 +64,6 @@ export default function EntriesList({
     setIsExperiencePage(!isExperiencePage);
   };
 
-  console.log("isExperiencePage", isExperiencePage);
   const outputData = filtered;
 
   const spring = {

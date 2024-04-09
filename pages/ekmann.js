@@ -54,7 +54,6 @@ function EmotionAnalysis() {
       console.error(error);
     }
   };
-  console.log("emotionResult", emotionResult);
   return (
     <ContainerFlex>
       <select id="language" onChange={handleLanguageSelect}>

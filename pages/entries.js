@@ -67,9 +67,6 @@ export default function Entries() {
     if (event.target.value === "lastWeek") {
       setFilter("lastWeek");
     }
-    // if (event.target.value === "moodsMap") {
-    //   setFilter("moodsMap");
-    // }
   }
 
   function handleIsVisualized() {
@@ -83,7 +80,6 @@ export default function Entries() {
         <select onChange={handleEntryFilter}>
           <option value="showAll">Show All</option>
           <option value="lastWeek">Show Emotion of the Last Week</option>
-          {/* <option value="moodsMap">Visualize</option> */}
         </select>
         <EntriesList
           filtered={filtered}
