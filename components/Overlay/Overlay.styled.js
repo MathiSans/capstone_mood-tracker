@@ -4,7 +4,6 @@ export const MenuContainer = styled.div`
   position: relative;
   display: flex;
   width: 100%;
-  min-height: 10dvh;
   z-index: 9999;
 `;
 

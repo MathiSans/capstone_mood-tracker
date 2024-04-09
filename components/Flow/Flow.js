@@ -95,7 +95,7 @@ export default function Flow() {
   };
   return (
     <>
-      {/* <Animation color={color} opacity={sliderValue} /> */}
+      <Animation color={color} opacity={sliderValue} />
       <AudioSettings
         experience={experience}
         audioTrigger={audioTrigger}
