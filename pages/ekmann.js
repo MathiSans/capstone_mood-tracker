@@ -6,7 +6,19 @@ import Circle from "@/components/Circle/Circle";
 import { TbList } from "react-icons/tb";
 
 function EmotionAnalysis() {
-  const [inputText, setInputText] = useState([]);
+  const [formData, setFormData] = useState({
+    0: "",
+    1: "",
+    2: "",
+    3: "",
+    4: "",
+    5: "",
+    6: "",
+    7: "",
+    8: "",
+    9: "",
+  });
+  // const [inputText, setInputText] = useState("");
   const [emotionResult, setEmotionResult] = useState("");
   const [language, setLanguage] = useState("en");
   const [page, setPage] = useState(0);
@@ -14,8 +26,15 @@ function EmotionAnalysis() {
   const [showList, setShowList] = useState(false);
 
   const handleChange = (event) => {
-    console.log(event.target.name);
-    setInputText(event.target.value);
+    console.log("name", event.target.name);
+    console.log("value", event.target.value);
+
+    // setInputText(event.target.value);
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const handleLanguageSelect = (event) => {
@@ -31,12 +50,22 @@ function EmotionAnalysis() {
     }
   };
 
-  const handleSubmit = async () => {
-    if (!inputText.trim()) {
-      // If inputText is empty, do not proceed with API request
-      console.log("Input text is empty. Please enter some text.");
-      return; // Exit early from the function
+  const handleSubmit = async (event) => {
+    // Check each field in formData for emptiness
+    for (const key in formData) {
+      if (formData.hasOwnProperty(key)) {
+        const value = formData[key].trim(); // Trim whitespace from value
+        if (!value) {
+          // If any field is empty, log error and exit early
+          console.log(`Field '${key}' is empty. Please enter some text.`);
+          return;
+        }
+      }
     }
+    event.preventDefault();
+
+    const inputText = JSON.stringify(formData);
+    console.log("inputText in submit", inputText);
 
     const url =
       "https://ekman-emotion-analysis.p.rapidapi.com/ekman-emotion?all=true";
@@ -57,7 +86,19 @@ function EmotionAnalysis() {
         },
       ]),
     };
-
+    // Reset form after submission (optional)
+    setFormData({
+      0: "",
+      1: "",
+      2: "",
+      3: "",
+      4: "",
+      5: "",
+      6: "",
+      7: "",
+      8: "",
+      9: "",
+    });
     try {
       const response = await fetch(url, options);
       const result = await response.json();
@@ -119,6 +160,7 @@ function EmotionAnalysis() {
         return "lightgrey"; // Default color for unknown emotions
     }
   }
+  // console.log("inputText", inputText);
 
   // if (!predictions || predictions.length === 0) {
   //   return <div>No predictions available</div>; // Render a message or fallback content
@@ -143,14 +185,13 @@ function EmotionAnalysis() {
           {page === 7 && question[7]}
           {page === 8 && question[8]}
           {page === 9 && question[9]}
-          {page === 10 && question[10]}
         </p>
 
         {page === 0 && (
           <StyledTextarea
             type="text"
             name="0"
-            value={inputText}
+            value={formData["0"]}
             onChange={handleChange}
             placeholder="write here..."
           />
@@ -159,7 +200,7 @@ function EmotionAnalysis() {
           <StyledTextarea
             type="text"
             name="1"
-            value={inputText}
+            value={formData["1"]}
             onChange={handleChange}
             placeholder="write here..."
           />
@@ -168,7 +209,7 @@ function EmotionAnalysis() {
           <StyledTextarea
             type="text"
             name="2"
-            value={inputText}
+            value={formData["2"]}
             onChange={handleChange}
             placeholder="write here..."
           />
@@ -177,7 +218,7 @@ function EmotionAnalysis() {
           <StyledTextarea
             type="text"
             name="3"
-            value={inputText}
+            value={formData["3"]}
             onChange={handleChange}
             placeholder="write here..."
           />
@@ -186,7 +227,7 @@ function EmotionAnalysis() {
           <StyledTextarea
             type="text"
             name="4"
-            value={inputText}
+            value={formData["4"]}
             onChange={handleChange}
             placeholder="write here..."
           />
@@ -195,7 +236,7 @@ function EmotionAnalysis() {
           <StyledTextarea
             type="text"
             name="5"
-            value={inputText}
+            value={formData["5"]}
             onChange={handleChange}
             placeholder="write here..."
           />
@@ -204,7 +245,7 @@ function EmotionAnalysis() {
           <StyledTextarea
             type="text"
             name="6"
-            value={inputText}
+            value={formData["6"]}
             onChange={handleChange}
             placeholder="write here..."
           />
@@ -213,7 +254,7 @@ function EmotionAnalysis() {
           <StyledTextarea
             type="text"
             name="7"
-            value={inputText}
+            value={formData["7"]}
             onChange={handleChange}
             placeholder="write here..."
           />
@@ -222,7 +263,7 @@ function EmotionAnalysis() {
           <StyledTextarea
             type="text"
             name="8"
-            value={inputText}
+            value={formData["8"]}
             onChange={handleChange}
             placeholder="write here..."
           />
@@ -231,26 +272,17 @@ function EmotionAnalysis() {
           <StyledTextarea
             type="text"
             name="9"
-            value={inputText}
+            value={formData["9"]}
             onChange={handleChange}
             placeholder="write here..."
             required
           />
         )}
-        {page === 10 && (
-          <StyledTextarea
-            type="text"
-            name="10"
-            value={inputText}
-            onChange={handleChange}
-            placeholder="What do hear now?"
-            required
-          />
-        )}
+
         {/* {page === 4 && (
           <NavButton onClick={handleSubmit}>Analyze Emotion</NavButton>
         )} */}
-        {page !== 4 && (
+        {page !== 9 && (
           <NavButton
             handleClick={() => {
               setPage((currPage) => currPage + 1);
@@ -259,7 +291,7 @@ function EmotionAnalysis() {
             next
           </NavButton>
         )}
-        {page === 4 && (
+        {page === 9 && (
           <div>
             <NavButton handleClick={handleSubmit}>Analyze Emotion</NavButton>
 
@@ -284,14 +316,15 @@ function EmotionAnalysis() {
         )}
         {predictionsState && (
           <CircleContainer>
-            {transformedPredictions.map((emotion, index) => (
-              <Circle
-                key={index}
-                circleSize={emotion.probability * 500}
-                color={getColorForEmotion(emotion.prediction)}
-                name={emotion.prediction}
-              />
-            ))}
+            {transformedPredictions &&
+              transformedPredictions.map((emotion, index) => (
+                <Circle
+                  key={index}
+                  circleSize={emotion.probability * 500}
+                  color={getColorForEmotion(emotion.prediction)}
+                  name={emotion.prediction}
+                />
+              ))}
           </CircleContainer>
         )}
       </Page>
