@@ -28,6 +28,11 @@ const nextConfig = {
 
     return config;
   },
+
+  // Add images configuration
+  images: {
+    domains: ["avatars.githubusercontent.com"], // Add your domain here
+  },
 };
 
 module.exports = nextConfig;

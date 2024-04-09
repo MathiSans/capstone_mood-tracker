@@ -14,7 +14,7 @@ export const Page = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: var(--spacing-xxxl);
   margin-bottom: 10vh;
 `;
 
@@ -23,5 +23,5 @@ export const Navigation = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
-  gap: 20px;
+  gap: var(--spacing-l);
 `;

@@ -2,23 +2,24 @@ import styled from "styled-components";
 
 export const IntensityContainer = styled.div`
   display: flex;
-  gap: 10px;
+  gap: var(--spacing-m);
 `;
 
 export const Intensity = styled.p`
   color: ${(props) =>
-    props.index === 1 ? "white" : "rgba(255, 255, 255, 0.5)"};
+    props.highlighted ? `var(--color-main-alt)` : ` var(--color-neutral)`};
   text-align: center;
   min-width: 80px;
-  text-shadow: black 2px 0 25px;
+  text-shadow: var(--color-main) 2px 0 25px;
 `;
 
 export const RangeInput = styled.input`
   height: 56px;
   background-color: transparent;
+  appearance: none;
   -webkit-appearance: none;
-  margin: 10 0;
-  width: 300px;
+  margin: var(--spacing-m) 0;
+  width: 100%;
 
   &:focus {
     outline: none;
@@ -28,21 +29,21 @@ export const RangeInput = styled.input`
     width: 100%;
     height: 2px;
     cursor: pointer;
-    animate: 0.2s;
-    box-shadow: 0 0 0 white;
-    background: white;
+    box-shadow: 0 0 0 var(--color-main-alt);
+    background: var(--color-main-alt);
     border-radius: 0;
-    border: 0 solid white;
+    border: 0 solid var(--color-main-alt);
   }
 
   &::-webkit-slider-thumb {
-    box-shadow: 0 0 0 white;
-    border: 0 solid white;
+    box-shadow: 0 0 0 var(--color-main-alt);
+    border: 0 solid var(--color-main-alt);
     height: 50px;
     width: 2px;
     border-radius: 0;
-    background: white;
+    background: var(--color-main-alt);
     cursor: pointer;
+    appearance: none;
     -webkit-appearance: none;
     margin-top: -24px;
   }

@@ -1,4 +1,4 @@
-import dbConnect from "@/db/models/connect";
+import dbConnect from "@/db/connect";
 import Activity from "@/db/models/Activity";
 
 export default async function handler(request, response) {
@@ -17,7 +17,6 @@ export default async function handler(request, response) {
     try {
       const activityData = request.body;
       await Activity.create(activityData);
-
       response.status(201).json({ status: "Entry created" });
     } catch (error) {
       response.status(400).json({ error: error.message });
