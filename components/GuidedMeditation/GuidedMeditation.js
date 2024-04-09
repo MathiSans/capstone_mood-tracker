@@ -41,7 +41,7 @@ export default function GuidedMeditation() {
 
 const BrightLink = styled(Link)`
   text-decoration: none;
-  color: #63d3ff; /* Set the color to a bright blue (you can adjust the color as needed) */
+  color: #ffffff; /* Set the color to a bright blue (you can adjust the color as needed) */
 
   /* Hover effect (optional) */
   &:hover {
