@@ -30,7 +30,7 @@ export default function QuotesPage({ fetcher }) {
   }
 
   function handleCounter() {
-    setQuoteCounter((prevState) => prevState + 1);
+    setQuoteCounter((prevState) => prevState + 0.5);
   }
 
   return (

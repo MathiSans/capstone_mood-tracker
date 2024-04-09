@@ -21,7 +21,7 @@ export const Card = styled.div`
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-l);
-  border-radius: var(--radius-small);
+  border-radius: var(--border-radius-small);
   width: 300px;
   padding: var(--spacing-xl);
   position: relative;

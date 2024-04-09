@@ -3,6 +3,7 @@ import * as Styled from "./EntriesList.styled";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiTrash2 } from "react-icons/fi";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 export default function SwissKnifeList({
   outputData,
@@ -12,6 +13,7 @@ export default function SwissKnifeList({
   handleDeleteEntry,
 }) {
   const router = useRouter();
+  const { data: session } = useSession();
   return (
     <Styled.Grid>
       <AnimatePresence>
@@ -30,10 +32,19 @@ export default function SwissKnifeList({
                 <Styled.ColoredShape color={entry.color} />
               </Styled.ColoredShapeContainer>
               <Styled.Sentence>
-                <Styled.StaticText>Somebody </Styled.StaticText>
-                {entry.location === "unknown"
-                  ? ""
-                  : `in ${entry.location.region}`}
+                {session ? (
+                  "You "
+                ) : (
+                  <Styled.StaticText>Somebody </Styled.StaticText>
+                )}
+                {entry.location === "unknown" ? (
+                  ""
+                ) : (
+                  <>
+                    <Styled.StaticText>in </Styled.StaticText>
+                    {entry.location.region}
+                  </>
+                )}
                 <Styled.StaticText> felt</Styled.StaticText> {entry.experience}.{" "}
                 <Styled.StaticText>More specifically</Styled.StaticText>{" "}
                 <Intensity
@@ -41,7 +52,7 @@ export default function SwissKnifeList({
                   experience={entry.experience}
                 />
                 <Styled.StaticText>
-                  . They selected these tags:
+                  . You selected these tags:
                 </Styled.StaticText>{" "}
                 {entry.reactions.map((reaction, index, array) => (
                   <span key={index}>

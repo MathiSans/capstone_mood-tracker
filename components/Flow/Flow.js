@@ -106,7 +106,6 @@ export default function Flow() {
     }
   };
 
-  console.log(hideInterface);
   return (
     <>
       <Animation

@@ -37,6 +37,7 @@ export default function Circle({
         justifyContent: "center",
         alignItems: "center",
         boxShadow: "10px 10px 50px black",
+        cursor: "pointer",
       }}
     >
       <motion.div

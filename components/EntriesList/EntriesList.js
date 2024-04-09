@@ -2,13 +2,16 @@ import * as Styled from "./EntriesList.styled";
 import { useSWRConfig } from "swr";
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import Circle from "../Circle/Circle";
 import experienceAnalyser from "@/utils/experienceAnalyser";
 import SwissKnifeList from "./SwissKnifeList";
 import styled from "styled-components";
+import NavButton from "../NavButton/NavButton";
+import { useSession } from "next-auth/react";
 
 export default function EntriesList({
+  isLastWeek,
+  handleEntryFilter,
   filtered,
   filter,
   isVisualized,
@@ -20,6 +23,15 @@ export default function EntriesList({
   const containerRef = useRef(null);
   const [targetExperience, setTargetExperience] = useState(null);
   const [isExperiencePage, setIsExperiencePage] = useState(false);
+  const { data: session } = useSession();
+
+  function filterEntriesByUser() {
+    if (!session) {
+      return filtered;
+    }
+
+    return filtered.filter((entry) => entry.user === session.user.id);
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -50,10 +62,12 @@ export default function EntriesList({
     mutate("/api/entries");
   }
 
-  const result = experienceAnalyser(filtered);
+  const result = experienceAnalyser(filterEntriesByUser());
   const totalCount = result.totalCount;
 
-  const experiences = isExperiencePage ? filtered : result.experiences;
+  const experiences = isExperiencePage
+    ? filterEntriesByUser()
+    : result.experiences;
   const sortedExperiences = experiences.sort((a, b) => b.count - a.count);
 
   const singleEmotionEntryList = experiences.filter(
@@ -64,54 +78,76 @@ export default function EntriesList({
     setIsExperiencePage(!isExperiencePage);
   };
 
-  const outputData = filtered;
+  const outputData = filterEntriesByUser();
 
   const spring = {
     type: "spring",
     stiffness: 300,
     damping: 20,
   };
+
   return (
     <>
       {/*Checkbox wird auf der Liste von der Einzelnen Emotion ausgeblendet*/}
       {!isExperiencePage && (
-        <Switch $right={isVisualized} onClick={() => handleIsVisualized()}>
-          <motion.div // styled-components police, be aware: motion.divs are kind of incompatible with styled-components and must be styled like this 🤓
-            style={{
-              width: "80px",
-              height: "32px",
-              backgroundColor: `var(--color-main-alt)`,
-              borderRadius: `var(--border-radius-medium)`,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              color: `var(--color-main)`,
-            }}
-            layout
-            transition={spring}
-          >
-            <SwitchText>{isVisualized ? "Circles" : "List View"}</SwitchText>
-          </motion.div>
-        </Switch>
+        <SwitchContainer>
+          {" "}
+          <Switch $right={isLastWeek} onClick={() => handleEntryFilter()}>
+            <motion.div // styled-components police, be aware: motion.divs are kind of incompatible with styled-components and must be styled like this 🤓
+              style={{
+                width: "80px",
+                height: "32px",
+                backgroundColor: `var(--color-main-alt)`,
+                borderRadius: `var(--border-radius-medium)`,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: `var(--color-main)`,
+              }}
+              layout
+              transition={spring}
+            >
+              <SwitchText>{isLastWeek ? "last week" : "all"}</SwitchText>
+            </motion.div>
+          </Switch>
+          <Switch $right={isVisualized} onClick={() => handleIsVisualized()}>
+            <motion.div // styled-components police, be aware: motion.divs are kind of incompatible with styled-components and must be styled like this 🤓
+              style={{
+                width: "80px",
+                height: "32px",
+                backgroundColor: `var(--color-main-alt)`,
+                borderRadius: `var(--border-radius-medium)`,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: `var(--color-main)`,
+              }}
+              layout
+              transition={spring}
+            >
+              <SwitchText>{isVisualized ? "Circles" : "List View"}</SwitchText>
+            </motion.div>
+          </Switch>
+        </SwitchContainer>
       )}
 
       {/*Der Block geht sehr lang und rendert Entweder die ShowAll Liste oder Die Circle*/}
       {isVisualized ? (
         <>
-          <p>
+          {/* <p>
             This are your{isExperiencePage && ` ${targetExperience}`} moods
             {filter === "lastWeek" && " of the last week"}
-          </p>
+          </p> */}
 
           {/*Nur der Button wird eingeblendet auf der Liste der einzelen Emotion*/}
           {isExperiencePage ? (
-            <button
-              onClick={() => {
+            <NavButton
+              handleClick={() => {
                 setIsExperiencePage(!isExperiencePage);
               }}
             >
-              back
-            </button>
+              reset experience filter
+            </NavButton>
           ) : (
             ""
           )}
@@ -176,4 +212,9 @@ const Switch = styled.div`
   padding: var(--spacing-s);
   cursor: pointer;
   z-index: 999;
+`;
+
+const SwitchContainer = styled.div`
+  display: flex;
+  gap: var(--spacing-m);
 `;

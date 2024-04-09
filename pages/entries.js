@@ -1,16 +1,28 @@
 import React from "react";
 import Guide from "@/components/Guide/Guide";
 import EntriesList from "@/components/EntriesList/EntriesList";
-import { Container, Navigation, Page } from "@/components/Layout/Layout.styled";
+import { Container, Page } from "@/components/Layout/Layout.styled";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
+import { useSession } from "next-auth/react";
+import styled from "styled-components";
 
 export default function Entries() {
   const { data, isLoading } = useSWR("/api/entries");
   const [filter, setFilter] = useState("showAll"); //Filter Entries State
   const [filtered, setFiltered] = useState([]);
   const [isVisualized, setIsVisualized] = useState(false);
+  const [isLastWeek, setIsLastWeek] = useState(false);
   const reversedData = Array.isArray(data) ? [...data].reverse() : [];
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (isLastWeek) {
+      setFilter("lastWeek");
+    } else {
+      setFilter("showAll");
+    }
+  }, [isLastWeek]);
 
   useEffect(() => {
     if (Array.isArray(data)) {
@@ -59,29 +71,47 @@ export default function Entries() {
     return;
   }
 
-  function handleEntryFilter(event) {
-    if (event.target.value === "showAll") {
-      setFilter("showAll");
-      setFiltered([...data].reverse());
-    }
-    if (event.target.value === "lastWeek") {
-      setFilter("lastWeek");
-    }
+  // function handleEntryFilter(event) {
+  //   if (event.target.value === "showAll") {
+  //     setFilter("showAll");
+  //     setFiltered([...data].reverse());
+  //   }
+  //   if (event.target.value === "lastWeek") {
+  //     setFilter("lastWeek");
+  //   }
+  // }
+
+  function handleEntryFilter() {
+    setIsLastWeek(!isLastWeek);
   }
 
   function handleIsVisualized() {
     setIsVisualized(!isVisualized);
   }
 
+  const spring = {
+    type: "spring",
+    stiffness: 300,
+    damping: 20,
+  };
+
   return (
     <Container>
       <Page>
-        <Guide text={"emotion collection"} />
-        <select onChange={handleEntryFilter}>
+        <Header>
+          {session ? (
+            <Guide text={`${session.user.name}'s emotion collection`} />
+          ) : (
+            <Guide text={`emotion collection`} />
+          )}
+        </Header>
+        {/* <select onChange={handleEntryFilter}>
           <option value="showAll">Show All</option>
           <option value="lastWeek">Show Emotion of the Last Week</option>
-        </select>
+        </select> */}
         <EntriesList
+          isLastWeek={isLastWeek}
+          handleEntryFilter={handleEntryFilter}
           filtered={filtered}
           filter={filter}
           handleIsVisualized={handleIsVisualized}
@@ -91,3 +121,10 @@ export default function Entries() {
     </Container>
   );
 }
+
+const Header = styled.div`
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-s);
+`;

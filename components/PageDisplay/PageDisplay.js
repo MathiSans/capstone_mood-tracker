@@ -6,6 +6,7 @@ import IntensityDisplay from "../IntensityDisplay/IntensityDisplay";
 import { useSession } from "next-auth/react";
 import { AnimatePresence } from "framer-motion";
 import AnimationWrapper from "../AnimationWrapper/AnimationWrapper";
+import * as Styled from "./PageDisplay.styled";
 
 export default function PageDisplay({
   hideInterface,
@@ -28,10 +29,15 @@ export default function PageDisplay({
           case 0:
             return (
               <>
-                <Guide bigger={true} text={"komm zur Ruh"} />
-                {session && (
-                  <Guide text={`Welcome back, ${session.user.name}`} />
-                )}
+                <Styled.TitleContainer>
+                  <Guide bigger={true} text={"komm zur Ruh"} />
+                  {session && (
+                    <h2 style={{ textAlign: "center" }}>
+                      Welcome back, <br />
+                      {session.user.name}
+                    </h2>
+                  )}
+                </Styled.TitleContainer>
               </>
             );
           case 1:
