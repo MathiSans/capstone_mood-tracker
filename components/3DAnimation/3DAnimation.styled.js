@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 
 export const Container = styled.div`
   position: absolute;
-  z-index: -1;
+  // z-index: -1;
   width: 100%;
   height: 100%;
 `;
