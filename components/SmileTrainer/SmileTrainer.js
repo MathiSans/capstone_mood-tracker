@@ -32,9 +32,9 @@ export default function SmileTrainer({ smileThreshold, facesDetected }) {
         transition={{ duration: 10 }}
       >
         <Styled.Circle
-          facesDetected={facesDetected}
-          smileThreshold={smileThreshold}
-          done={done}
+          $facesDetected={facesDetected}
+          $smileThreshold={smileThreshold}
+          $done={done}
         >
           <Styled.conditionalTextContainer>
             {done ? (
@@ -57,6 +57,11 @@ export default function SmileTrainer({ smileThreshold, facesDetected }) {
               {done ? null : `${Math.ceil(counter)} seconds remaining`}
             </Styled.conditionalText>
           </Styled.conditionalTextContainer>
+          <Styled.InnerCircle
+            $facesDetected={facesDetected}
+            $smileThreshold={smileThreshold}
+            $done={done}
+          />
         </Styled.Circle>
       </motion.div>
     </>

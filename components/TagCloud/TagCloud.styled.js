@@ -3,16 +3,17 @@ import styled from "styled-components";
 export const TagCloud = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: var(--spacing-m);
   max-width: 400px;
   justify-content: center;
 `;
 
 export const Button = styled.button`
-  padding: 10px 26px;
-  color: white;
-  border: 1px solid white;
+  padding: var(--spacing-m) 26px;
+  color: var(--color-main-alt);
+  border: 1px solid var(--color-main-alt);
   cursor: pointer;
-  text-shadow: black 2px 0 15px;
-  background-color: ${({ active, color }) => (active ? color : "transparent")};
+  text-shadow: var(--color-main) 2px 0 15px;
+  background-color: ${(props) =>
+    props.$active ? props.$color : "transparent"};
 `;

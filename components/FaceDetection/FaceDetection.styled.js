@@ -5,8 +5,9 @@ export const redFrame = styled.div`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
-  border: 1px solid red;
+  height: 100dvh;
+  border: 2px solid var(--color-danger);
+  z-index: -10;
 `;
 
 export const DisclaimerText = styled.p`
@@ -18,7 +19,7 @@ export const DisclaimerText = styled.p`
   right: 0;
   text-align: center;
   width: 80%;
-  color: red;
+  color: var(--color-danger);
 `;
 
 export const HiddenVideo = styled.video`

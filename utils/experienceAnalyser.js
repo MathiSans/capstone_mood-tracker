@@ -1,5 +1,6 @@
 export default function experienceAnalyser(data) {
   const experienceMap = {};
+  let totalCount = 0;
   data.forEach((entry) => {
     if (!experienceMap[entry.experience]) {
       experienceMap[entry.experience] = {
@@ -11,6 +12,7 @@ export default function experienceAnalyser(data) {
       experienceMap[entry.experience].count++;
       experienceMap[entry.experience].totalIntensity += entry.intensity;
     }
+    totalCount++;
   });
 
   const result = [];
@@ -26,6 +28,8 @@ export default function experienceAnalyser(data) {
       count: experienceMap[experience].count,
     });
   }
-
-  return result;
+  return {
+    experiences: result,
+    totalCount,
+  };
 }

@@ -3,9 +3,12 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const entrySchema = new Schema({
-  time: String,
   user: String,
-  location: String,
+  time: String,
+  location: {
+    city: String,
+    region: String,
+  },
   experience: String,
   color: String,
   intensity: Number,
