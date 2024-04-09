@@ -1,6 +1,6 @@
 import GlobalStyle from "../styles";
 import { SWRConfig } from "swr";
-import Layout from "@/components/Layout/Layout";
+import Overlay from "@/components/Overlay/Overlay";
 import { ThemeProvider } from "styled-components";
 import { SessionProvider } from "next-auth/react";
 
@@ -66,9 +66,9 @@ export default function App({
           }}
         >
           <SessionProvider session={session}>
-            <Layout>
+            <Overlay>
               <Component {...pageProps} />
-            </Layout>
+            </Overlay>
           </SessionProvider>
         </SWRConfig>
       </ThemeProvider>

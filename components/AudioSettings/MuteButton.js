@@ -24,7 +24,6 @@ export default function MuteButton({
     <StyledContainer>
       <StyledMuteButton type="button" onClick={toggleMute} $isMuted={isMuted}>
         {isMuted ? <IoVolumeMute /> : <IoVolumeHighSharp />}
-        {isMuted ? <IoVolumeMute /> : <IoVolumeHighSharp />}
       </StyledMuteButton>
     </StyledContainer>
   );
@@ -32,13 +31,10 @@ export default function MuteButton({
 
 const StyledContainer = styled.div`
   position: fixed;
+  display: flex;
   justify-content: end;
   align-items: end;
-  padding-bottom: var(--spacing-xl);
-  padding-bottom: var(--spacing-xl);
   bottom: 0;
-  display: flex;
-  right: 0;
   right: 0;
 `;
 
@@ -53,25 +49,9 @@ const StyledMuteButton = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: var(--border-radius-round);
-  margin-inline-end: 1.5rem;
-  font-size: 1.2rem;
-  height: 42px;
-  width: 42px;
-  background-color: transparent;
-  color: ${(props) =>
-    props.$isMuted ? `var(--color-neutral)` : `var(--color-main-alt)`};
-  border: 1px solid
-    ${(props) =>
-      props.$isMuted ? `var(--color-neutral)` : `var(--color-main-alt)`};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: var(--border-radius-round);
-  margin-inline-end: 5.5rem;
+  margin-inline-end: 5rem;
   margin-block-end: 1.5rem;
   font-size: 1.2rem;
-  height: 42px;
-  width: 42px;
-  filter: drop-shadow(black 0rem 0rem 25px);
-  cursor: pointer;
+  height: 40px;
+  width: 40px;
 `;
