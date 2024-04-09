@@ -1,15 +1,10 @@
-import Intensity from "@/utils/intensity";
-
 import * as Styled from "./EntriesList.styled";
 import { useSWRConfig } from "swr";
-import { AnimatePresence, motion } from "framer-motion";
-import { FiTrash2 } from "react-icons/fi";
+import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Circle from "../Circle/Circle";
-import { Grid } from "./EntriesList.styled";
 import experienceAnalyser from "@/utils/experienceAnalyser";
-import MapOfCircles from "../MapOfCircles/MapOfCircles";
 import SwissKnifeList from "./SwissKnifeList";
 import styled from "styled-components";
 
@@ -19,10 +14,7 @@ export default function EntriesList({
   isVisualized,
   handleIsVisualized,
 }) {
-  const router = useRouter();
   const [deletingId, setDeletingId] = useState(null);
-  const [mapsToggle, setMapsToggle] = useState(true);
-
   const { mutate } = useSWRConfig();
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
   const containerRef = useRef(null);
@@ -102,16 +94,6 @@ export default function EntriesList({
             <SwitchText>{isVisualized ? "Circles" : "List View"}</SwitchText>
           </motion.div>
         </Switch>
-
-        // <CheckboxLabel htmlFor="visualize">
-        //   {isVisualized ? "Listview" : "Visualize"}
-        //   <CheckboxInput
-        //     id="visualize"
-        //     type="checkbox"
-        //     checked={isVisualized}
-        //     onChange={handleIsVisualized}
-        //   />
-        // </CheckboxLabel>
       )}
 
       {/*Der Block geht sehr lang und rendert Entweder die ShowAll Liste oder Die Circle*/}
@@ -157,12 +139,6 @@ export default function EntriesList({
                     }
                   />
                 ))}
-                {/* <MapOfCircles
-                  data={sortedExperiences}
-                  handleExperienceClick={handleExperienceClick}
-                  totalCount={totalCount}
-                  isEntriesListStyle={true}
-                /> */}
               </Styled.Grid>
             ) : (
               <SwissKnifeList
@@ -187,42 +163,6 @@ export default function EntriesList({
     </>
   );
 }
-
-export const CheckboxLabel = styled.label`
-  height: 40px;
-  padding: 10px;
-  text-align: center;
-  width: 110px;
-  border-radius: var(--border-radius-medium);
-  font-size: var(--font-size-default);
-  background-color: ${(props) =>
-    props.$color ? props.$color : `var(--color-neutral)`};
-`;
-
-export const CheckboxInput = styled.input`
-  appearance: none;
-  position: relative;
-  -webkit-appearance: none;
-  height: 40px;
-  width: 110px;
-  outline: none;
-  font-size: var(--font-size-default);
-  border-radius: var(--border-radius-medium);
-  cursor: pointer;
-  top: -32px;
-  left: -14px;
-
-  &:checked::after {
-    content: "";
-    position: absolute;
-    height: 40px;
-    width: 110px;
-    border: 3.5px solid var(--color-main-alt);
-    font-size: var(--font-size-default);
-    color: var(--color-main-alt);
-    border-radius: var(--border-radius-medium);
-  }
-`;
 
 const SwitchText = styled.p`
   font-size: 0.8rem;

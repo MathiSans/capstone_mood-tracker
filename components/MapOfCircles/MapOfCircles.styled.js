@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Grid = styled.div`
-  position: ${(props) => (props.isEntriesListStyle ? "relative" : "absolute")};
+  position: absolute;
   top: 0;
   left: 0;
   display: flex;
@@ -11,8 +11,5 @@ export const Grid = styled.div`
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background: ${(props) =>
-    props.isEntriesListStyle
-      ? "var(--color-main)"
-      : "var(--effect-radial-gradient)"};
+  background: var(--effect-radial-gradient);
 `;
