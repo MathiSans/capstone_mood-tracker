@@ -9,11 +9,6 @@ export const Container = styled.div`
   min-height: 100dvh;
 `;
 
-export const MenuContainer = styled.div`
-  position: relative;
-  z-index: 9999;
-`;
-
 export const Page = styled.div`
   display: flex;
   flex-direction: column;

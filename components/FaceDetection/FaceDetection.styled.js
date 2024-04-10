@@ -7,6 +7,7 @@ export const redFrame = styled.div`
   width: 100vw;
   height: 100dvh;
   border: 2px solid var(--color-danger);
+  z-index: -10;
 `;
 
 export const DisclaimerText = styled.p`

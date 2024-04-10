@@ -5,7 +5,7 @@ import { Container, Page } from "../Layout/Layout.styled";
 import {
   Sentence,
   StaticText,
-  DeleteContainer,
+  ToolsContainer,
   DeleteButton,
 } from "../EntriesList/EntriesList.styled";
 import Intensity from "@/utils/intensity";
@@ -39,9 +39,10 @@ export default function Entry() {
   return (
     <>
       <Animation color={entry.color} opacity={entry.intensity} />
-      <Container>
-        <AnimatePresence>
-          {showSentence && (
+
+      <AnimatePresence>
+        {showSentence && (
+          <Container>
             <motion.div
               key={entry._id}
               initial={{ scale: 0.8, opacity: 0 }}
@@ -55,21 +56,22 @@ export default function Entry() {
               {" "}
               <Page>
                 <Sentence>
-                  {session ? (
-                    <StaticText>{session.user.name} </StaticText>
+                  {session ? "You " : <StaticText>Somebody </StaticText>}
+                  {entry.location === "unknown" ? (
+                    ""
                   ) : (
-                    <StaticText>Somebody </StaticText>
-                  )}{" "}
-                  {entry.location === "unknown"
-                    ? ""
-                    : `in ${entry.location.region}`}
+                    <>
+                      <StaticText>in </StaticText>
+                      {entry.location.region}
+                    </>
+                  )}
                   <StaticText> felt</StaticText> {entry.experience}.{" "}
                   <StaticText>More specifically</StaticText>{" "}
                   <Intensity
                     value={entry.intensity}
                     experience={entry.experience}
                   />
-                  <StaticText>. They selected these tags:</StaticText>{" "}
+                  <StaticText>. You selected these tags:</StaticText>{" "}
                   {entry.reactions.map((reaction, index, array) => (
                     <span key={index}>
                       {reaction}
@@ -80,25 +82,25 @@ export default function Entry() {
                 <StaticText>{entry.time}</StaticText>{" "}
               </Page>
             </motion.div>
+          </Container>
+        )}
+      </AnimatePresence>
+      <ToolsContainer>
+        <DeleteButton as="a" onClick={() => router.back()}>
+          {showSentence ? (
+            <FiArrowLeft />
+          ) : (
+            <FiArrowLeft style={{ color: "grey", opacity: "0.5" }} />
           )}
-        </AnimatePresence>
-        <DeleteContainer>
-          <DeleteButton as="a" onClick={() => router.back()}>
-            {showSentence ? (
-              <FiArrowLeft />
-            ) : (
-              <FiArrowLeft style={{ color: "grey", opacity: "0.5" }} />
-            )}
-          </DeleteButton>
-          <DeleteButton as="a" onClick={() => handleShowSentence()}>
-            {showSentence ? (
-              <FaRegEyeSlash />
-            ) : (
-              <FaRegEye style={{ color: "grey", opacity: "0.5" }} />
-            )}
-          </DeleteButton>
-        </DeleteContainer>
-      </Container>
+        </DeleteButton>
+        <DeleteButton as="a" onClick={() => handleShowSentence()}>
+          {showSentence ? (
+            <FaRegEyeSlash />
+          ) : (
+            <FaRegEye style={{ color: "grey", opacity: "0.5" }} />
+          )}
+        </DeleteButton>
+      </ToolsContainer>
     </>
   );
 }

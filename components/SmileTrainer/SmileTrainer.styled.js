@@ -34,10 +34,10 @@ export const InnerCircle = styled.div`
   width: 90%;
   border-radius: var(--border-radius-round);
   box-shadow: inset 0 0 60px black;
-  background-color: ${(props) =>
-    props.done || props.smileThreshold > 0.5
-      ? "#00FF00"
-      : props.facesDetected
-      ? "#6C6C6C"
+  background-color: ${({ $facesDetected, $smileThreshold, $done }) =>
+    $done || $smileThreshold > 0.5
+      ? "#18a924"
+      : $facesDetected
+      ? "#330aea"
       : "#262626"};
 `;

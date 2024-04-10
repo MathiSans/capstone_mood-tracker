@@ -10,11 +10,12 @@ const URL1 = "https://zenquotes.io/api/today/";
 const URL2 = "https://type.fit/api/quotes";
 const URL3 = "https://api.quotable.io/quotes/random";
 const URL4 = "https://api.quotable.io/quotes/";
+const URL5 = "https://dummyjson.com/quotes/random";
 
 export default function QuotesPage({ fetcher }) {
   const [quoteCounter, setQuoteCounter] = useState(0);
   const router = useRouter();
-  const { data, error, isLoading } = useSWR(URL3, fetcher);
+  const { data, error, isLoading } = useSWR(URL5, fetcher);
 
   if (isLoading) return null;
   if (error)
@@ -25,11 +26,11 @@ export default function QuotesPage({ fetcher }) {
     );
 
   function refreshQuote() {
-    mutate(URL3);
+    mutate(URL5);
   }
 
   function handleCounter() {
-    setQuoteCounter((prevState) => prevState + 1);
+    setQuoteCounter((prevState) => prevState + 0.5);
   }
 
   return (

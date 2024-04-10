@@ -78,3 +78,12 @@ export const DeleteContainer = styled.div`
   display: flex;
   gap: var(--spacing-l);
 `;
+
+export const ToolsContainer = styled.div`
+  position: absolute;
+  top: 7dvh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: var(--spacing-l);
+`;

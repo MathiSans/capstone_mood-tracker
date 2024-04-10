@@ -1,41 +1,53 @@
-import Intensity from "@/utils/intensity";
 import * as Styled from "./EntriesList.styled";
-import useSWR, { useSWRConfig } from "swr";
-import { AnimatePresence, motion } from "framer-motion";
-import { FiTrash2 } from "react-icons/fi";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useSWRConfig } from "swr";
+import { motion } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
+import Circle from "../Circle/Circle";
+import experienceAnalyser from "@/utils/experienceAnalyser";
+import SwissKnifeList from "./SwissKnifeList";
+import styled from "styled-components";
+import NavButton from "../NavButton/NavButton";
 import { useSession } from "next-auth/react";
 
-export default function EntriesList() {
+export default function EntriesList({
+  isLastWeek,
+  handleEntryFilter,
+  filtered,
+  filter,
+  isVisualized,
+  handleIsVisualized,
+}) {
   const [deletingId, setDeletingId] = useState(null);
-  const { data, isLoading } = useSWR("/api/entries");
   const { mutate } = useSWRConfig();
-  const [filtered, setFiltered] = useState([]);
-  const router = useRouter();
-
+  const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+  const containerRef = useRef(null);
+  const [targetExperience, setTargetExperience] = useState(null);
+  const [isExperiencePage, setIsExperiencePage] = useState(false);
   const { data: session } = useSession();
-  const userID = session?.user.id;
+
+  function filterEntriesByUser() {
+    if (!session) {
+      return filtered;
+    }
+
+    return filtered.filter((entry) => entry.user === session.user.id);
+  }
 
   useEffect(() => {
-    if (!data) return;
+    const handleResize = () => {
+      const containerWidth = containerRef.current
+        ? containerRef.current.offsetWidth
+        : window.innerWidth;
+      const containerHeight = containerRef.current
+        ? containerRef.current.offsetHeight
+        : window.innerHeight;
+      setScreenSize({ width: containerWidth, height: containerHeight });
+    };
 
-    const reversedData = [...data].reverse();
-
-    const filteredData = session
-      ? reversedData.filter((entry) => entry.user === userID)
-      : reversedData;
-
-    setFiltered(filteredData);
-  }, [data, session, userID]);
-
-  if (isLoading) {
-    return <p>loading...</p>;
-  }
-
-  if (!data) {
-    return <p>no data available</p>;
-  }
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   function handleDeleteDialog(event, id) {
     event.stopPropagation();
@@ -50,82 +62,159 @@ export default function EntriesList() {
     mutate("/api/entries");
   }
 
+  const result = experienceAnalyser(filterEntriesByUser());
+  const totalCount = result.totalCount;
+
+  const experiences = isExperiencePage
+    ? filterEntriesByUser()
+    : result.experiences;
+  const sortedExperiences = experiences.sort((a, b) => b.count - a.count);
+
+  const singleEmotionEntryList = experiences.filter(
+    (experience) => experience.experience === targetExperience
+  );
+  const handleExperienceClick = (experience) => {
+    setTargetExperience(experience);
+    setIsExperiencePage(!isExperiencePage);
+  };
+
+  const outputData = filterEntriesByUser();
+
+  const spring = {
+    type: "spring",
+    stiffness: 300,
+    damping: 20,
+  };
+
   return (
     <>
-      <Styled.Grid>
-        <AnimatePresence>
-          {filtered.map((entry) => (
-            <motion.div
-              key={entry._id}
-              whileHover={{ scale: 1.05 }}
-              exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.3 } }}
+      {/*Checkbox wird auf der Liste von der Einzelnen Emotion ausgeblendet*/}
+      {!isExperiencePage && (
+        <SwitchContainer>
+          {" "}
+          <Switch $right={isLastWeek} onClick={() => handleEntryFilter()}>
+            <motion.div // styled-components police, be aware: motion.divs are kind of incompatible with styled-components and must be styled like this 🤓
+              style={{
+                width: "80px",
+                height: "32px",
+                backgroundColor: `var(--color-main-alt)`,
+                borderRadius: `var(--border-radius-medium)`,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: `var(--color-main)`,
+              }}
+              layout
+              transition={spring}
             >
-              <Styled.Card onClick={() => router.push(`${entry._id}`)}>
-                <Styled.ColoredShapeContainer>
-                  <Styled.ColoredShape color={entry.color} />
-                </Styled.ColoredShapeContainer>
-                <Styled.Sentence>
-                  {session ? (
-                    <Styled.StaticText>{session.user.name} </Styled.StaticText>
-                  ) : (
-                    <Styled.StaticText>Somebody </Styled.StaticText>
-                  )}{" "}
-                  {entry.location === "unknown"
-                    ? ""
-                    : `in ${entry.location.region}`}
-                  <Styled.StaticText> felt</Styled.StaticText>{" "}
-                  {entry.experience}.{" "}
-                  <Styled.StaticText>More specifically</Styled.StaticText>{" "}
-                  <Intensity
-                    value={entry.intensity}
-                    experience={entry.experience}
-                  />
-                  <Styled.StaticText>
-                    . They selected these tags:
-                  </Styled.StaticText>{" "}
-                  {entry.reactions.map((reaction, index, array) => (
-                    <span key={index}>
-                      {reaction}
-                      {index < array.length - 1 && ", "}
-                    </span>
-                  ))}
-                </Styled.Sentence>
-                <Styled.DeleteContainer>
-                  {deletingId === entry._id ? (
-                    <>
-                      <Styled.DeleteQuestion>
-                        sure about deleting?
-                      </Styled.DeleteQuestion>
-                      <Styled.DeleteAnswer
-                        red
-                        onClick={(event) => handleDeleteEntry(event, entry._id)}
-                      >
-                        yes
-                      </Styled.DeleteAnswer>
-                      <Styled.DeleteAnswer
-                        onClick={(event) => handleDeleteDialog(event, null)}
-                      >
-                        no
-                      </Styled.DeleteAnswer>
-                    </>
-                  ) : (
-                    <>
-                      <Styled.DeleteButton
-                        as="a"
-                        onClick={(event) =>
-                          handleDeleteDialog(event, entry._id)
-                        }
-                      >
-                        <FiTrash2 />
-                      </Styled.DeleteButton>
-                    </>
-                  )}
-                </Styled.DeleteContainer>
-              </Styled.Card>
+              <SwitchText>{isLastWeek ? "last week" : "all"}</SwitchText>
             </motion.div>
-          ))}
-        </AnimatePresence>
-      </Styled.Grid>
+          </Switch>
+          <Switch $right={isVisualized} onClick={() => handleIsVisualized()}>
+            <motion.div // styled-components police, be aware: motion.divs are kind of incompatible with styled-components and must be styled like this 🤓
+              style={{
+                width: "80px",
+                height: "32px",
+                backgroundColor: `var(--color-main-alt)`,
+                borderRadius: `var(--border-radius-medium)`,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: `var(--color-main)`,
+              }}
+              layout
+              transition={spring}
+            >
+              <SwitchText>{isVisualized ? "Circles" : "List View"}</SwitchText>
+            </motion.div>
+          </Switch>
+        </SwitchContainer>
+      )}
+
+      {/*Der Block geht sehr lang und rendert Entweder die ShowAll Liste oder Die Circle*/}
+      {isVisualized ? (
+        <>
+          {/* <p>
+            This are your{isExperiencePage && ` ${targetExperience}`} moods
+            {filter === "lastWeek" && " of the last week"}
+          </p> */}
+
+          {/*Nur der Button wird eingeblendet auf der Liste der einzelen Emotion*/}
+          {isExperiencePage ? (
+            <NavButton
+              handleClick={() => {
+                setIsExperiencePage(!isExperiencePage);
+              }}
+            >
+              reset experience filter
+            </NavButton>
+          ) : (
+            ""
+          )}
+          <div>
+            {!isExperiencePage ? (
+              <Styled.Grid>
+                {sortedExperiences.map((entry, index) => (
+                  <Circle
+                    key={index}
+                    count={entry.count}
+                    percentage={Math.floor((entry.count / totalCount) * 100)}
+                    circleSize={Math.max(
+                      Math.sqrt(entry.count) *
+                        Math.min(screenSize.width, screenSize.height) *
+                        (0.2 / Math.log(entry.count + 3)),
+                      10
+                    )}
+                    name={entry.experience || entry.region}
+                    color={entry.color}
+                    handleExperienceClick={
+                      handleExperienceClick
+                        ? () => handleExperienceClick(entry.experience)
+                        : null
+                    }
+                  />
+                ))}
+              </Styled.Grid>
+            ) : (
+              <SwissKnifeList
+                outputData={singleEmotionEntryList}
+                filter={filter}
+                deletingId={deletingId}
+                handleDeleteDialog={handleDeleteDialog}
+                handleDeleteEntry={handleDeleteEntry}
+              />
+            )}
+          </div>
+        </>
+      ) : (
+        <SwissKnifeList
+          outputData={outputData}
+          filter={filter}
+          deletingId={deletingId}
+          handleDeleteDialog={handleDeleteDialog}
+          handleDeleteEntry={handleDeleteEntry}
+        />
+      )}
     </>
   );
 }
+
+const SwitchText = styled.p`
+  font-size: 0.8rem;
+`;
+const Switch = styled.div`
+  width: 160px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: ${(props) => (props.$right ? "flex-end" : "flex-start")};
+  border-radius: var(--border-radius-large);
+  padding: var(--spacing-s);
+  cursor: pointer;
+  z-index: 999;
+`;
+
+const SwitchContainer = styled.div`
+  display: flex;
+  gap: var(--spacing-m);
+`;

@@ -11,9 +11,9 @@ import {
   Vignette,
 } from "@react-three/postprocessing";
 
-export default function Animation({ color, opacity }) {
+export default function Animation({ color, opacity, hideInterface }) {
   return (
-    <Styled.Container>
+    <Styled.Container $hideInterface={hideInterface}>
       <Styled.CustomCanvas shadows camera={{ position: [0, 0, 4.5], fov: 50 }}>
         <Sphere color={color} opacity={opacity} />
         <OrbitControls />
