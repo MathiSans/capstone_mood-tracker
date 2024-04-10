@@ -1,7 +1,10 @@
-import Link from "next/link";
-import styled from "styled-components";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
+import { MeditationContainer } from "./GuidedMeditation.styled";
+import { Article } from "./GuidedMeditation.styled";
+import { SourceContainer } from "./GuidedMeditation.styled";
+import { BrightLink } from "./GuidedMeditation.styled";
+import { TextContainer } from "./GuidedMeditation.styled";
 
 export default function GuidedMeditation() {
   return (
@@ -38,32 +41,3 @@ export default function GuidedMeditation() {
     </>
   );
 }
-
-const BrightLink = styled(Link)`
-  text-decoration: none;
-  color: #ffffff; /* Set the color to a bright blue (you can adjust the color as needed) */
-
-  /* Hover effect (optional) */
-  &:hover {
-    text-decoration: underline; /* Underline on hover (you can modify this effect) */
-  }
-`;
-
-const TextContainer = styled.div`
-  margin-bottom: 2rem;
-  margin-top: 2rem;
-`;
-
-const SourceContainer = styled.div`
-  margin-bottom: 2rem;
-  margin-top: 2rem;
-  font-size: small;
-`;
-
-const Article = styled.article`
-  margin-top: 1%.5;
-`;
-
-const MeditationContainer = styled.div`
-  padding: 0 20rem 0 20rem;
-`;
