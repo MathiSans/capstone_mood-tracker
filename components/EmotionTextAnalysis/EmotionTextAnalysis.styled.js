@@ -5,19 +5,18 @@ export const CircleContainer = styled.div`
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
+  width: 100vw;
+  height: size;
+  padding: 1.5rem;
+  background: radial-gradient(
+    closest-corner,
+    rgba(233, 233, 233, 1),
+    rgba(163, 163, 163, 1) 100%,
+    rgba(114, 114, 114, 1)
+  );
 `;
+
 export const StyledTextarea = styled.textarea`
   height: 150px;
   width: 100%;
-`;
-
-export const ContainerFlex = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-export const StyledH3 = styled.h3`
-  color: red;
 `;

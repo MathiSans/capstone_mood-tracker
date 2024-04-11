@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { Container, Page } from "@/components/Layout/Layout.styled";
 import NavButton from "@/components/NavButton/NavButton";
 import Circle from "@/components/Circle/Circle";
@@ -7,20 +6,15 @@ import { TbList } from "react-icons/tb";
 import {
   CircleContainer,
   StyledTextarea,
-  ContainerFlex,
-  StyledH3,
-} from "@/components/Ekmann/ekmann.styled";
+} from "@/components/EmotionTextAnalysis/EmotionTextAnalysis.styled";
 
-require("dotenv").config();
-
-function EmotionAnalysis() {
+function EmotionTextAnalysis() {
   const [formData, setFormData] = useState(Array(10).fill(""));
   const [emotionResult, setEmotionResult] = useState("");
   const [language, setLanguage] = useState("en");
   const [page, setPage] = useState(0);
   const [predictionsState, setPredictionsState] = useState(false);
   const [showList, setShowList] = useState(false);
-  const [emptyFieldsError, setEmptyFieldsError] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -30,83 +24,28 @@ function EmotionAnalysis() {
     });
   };
 
-  // const handleLanguageSelect = (event) => {
-  //   if (event.target.value == "english") {
-  //     setLanguage("en");
-  //   }
-  //   if (event.target.value == "german") {
-  //     setLanguage("de");
-  //   }
-  //   if (event.target.value == "espanol") {
-  //     setLanguage("es");
-  //   }
-  // };
-
   const handleLanguageSelect = (event) => {
     setLanguage(event.target.options[event.target.selectedIndex].value);
   };
-  const handleSubmit = async (event) => {
-    // Check each field in formData for emptiness
-    for (const key in formData) {
-      if (formData.hasOwnProperty(key)) {
-        const value = formData[key].trim(); // Trim whitespace from value
-        if (!value) {
-          // If any field is empty, log error and exit early
-          setEmptyFieldsError(
-            `Field '${key}' is empty. Please enter some text in "EVERY" field.`
-          );
+  //information to the used API
+  //   //https://rapidapi.com/symanto-symanto-default/api/ekman-emotion-analysis
 
-          return;
-        }
-      }
-    }
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    //information to the used API
-    //https://rapidapi.com/symanto-symanto-default/api/ekman-emotion-analysis
-    //here you can log the data which is saved before it i processed very well
-    const inputText = JSON.stringify(formData);
-    console.log("inputText", inputText);
-    const url =
-      "https://ekman-emotion-analysis.p.rapidapi.com/ekman-emotion?all=true";
-    //?all=true for all emotions without filter
-    const options = {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        Accept: "application/json",
-        "X-RapidAPI-Key": process.env.X_RAPID_API_KEY,
-        // "X-RapidAPI-Key": "d494478f31mshab8f5690c7d60c8p1f2035jsna0a331ad02cd",
-        "X-RapidAPI-Host": "ekman-emotion-analysis.p.rapidapi.com",
-      },
-      body: JSON.stringify([
-        {
-          id: "1",
-          language: language,
-          text: inputText,
-        },
-      ]),
-    };
-    // Reset form after submission (optional)
-    setFormData({
-      0: "",
-      1: "",
-      2: "",
-      3: "",
-      4: "",
-      5: "",
-      6: "",
-      7: "",
-      8: "",
-      9: "",
-    });
     try {
-      const response = await fetch(url, options);
-      const result = await response.json();
-      //.text(); makes the response a string - to read the response body as plain text
-      setEmotionResult(result);
+      const response = await fetch("/api/analyze-emotion", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ formData, language: language }),
+      });
+
+      const data = await response.json();
+      setEmotionResult(data); // Update state with API response
       setPredictionsState(true);
     } catch (error) {
-      console.error(error);
+      console.error("Error:", error);
     }
   };
 
@@ -136,7 +75,6 @@ function EmotionAnalysis() {
         return prediction;
       }
     });
-
   function getColorForEmotion(emotion) {
     switch (emotion) {
       case "joy":
@@ -165,27 +103,9 @@ function EmotionAnalysis() {
           <option value="en">english</option>
           <option value="de">german</option>
           <option value="es">espanol</option>
-        </select>
-        {page === 0 && (
-          <StyledH3>
-            Important! Please fill out all fields, otherwise the Analyzer does
-            not work!
-          </StyledH3>
-        )}
-        <p>
-          {/* {page === 0 && question[0]}
-          {page === 1 && question[1]}
-          {page === 2 && question[2]}
-          {page === 3 && question[3]}
-          {page === 4 && question[4]}
-          {page === 5 && question[5]}
-          {page === 6 && question[6]}
-          {page === 7 && question[7]}
-          {page === 8 && question[8]}
-          {page === 9 && question[9]} */}
-          {question[page] && question[page]}
-        </p>
-
+        </select>{" "}
+        <h3>Emotion Text Analysis Tool</h3>
+        <p>{question[page] && question[page]}</p>
         {page === 0 && (
           <StyledTextarea
             type="text"
@@ -193,6 +113,7 @@ function EmotionAnalysis() {
             value={formData["0"]}
             onChange={handleChange}
             placeholder="write here..."
+            required
           />
         )}
         {page === 1 && (
@@ -275,12 +196,9 @@ function EmotionAnalysis() {
               value={formData["9"]}
               onChange={handleChange}
               placeholder="write here..."
-              required
             />
-            <p>{emptyFieldsError}</p>
           </>
         )}
-
         {page !== 9 && (
           <NavButton
             handleClick={() => {
@@ -322,6 +240,8 @@ function EmotionAnalysis() {
                   circleSize={emotion.probability * 500}
                   color={getColorForEmotion(emotion.prediction)}
                   name={emotion.prediction}
+                  ekmanPage={true}
+                  percentage={Math.floor(emotion.probability * 100)}
                 />
               ))}
           </CircleContainer>
@@ -331,4 +251,4 @@ function EmotionAnalysis() {
   );
 }
 
-export default EmotionAnalysis;
+export default EmotionTextAnalysis;
