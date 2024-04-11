@@ -84,7 +84,7 @@ function EmotionTextAnalysis() {
         return "orange";
       case "sadness":
         return "blue";
-      case "noemo":
+      case "no-emotion":
         return "gray";
       case "fear":
         return "purple";
