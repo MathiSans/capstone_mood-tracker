@@ -43,6 +43,7 @@ function EmotionTextAnalysis() {
 
       const data = await response.json();
       setEmotionResult(data); // Update state with API response
+      console.log(emotionResult);
       setPredictionsState(true);
     } catch (error) {
       console.error("Error:", error);
@@ -99,13 +100,25 @@ function EmotionTextAnalysis() {
   return (
     <Container>
       <Page>
-        <select id="language" onChange={handleLanguageSelect}>
-          <option value="en">english</option>
-          <option value="de">german</option>
-          <option value="es">espanol</option>
-        </select>{" "}
         <h3>Emotion Text Analysis Tool</h3>
+        <label htmlFor="language">
+          language{"       "}
+          <select id="language" onChange={handleLanguageSelect}>
+            <option value="en">english</option>
+            <option value="de">german</option>
+            <option value="es">espanol</option>
+          </select>{" "}
+        </label>
         <p>{question[page] && question[page]}</p>
+        {page === 10 && (
+          <p>
+            <TbList onClick={() => setShowList(!showList)} />
+            <span onClick={() => setShowList(!showList)}>
+              {showList ? "List-View" : "Circles-View"}
+              {"   "}
+            </span>
+          </p>
+        )}
         {page === 0 && (
           <StyledTextarea
             type="text"
@@ -199,7 +212,7 @@ function EmotionTextAnalysis() {
             />
           </>
         )}
-        {page !== 9 && (
+        {page !== 9 && page !== 10 && (
           <NavButton
             handleClick={() => {
               setPage((currPage) => currPage + 1);
@@ -209,10 +222,17 @@ function EmotionTextAnalysis() {
           </NavButton>
         )}
         {page === 9 && (
-          <div>
-            <NavButton handleClick={handleSubmit}>Analyze Emotion</NavButton>
-
-            <TbList onClick={() => setShowList(!showList)} />
+          <NavButton
+            handleClick={(event) => {
+              page !== 10 && handleSubmit(event);
+              setPage((currPage) => currPage + 1);
+            }}
+          >
+            Analyze Emotion
+          </NavButton>
+        )}
+        {page === 10 && (
+          <>
             {showList && (
               <div>
                 {emotionResult && emotionResult[0].predictions && (
@@ -229,22 +249,29 @@ function EmotionTextAnalysis() {
                 )}
               </div>
             )}
-          </div>
+          </>
         )}
-        {predictionsState && (
-          <CircleContainer>
-            {transformedPredictions &&
-              transformedPredictions.map((emotion, index) => (
-                <Circle
-                  key={index}
-                  circleSize={emotion.probability * 500}
-                  color={getColorForEmotion(emotion.prediction)}
-                  name={emotion.prediction}
-                  ekmanPage={true}
-                  percentage={Math.floor(emotion.probability * 100)}
-                />
-              ))}
-          </CircleContainer>
+        {predictionsState && !showList && (
+          <>
+            <CircleContainer>
+              {transformedPredictions &&
+                transformedPredictions.map((emotion, index) => (
+                  <Circle
+                    key={index}
+                    circleSize={emotion.probability * 500}
+                    color={getColorForEmotion(emotion.prediction)}
+                    name={emotion.prediction}
+                    ekmanPage={true}
+                    percentage={Math.floor(emotion.probability * 100)}
+                  />
+                ))}
+            </CircleContainer>
+            <NavButton
+              handleClick={() => alert("Thank you for choosing our tool!")}
+            >
+              Finish
+            </NavButton>
+          </>
         )}
       </Page>
     </Container>

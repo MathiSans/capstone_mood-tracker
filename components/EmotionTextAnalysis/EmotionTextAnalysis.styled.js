@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const CircleContainer = styled.div`
   display: flex;
   justify-content: center;
-  flex-direction: row;
+  align-items: start;
   flex-wrap: wrap;
   width: 100vw;
   height: size;
@@ -17,6 +17,6 @@ export const CircleContainer = styled.div`
 `;
 
 export const StyledTextarea = styled.textarea`
-  height: 150px;
+  height: 9.375rem;
   width: 100%;
 `;
