@@ -11,6 +11,7 @@ export default function Activities() {
     setShowForm(!showForm);
   }
 
+  //! refactor ActivitiesForm to Modal
   return (
     <Container>
       <Page>

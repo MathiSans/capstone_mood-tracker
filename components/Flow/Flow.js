@@ -13,6 +13,7 @@ import Settings from "../Settings/Settings";
 import SettingsTrigger from "../SettingsTrigger/SettingsTrigger";
 import { SettingsTriggerContainer } from "@/components/Overlay/Overlay.styled";
 
+//! Refactor Flow.js to sit inside index.js
 export default function Flow() {
   const { mutate } = useSWR("/api/entries");
   const [experience, setExperience] = useState([]);
@@ -27,6 +28,7 @@ export default function Flow() {
   const { data: session } = useSession();
   const userId = session?.user.id;
 
+  //! Add guides to utils?
   const guides = [
     "share your emotions ...",
     "breathe",

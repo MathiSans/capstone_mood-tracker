@@ -7,6 +7,7 @@ import experienceAnalyser from "@/utils/experienceAnalyser.js";
 import { useState } from "react";
 import MapOfCircles from "@/components/MapOfCircles/MapOfCircles";
 
+//! Rename maps.js to according tp what it displays
 export default function Maps({}) {
   const [mapsToggle, setMapsToggle] = useState(true);
   const { data, isLoading } = useSWR("/api/entries");

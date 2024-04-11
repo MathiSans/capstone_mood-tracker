@@ -1,6 +1,7 @@
 import { experiences } from "@/experiences";
 
-export default function Intensity({ value, experience }) {
+// name function according to what it does
+export default function GetIntensityValue({ value, experience }) {
   const selectedExperience = experiences.find((exp) => exp.name === experience);
 
   if (!experience) {

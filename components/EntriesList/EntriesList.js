@@ -9,6 +9,8 @@ import styled from "styled-components";
 import NavButton from "../NavButton/NavButton";
 import { useSession } from "next-auth/react";
 
+//! Refactor and rename EntriesList,js and add it to Entries Page (entries.js)
+//! Are all states needed?
 export default function EntriesList({
   isLastWeek,
   handleEntryFilter,
@@ -25,6 +27,7 @@ export default function EntriesList({
   const [isExperiencePage, setIsExperiencePage] = useState(false);
   const { data: session } = useSession();
 
+  //! --> utils
   function filterEntriesByUser() {
     if (!session) {
       return filtered;

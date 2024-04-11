@@ -10,6 +10,8 @@ export default function SingleToolPage() {
   const router = useRouter();
   const { tool } = router.query;
 
+  //! Boolean Wert aus der Datenbank (isTool: true) herausfiltern
+  //! Tools.js in pages Ordner verschieben; tools-Ordner löschen
   const links = ["quotes", "smiletrainer"];
 
   return (

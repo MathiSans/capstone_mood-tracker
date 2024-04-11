@@ -1,3 +1,5 @@
+//! Add to database and refactor for more practical access to key/values
+
 export const experiences = [
   {
     name: "anger",

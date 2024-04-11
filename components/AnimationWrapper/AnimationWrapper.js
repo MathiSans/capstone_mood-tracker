@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
+//! Refactor const animaations to sit inside utils ("framerMotion")
 export const animations = {
   hidden: { opacity: 0 },
   show: {

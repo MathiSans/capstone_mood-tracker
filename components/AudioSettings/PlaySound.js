@@ -29,6 +29,7 @@ export default function PlaySound({
       playAudio(neutral);
     }
 
+    // no key/value pair needed
     const experienceMap = {
       anger: anger,
       fear: fear,

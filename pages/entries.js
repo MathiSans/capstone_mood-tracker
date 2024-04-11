@@ -43,6 +43,7 @@ export default function Entries() {
         lastSevenDays.push(`${formattedDate1}, ${formattedDate2}`);
       }
 
+      //! Can be added to utils and imported to entries.js
       if (filter === "lastWeek" || "moodsMap") {
         const lastSevenDaysEntries = reversedData.filter((entry) => {
           const entryDate = entry.time.split(",")[0].trim(); // Get the date part of the entry's time

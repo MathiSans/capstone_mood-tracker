@@ -63,6 +63,7 @@ export default function ActivitiesForm({ handleShowForm }) {
     }
   }
 
+  //! Refactor/rename this to sit outside this component and import checkboxes(?)
   const checkboxes = [
     { text: "enjoyment", color: "#dabe39" },
     { text: "fear", color: "purple" },

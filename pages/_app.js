@@ -4,6 +4,7 @@ import Overlay from "@/components/Overlay/Overlay";
 import { ThemeProvider } from "styled-components";
 import { SessionProvider } from "next-auth/react";
 
+// relocate theme to another file
 const theme = {
   colors: {
     dark: "black",
@@ -58,7 +59,6 @@ export default function App({
   return (
     <>
       <ThemeProvider theme={theme}>
-        <GlobalStyle />
         <SWRConfig
           value={{
             fetcher: (resource, init) =>
@@ -66,6 +66,7 @@ export default function App({
           }}
         >
           <SessionProvider session={session}>
+            <GlobalStyle />
             <Overlay>
               <Component {...pageProps} />
             </Overlay>

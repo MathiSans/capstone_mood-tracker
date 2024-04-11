@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+// rename Layout.styled.js
 export const Container = styled.div`
   display: flex;
   align-items: center;
