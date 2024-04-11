@@ -235,18 +235,20 @@ function EmotionTextAnalysis() {
           <>
             {showList && (
               <div>
-                {emotionResult && emotionResult[0].predictions && (
-                  <div>
-                    Emotion Result:
-                    <ul>
-                      {emotionResult[0].predictions.map((emotion, index) => (
-                        <li key={index}>
-                          {emotion.prediction}: {emotion.probability}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                {emotionResult &&
+                  emotionResult[0] &&
+                  emotionResult[0].predictions && (
+                    <div>
+                      Emotion Result:
+                      <ul>
+                        {emotionResult[0].predictions.map((emotion, index) => (
+                          <li key={index}>
+                            {emotion.prediction}: {emotion.probability}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
               </div>
             )}
           </>
