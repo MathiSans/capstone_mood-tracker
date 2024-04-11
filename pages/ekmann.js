@@ -4,20 +4,17 @@ import { Container, Page } from "@/components/Layout/Layout.styled";
 import NavButton from "@/components/NavButton/NavButton";
 import Circle from "@/components/Circle/Circle";
 import { TbList } from "react-icons/tb";
+import {
+  CircleContainer,
+  StyledTextarea,
+  ContainerFlex,
+  StyledH3,
+} from "@/components/Ekmann/ekmann.styled";
+
+require("dotenv").config();
 
 function EmotionAnalysis() {
-  const [formData, setFormData] = useState({
-    0: "",
-    1: "",
-    2: "",
-    3: "",
-    4: "",
-    5: "",
-    6: "",
-    7: "",
-    8: "",
-    9: "",
-  });
+  const [formData, setFormData] = useState(Array(10).fill(""));
   const [emotionResult, setEmotionResult] = useState("");
   const [language, setLanguage] = useState("en");
   const [page, setPage] = useState(0);
@@ -33,18 +30,21 @@ function EmotionAnalysis() {
     });
   };
 
-  const handleLanguageSelect = (event) => {
-    if (event.target.value == "english") {
-      setLanguage("en");
-    }
-    if (event.target.value == "german") {
-      setLanguage("de");
-    }
-    if (event.target.value == "espanol") {
-      setLanguage("es");
-    }
-  };
+  // const handleLanguageSelect = (event) => {
+  //   if (event.target.value == "english") {
+  //     setLanguage("en");
+  //   }
+  //   if (event.target.value == "german") {
+  //     setLanguage("de");
+  //   }
+  //   if (event.target.value == "espanol") {
+  //     setLanguage("es");
+  //   }
+  // };
 
+  const handleLanguageSelect = (event) => {
+    setLanguage(event.target.options[event.target.selectedIndex].value);
+  };
   const handleSubmit = async (event) => {
     // Check each field in formData for emptiness
     for (const key in formData) {
@@ -61,9 +61,11 @@ function EmotionAnalysis() {
       }
     }
     event.preventDefault();
+    //information to the used API
+    //https://rapidapi.com/symanto-symanto-default/api/ekman-emotion-analysis
     //here you can log the data which is saved before it i processed very well
     const inputText = JSON.stringify(formData);
-
+    console.log("inputText", inputText);
     const url =
       "https://ekman-emotion-analysis.p.rapidapi.com/ekman-emotion?all=true";
     //?all=true for all emotions without filter
@@ -72,7 +74,8 @@ function EmotionAnalysis() {
       headers: {
         "content-type": "application/json",
         Accept: "application/json",
-        "X-RapidAPI-Key": "d494478f31mshab8f5690c7d60c8p1f2035jsna0a331ad02cd",
+        "X-RapidAPI-Key": process.env.X_RAPID_API_KEY,
+        // "X-RapidAPI-Key": "d494478f31mshab8f5690c7d60c8p1f2035jsna0a331ad02cd",
         "X-RapidAPI-Host": "ekman-emotion-analysis.p.rapidapi.com",
       },
       body: JSON.stringify([
@@ -159,9 +162,9 @@ function EmotionAnalysis() {
     <Container>
       <Page>
         <select id="language" onChange={handleLanguageSelect}>
-          <option value="english">english</option>
-          <option value="german">german</option>
-          <option value="espanol">espanol</option>
+          <option value="en">english</option>
+          <option value="de">german</option>
+          <option value="es">espanol</option>
         </select>
         {page === 0 && (
           <StyledH3>
@@ -170,7 +173,7 @@ function EmotionAnalysis() {
           </StyledH3>
         )}
         <p>
-          {page === 0 && question[0]}
+          {/* {page === 0 && question[0]}
           {page === 1 && question[1]}
           {page === 2 && question[2]}
           {page === 3 && question[3]}
@@ -179,7 +182,8 @@ function EmotionAnalysis() {
           {page === 6 && question[6]}
           {page === 7 && question[7]}
           {page === 8 && question[8]}
-          {page === 9 && question[9]}
+          {page === 9 && question[9]} */}
+          {question[page] && question[page]}
         </p>
 
         {page === 0 && (
@@ -328,25 +332,3 @@ function EmotionAnalysis() {
 }
 
 export default EmotionAnalysis;
-
-const CircleContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-`;
-const StyledTextarea = styled.textarea`
-  height: 150px;
-  width: 100%;
-`;
-
-const ContainerFlex = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const StyledH3 = styled.h3`
-  color: red;
-`;
