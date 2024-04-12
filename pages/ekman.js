@@ -62,19 +62,14 @@ function EmotionTextAnalysis() {
     "10. What are you grateful for today?",
   ];
 
-  const predictions =
-    emotionResult && emotionResult[0] && emotionResult[0].predictions;
+  const predictions = emotionResult?.[0]?.predictions;
 
   const transformedPredictions =
-    predictions &&
-    predictions[0] &&
-    predictions.map((prediction) => {
-      if (prediction.prediction === "noemo") {
-        return { ...prediction, prediction: "no-emotion" };
-      } else {
-        return prediction;
-      }
-    });
+    predictions?.map((prediction) => {
+      return prediction.prediction === "noemo"
+        ? { ...prediction, prediction: "no-emotion" }
+        : prediction;
+    }) ?? [];
   function getColorForEmotion(emotion) {
     switch (emotion) {
       case "joy":
@@ -118,99 +113,18 @@ function EmotionTextAnalysis() {
             </span>
           </p>
         )}
-        {page === 0 && (
+
+        {page >= 0 && page <= 9 && (
           <StyledTextarea
             type="text"
-            name="0"
-            value={formData["0"]}
+            name={page.toString()}
+            value={formData[page.toString()]}
             onChange={handleChange}
             placeholder="write here..."
-            required
+            required={page === 0}
           />
         )}
-        {page === 1 && (
-          <StyledTextarea
-            type="text"
-            name="1"
-            value={formData["1"]}
-            onChange={handleChange}
-            placeholder="write here..."
-          />
-        )}
-        {page === 2 && (
-          <StyledTextarea
-            type="text"
-            name="2"
-            value={formData["2"]}
-            onChange={handleChange}
-            placeholder="write here..."
-          />
-        )}
-        {page === 3 && (
-          <StyledTextarea
-            type="text"
-            name="3"
-            value={formData["3"]}
-            onChange={handleChange}
-            placeholder="write here..."
-          />
-        )}
-        {page === 4 && (
-          <StyledTextarea
-            type="text"
-            name="4"
-            value={formData["4"]}
-            onChange={handleChange}
-            placeholder="write here..."
-          />
-        )}
-        {page === 5 && (
-          <StyledTextarea
-            type="text"
-            name="5"
-            value={formData["5"]}
-            onChange={handleChange}
-            placeholder="write here..."
-          />
-        )}
-        {page === 6 && (
-          <StyledTextarea
-            type="text"
-            name="6"
-            value={formData["6"]}
-            onChange={handleChange}
-            placeholder="write here..."
-          />
-        )}
-        {page === 7 && (
-          <StyledTextarea
-            type="text"
-            name="7"
-            value={formData["7"]}
-            onChange={handleChange}
-            placeholder="write here..."
-          />
-        )}
-        {page === 8 && (
-          <StyledTextarea
-            type="text"
-            name="8"
-            value={formData["8"]}
-            onChange={handleChange}
-            placeholder="write here..."
-          />
-        )}
-        {page === 9 && (
-          <>
-            <StyledTextarea
-              type="text"
-              name="9"
-              value={formData["9"]}
-              onChange={handleChange}
-              placeholder="write here..."
-            />
-          </>
-        )}
+
         {page !== 9 && page !== 10 && (
           <NavButton
             handleClick={() => {
@@ -234,20 +148,18 @@ function EmotionTextAnalysis() {
           <>
             {showList && (
               <div>
-                {emotionResult &&
-                  emotionResult[0] &&
-                  emotionResult[0].predictions && (
-                    <div>
-                      Emotion Result:
-                      <ul>
-                        {emotionResult[0].predictions.map((emotion, index) => (
-                          <li key={index}>
-                            {emotion.prediction}: {emotion.probability}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
+                {emotionResult?.[0]?.predictions && (
+                  <div>
+                    Emotion Result:
+                    <ul>
+                      {emotionResult[0].predictions.map((emotion, index) => (
+                        <li key={index}>
+                          {emotion.prediction}: {emotion.probability}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             )}
           </>
@@ -255,17 +167,16 @@ function EmotionTextAnalysis() {
         {predictionsState && !showList && (
           <>
             <CircleContainer>
-              {transformedPredictions &&
-                transformedPredictions.map((emotion, index) => (
-                  <Circle
-                    key={index}
-                    circleSize={emotion.probability * 500}
-                    color={getColorForEmotion(emotion.prediction)}
-                    name={emotion.prediction}
-                    ekmanPage={true}
-                    percentage={Math.floor(emotion.probability * 100)}
-                  />
-                ))}
+              {transformedPredictions?.map((emotion, index) => (
+                <Circle
+                  key={index}
+                  circleSize={emotion.probability * 500}
+                  color={getColorForEmotion(emotion.prediction)}
+                  name={emotion.prediction}
+                  ekmanPage={true}
+                  percentage={Math.floor(emotion.probability * 100)}
+                />
+              ))}
             </CircleContainer>
             <NavButton
               handleClick={() => alert("Thank you for choosing our tool!")}

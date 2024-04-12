@@ -5,8 +5,9 @@ export const CircleContainer = styled.div`
   justify-content: center;
   align-items: start;
   flex-wrap: wrap;
-  width: 100vw;
-  height: size;
+  width: 100%;
+  height: ${({ size }) =>
+    size ? `${size}px` : "auto"}; // Default to 'auto' if no size provided
   padding: 1.5rem;
   background: radial-gradient(
     closest-corner,

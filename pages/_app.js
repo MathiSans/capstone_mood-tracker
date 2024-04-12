@@ -4,9 +4,6 @@ import Overlay from "@/components/Overlay/Overlay";
 import { ThemeProvider } from "styled-components";
 import { SessionProvider } from "next-auth/react";
 
-// Load environment variables from .env file
-require("dotenv").config();
-
 const theme = {
   colors: {
     dark: "black",

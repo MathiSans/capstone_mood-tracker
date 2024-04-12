@@ -59,7 +59,7 @@ export default function Circle({
         <h2 style={{ fontSize: circleSize / 10 }}>
           {mapsPage ? "" : `${percentage} % `}
           {name} <br />
-          {ekmanPage ? `` : `${count} entries`}
+          {!ekmanPage && `${count} entries`}
         </h2>
       </motion.div>
     </motion.div>
