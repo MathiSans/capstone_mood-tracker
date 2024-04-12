@@ -43,7 +43,7 @@ function EmotionTextAnalysis() {
 
       const data = await response.json();
       setEmotionResult(data); // Update state with API response
-      console.log(emotionResult);
+      console.log("emotionResult", emotionResult);
       setPredictionsState(true);
     } catch (error) {
       console.error("Error:", error);
