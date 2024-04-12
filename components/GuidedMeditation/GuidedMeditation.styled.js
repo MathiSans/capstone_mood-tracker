@@ -17,7 +17,7 @@ export const Article = styled.article`
 `;
 
 export const MeditationContainer = styled.div`
-  padding: 0 20rem 0 20rem;
+  padding: 0 2rem 0 2rem;
 `;
 
 export const BrightLink = styled(Link)`
