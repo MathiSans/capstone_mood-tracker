@@ -43,13 +43,11 @@ function EmotionTextAnalysis() {
 
       const data = await response.json();
       setEmotionResult(data); // Update state with API response
-      console.log("data", data);
       setPredictionsState(true);
     } catch (error) {
       console.error("Error:", error);
     }
   };
-  console.log("emotionResult", emotionResult);
 
   const question = [
     "1. What word describes your primary emotion right now?",
