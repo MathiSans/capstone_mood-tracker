@@ -9,6 +9,7 @@ export default function Circle({
   percentage,
   handleExperienceClick,
   mapsPage,
+  ekmanPage,
 }) {
   return (
     <motion.div
@@ -58,7 +59,7 @@ export default function Circle({
         <h2 style={{ fontSize: circleSize / 10 }}>
           {mapsPage ? "" : `${percentage} % `}
           {name} <br />
-          {count} entries
+          {!ekmanPage && `${count} entries`}
         </h2>
       </motion.div>
     </motion.div>
