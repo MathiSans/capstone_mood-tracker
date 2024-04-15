@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { experiences } from "@/experiences";
+import { guides } from "@/guides";
 import Animation from "@/components/3DAnimation/3DAnimation";
 import NavButton from "@/components/NavButton/NavButton";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
@@ -26,17 +27,6 @@ export default function Flow() {
 
   const { data: session } = useSession();
   const userId = session?.user.id;
-
-  const guides = [
-    "share your emotions ...",
-    "breathe",
-    "think about your day",
-    "how do you feel?",
-    "what do you feel right now?",
-    "how intense is this feeling for you?",
-    "what's your reaction?",
-    "Thank you for sharing",
-  ];
 
   function handleShowSettings() {
     setShowSettings(!showSettings);
