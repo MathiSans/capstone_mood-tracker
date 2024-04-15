@@ -1,4 +1,4 @@
-const questions = [
+export const questions = [
   "1. What word describes your primary emotion right now?",
   "2. How would you describe that emotion?",
   "3. How does your body feel?",

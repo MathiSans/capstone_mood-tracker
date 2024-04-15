@@ -7,7 +7,7 @@ import {
   CircleContainer,
   StyledTextarea,
 } from "@/components/EmotionTextAnalysis/EmotionTextAnalysis.styled";
-import questions from "@/components/EmotionTextAnalysis/EmotionTextAnalysisQuestions";
+import { questions } from "@/components/EmotionTextAnalysis/EmotionTextAnalysisQuestions";
 
 function EmotionTextAnalysis() {
   const [formData, setFormData] = useState(Array(10).fill(""));
