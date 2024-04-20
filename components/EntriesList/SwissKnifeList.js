@@ -27,7 +27,7 @@ export default function SwissKnifeList({
               transition: { duration: 0.3 },
             }}
           >
-            <Styled.Card onClick={() => router.push(`/${entry._id}`)}>
+            <Styled.Card onClick={() => router.push(`/entries/${entry._id}`)}>
               <Styled.ColoredShapeContainer>
                 <Styled.ColoredShape color={entry.color} />
               </Styled.ColoredShapeContainer>

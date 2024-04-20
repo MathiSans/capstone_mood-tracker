@@ -1,5 +1,5 @@
 import Flow from "@/components/NewEntryFlow/Flow";
 
-export default function HomePage() {
+export default function NewEntryFlow() {
   return <Flow />;
 }

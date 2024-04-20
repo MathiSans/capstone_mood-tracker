@@ -1,4 +1,4 @@
-import Entry from "@/components/Entry/Entry";
+import Entry from "@/components/SingleEntry/Entry";
 
 export default function SingleEntryPage() {
   return <Entry />;

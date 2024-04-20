@@ -199,7 +199,7 @@ export default function Flow() {
             )}
 
             {page === 5 && (
-              <NavButton linkToPage={"./entries"}>
+              <NavButton linkToPage={"./entries_old"}>
                 go to emotion entries
               </NavButton>
             )}

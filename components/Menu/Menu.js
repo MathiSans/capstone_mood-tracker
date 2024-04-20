@@ -48,10 +48,11 @@ export default function Menu({ handleShowMenu }) {
       <Styled.MenuContainer>
         {[
           { text: session ? "logout" : "login", link: "handleLoginButton" },
-          { text: "enter a mood", link: "/" },
-          { text: "moods collection", link: "/entries" },
-          { text: "moods map", link: "/maps" },
-          { text: "activities", link: "/activities" },
+          { text: "new home", link: "/index" },
+          { text: "LEGACY: enter a mood", link: "/flow" },
+          { text: "LEGACY: moods collection", link: "/entries_old" },
+          { text: "LEGACY: moods map", link: "/maps" },
+          { text: "LEGACY: activities", link: "/activities" },
         ].map((page, index) => (
           <motion.div key={index} {...buttonAnimation}>
             <NavButton handleClick={() => handleMenuButtonClick(page.link)}>
