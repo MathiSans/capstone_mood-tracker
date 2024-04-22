@@ -6,6 +6,7 @@ import { useData } from "@/lib/useData";
 import { Container } from "@/components/StyledComponents/Path.styled";
 import Dashboard from "@/components/Dashboard/Dashboard";
 import Animation from "@/components/3DAnimation/3DAnimation";
+import ActionBar from "@/components/ActionBar/ActionBar";
 import NewEntryFlow from "./flow";
 
 export default function Home() {
@@ -26,6 +27,11 @@ export default function Home() {
 
   return (
     <>
+      <ActionBar
+        session={session}
+        dashboardIsOpen={dashboardIsOpen}
+        handleDashboardIsOpen={handleDashboardIsOpen}
+      />
       <Animation color={"grey"} opacity={1} hideInterface={false} />
       <Container>
         {dashboardIsOpen && <Dashboard />}
