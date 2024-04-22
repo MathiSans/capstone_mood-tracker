@@ -15,6 +15,7 @@ export default function BarChartTile() {
   const { userEntries } = useData().fetchedUserEntries;
   const lastWeek = lastWeekAnalyser(session ? userEntries : allEntries);
   console.log("lastWeek", lastWeek);
+  console.log("userEntries", userEntries);
 
   const visualizedData = isLastWeek
     ? experienceAnalyser(lastWeek)
@@ -36,8 +37,14 @@ export default function BarChartTile() {
     visualizedData.experiences
   );
 
-  const emotionFirst = topTwoExperiences[0].experience;
-  const emotionSecond = topTwoExperiences[1].experience;
+  const emotionFirst =
+    topTwoExperiences.length !== 0
+      ? topTwoExperiences[0].experience
+      : "NO DATA";
+  const emotionSecond =
+    topTwoExperiences.length !== 0
+      ? topTwoExperiences[1].experience
+      : "NO DATA";
   return (
     <BarChartContainer>
       <LastWeekTogglePill
