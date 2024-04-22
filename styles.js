@@ -7,14 +7,38 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
+  * {
+  margin: 0;
+  padding: 0;
+  }
+
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    color: var(--color-main-alt); 
+    font-family: var(--font-main);
+    background-color: var(--color-main); 
+  }
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  input, button, textarea, select {
+    font: inherit;
+  }
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+
   :root {
     ${(props) => {
       const { colors, fonts, fontSize, fontWeight, spacing, effects, borders } =
         props.theme;
 
       return `
-        --color-main: ${colors.dark};
+        --color-main: ${colors.black};
         --color-main-alt: ${colors.light};
+        --color-dark: ${colors.dark};
         --color-neutral: ${colors.neutral};
         --color-danger: ${colors.danger};
 
@@ -52,15 +76,5 @@ export default createGlobalStyle`
     }}
   }
 
-  body {
-    color: var(--color-main-alt); 
-    margin: 0 auto;
-    font-family: var(--font-main);
-    background-color: var(--color-main); 
-  }
 
-  h2 {
-    font-size: var(--font-size-large);
-    font-weight: var(--font-weight-light);
-  }
 `;

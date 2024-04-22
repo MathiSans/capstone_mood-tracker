@@ -3,10 +3,12 @@ import { SWRConfig } from "swr";
 import Overlay from "@/components/Overlay/Overlay";
 import { ThemeProvider } from "styled-components";
 import { SessionProvider } from "next-auth/react";
+import { DataProvider } from "@/lib/useData";
 
 const theme = {
   colors: {
-    dark: "black",
+    black: "black",
+    dark: "#232323",
     light: "white",
     neutral: "grey",
     danger: "red",
@@ -66,9 +68,11 @@ export default function App({
           }}
         >
           <SessionProvider session={session}>
-            <Overlay>
-              <Component {...pageProps} />
-            </Overlay>
+            <DataProvider>
+              <Overlay>
+                <Component {...pageProps} />
+              </Overlay>
+            </DataProvider>
           </SessionProvider>
         </SWRConfig>
       </ThemeProvider>
