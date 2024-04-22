@@ -9,11 +9,9 @@ import {
   SingleBar,
   HeadContainer,
 } from "./BarChartTile.styled";
-import { useState } from "react";
 
-export default function BarChartTile() {
+export default function BarChartTile({ isLastWeek, setIsLastWeek }) {
   const { data: session } = useSession();
-  const [isLastWeek, setIsLastWeek] = useState(true);
 
   const { allEntries, isLoadingEntries, errorEntries } =
     useData().fetchedAllEntries;
