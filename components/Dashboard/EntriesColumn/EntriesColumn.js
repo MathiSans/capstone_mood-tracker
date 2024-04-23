@@ -34,12 +34,6 @@ export default function EntriesColumn() {
     if (!isLastWeek && !session) {
       return allEntries;
     }
-    // if(!singleExperienceList){
-    //   const singleEmotionEntryList = experiences.filter(
-    //     (experience) => experience.experience === targetExperience
-    //   );
-    //   return singleEmotionEntryList
-    // }
   }
   const allEmotionsDisplayed = entriesToDisplay({
     lastWeek,
