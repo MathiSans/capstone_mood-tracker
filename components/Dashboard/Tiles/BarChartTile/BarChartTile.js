@@ -10,7 +10,11 @@ import {
   HeadContainer,
 } from "./BarChartTile.styled";
 
-export default function BarChartTile({ isLastWeek, setIsLastWeek }) {
+export default function BarChartTile({
+  isLastWeek,
+  setIsLastWeek,
+  handleExperienceClick,
+}) {
   const { data: session } = useSession();
 
   const { allEntries, isLoadingEntries, errorEntries } =
@@ -26,7 +30,7 @@ export default function BarChartTile({ isLastWeek, setIsLastWeek }) {
     : experienceAnalyser(session ? userEntries : allEntries);
 
   const totalCount = visualizedData.totalCount;
-  console.log(visualizedData.experiences);
+  console.log("visualizedData.experiences", visualizedData.experiences);
 
   if (isLoadingEntries) return <p>Entries Loading</p>;
   if (errorEntries) return <p>Sorry, there was an error fetching entries</p>;
@@ -67,15 +71,20 @@ export default function BarChartTile({ isLastWeek, setIsLastWeek }) {
       </HeadContainer>
 
       {visualizedData.experiences &&
-        visualizedData.experiences.map(({ index, count, color }) => (
-          <>
-            <SingleBar
-              key={index}
-              color={color}
-              barHeight={Math.floor((count / totalCount) * 100)}
-            />
-          </>
-        ))}
+        visualizedData.experiences.map(
+          ({ index, count, color, experience }) => (
+            <>
+              <SingleBar
+                key={index}
+                color={color}
+                barHeight={Math.floor((count / totalCount) * 100)}
+                onClick={() => {
+                  handleExperienceClick(experience);
+                }}
+              />
+            </>
+          )
+        )}
     </BarChartContainer>
   );
 }
