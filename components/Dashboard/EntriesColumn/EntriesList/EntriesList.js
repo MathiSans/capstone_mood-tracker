@@ -1,18 +1,61 @@
 import styled from "styled-components";
+import { useSession } from "next-auth/react";
 
 export default function EntriesList({ data }) {
+  const { data: session } = useSession();
+  function getWeekdayName(date) {
+    const weekdays = [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ];
+
+    // Create a new Date object using the provided date string or timestamp
+    const dateObj = new Date(date);
+
+    // Get the day of the week (0-6)
+    const dayOfWeek = dateObj.getDay();
+
+    // Return the weekday name corresponding to the day of the week
+    return weekdays[dayOfWeek];
+  }
+
+  // Example usage:
+  const myDate = "2024-04-23"; // Date string in YYYY-MM-DD format
+  const weekdayName = getWeekdayName(myDate);
   console.log("data", data);
   return (
     <>
       {data.map(({ _id, experience, time, color, intensity, reactions }) => (
         <Card key={_id}>
-          I felt {experience}, the {color}, the intensity {intensity.toFixed(2)}{" "}
-          and my reaction {reactions.join(", ")} at {time}.
+          <p>{time}</p>
+          <p>
+            {session ? "I felt" : "Somebody"}
+            <DynamicCardSpan color={color}> {experience}</DynamicCardSpan> with
+            the intensity of {intensity} .
+          </p>
+          <p>I reacted with {reactions}.</p>
+          <ColorCircle color={color} />
         </Card>
       ))}
     </>
   );
 }
+
+const DynamicCardSpan = styled.span`
+  color: ${(prop) => prop.color};
+`;
+
+const ColorCircle = styled.div`
+  width: 100px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: ${(prop) => prop.color};
+`;
 
 export const Card = styled.div`
   background: var(--effect-radial-gradient);
@@ -22,6 +65,7 @@ export const Card = styled.div`
   gap: var(--spacing-l);
   border-radius: var(--border-radius-small);
   width: 100%;
+  height: 100%;
   padding: var(--spacing-xl);
   position: relative;
   cursor: pointer;
