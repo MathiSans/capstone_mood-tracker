@@ -59,6 +59,7 @@ export default function EntriesColumn() {
         singleExperienceList={singleExperienceList}
         clickedExperience={clickedExperience}
         setSingleExperienceList={setSingleExperienceList}
+        singleEmotionDisplayed={singleEmotionDisplayed}
       />
 
       <EntriesList

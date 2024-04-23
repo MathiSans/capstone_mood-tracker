@@ -17,6 +17,7 @@ export default function BarChartTile({
   singleExperienceList,
   setSingleExperienceList,
   clickedExperience,
+  singleEmotionDisplayed,
 }) {
   const { data: session } = useSession();
 
@@ -56,6 +57,8 @@ export default function BarChartTile({
     topTwoExperiences.length !== 0
       ? topTwoExperiences[1].experience
       : "NO DATA";
+
+  console.log("singleEmotionDisplayed", singleEmotionDisplayed);
   return (
     <BarChartContainer>
       <HeadContainer>
@@ -69,7 +72,12 @@ export default function BarChartTile({
           </LastWeekTogglePill>
         </div>
         <EntriesDescription>
-          {totalCount} entries most are {emotionFirst} and {emotionSecond}
+          {singleExperienceList ? singleEmotionDisplayed.length : totalCount}{" "}
+          entries most are{" "}
+          {singleExperienceList
+            ? singleEmotionDisplayed[0].experience
+            : emotionFirst}{" "}
+          {singleExperienceList ? "" : `and ${emotionSecond}`}
         </EntriesDescription>
       </HeadContainer>
 

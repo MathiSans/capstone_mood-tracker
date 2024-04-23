@@ -2,6 +2,7 @@ import getWeekdayFromTime from "@/utils/getWeekdayFromTime";
 import styled from "styled-components";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function EntryTile({
   experience,
@@ -16,7 +17,7 @@ export default function EntryTile({
 
   return (
     <>
-      <Card onClick={() => router.push(`/entries/${entryUrl}`)}>
+      <Card href={`/entries/${entryUrl}`}>
         <p>{time} on </p>
         <span>{getWeekdayFromTime(time)}</span>
         <p>
@@ -42,7 +43,7 @@ const ColorCircle = styled.div`
   background-color: ${(prop) => prop.color};
 `;
 
-export const Card = styled.div`
+export const Card = styled(Link)`
   background: var(--effect-radial-gradient);
   display: flex;
   flex-direction: column;
@@ -56,6 +57,8 @@ export const Card = styled.div`
   cursor: pointer;
   grid-column-end: span 4;
   grid-row-end: span 3;
+  text-decoration: none;
+  color: var(--color-primary-alt);
 `;
 
 /*
