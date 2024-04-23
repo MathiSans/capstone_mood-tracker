@@ -12,6 +12,8 @@ export function Community() {
   const { userEntries } = useData().fetchedUserEntries;
   const { allUsers, isLoadingAllUsers, errorAllUsers } =
     useData().fetchedAllUsers;
+  const { activities, isLoadingActivities, errorActivities } =
+    useData().fetchedActivities;
   console.log("allUsers", allUsers);
   const userName = session && session.user.name;
   function handleOnTyping(event) {
@@ -95,7 +97,17 @@ export function Community() {
       <br />
       <button onClick={() => setSend("💐")}>Send Flowers 💐</button>
       <button onClick={() => setSend("🤗")}>Send Hugs 🤗</button>
-      <button onClick={() => setSend("🌅")}>Invite to an Activity</button>
+      <br />
+      <br />
+      <select onChange={(event) => setSend(event.target.value)}>
+        {activities &&
+          activities.map(({ _id, title, emoji }) => (
+            <option key={_id} value={`${title} ${emoji}`}>
+              {title}
+            </option>
+          ))}
+      </select>
+      <b>Invite to an Activity</b>
       <h1>{send}</h1>
     </>
   );
