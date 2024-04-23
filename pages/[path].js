@@ -25,7 +25,7 @@ export default function Home() {
 
   return (
     <>
-      <Animation color={"grey"} opacity={1} hideInterface={false} />
+      {/* <Animation color={"grey"} opacity={1} hideInterface={false} /> */}
       <Container>
         {dashboardIsOpen && <Dashboard />}
         {path === "newentry" && <NewEntryFlow />}
