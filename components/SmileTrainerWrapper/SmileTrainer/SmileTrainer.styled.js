@@ -29,6 +29,7 @@ export const Circle = styled.div`
 `;
 
 export const InnerCircle = styled.div`
+  filter: blur(20px);
   position: absolute;
   height: 90%;
   width: 90%;
