@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  z-index: 100;
   position: fixed;
   display: flex;
   justify-content: space-between;

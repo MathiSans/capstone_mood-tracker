@@ -7,7 +7,7 @@ import { useData } from "@/lib/useData";
 import lastWeekAnalyser from "@/utils/lastWeekAnalyser";
 
 export default function EntriesColumn() {
-  const [isLastWeek, setIsLastWeek] = useState(true);
+  const [isLastWeek, setIsLastWeek] = useState(false);
   const [targetExperience, setTargetExperience] = useState(null);
   const [singleExperienceList, setSingleExperienceList] = useState(false);
   const [clickedExperience, setClickedExperience] = useState(null);
@@ -18,14 +18,15 @@ export default function EntriesColumn() {
     useData().fetchedAllEntries;
   const { userEntries } = useData().fetchedUserEntries;
   const lastWeek = lastWeekAnalyser(session ? userEntries : allEntries);
-  console.log(lastWeek);
 
   const handleExperienceClick = (experience) => {
-    setClickedExperience(experience);
-    setTargetExperience(experience);
     if (experience === targetExperience) {
       setSingleExperienceList(!singleExperienceList);
       setClickedExperience(null);
+    } else {
+      setSingleExperienceList(!singleExperienceList);
+      setClickedExperience(experience);
+      setTargetExperience(experience);
     }
   };
 
@@ -48,10 +49,15 @@ export default function EntriesColumn() {
   const singleEmotionDisplayed = allEmotionsDisplayed.filter(
     (experience) => experience.experience === targetExperience
   );
+
+  function handleFilterSwitchClick() {
+    setIsLastWeek(!isLastWeek);
+  }
+
   return (
     <Grid>
       <BarChartTile
-        setIsLastWeek={setIsLastWeek}
+        handleFilterSwitchClick={handleFilterSwitchClick}
         isLastWeek={isLastWeek}
         targetExperience={targetExperience}
         setTargetExperience={setTargetExperience}
