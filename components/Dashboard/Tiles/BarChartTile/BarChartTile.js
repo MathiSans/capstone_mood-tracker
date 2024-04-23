@@ -15,6 +15,7 @@ export default function BarChartTile({
   setIsLastWeek,
   handleExperienceClick,
   singleExperienceList,
+  setSingleExperienceList,
   clickedExperience,
 }) {
   const { data: session } = useSession();

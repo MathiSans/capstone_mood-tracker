@@ -37,6 +37,7 @@ export const BarChartContainer = styled.div`
   /* margin-top: 3rem; */
   grid-column-end: span 4;
   grid-row-end: span 3;
+  position: relative;
 `;
 
 export const SingleBar = styled.div`

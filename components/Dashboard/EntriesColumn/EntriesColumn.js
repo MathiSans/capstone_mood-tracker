@@ -57,7 +57,17 @@ export default function EntriesColumn() {
         handleExperienceClick={handleExperienceClick}
         singleExperienceList={singleExperienceList}
         clickedExperience={clickedExperience}
+        setSingleExperienceList={setSingleExperienceList}
       />
+      {singleExperienceList && (
+        <button
+          onClick={() => {
+            setSingleExperienceList(!singleExperienceList);
+          }}
+        >
+          x
+        </button>
+      )}
       <EntriesList
         data={
           singleExperienceList ? singleEmotionDisplayed : allEmotionsDisplayed
