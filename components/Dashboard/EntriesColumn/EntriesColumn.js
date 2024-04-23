@@ -23,9 +23,10 @@ export default function EntriesColumn() {
   const handleExperienceClick = (experience) => {
     setClickedExperience(experience);
     setTargetExperience(experience);
-    // const trueORFalse = setSingleExperienceList(
-    //   singleExperienceList ? singleExperienceList : !singleExperienceList
-    // );
+    if (experience === targetExperience) {
+      setSingleExperienceList(!singleExperienceList);
+      setClickedExperience(null);
+    }
   };
 
   function entriesToDisplay({ lastWeek, session }) {
@@ -59,15 +60,7 @@ export default function EntriesColumn() {
         clickedExperience={clickedExperience}
         setSingleExperienceList={setSingleExperienceList}
       />
-      {singleExperienceList && (
-        <button
-          onClick={() => {
-            setSingleExperienceList(!singleExperienceList);
-          }}
-        >
-          x
-        </button>
-      )}
+
       <EntriesList
         data={
           singleExperienceList ? singleEmotionDisplayed : allEmotionsDisplayed
