@@ -17,7 +17,7 @@ export default function EntryTile({
 
   return (
     <>
-      <Card href={`/entries/${entryUrl}`}>
+      <Card href={`/${entryUrl}`}>
         <p>{time} on </p>
         <span>{getWeekdayFromTime(time)}</span>
         <p>

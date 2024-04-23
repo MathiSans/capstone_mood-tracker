@@ -68,7 +68,7 @@ export default function BarChartTile({
               setIsLastWeek(!isLastWeek);
             }}
           >
-            <span>Last Week</span>
+            <span>{isLastWeek ? "Last 7 days" : "all Entries"}</span>
           </LastWeekTogglePill>
         </div>
         <EntriesDescription>
