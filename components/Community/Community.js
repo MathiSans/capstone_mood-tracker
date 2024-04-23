@@ -1,4 +1,5 @@
 import { useData } from "@/lib/useData";
+import { color } from "framer-motion";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 
@@ -34,11 +35,15 @@ export function Community() {
       console.log("User not found.");
       return; // Exit early if user not found
     }
-    console.log("allEntries", allEntries);
+
+    const reversedEntries = allEntries && allEntries.slice().reverse(); // Create a copy and reverse it
+    console.log("reversedEntries", reversedEntries);
 
     const latestFriendEntry =
-      getUserName && allEntries
-        ? allEntries.find((friendEntry) => friendEntry.user === getUserName._id)
+      getUserName && reversedEntries
+        ? reversedEntries.find(
+            (friendEntry) => friendEntry.user === getUserName._id
+          )
         : "No Data";
     return latestFriendEntry;
   }
@@ -56,10 +61,10 @@ export function Community() {
       <h1>Community-Area</h1>
       <h3>share with your friends</h3>
 
-      <p>hi {userName}</p>
-      <p>id: {session && session.user.id}</p>
+      <p>Welcome {session ? userName : "Unknown User"}</p>
+      <p>Your id: {session && session.user.id}</p>
       <br />
-      <h4>Your Friends</h4>
+      <h4>Search for Your Friends</h4>
       <input
         type="search"
         onChange={(event) => {
@@ -71,13 +76,20 @@ export function Community() {
         <br />
         <br />
         <hr />
+        <br />
         <section>
           <p>
-            Your friend {getUserName?.name} felt on {friendsEntry.time}
+            Your friend{" "}
+            <b style={{ color: "lightblue" }}>{getUserName?.name}</b> felt on{" "}
+            <b style={{ color: "lightblue" }}>{friendsEntry.time}</b>
             {"  "}
-            {friendsEntry.experience}
+            <b style={{ color: friendsEntry.color }}>
+              {friendsEntry.experience}
+            </b>
           </p>
         </section>
+        <br />
+        <hr />
       </div>
       <br />
       <br />
