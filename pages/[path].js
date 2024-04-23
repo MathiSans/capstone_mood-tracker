@@ -8,6 +8,7 @@ import Dashboard from "@/components/Dashboard/Dashboard";
 import Animation from "@/components/3DAnimation/3DAnimation";
 import ActionBar from "@/components/ActionBar/ActionBar";
 import NewEntryFlow from "./flow";
+import Entry from "@/components/SingleEntry/Entry";
 
 export default function Home() {
   const router = useRouter();
@@ -35,6 +36,7 @@ export default function Home() {
       <Animation color={"grey"} opacity={1} hideInterface={false} />
       <Container>
         {dashboardIsOpen && <Dashboard />}
+        <Entry id={path} />
         {path === "newentry" && <NewEntryFlow />}
       </Container>
     </>
