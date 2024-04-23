@@ -97,17 +97,26 @@ export function Community() {
       <br />
       <button onClick={() => setSend("💐")}>Send Flowers 💐</button>
       <button onClick={() => setSend("🤗")}>Send Hugs 🤗</button>
+      <b>
+        {"       "}to{" "}
+        <span style={{ color: "yellow" }}>{getUserName.name}</span>
+      </b>
       <br />
       <br />
-      <select onChange={(event) => setSend(event.target.value)}>
-        {activities &&
-          activities.map(({ _id, title, emoji }) => (
-            <option key={_id} value={`${title} ${emoji}`}>
-              {title}
-            </option>
-          ))}
-      </select>
-      <b>Invite to an Activity</b>
+
+      <b>
+        {"       "}Invite{" "}
+        <span style={{ color: "yellow" }}>{getUserName.name}</span> to{" "}
+        <select onChange={(event) => setSend(event.target.value)}>
+          {activities &&
+            activities.map(({ _id, title, emoji }) => (
+              <option key={_id} value={`${title} ${emoji}`}>
+                {title}
+              </option>
+            ))}
+        </select>
+        Activity
+      </b>
       <h1>{send}</h1>
     </>
   );
