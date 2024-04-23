@@ -45,4 +45,5 @@ export const SingleBar = styled.div`
   background-color: ${(props) => props.color};
   align-items: flex-end;
   border-radius: 12px;
+  border: ${(props) => (props.isClicked ? "2.5px solid white" : "none")};
 `;

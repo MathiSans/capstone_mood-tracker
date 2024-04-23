@@ -10,6 +10,8 @@ export default function EntriesColumn() {
   const [isLastWeek, setIsLastWeek] = useState(true);
   const [targetExperience, setTargetExperience] = useState(null);
   const [singleExperienceList, setSingleExperienceList] = useState(false);
+  const [clickedExperience, setClickedExperience] = useState(null);
+
   const { data: session } = useSession();
 
   const { allEntries, isLoadingEntries, errorEntries } =
@@ -19,9 +21,11 @@ export default function EntriesColumn() {
   console.log(lastWeek);
 
   const handleExperienceClick = (experience) => {
-    console.log("experience", experience);
+    setClickedExperience(experience);
     setTargetExperience(experience);
-    setSingleExperienceList(!singleExperienceList);
+    // const trueORFalse = setSingleExperienceList(
+    //   singleExperienceList ? singleExperienceList : !singleExperienceList
+    // );
   };
 
   function entriesToDisplay({ lastWeek, session }) {
@@ -51,6 +55,8 @@ export default function EntriesColumn() {
         targetExperience={targetExperience}
         setTargetExperience={setTargetExperience}
         handleExperienceClick={handleExperienceClick}
+        singleExperienceList={singleExperienceList}
+        clickedExperience={clickedExperience}
       />
       <EntriesList
         data={

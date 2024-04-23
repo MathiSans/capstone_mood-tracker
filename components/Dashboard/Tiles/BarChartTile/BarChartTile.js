@@ -14,6 +14,8 @@ export default function BarChartTile({
   isLastWeek,
   setIsLastWeek,
   handleExperienceClick,
+  singleExperienceList,
+  clickedExperience,
 }) {
   const { data: session } = useSession();
 
@@ -81,6 +83,7 @@ export default function BarChartTile({
                 onClick={() => {
                   handleExperienceClick(experience);
                 }}
+                isClicked={clickedExperience === experience}
               />
             </>
           )
