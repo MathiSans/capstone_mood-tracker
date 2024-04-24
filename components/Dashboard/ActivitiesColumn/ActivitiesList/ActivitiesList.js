@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { FiPlus } from "react-icons/fi";
 import { useSession } from "next-auth/react";
+import ActivityTile from "../../Tiles/ActivityTile/ActivityTile";
 
 export default function ActivitiesList({ handleShowForm }) {
   const [filterPhrase, setFilterPhrase] = useState();
@@ -54,18 +55,9 @@ export default function ActivitiesList({ handleShowForm }) {
         )}
       </HeaderSwitches>
 
-      <ActivitiesListOption>
-        {filteredActivities.map((activity, index) => (
-          <motion.div key={index} whileHover={{ scale: 1.05 }}>
-            <WhiteBox>
-              {activity.tool ? <span>tool</span> : null}
-              <span>{activity.emoji}</span>
-              <h2>{activity.title}</h2>
-              <p>{activity.description}</p>
-            </WhiteBox>
-          </motion.div>
-        ))}
-      </ActivitiesListOption>
+      {filteredActivities.map((activity, index) => (
+        <ActivityTile key={index} activity={activity} />
+      ))}
     </>
   );
 }

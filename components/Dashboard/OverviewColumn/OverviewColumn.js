@@ -7,7 +7,7 @@ export default function OverviewColumn() {
   return (
     <Grid>
       <NewEntryTile />
-      <ActivityTile isOnOverviewColumn />
+      {/* <ActivityTile isOnOverviewColumn /> */}
     </Grid>
   );
 }
