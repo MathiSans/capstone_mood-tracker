@@ -1,11 +1,15 @@
 import { useData } from "@/lib/useData";
-import { color } from "framer-motion";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
+import { mutate } from "swr";
 
 export function Community() {
   const { data: session } = useSession();
   const [searchValue, setSearchValue] = useState("");
+  const [hug, setHug] = useState("");
+  const [flowers, setFlowers] = useState("");
+  const [inviteActivity, setInviteActivity] = useState("");
+
   const [send, setSend] = useState("");
   const { allEntries, isLoadingEntries, errorEntries } =
     useData().fetchedAllEntries;
@@ -57,6 +61,39 @@ export function Community() {
   console.log("W", getUserName);
   const friendsEntry = getUserName && allUsers && getLatestEmotion();
   console.log(friendsEntry, "friendsEntry");
+  console.log(getUserName);
+  async function handleSubmit(event) {
+    event.preventDefault();
+    // const title = event.target.elements.title.value.trim();
+    // const description = event.target.elements.description.value.trim();
+    // if (!title || !description || inputString.length === 0) {
+    //   alert("Title, description or emoji cannot be empty or just spaces.");
+    //   return;
+    // }
+
+    const response = await fetch("/api/community", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        senderId: session ? session.user.id : null,
+        recipientId: getUserName._id,
+        entryId: friendsEntry._id,
+        hug: hug,
+        flowers: flowers,
+        activity: inviteActivity,
+      }),
+    });
+
+    if (response.ok) {
+      mutate();
+
+      event.target.reset();
+
+      //   handleShowForm();
+    }
+  }
 
   return (
     <>
@@ -95,29 +132,55 @@ export function Community() {
       </div>
       <br />
       <br />
-      <button onClick={() => setSend("💐")}>Send Flowers 💐</button>
-      <button onClick={() => setSend("🤗")}>Send Hugs 🤗</button>
-      <b>
-        {"       "}to{" "}
-        <span style={{ color: "yellow" }}>{getUserName.name}</span>
-      </b>
-      <br />
-      <br />
+      <form onSubmit={handleSubmit}>
+        <button
+          onClick={() => {
+            setFlowers("💐");
+            setSend("💐");
+          }}
+        >
+          Send Flowers 💐
+        </button>
+        <button
+          onClick={() => {
+            setHug("🤗");
+            setSend("💐");
+          }}
+        >
+          Send Hugs 🤗
+        </button>
+        <b>
+          {"       "}to{" "}
+          <span style={{ color: "yellow" }}>{getUserName.name}</span>
+        </b>
+        <br />
+        <br />
 
-      <b>
-        {"       "}Invite{" "}
-        <span style={{ color: "yellow" }}>{getUserName.name}</span> to{" "}
-        <select onChange={(event) => setSend(event.target.value)}>
-          {activities &&
-            activities.map(({ _id, title, emoji }) => (
-              <option key={_id} value={`${title} ${emoji}`}>
-                {title}
-              </option>
-            ))}
-        </select>
-        Activity
-      </b>
-      <h1>{send}</h1>
+        <b>
+          {"       "}Invite{" "}
+          <span style={{ color: "yellow" }}>{getUserName.name}</span> to{" "}
+          <select
+            onChange={(event) => {
+              setInviteActivity(event.target.value);
+              setSend(event.target.value);
+            }}
+          >
+            {!isLoadingActivities &&
+              activities.map(({ _id, title, emoji }) => (
+                <option key={_id} value={`${title} ${emoji}`}>
+                  {title}
+                </option>
+              ))}
+          </select>
+          Activity
+        </b>
+        <h1>{send}</h1>
+        <br />
+        <br />
+        <br />
+        <br />
+        <button type="submit">Send</button>
+      </form>
     </>
   );
 }
