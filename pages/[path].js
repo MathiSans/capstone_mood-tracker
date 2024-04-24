@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useData } from "@/lib/useData";
+
 import { Container } from "@/components/StyledComponents/Path.styled";
 import Dashboard from "@/components/Dashboard/Dashboard";
 import Animation from "@/components/3DAnimation/3DAnimation";
+import ActionBar from "@/components/ActionBar/ActionBar";
 import NewEntryFlow from "./flow";
 
 export default function Home() {
@@ -25,31 +27,16 @@ export default function Home() {
 
   return (
     <>
-      {/* <Animation color={"grey"} opacity={1} hideInterface={false} /> */}
+      <ActionBar
+        session={session}
+        dashboardIsOpen={dashboardIsOpen}
+        handleDashboardIsOpen={handleDashboardIsOpen}
+      />
+      <Animation color={"grey"} opacity={1} hideInterface={false} />
       <Container>
         {dashboardIsOpen && <Dashboard />}
         {path === "newentry" && <NewEntryFlow />}
       </Container>
     </>
   );
-}
-
-{
-  /* <Entry id={path} />
-
-{path === "index" && <div>HOME</div>}
-<div>Path: {path}</div>
-{!isLoadingActivities && <div>Aktivitiäten: {activities.length}</div>}
-{!isLoadingEntries && (
-  <div>
-    User-Entries: {session ? userEntries.length : "no user loggeed in"}
-  </div>
-)}
-{!isLoadingEntries && <div>Alle Entries: {allEntries.length}</div>}
-
-<ActionBar
-session={session}
-handleDashboardIsOpen={handleDashboardIsOpen}
-dashboardIsOpen={dashboardIsOpen}
-/> */
 }
