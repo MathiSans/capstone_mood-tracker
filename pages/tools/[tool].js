@@ -13,8 +13,6 @@ export default function SingleToolPage() {
 
   const links = ["quotes", "smiletrainer", "meditation"];
 
-  console.log("tool", tool);
-
   return (
     <>
       <Container>

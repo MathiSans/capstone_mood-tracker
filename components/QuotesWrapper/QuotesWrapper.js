@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import Guide from "@/components/Guide/Guide";
-import Quotes from "@/components/Quotes/Quotes";
+import Quotes from "./Quotes/Quotes";
 import { useRouter } from "next/router";
-import { Page } from "@/components/Layout/Layout.styled";
 import useSWR, { mutate } from "swr";
 import * as Styled from "./QuotesWrapper.styled";
 
@@ -35,17 +33,19 @@ export default function QuotesPage({ fetcher }) {
 
   return (
     <>
-      <Quotes
-        handleCounter={handleCounter}
-        quote={data}
-        refreshQuote={refreshQuote}
-      />
-      {quoteCounter > 0 && (
-        <Styled.CounterContainer>
-          <Styled.Counter>{quoteCounter}</Styled.Counter>
-          <p>quotes viewed</p>
-        </Styled.CounterContainer>
-      )}
+      <Styled.Container>
+        <Quotes
+          handleCounter={handleCounter}
+          quote={data}
+          refreshQuote={refreshQuote}
+        />
+        {quoteCounter > 0 && (
+          <Styled.CounterContainer>
+            <Styled.Counter>{quoteCounter}</Styled.Counter>
+            <p>quotes viewed</p>
+          </Styled.CounterContainer>
+        )}
+      </Styled.Container>
     </>
   );
 }
