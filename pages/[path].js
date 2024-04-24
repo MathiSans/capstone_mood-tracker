@@ -36,7 +36,7 @@ export default function Home() {
       {/* <Animation color={"grey"} opacity={1} hideInterface={false} /> */}
       <Container>
         {dashboardIsOpen && <Dashboard />}
-        {path.includes("id:") && <Entry id={path.replace("id:", "")} />}
+        {/* {path.includes("id:") && <Entry id={path.replace("id:", "")} />} */}
         {path === "newentry" && <NewEntryFlow />}
       </Container>
     </>
