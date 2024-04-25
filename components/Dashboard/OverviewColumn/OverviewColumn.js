@@ -58,7 +58,6 @@ export default function OverviewColumn({
           href="/newentry"
           key={index}
           style={{
-            // background: "var(--effect-radial-gradient)",
             background: "var(--color-neutral)",
             borderRadius: "var(--border-radius-small)",
             height: "100%",

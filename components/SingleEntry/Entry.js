@@ -19,7 +19,6 @@ import { useSession } from "next-auth/react";
 export default function Entry({ id }) {
   const [showSentence, setShowSentence] = useState(true);
   const router = useRouter();
-  // const { id } = router.query;
   const { data: session } = useSession();
 
   const { data: entry, isLoading } = useSWR(`/api/entries/${id}`);
