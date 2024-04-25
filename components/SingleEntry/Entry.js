@@ -22,7 +22,6 @@ export default function Entry({ id }) {
   const [showSentence, setShowSentence] = useState(true);
   const [showFriendMessages, setShowFriendMessages] = useState(false);
   const router = useRouter();
-  // const { id } = router.query;
   const { data: session } = useSession();
 
   const { data: entry, isLoading } = useSWR(`/api/entries/${id}`);

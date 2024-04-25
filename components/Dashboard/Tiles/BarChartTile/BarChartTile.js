@@ -1,27 +1,26 @@
 import { useSession } from "next-auth/react";
 import experienceAnalyser from "@/utils/experienceAnalyser";
-import lastWeekAnalyser from "@/utils/lastWeekAnalyser";
-import { useData } from "@/lib/useData";
 import * as Styled from "./BarChartTile.styled";
 
 export default function BarChartTile({
-  isLastWeek,
   handleFilterSwitchClick,
   singleExperienceList,
+  isLast7Days,
+  setIsLast7Days,
   handleExperienceClick,
   setSingleExperienceList,
   clickedExperience,
   singleEmotionDisplayed,
+  allEntries,
+  userEntries,
+  isLoadingEntries,
+  errorEntries,
+  last7DaysEntries,
 }) {
   const { data: session } = useSession();
 
-  const { allEntries, isLoadingEntries, errorEntries } =
-    useData().fetchedAllEntries;
-  const { userEntries } = useData().fetchedUserEntries;
-  const lastWeek = lastWeekAnalyser(session ? userEntries : allEntries);
-
-  const visualizedData = isLastWeek
-    ? experienceAnalyser(lastWeek)
+  const visualizedData = isLast7Days
+    ? experienceAnalyser(last7DaysEntries)
     : experienceAnalyser(session ? userEntries : allEntries);
 
   const totalCount = visualizedData.totalCount;
@@ -56,8 +55,8 @@ export default function BarChartTile({
             handleFilterSwitchClick();
           }}
         >
-          <Styled.Option $isActive={!isLastWeek}>all time</Styled.Option>
-          <Styled.Option $isActive={isLastWeek}>last 7 days</Styled.Option>
+          <Styled.Option $isActive={!isLast7Days}>all time</Styled.Option>
+          <Styled.Option $isActive={isLast7Days}>last 7 days</Styled.Option>
         </Styled.Switch>
         <Styled.EntriesDescriptionContainer>
           <Styled.EntriesDescription $bold>
