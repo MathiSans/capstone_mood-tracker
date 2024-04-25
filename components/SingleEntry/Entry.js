@@ -46,7 +46,7 @@ export default function Entry({ id }) {
   }
 
   if (!entry) {
-    return;
+    return <h1>Entry not found</h1>;
   }
 
   function handleShowSentence() {
