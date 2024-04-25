@@ -12,22 +12,19 @@ import QuotesWrapper from "@/components/QuotesWrapper/QuotesWrapper";
 import SmileTrainerWrapper from "@/components/SmileTrainerWrapper/SmileTrainerWrapper";
 import GuidedMeditation from "@/components/GuidedMeditation/GuidedMeditation";
 import Entry from "@/components/SingleEntry/Entry";
+import { useDashboardState } from "@/components/DashboardStateProvider/DashboardStateProvider";
 
 export default function Home() {
+  const { dashboardIsOpen, handleDashboardIsOpen } = useDashboardState();
   const router = useRouter();
   const { path } = router.query;
   const { data: session } = useSession();
   const [audioTrigger, setAudioTrigger] = useState(false);
-  const [dashboardIsOpen, setDashboardIsOpen] = useState(true);
   const { allEntries, isLoadingEntries, errorEntries } =
     useData().fetchedAllEntries;
   const { userEntries } = useData().fetchedUserEntries;
   const { activities, isLoadingActivities, errorActivities } =
     useData().fetchedActivities;
-
-  function handleDashboardIsOpen() {
-    setDashboardIsOpen(!dashboardIsOpen);
-  }
 
   return (
     <>
@@ -36,14 +33,18 @@ export default function Home() {
         dashboardIsOpen={dashboardIsOpen}
         handleDashboardIsOpen={handleDashboardIsOpen}
       />
-      {/* <Animation color={"grey"} opacity={1} hideInterface={false} /> */}
+      <Animation color={"grey"} opacity={0.1} hideInterface={false} />
       <Container>
         {dashboardIsOpen && <Dashboard />}
-        {/* {path.includes("id:") && <Entry id={path.replace("id:", "")} />} */}
-        {path === "newentry" && <NewEntryFlow />}
-        {path === "quotes-tool" && <QuotesWrapper />}
-        {path === "smiletrainer" && <SmileTrainerWrapper />}
-        {path === "guided-meditation" && <GuidedMeditation />}
+        {path && path.includes("id:") && !dashboardIsOpen && (
+          <Entry id={path.replace("id:", "")} />
+        )}
+        {path === "new-entry" && !dashboardIsOpen && <NewEntryFlow />}
+        {path === "quotes" && !dashboardIsOpen && <QuotesWrapper />}
+        {path === "smiletrainer" && !dashboardIsOpen && <SmileTrainerWrapper />}
+        {path === "guided-meditation" && !dashboardIsOpen && (
+          <GuidedMeditation />
+        )}
       </Container>
     </>
   );

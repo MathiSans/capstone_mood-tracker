@@ -26,7 +26,7 @@ export const ColorCircle = styled.div`
   opacity: 0.6;
 `;
 
-export const Container = styled(Link)`
+export const Container = styled.div`
   position: relative;
   background: var(--effect-radial-gradient);
   border-radius: var(--border-radius-small);
