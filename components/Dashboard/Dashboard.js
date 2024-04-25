@@ -66,6 +66,9 @@ export default function Dashboard() {
       (experience) => experience.experience === targetExperience
     );
 
+  function handleFilterSwitchClick() {
+    setIsLast7Days(!isLast7Days);
+  }
   return (
     <Container>
       <Menu
@@ -90,6 +93,7 @@ export default function Dashboard() {
           last7DaysEntries={last7DaysEntries}
           isLoadingEntries={isLoadingEntries}
           errorEntries={errorEntries}
+          handleFilterSwitchClick={handleFilterSwitchClick}
         />
       )}
       {selectedColumn === menuItems[1].id && (
@@ -111,6 +115,7 @@ export default function Dashboard() {
           isLoadingEntries={isLoadingEntries}
           errorEntries={errorEntries}
           allEmotionsDisplayed={allEmotionsDisplayed}
+          handleFilterSwitchClick={handleFilterSwitchClick}
         />
       )}
       {selectedColumn === menuItems[2].id && <ActivitiesColumn />}

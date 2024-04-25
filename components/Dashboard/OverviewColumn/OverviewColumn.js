@@ -17,6 +17,7 @@ export default function OverviewColumn({
   userEntries,
   allEntries,
   isLoadingEntries,
+  handleFilterSwitchClick,
 }) {
   const boxes = [
     { gridColumnEnd: "span 4", gridRowEnd: "span 3" },
@@ -49,6 +50,7 @@ export default function OverviewColumn({
           isOnEntriesPage={true}
           last7DaysAnalyser={last7DaysAnalyser}
           last7DaysEntries={last7DaysEntries}
+          handleFilterSwitchClick={handleFilterSwitchClick}
         />
       )}
       {boxes.map((box, index) => (

@@ -1,7 +1,5 @@
 import { useSession } from "next-auth/react";
 import experienceAnalyser from "@/utils/experienceAnalyser";
-import lastWeekAnalyser from "@/utils/lastWeekAnalyser";
-import { useData } from "@/lib/useData";
 import * as Styled from "./BarChartTile.styled";
 
 export default function BarChartTile({
@@ -57,8 +55,8 @@ export default function BarChartTile({
             handleFilterSwitchClick();
           }}
         >
-          <Styled.Option $isActive={!isLastWeek}>all time</Styled.Option>
-          <Styled.Option $isActive={isLastWeek}>last 7 days</Styled.Option>
+          <Styled.Option $isActive={!isLast7Days}>all time</Styled.Option>
+          <Styled.Option $isActive={isLast7Days}>last 7 days</Styled.Option>
         </Styled.Switch>
         <Styled.EntriesDescriptionContainer>
           <Styled.EntriesDescription $bold>

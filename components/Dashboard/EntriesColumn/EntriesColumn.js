@@ -20,6 +20,7 @@ export default function EntriesColumn({
   allEntries,
   last7DaysAnalyser,
   last7DaysEntries,
+  handleFilterSwitchClick,
 }) {
   return (
     <Grid>
