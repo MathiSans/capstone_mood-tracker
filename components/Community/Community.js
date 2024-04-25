@@ -9,6 +9,7 @@ export function Community() {
   const [hug, setHug] = useState("");
   const [flowers, setFlowers] = useState("");
   const [inviteActivity, setInviteActivity] = useState("");
+  const [submissionStatus, setSubmissionStatus] = useState(null);
 
   const [send, setSend] = useState("");
   const { allEntries, isLoadingEntries, errorEntries } =
@@ -62,39 +63,40 @@ export function Community() {
   const friendsEntry = getUserName && allUsers && getLatestEmotion();
   console.log(friendsEntry, "friendsEntry");
   console.log(getUserName);
+  const currentLocalUserDate = new Date();
+  console.log("currentLocalUserDate", typeof currentLocalUserDate);
   async function handleSubmit(event) {
     event.preventDefault();
-    // const title = event.target.elements.title.value.trim();
-    // const description = event.target.elements.description.value.trim();
-    // if (!title || !description || inputString.length === 0) {
-    //   alert("Title, description or emoji cannot be empty or just spaces.");
-    //   return;
-    // }
+    try {
+      const response = await fetch("/api/community", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          localCreationDate: currentLocalUserDate,
+          senderId: session ? session.user.id : null,
+          recipientId: getUserName._id,
+          entryId: friendsEntry._id,
+          hug: hug,
+          flowers: flowers,
+          activity: inviteActivity,
+        }),
+      });
 
-    const response = await fetch("/api/community", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        senderId: session ? session.user.id : null,
-        recipientId: getUserName._id,
-        entryId: friendsEntry._id,
-        hug: hug,
-        flowers: flowers,
-        activity: inviteActivity,
-      }),
-    });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
 
-    if (response.ok) {
       mutate();
-
+      setSubmissionStatus("success");
       event.target.reset();
-
-      //   handleShowForm();
+    } catch (error) {
+      console.error("Error submitting data:", error);
+      setSubmissionStatus("error");
     }
   }
-
+  console.log("inviteActivity", inviteActivity);
   return (
     <>
       <h1>Community-Area</h1>
@@ -160,11 +162,13 @@ export function Community() {
           {"       "}Invite{" "}
           <span style={{ color: "yellow" }}>{getUserName.name}</span> to{" "}
           <select
+            required
             onChange={(event) => {
               setInviteActivity(event.target.value);
               setSend(event.target.value);
             }}
           >
+            <option value={false}>--choose activity--</option>
             {!isLoadingActivities &&
               activities.map(({ _id, title, emoji }) => (
                 <option key={_id} value={`${title} ${emoji}`}>
@@ -176,11 +180,15 @@ export function Community() {
         </b>
         <h1>{send}</h1>
         <br />
-        <br />
-        <br />
-        <br />
+
         <button type="submit">Send</button>
       </form>
+      <br />
+      <br />
+      <br />
+      {submissionStatus === "success" && (
+        <p style={{ color: "green" }}>Submission successful!</p>
+      )}
     </>
   );
 }

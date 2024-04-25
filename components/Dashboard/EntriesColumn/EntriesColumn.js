@@ -11,6 +11,7 @@ export default function EntriesColumn() {
   const [targetExperience, setTargetExperience] = useState(null);
   const [singleExperienceList, setSingleExperienceList] = useState(false);
   const [clickedExperience, setClickedExperience] = useState(null);
+  // const [idsOfEntriesDisplayed, setIdsOfEntriesDisplayed] = useState([]);
 
   const { data: session } = useSession();
 
@@ -48,6 +49,20 @@ export default function EntriesColumn() {
   const singleEmotionDisplayed = allEmotionsDisplayed.filter(
     (experience) => experience.experience === targetExperience
   );
+
+  const { allCommunity, isLoadingAllCommunity, errorAllCommunity } =
+    useData().fetchedCommunity;
+
+  // const friendsMessages = allCommunity.filter((friends) => {
+  //   return friends.entryId === entry._id;
+  // }).length;
+  // console.log("friendsMessages", friendsMessages);
+  // const handleEntryRender = (entryId) => {
+  //   console.log("entryId", entryId);
+  //   // setIdsOfEntriesDisplayed((prevIds) => [...prevIds, entryId]);
+  // };
+  // console.log("state Entry ID:", idsOfEntriesDisplayed);
+
   return (
     <Grid>
       <BarChartTile
@@ -68,6 +83,7 @@ export default function EntriesColumn() {
         }
         targetExperience={targetExperience}
         setTargetExperience={setTargetExperience}
+        // onEntryRender={"handleEntryRender"}
       />
     </Grid>
   );
