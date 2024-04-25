@@ -19,4 +19,9 @@ export const Grid = styled.div`
   grid-gap: 1rem;
   grid-auto-rows: 80px;
   overflow-y: scroll;
+  *::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
