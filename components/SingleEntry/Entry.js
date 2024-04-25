@@ -29,7 +29,6 @@ export default function Entry({ id }) {
     useData().fetchedAllUsers;
   const { allCommunity, isLoadingAllCommunity, errorAllCommunity } =
     useData().fetchedCommunity;
-  console.log(allCommunity);
 
   const getUsername = (userId) => {
     const friendlyRecipient =
@@ -37,7 +36,6 @@ export default function Entry({ id }) {
       allUsers.filter((friend) => {
         return friend._id === userId;
       });
-    console.log(friendlyRecipient);
     return friendlyRecipient[0].name;
   };
 

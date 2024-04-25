@@ -1,7 +1,6 @@
 import EntryTile from "../../Tiles/EntryTile/EntryTile";
 
 export default function EntriesList({ data }) {
-  console.log("data", data);
   return (
     <>
       {data &&

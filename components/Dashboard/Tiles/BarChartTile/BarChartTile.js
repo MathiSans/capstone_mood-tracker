@@ -23,7 +23,6 @@ export default function BarChartTile({
   const visualizedData = isLast7Days
     ? experienceAnalyser(last7DaysEntries)
     : experienceAnalyser(session ? userEntries : allEntries);
-  console.log(visualizedData);
 
   const totalCount = visualizedData.totalCount;
 
@@ -84,7 +83,6 @@ export default function BarChartTile({
                 barheight={Math.floor((count / totalCount) * 100)}
                 onClick={() => {
                   handleExperienceClick(experience);
-                  console.log("clicked", experience);
                 }}
                 isclicked={clickedExperience === experience}
               />
