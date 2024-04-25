@@ -19,7 +19,7 @@ export default function EntryTile({
 
   return (
     <>
-      <Styled.Container href={`/id:${entryUrl}`}>
+      <Styled.Container href={`/${entryUrl}`}>
         <Styled.TextContainer>
           {session ? "You " : <Styled.StaticText>Somebody </Styled.StaticText>}
           {location === "unknown" ? (
