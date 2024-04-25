@@ -1,19 +1,12 @@
 import EntryTile from "../../Tiles/EntryTile/EntryTile";
 
-export default function EntriesList({ data }) {
+export default function EntriesList({ data, onEntryRender }) {
+  console.log("data", data);
   return (
     <>
-      {data.map(
-        ({
-          _id,
-          experience,
-          time,
-          color,
-          intensity,
-          reactions,
-          location,
-          region,
-        }) => (
+      {data.map(({ _id, experience, time, color, intensity, reactions }) => {
+        // onEntryRender(_id);
+        return (
           <EntryTile
             key={_id}
             experience={experience}
@@ -22,11 +15,10 @@ export default function EntriesList({ data }) {
             intensity={intensity}
             reactions={reactions}
             entryUrl={_id}
-            location={location}
-            region={region}
           />
-        )
-      )}
+        );
+      })}
+
     </>
   );
 }
