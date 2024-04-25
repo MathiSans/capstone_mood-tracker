@@ -20,7 +20,7 @@ export default function BarChartTile({
   const { data: session } = useSession();
 
   const visualizedData = isLast7Days
-    ? experienceAnalyser(last7DaysEntries)
+    ? experienceAnalyser(last7DaysEntries && last7DaysEntries)
     : experienceAnalyser(session ? userEntries : allEntries);
 
   const totalCount = visualizedData.totalCount;

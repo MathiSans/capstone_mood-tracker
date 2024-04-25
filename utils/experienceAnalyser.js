@@ -1,4 +1,8 @@
 export default function experienceAnalyser(data) {
+  if (!Array.isArray(data)) {
+    console.error("Invalid data format. Expected an array but received:", data);
+    return { experiences: [], totalCount: 0 };
+  }
   const experienceMap = {};
   let totalCount = 0;
   data.forEach((entry) => {
