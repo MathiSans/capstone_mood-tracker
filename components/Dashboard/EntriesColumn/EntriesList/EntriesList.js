@@ -18,6 +18,7 @@ export default function EntriesList({ data, onEntryRender }) {
           />
         );
       })}
+
     </>
   );
 }

@@ -18,6 +18,7 @@ export const Article = styled.article`
 
 export const MeditationContainer = styled.div`
   padding: 0 2rem 0 2rem;
+  max-width: 600px;
 `;
 
 export const BrightLink = styled(Link)`

@@ -1,18 +1,40 @@
 import styled from "styled-components";
 
 export const HeadContainer = styled.div`
-  top: 1rem;
-  position: absolute;
   width: 100%;
   justify-content: space-between;
   display: flex;
 `;
 
+export const EntriesDescriptionContainer = styled.div`
+  width: 50%;
+`;
+
 export const EntriesDescription = styled.article`
-  font-weight: bold;
-  width: 40%;
-  right: 1rem;
-  margin-right: 0.75rem;
+  font-weight: ${(props) => (props.$bold ? "bold" : "normal")};
+  text-align: right;
+`;
+
+export const Switch = styled.div`
+  background-color: #414141;
+  border-radius: var(--border-radius-small);
+  width: 118px;
+  height: 26px;
+  font-size: 11px;
+  display: flex;
+  cursor: pointer;
+`;
+
+export const Option = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 6px;
+  border-radius: var(--border-radius-small);
+  background-color: ${(props) =>
+    props.$isActive ? "var(--color-main)" : "#414141"};
+  color: ${(props) =>
+    props.$isActive ? "var(--color-main-alt)" : "var(--color-neutral)"};
 `;
 
 export const LastWeekTogglePill = styled.button`
@@ -20,31 +42,37 @@ export const LastWeekTogglePill = styled.button`
   background-color: black;
   color: white;
   padding: 0.2rem 0.5rem;
-  font-size: 0.5rem;
-  position: absolute;
-  left: 1rem;
+  font-size: 11px;
 `;
 
 export const BarChartContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
+  display: grid;
+  align-items: end;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
   width: 100%;
   height: 100%;
-  background-color: #2b2b2b;
-  align-items: flex-end;
-  border-radius: 16px;
+  overflow: hidden;
+`;
+
+export const Container = styled.div`
   position: relative;
-  /* margin-top: 3rem; */
+  background: var(--effect-radial-gradient);
+  border-radius: var(--border-radius-small);
+  width: 100%;
+  height: 100%;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   grid-column-end: span 4;
   grid-row-end: span 3;
-  position: relative;
 `;
 
 export const SingleBar = styled.div`
-  width: 3.31rem;
-  height: ${(props) => props.barHeight}%;
+  width: 100%;
+  height: ${(props) => props.barHeight * 2}%;
   background-color: ${(props) => props.color};
-  align-items: flex-end;
-  border-radius: 12px;
+  border-radius: var(--border-radius-small);
   border: ${(props) => (props.isClicked ? "2.5px solid white" : "none")};
 `;

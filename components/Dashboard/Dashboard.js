@@ -1,4 +1,5 @@
 import ActivitiesColumn from "./ActivitiesColumn/ActivitiesColumn";
+import CommunityColumn from "./CommunityColumn/CommunityColumn";
 import { Container } from "./Dashboard.styled";
 import EntriesColumn from "./EntriesColumn/EntriesColumn";
 import Menu from "./Menu/Menu";
@@ -12,6 +13,7 @@ export default function Dashboard() {
     { id: "overview", label: "Overview" },
     { id: "entries", label: "Entries" },
     { id: "activities", label: "Activities" },
+    { id: "community", label: "Community" },
   ];
 
   function handleSelectedColumnChange(column) {
@@ -28,6 +30,7 @@ export default function Dashboard() {
       {selectedColumn === menuItems[0].id && <OverviewColumn />}
       {selectedColumn === menuItems[1].id && <EntriesColumn />}
       {selectedColumn === menuItems[2].id && <ActivitiesColumn />}
+      {selectedColumn === menuItems[3].id && <CommunityColumn />}
     </Container>
   );
 }
