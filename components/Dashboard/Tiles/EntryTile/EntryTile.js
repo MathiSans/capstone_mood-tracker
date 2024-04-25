@@ -15,7 +15,6 @@ export default function EntryTile({
   location,
 }) {
   const { data: session } = useSession();
-  const router = useRouter();
 
   return (
     <>

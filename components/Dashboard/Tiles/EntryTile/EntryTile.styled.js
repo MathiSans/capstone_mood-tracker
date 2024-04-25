@@ -28,10 +28,11 @@ export const ColorCircle = styled.div`
 
 export const Container = styled(Link)`
   position: relative;
-  background: var(--effect-radial-gradient);
-  border-radius: var(--border-radius-small);
   width: 100%;
   height: 100%;
+  border-radius: var(--border-radius-small);
+  background: radial-gradient(circle at left, #6f6f6f, #00000000),
+    radial-gradient(circle at right, #2e2c29, #00000000);
   padding: 12px 14px;
   display: flex;
   flex-direction: column;
@@ -42,4 +43,23 @@ export const Container = styled(Link)`
   text-decoration: none;
   color: var(--color-primary-alt);
   font-size: 11px;
+`;
+
+export const TileH3 = styled.h3`
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 500;
+`;
+
+export const Pill = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  color: white;
+  border-radius: 2rem;
+  filter: drop-shadow(#242321 0rem 0rem 4px);
+  width: 2.5rem;
+  height: 1.2rem;
+  margin-block-end: 0.4rem;
 `;
