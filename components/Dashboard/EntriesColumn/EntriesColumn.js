@@ -25,6 +25,7 @@ export default function EntriesColumn({
     <Grid>
       {!isLoadingEntries && (
         <BarChartTile
+          handleFilterSwitchClick={handleFilterSwitchClick}
           setIsLast7Days={setIsLast7Days}
           isLast7Days={isLast7Days}
           targetExperience={targetExperience}
