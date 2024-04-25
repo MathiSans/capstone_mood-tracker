@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import experienceAnalyser from "@/utils/experienceAnalyser";
 import * as Styled from "./BarChartTile.styled";
+import { nanoid } from "nanoid";
 
 export default function BarChartTile({
   handleFilterSwitchClick,
@@ -22,6 +23,7 @@ export default function BarChartTile({
   const visualizedData = isLast7Days
     ? experienceAnalyser(last7DaysEntries)
     : experienceAnalyser(session ? userEntries : allEntries);
+  console.log(visualizedData);
 
   const totalCount = visualizedData.totalCount;
 
@@ -77,14 +79,14 @@ export default function BarChartTile({
           visualizedData.experiences.map(
             ({ index, count, color, experience }) => (
               <Styled.SingleBar
-                key={index}
+                key={nanoid()}
                 color={color}
-                barHeight={Math.floor((count / totalCount) * 100)}
+                barheight={Math.floor((count / totalCount) * 100)}
                 onClick={() => {
                   handleExperienceClick(experience);
                   console.log("clicked", experience);
                 }}
-                isClicked={clickedExperience === experience}
+                isclicked={clickedExperience === experience}
               />
             )
           )}

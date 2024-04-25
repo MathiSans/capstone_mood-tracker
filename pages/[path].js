@@ -36,7 +36,7 @@ export default function Home() {
         dashboardIsOpen={dashboardIsOpen}
         handleDashboardIsOpen={handleDashboardIsOpen}
       />
-      {/* <Animation color={"grey"} opacity={1} hideInterface={false} /> */}
+      <Animation color={"grey"} opacity={1} hideInterface={false} />
       <Container>
         {dashboardIsOpen && <Dashboard />}
         {/* {path.includes("id:") && <Entry id={path.replace("id:", "")} />} */}

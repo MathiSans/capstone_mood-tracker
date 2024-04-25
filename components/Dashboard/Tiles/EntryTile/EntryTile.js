@@ -16,7 +16,7 @@ export default function EntryTile({
 }) {
   const { data: session } = useSession();
   const router = useRouter();
-
+  console.log(location);
   return (
     <>
       <Styled.Container href={`/id:${entryUrl}`}>
