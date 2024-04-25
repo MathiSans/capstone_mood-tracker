@@ -35,7 +35,6 @@ export default function OverviewColumn({
     { gridColumnEnd: "span 2", gridRowEnd: "span 2" },
   ];
 
-export default function OverviewColumn() {
   return (
     <Grid>
       {!isLoadingEntries && (
