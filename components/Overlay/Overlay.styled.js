@@ -13,8 +13,7 @@ export const MenuTriggerContainer = styled.div`
   justify-content: center;
   padding-block-end: 1.5rem;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 24px;
 `;
 
 export const SettingsTriggerContainer = styled.div`

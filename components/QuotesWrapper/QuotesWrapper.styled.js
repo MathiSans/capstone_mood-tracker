@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 50px;
+`;
+
 export const CounterContainer = styled.div`
   display: flex;
   justify-content: center;
