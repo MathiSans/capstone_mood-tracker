@@ -73,6 +73,7 @@ export default function CommunityColumn() {
         : "No Data";
     return latestFriendEntry;
   }
+
   const handleGetUsername = (userId) => {
     const friendlyRecipient =
       !isLoadingAllUsers &&
@@ -132,6 +133,7 @@ export default function CommunityColumn() {
         allCommunity={allCommunity}
         isLoadingAllCommunity={isLoadingAllCommunity}
         setShowFriendMessages={setShowFriendMessages}
+        handleGetUsername={handleGetUsername}
       />
       <OutboxTile
         getUserName={getUserName}
