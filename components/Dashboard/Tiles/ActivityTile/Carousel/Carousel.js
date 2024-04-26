@@ -13,6 +13,10 @@ export default function Carousel({ children }) {
     return () => clearInterval(interval);
   }, [children.length]);
 
+  const handleIndicatorClick = (index) => {
+    setCurrentIndex(index);
+  };
+
   return (
     <Styled.CarouselContainer>
       <AnimatePresence initial={false}>
