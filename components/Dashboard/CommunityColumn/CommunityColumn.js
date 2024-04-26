@@ -107,7 +107,7 @@ export default function CommunityColumn() {
           entryId: friendsEntry._id,
           hug: hug,
           flowers: flowers,
-          activity: inviteActivity,
+          activity: inviteActivity? inviteActivity: null,
         }),
       });
 
