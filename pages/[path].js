@@ -13,9 +13,11 @@ import SmileTrainerWrapper from "@/components/SmileTrainerWrapper/SmileTrainerWr
 import GuidedMeditation from "@/components/GuidedMeditation/GuidedMeditation";
 import Entry from "@/components/SingleEntry/Entry";
 import { useDashboardState } from "@/components/DashboardStateProvider/DashboardStateProvider";
+import { useSphereState } from "@/components/ContextProviders/SphereStateProvider/SphereStateProvider";
 
 export default function Home() {
   const { dashboardIsOpen, handleDashboardIsOpen } = useDashboardState();
+  const { sphereState, handleSphereState } = useSphereState();
   const router = useRouter();
   const { path } = router.query;
   const { data: session } = useSession();
@@ -33,7 +35,11 @@ export default function Home() {
         dashboardIsOpen={dashboardIsOpen}
         handleDashboardIsOpen={handleDashboardIsOpen}
       />
-      <Animation color={"grey"} opacity={0.1} hideInterface={false} />
+      <Animation
+        color={sphereState.color}
+        opacity={sphereState.intensity}
+        hideInterface={false}
+      />
       <Container>
         {dashboardIsOpen && <Dashboard />}
         {path && path.includes("id:") && !dashboardIsOpen && (

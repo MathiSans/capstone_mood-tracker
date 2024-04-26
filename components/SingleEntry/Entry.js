@@ -15,14 +15,20 @@ import { FaRegEye } from "react-icons/fa6";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSession } from "next-auth/react";
+import { useSphereState } from "../ContextProviders/SphereStateProvider/SphereStateProvider";
+import { useEffect } from "react";
 
 export default function Entry({ id }) {
+  const { handleSphereState } = useSphereState();
   const [showSentence, setShowSentence] = useState(true);
   const router = useRouter();
   // const { id } = router.query;
   const { data: session } = useSession();
-
   const { data: entry, isLoading } = useSWR(`/api/entries/${id}`);
+
+  useEffect(() => {
+    handleSphereState({ color: entry?.color, intensity: entry?.intensity });
+  }, [entry]);
 
   if (isLoading) {
     return <h1>loading...</h1>;
@@ -38,8 +44,6 @@ export default function Entry({ id }) {
 
   return (
     <>
-      <Animation color={entry.color} opacity={entry.intensity} />
-
       <AnimatePresence>
         {showSentence && (
           <Container>
@@ -71,7 +75,9 @@ export default function Entry({ id }) {
                     value={entry.intensity}
                     experience={entry.experience}
                   />
-                  <StaticText>. You selected these tags:</StaticText>{" "}
+                  <StaticText>
+                    . {session ? "You" : "They"} selected these tags:
+                  </StaticText>{" "}
                   {entry.reactions.map((reaction, index, array) => (
                     <span key={index}>
                       {reaction}
@@ -86,13 +92,13 @@ export default function Entry({ id }) {
         )}
       </AnimatePresence>
       <ToolsContainer>
-        <DeleteButton as="a" onClick={() => router.back()}>
+        {/* <DeleteButton as="a" onClick={() => router.back()}>
           {showSentence ? (
             <FiArrowLeft />
           ) : (
             <FiArrowLeft style={{ color: "grey", opacity: "0.5" }} />
           )}
-        </DeleteButton>
+        </DeleteButton> */}
         <DeleteButton as="a" onClick={() => handleShowSentence()}>
           {showSentence ? (
             <FaRegEyeSlash />

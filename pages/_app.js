@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components";
 import { SessionProvider } from "next-auth/react";
 import { DataProvider } from "@/lib/useData";
 import { DashboardStateProvider } from "@/components/DashboardStateProvider/DashboardStateProvider";
+import { SphereStateProvider } from "@/components/ContextProviders/SphereStateProvider/SphereStateProvider";
 
 const theme = {
   colors: {
@@ -72,7 +73,9 @@ export default function App({
             <DataProvider>
               <Overlay>
                 <DashboardStateProvider>
-                  <Component {...pageProps} />
+                  <SphereStateProvider>
+                    <Component {...pageProps} />
+                  </SphereStateProvider>
                 </DashboardStateProvider>
               </Overlay>
             </DataProvider>
