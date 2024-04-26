@@ -73,8 +73,7 @@ export default function CommunityColumn() {
         : "No Data";
     return latestFriendEntry;
   }
-
-  const getUsername = (userId) => {
+  const handleGetUsername = (userId) => {
     const friendlyRecipient =
       !isLoadingAllUsers &&
       allUsers.filter((friend) => {
@@ -126,14 +125,22 @@ export default function CommunityColumn() {
     <Grid>
       <FriendsFilterTile handleOnTyping={handleOnTyping} userName={userName} />
       <FriendsListTile friendsEntry={friendsEntry} getUserName={getUserName} />
-      {/* <InboxTile showSentence={showSentence} /> */}
+      <InboxTile
+        showSentence={showSentence}
+        friendsEntry={friendsEntry}
+        showFriendMessages={showFriendMessages}
+        allCommunity={allCommunity}
+        isLoadingAllCommunity={isLoadingAllCommunity}
+        setShowFriendMessages={setShowFriendMessages}
+      />
       <OutboxTile
+        getUserName={getUserName}
         handleSubmit={handleSubmit}
         setFlowers={setFlowers}
         setHug={setHug}
         setSend={setSend}
         setInviteActivity={setInviteActivity}
-        getUserName={getUserName}
+        handleGetUsername={handleGetUsername}
         isLoadingActivities={isLoadingActivities}
         activities={activities}
         send={send}

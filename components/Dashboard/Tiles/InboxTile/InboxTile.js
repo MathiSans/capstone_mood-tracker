@@ -6,9 +6,17 @@ import {
 } from "@/components/EntriesList/EntriesList.styled";
 import Intensity from "@/utils/intensity";
 
-export default function InboxTile({ showSentence }) {
+export default function InboxTile({
+  showSentence,
+  allCommunity,
+  isLoadingAllCommunity,
+  handleGetUsername,
+  setShowFriendMessages,
+  showFriendMessages,
+  friendsEntry,
+  getUserName,
+}) {
   const { data: session } = useSession();
-
   return (
     <Styled.Container>
       <>
@@ -18,27 +26,22 @@ export default function InboxTile({ showSentence }) {
               <div>
                 <Sentence>
                   {session ? "You " : <StaticText>Somebody </StaticText>}
-                  {entry.location === "unknown" ? (
+                  {friendsEntry.location === "unknown" ? (
                     ""
                   ) : (
                     <>
                       <StaticText>in </StaticText>
-                      {entry.location.region}
+                      {friendsEntry.location.region}
                     </>
                   )}
-                  <StaticText> felt</StaticText> {entry.experience}.{" "}
+                  <StaticText> felt</StaticText> {friendsEntry.experience}.{" "}
                   <StaticText>More specifically</StaticText>{" "}
                   <Intensity
-                    value={entry.intensity}
-                    experience={entry.experience}
+                    value={friendsEntry.intensity}
+                    experience={friendsEntry.experience}
                   />
                   <StaticText>. You selected these tags:</StaticText>{" "}
-                  {entry.reactions.map((reaction, index, array) => (
-                    <span key={index}>
-                      {reaction}
-                      {index < array.length - 1 && ", "}
-                    </span>
-                  ))}
+                  {friendsEntry.reaction}
                 </Sentence>
                 <StaticText style={{ color: "white" }}>
                   Friends Messages:
@@ -48,14 +51,14 @@ export default function InboxTile({ showSentence }) {
                       {!isLoadingAllCommunity &&
                         allCommunity
                           .filter((friends) => {
-                            return friends.entryId === entry._id;
+                            return friends.entryId === friendsEntry._id;
                           })
                           .map((message) => {
                             console.log("message", message);
                             const senderUsername =
                               message.senderId === null
                                 ? "Anonym"
-                                : getUsername(message.senderId);
+                                : handleGetUsername(message.senderId);
                             return (
                               <>
                                 <p
@@ -95,13 +98,13 @@ export default function InboxTile({ showSentence }) {
                     >
                       {
                         allCommunity.filter((friends) => {
-                          return friends.entryId === entry._id;
+                          return friends.entryId === friendsEntry._id;
                         }).length
                       }
                     </div>
                   )}
                 </StaticText>
-                <StaticText>{entry.time}</StaticText>{" "}
+                <StaticText>{friendsEntry.time}</StaticText>{" "}
               </div>
             )}
           </div>
