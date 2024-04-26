@@ -90,6 +90,7 @@ export default function CommunityColumn() {
   const friendsEntry = getUserName && allUsers && getLatestEmotion();
   console.log(friendsEntry, "friendsEntry Column");
   console.log(getUserName, "getUserName Column");
+
   const currentLocalUserDate = new Date();
   async function handleSubmit(event) {
     event.preventDefault();

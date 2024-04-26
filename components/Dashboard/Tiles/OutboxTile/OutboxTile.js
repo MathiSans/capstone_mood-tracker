@@ -33,12 +33,17 @@ export default function OutboxTile({
         </button>
         <b>
           {"       "}to{" "}
-          <span style={{ color: "yellow" }}>{getUserName.name}</span>
+          <span style={{ color: "yellow" }}>
+            {getUserName ? getUserName.name : "no username"}
+          </span>
         </b>
 
         <b>
           {"       "}Invite{" "}
-          <span style={{ color: "yellow" }}>{getUserName.name}</span> to{" "}
+          <span style={{ color: "yellow" }}>
+            {getUserName ? getUserName.name : "no username"}
+          </span>{" "}
+          to{" "}
           <select
             required
             onChange={(event) => {

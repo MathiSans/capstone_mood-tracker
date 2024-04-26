@@ -17,12 +17,13 @@ export default function InboxTile({
   getUserName,
 }) {
   const { data: session } = useSession();
+
   return (
     <Styled.Container>
       <>
         <>
           <div>
-            {showSentence && (
+            {showSentence && friendsEntry && (
               <div>
                 <Sentence>
                   {session ? "You " : <StaticText>Somebody </StaticText>}
