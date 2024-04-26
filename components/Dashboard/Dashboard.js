@@ -31,7 +31,8 @@ export default function Dashboard() {
   const { data: session } = useSession();
 
   const last7DaysEntries =
-    isLoadingEntries && last7DaysAnalyser(session ? userEntries : allEntries);
+    !isLoadingEntries && last7DaysAnalyser(session ? userEntries : allEntries);
+
   const allEmotionsDisplayed = entriesToDisplay({
     last7DaysEntries,
     session,
