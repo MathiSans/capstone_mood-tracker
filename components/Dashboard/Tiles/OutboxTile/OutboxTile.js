@@ -26,7 +26,7 @@ export default function OutboxTile({
         <button
           onClick={() => {
             setHug("🤗");
-            setSend("💐");
+            setSend("🤗");
           }}
         >
           Send Hugs 🤗
