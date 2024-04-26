@@ -64,6 +64,10 @@ export default function EntriesColumn() {
   // };
   // console.log("state Entry ID:", idsOfEntriesDisplayed);
 
+  function handleFilterSwitchClick() {
+    setIsLastWeek(!isLastWeek);
+  }
+
   return (
     <Grid>
       <BarChartTile
