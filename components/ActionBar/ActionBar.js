@@ -18,13 +18,7 @@ export default function ActionBar({
 
   return (
     <Container>
-      <MenuItem
-        onClick={() => {
-          handleLoginButton();
-        }}
-        $left
-        $isActive={true}
-      >
+      <MenuItem onClick={handleLoginButton} $left $isActive={true}>
         {session ? (
           <Image
             alt="user profile picture"
@@ -37,12 +31,7 @@ export default function ActionBar({
           "login"
         )}
       </MenuItem>
-      <MenuItem
-        onClick={() => {
-          handleDashboardIsOpen();
-        }}
-        $isActive={true}
-      >
+      <MenuItem onClick={handleDashboardIsOpen} $isActive={true}>
         {dashboardIsOpen ? "close" : "open"}
       </MenuItem>
       <MenuItem $right $isActive={true}>
