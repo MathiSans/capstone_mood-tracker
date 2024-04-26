@@ -19,7 +19,7 @@ import { useSphereState } from "../ContextProviders/SphereStateProvider/SphereSt
 import { useEffect } from "react";
 
 export default function Entry({ id }) {
-  const { sphereState, handleSphereState } = useSphereState();
+  const { handleSphereState } = useSphereState();
   const [showSentence, setShowSentence] = useState(true);
   const router = useRouter();
   // const { id } = router.query;
