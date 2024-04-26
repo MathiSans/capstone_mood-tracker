@@ -14,7 +14,6 @@ export default function InboxTile({
   setShowFriendMessages,
   showFriendMessages,
   friendsEntry,
-  getUserName,
 }) {
   const { data: session } = useSession();
 
