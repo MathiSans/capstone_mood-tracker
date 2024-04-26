@@ -126,7 +126,11 @@ export default function CommunityColumn() {
   return (
     <Grid>
       <FriendsFilterTile handleOnTyping={handleOnTyping} userName={userName} />
-      <FriendsListTile friendsEntry={friendsEntry} getUserName={getUserName} />
+      <FriendsListTile
+        friendsEntry={friendsEntry}
+        getUserName={getUserName}
+        searchValue={searchValue}
+      />
       <InboxTile
         showSentence={showSentence}
         friendsEntry={friendsEntry}
