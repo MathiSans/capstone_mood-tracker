@@ -15,6 +15,7 @@ export default function InboxTile({
   setShowFriendMessages,
   showFriendMessages,
   friendsEntry,
+  entriesWithUserIdGifts,
 }) {
   const { data: session } = useSession();
 
@@ -107,77 +108,133 @@ export default function InboxTile({
           </div>
         )}
       </div> */}
-      <MessageContainers>
-        <FriendsLastEntry>
-          {showSentence &&
-            friendsEntry &&
-            !isLoadingAllCommunity &&
-            allCommunity
-              .filter((friends) => {
-                return friends.entryId === friendsEntry._id;
-              })
-              .map((message) => {
-                console.log("message", message);
-                const senderUsername =
-                  message.senderId === null
-                    ? "Anonym"
-                    : handleGetUsername(message.senderId);
+      {/* SECOND TRY */}
 
-                return (
-                  <div
-                    onClick={() => {
-                      setShowFriendMessages(showFriendMessages);
-                    }}
-                    key={message._id}
+      {/* <h2>INBOX</h2>
+      <MessageContainers>*/}
+      <MessageContainers>
+        {entriesWithUserIdGifts &&
+          entriesWithUserIdGifts.map((giftEntry) => {
+            console.log("giftEntry", giftEntry);
+            return (
+              <FriendsLastEntry key={giftEntry._id}>
+                {giftEntry.name}
+                {!isLoadingAllCommunity &&
+                  allCommunity
+                    .filter((friends) => {
+                      return friends.entryId === friendsEntry._id;
+                    })
+                    .map((message) => {
+                      console.log("message", message);
+                      const senderUsername =
+                        message.senderId === null
+                          ? "Anonym"
+                          : handleGetUsername(message.senderId);
+
+                      return (
+                        <div
+                          key={message._id}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+
+                            position: "absolute",
+                            top: "30%",
+                          }}
+                        >
+                          <span
+                            style={{
+                              fontSize: "100 px",
+                              width: "100%",
+                              height: "100%",
+                              color: "white",
+                            }}
+                            key={message._id}
+                          >
+                            {message.flowers}
+                            {message.hugs}
+                          </span>
+                          <span
+                            style={{
+                              fontSize: "10px",
+                              width: "100%",
+                              height: "100%",
+                              color: "white",
+
+                              display: "flex",
+                            }}
+                            key={message._id}
+                          >
+                            from {"     "}
+                            {senderUsername}
+                          </span>
+                        </div>
+                      );
+                    })}
+                <FriendsEmotionColorCircle color={giftEntry.color} />
+              </FriendsLastEntry>
+            );
+          })}
+      </MessageContainers>
+
+      {/* SECOND TRY */}
+
+      {/* <FriendsLastEntry>
+        {showSentence &&
+          friendsEntry &&
+          !isLoadingAllCommunity &&
+          allCommunity
+            .filter((friends) => {
+              return friends.entryId === friendsEntry._id;
+            })
+            .map((message) => {
+              console.log("message", message);
+              const senderUsername =
+                message.senderId === null
+                  ? "Anonym"
+                  : handleGetUsername(message.senderId);
+
+              return (
+                <div
+                  key={message._id}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+
+                    position: "absolute",
+                    top: "30%",
+                  }}
+                >
+                  <span
                     style={{
+                      fontSize: "100 px",
                       width: "100%",
                       height: "100%",
-
-                      position: "absolute",
-                      top: "30%",
+                      color: "white",
                     }}
+                    key={message._id}
                   >
-                    <span
-                      style={{
-                        fontSize: "100 px",
-                        width: "100%",
-                        height: "100%",
-                        color: "white",
-                      }}
-                      key={message._id}
-                    >
-                      {message.flowers}
-                      {message.hugs}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "10px",
-                        width: "100%",
-                        height: "100%",
-                        color: "white",
+                    {message.flowers}
+                    {message.hugs}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      width: "100%",
+                      height: "100%",
+                      color: "white",
 
-                        display: "flex",
-                      }}
-                      key={message._id}
-                    >
-                      from {"     "}
-                      {senderUsername}
-                    </span>
-                  </div>
-                );
-              })}
-          <FriendsEmotionColorCircle color={"red"} />
-        </FriendsLastEntry>
-        <FriendsLastEntry>
-          <FriendsEmotionColorCircle color={"green"} />2
-        </FriendsLastEntry>
-        <FriendsLastEntry>
-          <FriendsEmotionColorCircle color={"purple"} />3
-        </FriendsLastEntry>
-        <FriendsLastEntry>
-          <FriendsEmotionColorCircle color={"yellow"} />3
-        </FriendsLastEntry>
-      </MessageContainers>
+                      display: "flex",
+                    }}
+                    key={message._id}
+                  >
+                    from {"     "}
+                    {senderUsername}
+                  </span>
+                </div>
+              );
+            })}
+      </FriendsLastEntry> */}
     </Styled.Container>
   );
 }

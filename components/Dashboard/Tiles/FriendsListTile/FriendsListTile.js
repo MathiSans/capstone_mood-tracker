@@ -1,54 +1,59 @@
-import { MdPadding } from "react-icons/md";
 import * as Styled from "./FriendsListTile.styled";
+import Image from "next/image";
+import styled from "styled-components";
 
 export default function FriendsListTile({
-  getUserName,
-  friendsEntry,
-  searchValue,
-  latestFriendsEntries,
-  handleGetUsername,
+  moodies,
   isLoadingAllUsers,
+  isLoadingEntries,
 }) {
-  console.log(
-    "getUserName List",
-    getUserName,
-    "friendsEntry List",
-    friendsEntry
-  );
+  console.log("moodies Friednslisttile", moodies);
   return (
-    <Styled.Container>
-      {/* <section>
-        {searchValue === ""
-          ? ""
-          : friendsEntry && (
-              <p>
-                Your friend{" "}
-                <b style={{ color: "lightblue" }}>{getUserName.name}</b> felt on{" "}
-                <b style={{ color: "lightblue" }}>{friendsEntry.time}</b>
-                {"  "}
-                <b style={{ color: friendsEntry.color }}>
-                  {friendsEntry.experience}
-                </b>
-              </p>
-            )}
-      </section> */}
-      <div>
-        {latestFriendsEntries.map(
-          ({ experience, reactions, _id, time, user, color }) => {
+    <FriendListContainer>
+      <h2>Friends List</h2>
+      <p>The Moodies</p>
+      <FriendsContainers>
+        {!isLoadingEntries &&
+          moodies &&
+          moodies.map(({ _id, image, name }) => {
             return (
-              <p
-                key={_id}
-                style={{ padding: "5px", boxShadow: `2px 2px 4px ${color}` }}
-              >
-                <b>{!isLoadingAllUsers && handleGetUsername(user)}</b> felt on{" "}
-                <b>{time}</b> <b>{experience}.</b>
-                {"  "} Reaction:
-                <b>{reactions}</b>
-              </p>
+              <FriendsCard key={_id}>
+                <Image
+                  width={35}
+                  height={35}
+                  src={image}
+                  alt={`image of ${name}`}
+                />
+                <p>{name}</p>
+              </FriendsCard>
             );
-          }
-        )}
-      </div>
-    </Styled.Container>
+          })}
+      </FriendsContainers>
+    </FriendListContainer>
   );
 }
+
+const FriendsCard = styled.div`
+  padding: 0.7rem;
+`;
+export const FriendListContainer = styled.div`
+  background: var(--effect-radial-gradient);
+  border-radius: var(--border-radius-small);
+  width: 100%;
+  height: 100%;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  grid-column-end: span 4;
+  grid-row-end: span 3;
+`;
+export const FriendsContainers = styled.div`
+  width: 100%;
+  gap: 10px;
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  grid-column-end: span 4;
+  grid-row-end: span 4;
+  margin-top: 1rem;
+`;

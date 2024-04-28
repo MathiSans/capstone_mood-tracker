@@ -24,6 +24,9 @@ export default function CommunityColumn() {
 
   const { data: session } = useSession();
 
+  const userId = session?.user.id;
+  const myUserId = session?.user.id;
+
   //Database
   //Entries & Activites
   const { allEntries, isLoadingEntries, errorEntries } =
@@ -83,6 +86,43 @@ export default function CommunityColumn() {
     return friendlyRecipient[0].name;
   };
 
+  const handleGetUserGifts = (id) => {
+    if (session) {
+      const arrayOfGiftEntriesList = allCommunity.filter((item) => {
+        return id === item.recipientId;
+      });
+      return arrayOfGiftEntriesList;
+    } else {
+      return null;
+    }
+  };
+
+  const myGifts = handleGetUserGifts(myUserId);
+  const giftEntriesIds = myGifts
+    ? myGifts.map((entry) => entry.entryId)
+    : ["Please Login!"];
+
+  console.log("userEntries Before gift entries", userEntries);
+
+  const entriesWithUserIdGifts =
+    !isLoadingEntries &&
+    userEntries &&
+    session &&
+    userEntries.filter((item) =>
+      giftEntriesIds.some((giftEntry) => giftEntry._id === item.id)
+    );
+
+  const handleGetGiftedUserEntries = (entryId) => {};
+
+  console.log("giftEntriesIds", giftEntriesIds);
+  console.log("handleGetUserGifts", handleGetUserGifts(myUserId));
+
+  console.log("entriesWithUserIdGifts", entriesWithUserIdGifts);
+
+  // userEntries.filter((giftEntry) => {
+  //   return;
+  //   giftEntry._id === allCommunities[index].entryId;
+  //
   //FriendsList
 
   const handleGetFriendsList = (names) => {
@@ -164,14 +204,7 @@ export default function CommunityColumn() {
   return (
     <Grid>
       <FriendsFilterTile handleOnTyping={handleOnTyping} userName={userName} />
-      <FriendsListTile
-        friendsEntry={friendsEntry}
-        getUserName={getUserName}
-        searchValue={searchValue}
-        latestFriendsEntries={latestFriendsEntries}
-        handleGetUsername={handleGetUsername}
-        isLoadingAllUsers={isLoadingAllUsers}
-      />
+      <FriendsListTile moodies={moodies} isLoadingEntries={isLoadingEntries} />
       <InboxTile
         showSentence={showSentence}
         friendsEntry={friendsEntry}
@@ -180,6 +213,7 @@ export default function CommunityColumn() {
         isLoadingAllCommunity={isLoadingAllCommunity}
         setShowFriendMessages={setShowFriendMessages}
         handleGetUsername={handleGetUsername}
+        entriesWithUserIdGifts={entriesWithUserIdGifts}
       />
       <OutboxTile
         getUserName={getUserName}
@@ -192,6 +226,10 @@ export default function CommunityColumn() {
         isLoadingActivities={isLoadingActivities}
         activities={activities}
         send={send}
+        friendsEntry={friendsEntry}
+        searchValue={searchValue}
+        latestFriendsEntries={latestFriendsEntries}
+        isLoadingAllUsers={isLoadingAllUsers}
       />
     </Grid>
   );
