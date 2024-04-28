@@ -26,7 +26,7 @@ export default function OutboxTile({
         <button
           onClick={() => {
             setHug("🤗");
-            setSend("💐");
+            setSend("🤗");
           }}
         >
           Send Hugs 🤗
@@ -45,7 +45,7 @@ export default function OutboxTile({
           </span>{" "}
           to{" "}
           <select
-            required
+            
             onChange={(event) => {
               setInviteActivity(event.target.value);
               setSend(event.target.value);
