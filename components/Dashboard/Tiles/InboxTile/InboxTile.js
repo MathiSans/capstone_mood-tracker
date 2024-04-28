@@ -109,7 +109,66 @@ export default function InboxTile({
       </div> */}
       <MessageContainers>
         <FriendsLastEntry>
-          <FriendsEmotionColorCircle color={"red"} />1
+          <FriendsEmotionColorCircle color={"red"} />
+          {showSentence &&
+            friendsEntry &&
+            !isLoadingAllCommunity &&
+            allCommunity
+              .filter((friends) => {
+                return friends.entryId === friendsEntry._id;
+              })
+              .map((message) => {
+                console.log("message", message);
+                const senderUsername =
+                  message.senderId === null
+                    ? "Anonym"
+                    : handleGetUsername(message.senderId);
+                return (
+                  <div
+                    onClick={() => {
+                      setShowFriendMessages(showFriendMessages);
+                    }}
+                    key={message._id}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+
+                      position: "absolute",
+                      top: "30%",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: "100 px",
+                        width: "100%",
+                        height: "100%",
+                        color: "white",
+                      }}
+                      key={message._id}
+                    >
+                      {message.flowers}
+                      {message.hugs}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: "10px",
+                        width: "100%",
+                        height: "100%",
+                        color: "white",
+                        position: "absolute",
+                        bottom: "0",
+                        right: "0",
+                        display: "flex",
+                        flexWrap: "wrap",
+                      }}
+                      key={message._id}
+                    >
+                      from {"     "}
+                      {senderUsername}
+                    </span>
+                  </div>
+                );
+              })}
         </FriendsLastEntry>
         <FriendsLastEntry>
           <FriendsEmotionColorCircle color={"green"} />2
@@ -131,6 +190,7 @@ const FriendsLastEntry = styled.div`
   width: 150px;
   height: 150px;
   padding: 0;
+  position: relative;
 `;
 
 const FriendsEmotionColorCircle = styled.div`
