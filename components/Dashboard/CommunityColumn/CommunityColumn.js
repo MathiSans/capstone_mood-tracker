@@ -230,6 +230,9 @@ export default function CommunityColumn() {
         searchValue={searchValue}
         latestFriendsEntries={latestFriendsEntries}
         isLoadingAllUsers={isLoadingAllUsers}
+        showSentence={showSentence}
+        showFriendMessages={showFriendMessages}
+        setShowFriendMessages={setShowFriendMessages}
       />
     </Grid>
   );

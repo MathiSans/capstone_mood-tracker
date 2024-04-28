@@ -1,4 +1,6 @@
 import * as Styled from "./OutboxTile.styled";
+import { FaPlusCircle } from "react-icons/fa";
+import EmojiPicker from "emoji-picker-react";
 
 export default function OutboxTile({
   handleSubmit,
@@ -15,6 +17,8 @@ export default function OutboxTile({
   latestFriendsEntries,
   handleGetUsername,
   isLoadingAllUsers,
+  showFriendMessages,
+  setShowFriendMessages,
 }) {
   return (
     <Styled.Container>
@@ -86,18 +90,26 @@ export default function OutboxTile({
             )}
       </section> */}
       <div style={{ paddingBottom: "6rem" }}>
+        {showFriendMessages && <EmojiPicker />}
         {latestFriendsEntries.map(
           ({ experience, reactions, _id, time, user, color }) => {
             return (
-              <p
-                key={_id}
-                style={{ padding: "5px", boxShadow: `2px 2px 4px ${color}` }}
-              >
-                <b>{!isLoadingAllUsers && handleGetUsername(user)}</b> felt on{" "}
-                <b>{time}</b> <b>{experience}.</b>
-                {"  "} Reaction:
-                <b>{reactions}</b>
-              </p>
+              <>
+                <p
+                  key={_id}
+                  style={{ padding: "5px", boxShadow: `2px 2px 4px ${color}` }}
+                >
+                  <b>{!isLoadingAllUsers && handleGetUsername(user)}</b> felt on{" "}
+                  <b>{time}</b> <b>{experience}.</b>
+                  {"  "} Reaction:
+                  <b>{reactions}</b>
+                </p>
+                <FaPlusCircle
+                  onClick={() => {
+                    setShowFriendMessages(!showFriendMessages);
+                  }}
+                />
+              </>
             );
           }
         )}
