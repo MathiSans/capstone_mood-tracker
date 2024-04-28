@@ -11,4 +11,5 @@ export const Container = styled.div`
   justify-content: space-between;
   grid-column-end: span 4;
   grid-row-end: span 2;
+  overflow-x: scroll; //added by Niko for the community boxes
 `;
