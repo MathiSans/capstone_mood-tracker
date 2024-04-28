@@ -96,7 +96,13 @@ export default function CommunityColumn() {
     return friendsList;
   };
 
-  const moodies = handleGetFriendsList(["Niko", "Jan", "Mathis", "ramin"]);
+  const moodies = handleGetFriendsList([
+    "Niko",
+    "Jan",
+    "Mathis",
+    "ramin",
+    "crash",
+  ]);
   console.log("moodies", moodies);
 
   const latestFriendsEntries = moodies.map((moodie) => {

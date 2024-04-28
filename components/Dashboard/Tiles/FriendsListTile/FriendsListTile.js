@@ -1,3 +1,4 @@
+import { MdPadding } from "react-icons/md";
 import * as Styled from "./FriendsListTile.styled";
 
 export default function FriendsListTile({
@@ -33,10 +34,13 @@ export default function FriendsListTile({
       </section> */}
       <div>
         {latestFriendsEntries.map(
-          ({ experience, reactions, _id, time, user }) => {
+          ({ experience, reactions, _id, time, user, color }) => {
             return (
-              <p key={_id}>
-                {!isLoadingAllUsers && handleGetUsername(user)} felt on{" "}
+              <p
+                key={_id}
+                style={{ padding: "5px", boxShadow: `2px 2px 4px ${color}` }}
+              >
+                <b>{!isLoadingAllUsers && handleGetUsername(user)}</b> felt on{" "}
                 <b>{time}</b> <b>{experience}.</b>
                 {"  "} Reaction:
                 <b>{reactions}</b>
