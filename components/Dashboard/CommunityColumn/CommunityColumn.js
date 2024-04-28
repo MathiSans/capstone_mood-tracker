@@ -96,10 +96,25 @@ export default function CommunityColumn() {
     return friendsList;
   };
 
-  console.log(
-    "handleGetFriendsList",
-    handleGetFriendsList(["Niko", "Jan", "Mathis", "ramin"])
-  );
+  const moodies = handleGetFriendsList(["Niko", "Jan", "Mathis", "ramin"]);
+  console.log("moodies", moodies);
+
+  const latestFriendsEntries = moodies.map((moodie) => {
+    const filteredEntries = allEntries.filter(
+      (entry) => entry.user === moodie._id
+    );
+    if (filteredEntries.length > 0) {
+      const latestEntry = filteredEntries.sort((a, b) => {
+        return new Date(b.time) - new Date(a.time);
+      })[0];
+      return latestEntry;
+    } else {
+      return null; // If no entry is found for the moodie
+    }
+  });
+
+  console.log("latestEntries", latestFriendsEntries);
+
   //Design
   function handleShowSentence() {
     setShowSentence(!showSentence);
@@ -147,6 +162,9 @@ export default function CommunityColumn() {
         friendsEntry={friendsEntry}
         getUserName={getUserName}
         searchValue={searchValue}
+        latestFriendsEntries={latestFriendsEntries}
+        handleGetUsername={handleGetUsername}
+        isLoadingAllUsers={isLoadingAllUsers}
       />
       <InboxTile
         showSentence={showSentence}

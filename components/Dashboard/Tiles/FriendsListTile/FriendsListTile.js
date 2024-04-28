@@ -4,6 +4,9 @@ export default function FriendsListTile({
   getUserName,
   friendsEntry,
   searchValue,
+  latestFriendsEntries,
+  handleGetUsername,
+  isLoadingAllUsers,
 }) {
   console.log(
     "getUserName List",
@@ -13,7 +16,7 @@ export default function FriendsListTile({
   );
   return (
     <Styled.Container>
-      <section>
+      {/* <section>
         {searchValue === ""
           ? ""
           : friendsEntry && (
@@ -27,7 +30,21 @@ export default function FriendsListTile({
                 </b>
               </p>
             )}
-      </section>
+      </section> */}
+      <div>
+        {latestFriendsEntries.map(
+          ({ experience, reactions, _id, time, user }) => {
+            return (
+              <p key={_id}>
+                {!isLoadingAllUsers && handleGetUsername(user)} felt on{" "}
+                <b>{time}</b> <b>{experience}.</b>
+                {"  "} Reaction:
+                <b>{reactions}</b>
+              </p>
+            );
+          }
+        )}
+      </div>
     </Styled.Container>
   );
 }
