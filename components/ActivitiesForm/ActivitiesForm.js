@@ -16,8 +16,6 @@ export default function ActivitiesForm({ handleShowForm }) {
 
   function onEmojiClick(emoji) {
     setInputString((prevInput) => [...prevInput, emoji]);
-    setShowPicker(false);
-    window.scrollTo(0, 0);
   }
 
   function handleCheckboxChange(emotion, isChecked) {

@@ -9,6 +9,7 @@ import { useData } from "@/lib/useData";
 import useSWR from "swr";
 import styled from "styled-components";
 import FriendsFilterTile from "../Tiles/FriendsFilterTile/FriendsFilterTile";
+import { signIn } from "next-auth/react";
 
 export default function CommunityColumn() {
   //Inbox
@@ -21,6 +22,7 @@ export default function CommunityColumn() {
   const [inviteActivity, setInviteActivity] = useState("");
   const [submissionStatus, setSubmissionStatus] = useState(null);
   const [send, setSend] = useState("");
+  const [sendGift, setSendGift] = useState("");
 
   const { data: session } = useSession();
 
@@ -201,39 +203,72 @@ export default function CommunityColumn() {
       setSubmissionStatus("error");
     }
   }
+
+  //Effects
+  //OUTBOX REACTIONS
+
+  const handleOutboxReaction = (emoji) => {
+    setSendGift((prevInput) => [...prevInput, emoji]);
+  };
+
   return (
     <Grid>
-      <FriendsFilterTile handleOnTyping={handleOnTyping} userName={userName} />
-      <FriendsListTile moodies={moodies} isLoadingEntries={isLoadingEntries} />
-      <InboxTile
-        showSentence={showSentence}
-        friendsEntry={friendsEntry}
-        showFriendMessages={showFriendMessages}
-        allCommunity={allCommunity}
-        isLoadingAllCommunity={isLoadingAllCommunity}
-        setShowFriendMessages={setShowFriendMessages}
-        handleGetUsername={handleGetUsername}
-        entriesWithUserIdGifts={entriesWithUserIdGifts}
-      />
-      <OutboxTile
-        getUserName={getUserName}
-        handleSubmit={handleSubmit}
-        setFlowers={setFlowers}
-        setHug={setHug}
-        setSend={setSend}
-        setInviteActivity={setInviteActivity}
-        handleGetUsername={handleGetUsername}
-        isLoadingActivities={isLoadingActivities}
-        activities={activities}
-        send={send}
-        friendsEntry={friendsEntry}
-        searchValue={searchValue}
-        latestFriendsEntries={latestFriendsEntries}
-        isLoadingAllUsers={isLoadingAllUsers}
-        showSentence={showSentence}
-        showFriendMessages={showFriendMessages}
-        setShowFriendMessages={setShowFriendMessages}
-      />
+      {session && (
+        <>
+          <FriendsFilterTile
+            handleOnTyping={handleOnTyping}
+            userName={userName}
+          />
+          <FriendsListTile
+            moodies={moodies}
+            isLoadingEntries={isLoadingEntries}
+          />
+          <InboxTile
+            showSentence={showSentence}
+            friendsEntry={friendsEntry}
+            showFriendMessages={showFriendMessages}
+            allCommunity={allCommunity}
+            isLoadingAllCommunity={isLoadingAllCommunity}
+            setShowFriendMessages={setShowFriendMessages}
+            handleGetUsername={handleGetUsername}
+            entriesWithUserIdGifts={entriesWithUserIdGifts}
+          />
+          <OutboxTile
+            getUserName={getUserName}
+            handleSubmit={handleSubmit}
+            setFlowers={setFlowers}
+            setHug={setHug}
+            setSend={setSend}
+            setInviteActivity={setInviteActivity}
+            handleGetUsername={handleGetUsername}
+            isLoadingActivities={isLoadingActivities}
+            activities={activities}
+            send={send}
+            friendsEntry={friendsEntry}
+            searchValue={searchValue}
+            latestFriendsEntries={latestFriendsEntries}
+            isLoadingAllUsers={isLoadingAllUsers}
+            showSentence={showSentence}
+            showFriendMessages={showFriendMessages}
+            setShowFriendMessages={setShowFriendMessages}
+            handleOutboxReaction={handleOutboxReaction}
+            sendGift={sendGift}
+            setSendGift={setSendGift}
+          />
+        </>
+      )}
+      {!session && (
+        <>
+          <p>This feature is only for logged in users. Please log in!</p>
+          <button
+            onClick={() => {
+              signIn();
+            }}
+          >
+            Sign In!
+          </button>
+        </>
+      )}
     </Grid>
   );
 }

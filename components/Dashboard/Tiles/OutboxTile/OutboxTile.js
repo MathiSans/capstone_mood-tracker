@@ -1,6 +1,6 @@
 import * as Styled from "./OutboxTile.styled";
 import { FaPlusCircle } from "react-icons/fa";
-import EmojiPicker from "emoji-picker-react";
+import Picker from "emoji-picker-react";
 
 export default function OutboxTile({
   handleSubmit,
@@ -19,10 +19,15 @@ export default function OutboxTile({
   isLoadingAllUsers,
   showFriendMessages,
   setShowFriendMessages,
+  handleOutboxReaction,
+  sendGift,
+  setSendGift,
 }) {
   return (
     <Styled.Container>
-      <h2>OUTBOX</h2>{" "}
+      <h2>
+        OUTBOX<span>{sendGift}</span>
+      </h2>{" "}
       <form onSubmit={handleSubmit}>
         <button
           onClick={() => {
@@ -90,7 +95,14 @@ export default function OutboxTile({
             )}
       </section> */}
       <div style={{ paddingBottom: "6rem" }}>
-        {showFriendMessages && <EmojiPicker />}
+        {showFriendMessages && (
+          <Picker
+            reactionsDefaultOpen={true}
+            onEmojiClick={(emojiObject) => {
+              handleOutboxReaction(emojiObject.emoji);
+            }}
+          />
+        )}
         {latestFriendsEntries.map(
           ({ experience, reactions, _id, time, user, color }) => {
             return (
