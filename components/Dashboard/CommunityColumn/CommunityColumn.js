@@ -83,6 +83,23 @@ export default function CommunityColumn() {
     return friendlyRecipient[0].name;
   };
 
+  //FriendsList
+
+  const handleGetFriendsList = (names) => {
+    const friendsList =
+      !isLoadingAllUsers &&
+      allUsers.filter((friend) => {
+        return names.some((name) =>
+          friend.name.toLowerCase().includes(name.toLowerCase())
+        );
+      });
+    return friendsList;
+  };
+
+  console.log(
+    "handleGetFriendsList",
+    handleGetFriendsList(["Niko", "Jan", "Mathis", "ramin"])
+  );
   //Design
   function handleShowSentence() {
     setShowSentence(!showSentence);
@@ -107,7 +124,7 @@ export default function CommunityColumn() {
           entryId: friendsEntry._id,
           hug: hug,
           flowers: flowers,
-          activity: inviteActivity? inviteActivity: null,
+          activity: inviteActivity ? inviteActivity : null,
         }),
       });
 

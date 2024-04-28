@@ -109,7 +109,6 @@ export default function InboxTile({
       </div> */}
       <MessageContainers>
         <FriendsLastEntry>
-          <FriendsEmotionColorCircle color={"red"} />
           {showSentence &&
             friendsEntry &&
             !isLoadingAllCommunity &&
@@ -123,6 +122,7 @@ export default function InboxTile({
                   message.senderId === null
                     ? "Anonym"
                     : handleGetUsername(message.senderId);
+
                 return (
                   <div
                     onClick={() => {
@@ -155,11 +155,8 @@ export default function InboxTile({
                         width: "100%",
                         height: "100%",
                         color: "white",
-                        position: "absolute",
-                        bottom: "0",
-                        right: "0",
+
                         display: "flex",
-                        flexWrap: "wrap",
                       }}
                       key={message._id}
                     >
@@ -169,6 +166,7 @@ export default function InboxTile({
                   </div>
                 );
               })}
+          <FriendsEmotionColorCircle color={"red"} />
         </FriendsLastEntry>
         <FriendsLastEntry>
           <FriendsEmotionColorCircle color={"green"} />2
