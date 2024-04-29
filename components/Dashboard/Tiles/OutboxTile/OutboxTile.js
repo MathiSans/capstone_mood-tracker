@@ -32,7 +32,9 @@ export default function OutboxTile({
   sendGift,
   setSendGift,
   setSearchValue,
+  submissionStatus,
 }) {
+  console.log("submissionStatus", submissionStatus);
   return (
     <Styled.Container>
       <h2>OUTBOX</h2>{" "}
@@ -61,7 +63,6 @@ export default function OutboxTile({
             {getUserName ? getUserName.name : "no username"}
           </span>
         </b>
-
         <b>
           {"       "}and Invite{" "}
           <span style={{ color: "yellow" }}>
@@ -85,9 +86,11 @@ export default function OutboxTile({
         </b>
         <h1>{send}</h1>
         <br />
-
-        <button type="submit">Send</button>
-      </form>
+        <button type="submit">Send</button>{" "}
+        {submissionStatus === "success" && (
+          <span style={{ color: "green" }}>Submission successful!</span>
+        )}
+      </form>{" "}
       {/* <section>
         {searchValue === ""
           ? ""

@@ -6,6 +6,7 @@ import FriendsListTile from "@/components/Dashboard/Tiles/FriendsListTile/Friend
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useData } from "@/lib/useData";
+import { mutate } from "swr";
 import useSWR from "swr";
 import styled from "styled-components";
 import FriendsFilterTile from "../Tiles/FriendsFilterTile/FriendsFilterTile";
@@ -234,7 +235,11 @@ export default function CommunityColumn() {
     }
   };
   const handleAddFriend = () => {
-    const newObject = { _id: 3, name: "Bob", image: "/images/newfriend.jpeg" };
+    const newObject = {
+      _id: 3,
+      name: "Chatty",
+      image: "/images/newfriend.jpeg",
+    };
     setMoodies((prevMoodies) => [...prevMoodies, newObject]);
   };
   return (
@@ -290,6 +295,7 @@ export default function CommunityColumn() {
             sendGift={sendGift}
             setSendGift={setSendGift}
             setSearchValue={setSearchValue}
+            submissionStatus={submissionStatus}
           />
         </>
       )}
