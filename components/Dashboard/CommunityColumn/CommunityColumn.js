@@ -224,6 +224,7 @@ export default function CommunityColumn() {
           <FriendsListTile
             moodies={moodies}
             isLoadingEntries={isLoadingEntries}
+            setSearchValue={setSearchValue}
           />
           <InboxTile
             showSentence={showSentence}
@@ -256,6 +257,7 @@ export default function CommunityColumn() {
             handleOutboxReaction={handleOutboxReaction}
             sendGift={sendGift}
             setSendGift={setSendGift}
+            setSearchValue={setSearchValue}
           />
         </>
       )}

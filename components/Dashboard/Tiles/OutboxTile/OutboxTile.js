@@ -31,14 +31,13 @@ export default function OutboxTile({
   handleOutboxReaction,
   sendGift,
   setSendGift,
+  setSearchValue,
 }) {
   return (
     <Styled.Container>
-      <h2>
-        OUTBOX<span>{sendGift}</span>
-      </h2>{" "}
+      <h2>OUTBOX</h2>{" "}
       <form onSubmit={handleSubmit}>
-        <button
+        {/* <button
           onClick={() => {
             setFlowers("💐");
             setSend("💐");
@@ -53,7 +52,9 @@ export default function OutboxTile({
           }}
         >
           Send Hugs 🤗
-        </button>
+        </button> */}
+        <b>send</b>
+        <span>{sendGift}</span>
         <b>
           {"       "}to{" "}
           <span style={{ color: "yellow" }}>
@@ -62,11 +63,11 @@ export default function OutboxTile({
         </b>
 
         <b>
-          {"       "}Invite{" "}
+          {"       "}and Invite{" "}
           <span style={{ color: "yellow" }}>
             {getUserName ? getUserName.name : "no username"}
           </span>{" "}
-          to{" "}
+          to...{" "}
           <select
             onChange={(event) => {
               setInviteActivity(event.target.value);
@@ -81,7 +82,6 @@ export default function OutboxTile({
                 </option>
               ))}
           </select>
-          Activity
         </b>
         <h1>{send}</h1>
         <br />
@@ -197,9 +197,10 @@ export default function OutboxTile({
                         <>
                           <AddButton
                             type="button"
-                            onClick={() =>
-                              setShowFriendMessages(!showFriendMessages)
-                            }
+                            onClick={() => {
+                              setShowFriendMessages(!showFriendMessages);
+                              setSearchValue(handleGetUsername(user));
+                            }}
                           >
                             <FiPlus />
                           </AddButton>

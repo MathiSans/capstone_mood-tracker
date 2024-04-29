@@ -6,6 +6,7 @@ export default function FriendsListTile({
   moodies,
   isLoadingAllUsers,
   isLoadingEntries,
+  setSearchValue,
 }) {
   console.log("moodies Friednslisttile", moodies);
   return (
@@ -17,7 +18,12 @@ export default function FriendsListTile({
           moodies &&
           moodies.map(({ _id, image, name }) => {
             return (
-              <FriendsCard key={_id}>
+              <FriendsCard
+                key={_id}
+                onClick={() => {
+                  setSearchValue(name);
+                }}
+              >
                 <Image
                   width={35}
                   height={35}
@@ -35,6 +41,7 @@ export default function FriendsListTile({
 
 const FriendsCard = styled.div`
   padding: 0.7rem;
+  cursor: pointer;
 `;
 export const FriendListContainer = styled.div`
   background: var(--effect-radial-gradient);
