@@ -193,7 +193,7 @@ export default function OutboxTile({
                           </DeleteButton>
                         </>
                       ) : null}
-                      {sendGift.length < 5 && (
+                      {sendGift.length < 3 && (
                         <>
                           <AddButton
                             type="button"
