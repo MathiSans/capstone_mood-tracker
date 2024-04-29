@@ -28,7 +28,9 @@ export default function Dashboard() {
 
   const { allEntries, isLoadingEntries, errorEntries } =
     useData().fetchedAllEntries;
-  const { userEntries } = useData().fetchedUserEntries;
+  const {
+    fetchedUserEntries: { userEntries },
+  } = useData();
   const { data: session } = useSession();
 
   const last7DaysEntries =

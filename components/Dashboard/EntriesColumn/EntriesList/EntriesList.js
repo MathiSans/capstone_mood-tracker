@@ -1,12 +1,13 @@
 import EntryTile from "../../Tiles/EntryTile/EntryTile";
+import { NoDataContainer } from "./EntriesList.styled";
 
 export default function EntriesList({ data }) {
   if (!Array.isArray(data)) {
     console.error("Invalid data format. Expected an array but received:", data);
     return (
-      <div style={{ padding: "16px", textAlign: "center", color: "white" }}>
+      <NoDataContainer>
         {data === null ? <p>No data available</p> : <p>Data is empty</p>}
-      </div>
+      </NoDataContainer>
     );
   }
   return (

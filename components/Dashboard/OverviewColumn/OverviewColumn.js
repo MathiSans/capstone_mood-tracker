@@ -8,7 +8,7 @@ export default function OverviewColumn({
   singleExperienceList,
   clickedExperience,
   singleEmotionDisplayed,
-
+  errorEntries,
   isLoadingEntries,
   handleFilterSwitchClick,
   visualizedData,
