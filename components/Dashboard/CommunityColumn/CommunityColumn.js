@@ -175,6 +175,7 @@ export default function CommunityColumn() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
+      console.log("sendGift", sendGift);
       const response = await fetch("/api/community", {
         method: "POST",
         headers: {
@@ -185,6 +186,7 @@ export default function CommunityColumn() {
           senderId: session ? session.user.id : null,
           recipientId: getUserName._id,
           entryId: friendsEntry._id,
+          emoji: sendGift,
           hug: hug,
           flowers: flowers,
           activity: inviteActivity ? inviteActivity : null,

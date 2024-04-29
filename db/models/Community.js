@@ -8,9 +8,10 @@ const communitySchema = new Schema({
   senderId: { type: Schema.Types.ObjectId, ref: "User" },
   recipientId: { type: String, required: true },
   entryId: { type: String, required: true },
-  hug: { type: String, required: true },
-  flowers: { type: String, required: true },
-  activity: { type: Schema.Types.Mixed, required: true },
+  emoji: { type: [String], required: true },
+  hug: { type: String, required: false },
+  flowers: { type: String, required: false },
+  activity: { type: Schema.Types.Mixed, required: false },
 });
 
 const Community =

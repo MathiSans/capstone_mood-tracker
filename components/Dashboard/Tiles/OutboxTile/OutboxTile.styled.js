@@ -10,5 +10,5 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   grid-column-end: span 4;
-  grid-row-end: span 3;
+  grid-row-end: span 5;
 `;

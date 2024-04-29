@@ -151,8 +151,7 @@ export default function InboxTile({
                             }}
                             key={message._id}
                           >
-                            {message.flowers}
-                            {message.hugs}
+                            {message.emoji[0]}
                           </span>
                           <span
                             style={{

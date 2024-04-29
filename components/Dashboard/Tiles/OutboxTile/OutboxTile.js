@@ -1,6 +1,15 @@
 import * as Styled from "./OutboxTile.styled";
 import { FaPlusCircle } from "react-icons/fa";
 import Picker from "emoji-picker-react";
+import EntryTile from "../EntryTile/EntryTile";
+import { FiDelete } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
+import { EmojiContainer } from "../../ActivitiesColumn/ActivitiesForm/ActivitiesForm.styled";
+import { Emojis } from "../../ActivitiesColumn/ActivitiesForm/ActivitiesForm.styled";
+import { DeleteButton } from "../../ActivitiesColumn/ActivitiesForm/ActivitiesForm.styled";
+import { AddEmojisSentence } from "../../ActivitiesColumn/ActivitiesForm/ActivitiesForm.styled";
+import { addButton } from "@/components/ActivitiesForm/ActivitiesForm.styled";
+import styled from "styled-components";
 
 export default function OutboxTile({
   handleSubmit,
@@ -94,7 +103,22 @@ export default function OutboxTile({
               </p>
             )}
       </section> */}
-      <div style={{ paddingBottom: "6rem" }}>
+      <div style={{ paddingBottom: "6rem", overflowX: "scroll" }}>
+        {showFriendMessages && (
+          <Picker
+            style={{
+              position: "absolute",
+              top: "90px",
+              left: "0",
+              zIndex: "10",
+            }}
+            pickerStyle={{ width: "100%" }}
+            onEmojiClick={(emojiObject) => {
+              handleOutboxReaction(emojiObject.emoji);
+            }}
+          />
+        )}
+
         {showFriendMessages && (
           <Picker
             // reactions={["U+1F618,1F917,FE0F,1F49A,1F338"]}
@@ -105,7 +129,92 @@ export default function OutboxTile({
             }}
           />
         )}
-        {latestFriendsEntries.map(
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            gap: "1rem",
+            overflow: "hidden",
+
+            width: "fit-content",
+          }}
+        >
+          {latestFriendsEntries.map(
+            ({
+              _id,
+              experience,
+              time,
+              color,
+              intensity,
+              reactions,
+              location,
+            }) => {
+              // onEntryRender(_id);
+              return (
+                <div
+                  key={_id}
+                  style={{
+                    height: "160px",
+                    width: "160px",
+                    position: "relative",
+                  }}
+                >
+                  <EntryTile
+                    experience={experience}
+                    time={time}
+                    color={color}
+                    intensity={intensity}
+                    reactions={reactions}
+                    entryUrl={_id}
+                    location={location}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "50%",
+                      right: "50%",
+
+                      width: "10px",
+                      height: "10px",
+                      backgroundColor: "red",
+                    }}
+                  >
+                    <EmojiContainer>
+                      {sendGift.length !== 0 ? (
+                        <>
+                          <Emojis $inputString={sendGift}>{sendGift}</Emojis>
+                          <DeleteButton
+                            onClick={() => {
+                              setSendGift(sendGift.slice(0, -1));
+                            }}
+                          >
+                            <FiDelete />
+                          </DeleteButton>
+                        </>
+                      ) : null}
+                      {sendGift.length < 5 && (
+                        <>
+                          <AddButton
+                            type="button"
+                            onClick={() =>
+                              setShowFriendMessages(!showFriendMessages)
+                            }
+                          >
+                            <FiPlus />
+                          </AddButton>
+                          {sendGift.length === 0 && (
+                            <AddEmojisSentence>add emojis</AddEmojisSentence>
+                          )}
+                        </>
+                      )}
+                    </EmojiContainer>
+                  </div>
+                </div>
+              );
+            }
+          )}
+        </div>
+        {/* {latestFriendsEntries.map(
           ({ experience, reactions, _id, time, user, color }) => {
             return (
               <>
@@ -126,8 +235,20 @@ export default function OutboxTile({
               </>
             );
           }
-        )}
+        )} */}
       </div>
     </Styled.Container>
   );
 }
+
+const AddButton = styled.button`
+  height: 36px;
+  width: 36px;
+  border: none;
+  font-size: 2rem;
+  color: var(--color-main-alt);
+  background-color: black;
+  margin-left: -12px;
+  z-index: 100;
+  position: absolute;
+`;
