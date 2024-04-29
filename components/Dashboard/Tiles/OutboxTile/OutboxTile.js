@@ -148,6 +148,7 @@ export default function OutboxTile({
               intensity,
               reactions,
               location,
+              user,
             }) => {
               // onEntryRender(_id);
               return (
@@ -168,15 +169,15 @@ export default function OutboxTile({
                     entryUrl={_id}
                     location={location}
                   />
+                  <FriendsNamePill>{handleGetUsername(user)}</FriendsNamePill>
                   <div
                     style={{
                       position: "absolute",
-                      top: "50%",
-                      right: "50%",
+                      top: "38%",
+                      right: "52%",
 
                       width: "10px",
                       height: "10px",
-                      backgroundColor: "red",
                     }}
                   >
                     <EmojiContainer>
@@ -248,7 +249,22 @@ const AddButton = styled.button`
   font-size: 2rem;
   color: var(--color-main-alt);
   background-color: black;
-  margin-left: -12px;
   z-index: 100;
   position: absolute;
+  border-radius: 50%;
+`;
+
+const FriendsNamePill = styled.div`
+  width: 6rem;
+  height: 2rem;
+  border-radius: 30%;
+  position: absolute;
+  z-index: 100;
+  top: 0.5rem;
+  left: 0.5rem;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  font-size: 0.8rem;
+  border: 1px solid white;
 `;
