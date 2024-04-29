@@ -139,17 +139,34 @@ export default function OutboxTile({
             width: "fit-content",
           }}
         >
-          {latestFriendsEntries.map(
-            ({
-              _id,
-              experience,
-              time,
-              color,
-              intensity,
-              reactions,
-              location,
-              user,
-            }) => {
+          {latestFriendsEntries &&
+            latestFriendsEntries.map((entry) => {
+              if (entry === null || typeof entry !== "object") {
+                // Handle the case where the entry is null or not an object
+                return null;
+              }
+
+              // Destructure properties if the entry is valid
+              const {
+                _id,
+                experience,
+                time,
+                color,
+                intensity,
+                reactions,
+                location,
+                user,
+              } = entry;
+              // ({
+              //   _id,
+              //   experience,
+              //   time,
+              //   color,
+              //   intensity,
+              //   reactions,
+              //   location,
+              //   user,
+              // }) => {
               // onEntryRender(_id);
               return (
                 <div
@@ -213,8 +230,7 @@ export default function OutboxTile({
                   </div>
                 </div>
               );
-            }
-          )}
+            })}
         </div>
         {/* {latestFriendsEntries.map(
           ({ experience, reactions, _id, time, user, color }) => {

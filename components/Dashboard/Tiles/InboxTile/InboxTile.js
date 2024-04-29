@@ -120,6 +120,7 @@ export default function InboxTile({
               <FriendsLastEntry key={giftEntry._id}>
                 {giftEntry.name}
                 {!isLoadingAllCommunity &&
+                  friendsEntry &&
                   allCommunity
                     .filter((friends) => {
                       return friends.entryId === friendsEntry._id;

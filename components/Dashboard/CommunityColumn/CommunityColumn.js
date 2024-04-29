@@ -10,6 +10,7 @@ import useSWR from "swr";
 import styled from "styled-components";
 import FriendsFilterTile from "../Tiles/FriendsFilterTile/FriendsFilterTile";
 import { signIn } from "next-auth/react";
+import { useRef } from "react";
 
 export default function CommunityColumn() {
   //Inbox
@@ -28,6 +29,8 @@ export default function CommunityColumn() {
 
   const userId = session?.user.id;
   const myUserId = session?.user.id;
+  const [friendsSearchValue, setFriendsSearchValue] = useState("");
+  const [isFriendsSearch, setIsFriendsSearch] = useState(true);
 
   //Database
   //Entries & Activites
@@ -40,7 +43,11 @@ export default function CommunityColumn() {
 
   const userName = session && session.user.name;
   function handleOnTyping(event) {
-    setSearchValue(event.target.value);
+    if (isFriendsSearch) {
+      setSearchValue(event.target.value);
+    } else {
+      setFriendsSearchValue(event.target.value);
+    }
   }
 
   //Users and Community
@@ -138,13 +145,10 @@ export default function CommunityColumn() {
     return friendsList;
   };
 
-  const moodies = handleGetFriendsList([
-    "Niko",
-    "Jan",
-    "Mathis",
-    "ramin",
-    "crash",
-  ]);
+  const [moodies, setMoodies] = useState(
+    handleGetFriendsList(["Niko", "Jan", "Mathis", "ramin", "crash"])
+  );
+
   console.log("moodies", moodies);
 
   const latestFriendsEntries = moodies.map((moodie) => {
@@ -212,7 +216,27 @@ export default function CommunityColumn() {
   const handleOutboxReaction = (emoji) => {
     setSendGift((prevInput) => [...prevInput, emoji]);
   };
+  const handleFriendsAddClick = () => {
+    const element = document.getElementById("friends-search");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
+  const inputRef = useRef(null);
+
+  // Function to focus the input field
+  const focusInput = () => {
+    // Check if the input ref is available
+    if (inputRef.current) {
+      // Focus the input field
+      inputRef.current.focus();
+    }
+  };
+  const handleAddFriend = () => {
+    const newObject = { _id: 3, name: "Bob", image: "/images/newfriend.jpeg" };
+    setMoodies((prevMoodies) => [...prevMoodies, newObject]);
+  };
   return (
     <Grid>
       {session && (
@@ -220,11 +244,19 @@ export default function CommunityColumn() {
           <FriendsFilterTile
             handleOnTyping={handleOnTyping}
             userName={userName}
+            inputRef={inputRef}
+            isFriendsSearch={isFriendsSearch}
+            setIsFriendsSearch={setIsFriendsSearch}
+            friendsSearchValue={friendsSearchValue}
+            getUserName={getUserName}
+            handleAddFriend={handleAddFriend}
           />
           <FriendsListTile
             moodies={moodies}
             isLoadingEntries={isLoadingEntries}
             setSearchValue={setSearchValue}
+            handleFriendsAddClick={handleFriendsAddClick}
+            focusInput={focusInput}
           />
           <InboxTile
             showSentence={showSentence}
