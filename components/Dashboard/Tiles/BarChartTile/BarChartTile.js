@@ -6,23 +6,13 @@ export default function BarChartTile({
   handleFilterSwitchClick,
   singleExperienceList,
   isLast7Days,
-  setIsLast7Days,
   handleExperienceClick,
-  setSingleExperienceList,
   clickedExperience,
   singleEmotionDisplayed,
-  allEntries,
-  userEntries,
   isLoadingEntries,
   errorEntries,
-  last7DaysEntries,
+  visualizedData,
 }) {
-  const { data: session } = useSession();
-
-  const visualizedData = isLast7Days
-    ? experienceAnalyser(last7DaysEntries && last7DaysEntries)
-    : experienceAnalyser(session ? userEntries : allEntries);
-
   const totalCount = visualizedData.totalCount;
 
   if (isLoadingEntries) return <p>Entries Loading</p>;
@@ -73,7 +63,7 @@ export default function BarChartTile({
         </Styled.EntriesDescriptionContainer>
       </Styled.HeadContainer>
       <Styled.BarChartContainer>
-        {visualizedData.experiences &&
+        {visualizedData &&
           visualizedData.experiences.map(
             ({ index, count, color, experience }) => (
               <Styled.SingleBar

@@ -4,20 +4,14 @@ import BarChartTile from "../Tiles/BarChartTile/BarChartTile";
 
 export default function OverviewColumn({
   isLast7Days,
-  setIsLast7Days,
-  targetExperience,
-  setTargetExperience,
   handleExperienceClick,
   singleExperienceList,
   clickedExperience,
-  setSingleExperienceList,
   singleEmotionDisplayed,
-  last7DaysAnalyser,
-  last7DaysEntries,
-  userEntries,
-  allEntries,
+
   isLoadingEntries,
   handleFilterSwitchClick,
+  visualizedData,
 }) {
   const boxes = [
     { gridColumnEnd: "span 4", gridRowEnd: "span 3" },
@@ -36,21 +30,15 @@ export default function OverviewColumn({
     <Grid>
       {!isLoadingEntries && (
         <BarChartTile
-          setIsLast7Days={setIsLast7Days}
-          isLast7Days={isLast7Days}
-          targetExperience={targetExperience}
-          setTargetExperience={setTargetExperience}
-          handleExperienceClick={handleExperienceClick}
-          singleExperienceList={singleExperienceList}
-          clickedExperience={clickedExperience}
-          setSingleExperienceList={setSingleExperienceList}
-          singleEmotionDisplayed={singleEmotionDisplayed}
-          userEntries={userEntries}
-          allEntries={allEntries}
-          isOnEntriesPage={true}
-          last7DaysAnalyser={last7DaysAnalyser}
-          last7DaysEntries={last7DaysEntries}
           handleFilterSwitchClick={handleFilterSwitchClick}
+          singleExperienceList={singleExperienceList}
+          isLast7Days={isLast7Days}
+          handleExperienceClick={handleExperienceClick}
+          clickedExperience={clickedExperience}
+          singleEmotionDisplayed={singleEmotionDisplayed}
+          isLoadingEntries={isLoadingEntries}
+          errorEntries={errorEntries}
+          visualizedData={visualizedData}
         />
       )}
       {boxes.map((box, index) => (

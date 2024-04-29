@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useData } from "@/lib/useData";
 import last7DaysAnalyser from "@/utils/last7DaysAnalyser";
+import experienceAnalyser from "@/utils/experienceAnalyser";
 
 export default function Dashboard() {
   const [selectedColumn, setSelectedColumn] = useState("overview");
@@ -33,11 +34,7 @@ export default function Dashboard() {
   const last7DaysEntries =
     !isLoadingEntries && last7DaysAnalyser(session ? userEntries : allEntries);
 
-  const allEmotionsDisplayed = entriesToDisplay({
-    last7DaysEntries,
-    session,
-    isLast7Days,
-  });
+  const allEmotionsDisplayed = entriesToDisplay();
 
   const handleExperienceClick = (experience) => {
     setClickedExperience(experience);
@@ -48,7 +45,7 @@ export default function Dashboard() {
     }
   };
 
-  function entriesToDisplay({ last7DaysEntries, session }) {
+  function entriesToDisplay() {
     if (isLast7Days) {
       return last7DaysEntries;
     }
@@ -69,6 +66,10 @@ export default function Dashboard() {
   function handleFilterSwitchClick() {
     setIsLast7Days(!isLast7Days);
   }
+
+  const visualizedData = isLast7Days
+    ? experienceAnalyser(last7DaysEntries && last7DaysEntries)
+    : experienceAnalyser(session ? userEntries : allEntries);
   return (
     <Container>
       <Menu
@@ -79,21 +80,15 @@ export default function Dashboard() {
       {selectedColumn === menuItems[0].id && (
         <OverviewColumn
           isLast7Days={isLast7Days}
-          setIsLast7Days={setIsLast7Days}
-          targetExperience={targetExperience}
-          setTargetExperience={setTargetExperience}
           handleExperienceClick={handleExperienceClick}
           singleExperienceList={singleExperienceList}
           clickedExperience={clickedExperience}
-          setSingleExperienceList={setSingleExperienceList}
           singleEmotionDisplayed={singleEmotionDisplayed}
-          userEntries={userEntries}
           allEntries={allEntries}
-          last7DaysAnalyser={last7DaysAnalyser}
-          last7DaysEntries={last7DaysEntries}
           isLoadingEntries={isLoadingEntries}
           errorEntries={errorEntries}
           handleFilterSwitchClick={handleFilterSwitchClick}
+          visualizedData={visualizedData}
         />
       )}
       {selectedColumn === menuItems[1].id && (
@@ -105,17 +100,12 @@ export default function Dashboard() {
           handleExperienceClick={handleExperienceClick}
           singleExperienceList={singleExperienceList}
           clickedExperience={clickedExperience}
-          setSingleExperienceList={setSingleExperienceList}
           singleEmotionDisplayed={singleEmotionDisplayed}
-          userEntries={userEntries}
-          allEntries={allEntries}
-          isOnEntriesPage={true}
-          last7DaysAnalyser={last7DaysAnalyser}
-          last7DaysEntries={last7DaysEntries}
           isLoadingEntries={isLoadingEntries}
           errorEntries={errorEntries}
           allEmotionsDisplayed={allEmotionsDisplayed}
           handleFilterSwitchClick={handleFilterSwitchClick}
+          visualizedData={visualizedData}
         />
       )}
       {selectedColumn === menuItems[2].id && <ActivitiesColumn />}
