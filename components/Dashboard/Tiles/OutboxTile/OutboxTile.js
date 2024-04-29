@@ -97,6 +97,8 @@ export default function OutboxTile({
       <div style={{ paddingBottom: "6rem" }}>
         {showFriendMessages && (
           <Picker
+            // reactions={["U+1F618,1F917,FE0F,1F49A,1F338"]}
+            theme={"dark"}
             reactionsDefaultOpen={true}
             onEmojiClick={(emojiObject) => {
               handleOutboxReaction(emojiObject.emoji);
