@@ -2,7 +2,7 @@ import { Grid } from "../Dashboard.styled";
 import InboxTile from "../Tiles/InboxTile/InboxTile";
 import OutboxTile from "@/components/Dashboard/Tiles/OutboxTile/OutboxTile";
 import FriendsListTile from "@/components/Dashboard/Tiles/FriendsListTile/FriendsListTile";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useData } from "@/lib/useData";
 import { mutate } from "swr";
@@ -267,13 +267,7 @@ export default function CommunityColumn() {
         <>
           {" "}
           <FriendsFilterTile
-            handleOnTyping={handleOnTyping}
             userName={userName}
-            inputRef={inputRef}
-            isFriendsSearch={isFriendsSearch}
-            setIsFriendsSearch={setIsFriendsSearch}
-            friendsSearchValue={friendsSearchValue}
-            getUserName={getUserName}
             handleAddFriend={handleAddFriend}
             allUsers={allUsers}
             isLoadingAllUsers={isLoadingAllUsers}
@@ -283,7 +277,6 @@ export default function CommunityColumn() {
             setSearchValue={setSearchValue}
             handleFriendsAddClick={handleFriendsAddClick}
             focusInput={focusInput}
-            userData={userData}
             friendsList={friendsList}
           />
           <InboxTile
