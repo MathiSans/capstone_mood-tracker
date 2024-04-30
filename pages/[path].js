@@ -30,12 +30,7 @@ export default function Home() {
     "guided-meditation": GuidedMeditation,
   };
 
-  let Component;
-  if (path && path.includes("id:")) {
-    Component = Entry;
-  } else {
-    Component = componentMap[path];
-  }
+  const Component = path?.includes("id:") ? Entry : componentMap[path];
 
   return (
     <>
