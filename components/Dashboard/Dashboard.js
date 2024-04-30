@@ -5,8 +5,9 @@ import EntriesColumn from "./EntriesColumn/EntriesColumn";
 import Menu from "./Menu/Menu";
 import OverviewColumn from "./OverviewColumn/OverviewColumn";
 import { useState } from "react";
+import { animations } from "../AnimationWrapper/animations";
 
-export default function Dashboard() {
+export default function Dashboard({ dashboardIsOpen }) {
   const [selectedColumn, setSelectedColumn] = useState("overview");
 
   const menuItems = [
@@ -21,7 +22,12 @@ export default function Dashboard() {
   }
 
   return (
-    <Container>
+    <Container
+      variants={animations}
+      initial={dashboardIsOpen ? "show" : "hidden"}
+      animate={dashboardIsOpen ? "show" : "hidden"}
+      transition="easeInOut"
+    >
       <Menu
         menuItems={menuItems}
         selectedColumn={selectedColumn}

@@ -2,31 +2,40 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useData } from "@/lib/useData";
-
 import { Container } from "@/components/StyledComponents/Path.styled";
 import Dashboard from "@/components/Dashboard/Dashboard";
 import Animation from "@/components/3DAnimation/3DAnimation";
 import ActionBar from "@/components/ActionBar/ActionBar";
-import NewEntryFlow from "./flow";
+import Flow from "@/components/NewEntryFlow/Flow";
 import QuotesWrapper from "@/components/QuotesWrapper/QuotesWrapper";
 import SmileTrainerWrapper from "@/components/SmileTrainerWrapper/SmileTrainerWrapper";
 import GuidedMeditation from "@/components/GuidedMeditation/GuidedMeditation";
 import Entry from "@/components/SingleEntry/Entry";
 import { useDashboardState } from "@/components/DashboardStateProvider/DashboardStateProvider";
 import { useSphereState } from "@/components/ContextProviders/SphereStateProvider/SphereStateProvider";
+import { motion, AnimatePresence } from "framer-motion";
+import { animations } from "@/components/AnimationWrapper/animations";
 
 export default function Home() {
   const { dashboardIsOpen, handleDashboardIsOpen } = useDashboardState();
-  const { sphereState, handleSphereState } = useSphereState();
+  const { sphereState } = useSphereState();
   const router = useRouter();
   const { path } = router.query;
   const { data: session } = useSession();
-  const [audioTrigger, setAudioTrigger] = useState(false);
-  const { allEntries, isLoadingEntries, errorEntries } =
-    useData().fetchedAllEntries;
-  const { userEntries } = useData().fetchedUserEntries;
-  const { activities, isLoadingActivities, errorActivities } =
-    useData().fetchedActivities;
+
+  const componentMap = {
+    "new-entry": Flow,
+    quotes: QuotesWrapper,
+    smiletrainer: SmileTrainerWrapper,
+    "guided-meditation": GuidedMeditation,
+  };
+
+  let Component;
+  if (path && path.includes("id:")) {
+    Component = Entry;
+  } else {
+    Component = componentMap[path];
+  }
 
   return (
     <>
@@ -41,16 +50,21 @@ export default function Home() {
         hideInterface={false}
       />
       <Container>
-        {dashboardIsOpen && <Dashboard />}
-        {path && path.includes("id:") && !dashboardIsOpen && (
-          <Entry id={path.replace("id:", "")} />
-        )}
-        {path === "new-entry" && !dashboardIsOpen && <NewEntryFlow />}
-        {path === "quotes" && !dashboardIsOpen && <QuotesWrapper />}
-        {path === "smiletrainer" && !dashboardIsOpen && <SmileTrainerWrapper />}
-        {path === "guided-meditation" && !dashboardIsOpen && (
-          <GuidedMeditation />
-        )}
+        <AnimatePresence mode="wait">
+          <Dashboard key="dashboard" dashboardIsOpen={dashboardIsOpen} />
+          {Component && (
+            <motion.div
+              key={path}
+              variants={animations}
+              initial="fadeOut"
+              animate={dashboardIsOpen ? "fadeOut" : "fadeIn"}
+              exit="fadeOut"
+              transition="easeInOut"
+            >
+              <Component id={path.replace("id:", "")} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Container>
     </>
   );

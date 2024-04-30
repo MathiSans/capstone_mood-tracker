@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useDashboardState } from "../DashboardStateProvider/DashboardStateProvider";
 import * as Styled from "./LinkWrapper.styled";
 
