@@ -115,7 +115,6 @@ export default function InboxTile({
       <MessageContainers>
         {entriesWithUserIdGifts &&
           entriesWithUserIdGifts.map((giftEntry) => {
-            console.log("giftEntry", giftEntry);
             return (
               <FriendsLastEntry key={giftEntry._id}>
                 {giftEntry.name}
@@ -126,7 +125,6 @@ export default function InboxTile({
                       return friends.entryId === friendsEntry._id;
                     })
                     .map((message) => {
-                      console.log("message", message);
                       const senderUsername =
                         message.senderId === null
                           ? "Anonym"

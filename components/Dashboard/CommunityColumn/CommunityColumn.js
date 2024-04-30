@@ -1,17 +1,16 @@
 import { Grid } from "../Dashboard.styled";
-import * as Styled from "@/components/Dashboard/Tiles/OutboxTile/OutboxTile.styled";
 import InboxTile from "../Tiles/InboxTile/InboxTile";
 import OutboxTile from "@/components/Dashboard/Tiles/OutboxTile/OutboxTile";
 import FriendsListTile from "@/components/Dashboard/Tiles/FriendsListTile/FriendsListTile";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useData } from "@/lib/useData";
 import { mutate } from "swr";
 import useSWR from "swr";
-import styled from "styled-components";
 import FriendsFilterTile from "../Tiles/FriendsFilterTile/FriendsFilterTile";
 import { signIn } from "next-auth/react";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function CommunityColumn() {
   //Inbox
@@ -30,8 +29,11 @@ export default function CommunityColumn() {
 
   const userId = session?.user.id;
   const myUserId = session?.user.id;
+  const { data: userData } = useSWR(`/api/user/${userId}`);
+
   const [friendsSearchValue, setFriendsSearchValue] = useState("");
   const [isFriendsSearch, setIsFriendsSearch] = useState(true);
+  const [listUpdate, setListUpdate] = useState(false);
 
   //Database
   //Entries & Activites
@@ -43,6 +45,8 @@ export default function CommunityColumn() {
     useData().fetchedActivities;
 
   const userName = session && session.user.name;
+  const [friendsList, setFriendsList] = useLocalStorageState([]);
+
   function handleOnTyping(event) {
     if (isFriendsSearch) {
       setSearchValue(event.target.value);
@@ -112,8 +116,6 @@ export default function CommunityColumn() {
     ? myGifts.map((entry) => entry.entryId)
     : ["Please Login!"];
 
-  console.log("userEntries Before gift entries", userEntries);
-
   const entriesWithUserIdGifts =
     !isLoadingEntries &&
     userEntries &&
@@ -124,63 +126,45 @@ export default function CommunityColumn() {
 
   const handleGetGiftedUserEntries = (entryId) => {};
 
-  console.log("giftEntriesIds", giftEntriesIds);
-  console.log("handleGetUserGifts", handleGetUserGifts(myUserId));
-
-  console.log("entriesWithUserIdGifts", entriesWithUserIdGifts);
-
-  // userEntries.filter((giftEntry) => {
-  //   return;
-  //   giftEntry._id === allCommunities[index].entryId;
-  //
-  //FriendsList
-
-  const handleGetFriendsList = (names) => {
-    const friendsList =
-      !isLoadingAllUsers &&
-      allUsers.filter((friend) => {
-        return names.some((name) =>
-          friend.name.toLowerCase().includes(name.toLowerCase())
+  // const latestFriendsEntries = friendsList.map((moodie) => {
+  //   const filteredEntries = allEntries.filter(
+  //     (entry) => entry.user === moodie._id
+  //   );
+  //   if (filteredEntries.length > 0) {
+  //     const latestEntry = filteredEntries.sort((a, b) => {
+  //       return new Date(b.time) - new Date(a.time);
+  //     })[0];
+  //     return latestEntry;
+  //   } else {
+  //     return null; // If no entry is found for the moodie
+  //   }
+  // });
+  const latestFriendsEntries = friendsList
+    ? friendsList.map((moodie) => {
+        const filteredEntries = allEntries.filter(
+          (entry) => entry.user === moodie._id
         );
-      });
-    return friendsList;
-  };
-
-  const [moodies, setMoodies] = useState(
-    handleGetFriendsList(["Niko", "Jan", "Mathis", "ramin", "crash"])
-  );
-
-  console.log("moodies", moodies);
-
-  const latestFriendsEntries = moodies.map((moodie) => {
-    const filteredEntries = allEntries.filter(
-      (entry) => entry.user === moodie._id
-    );
-    if (filteredEntries.length > 0) {
-      const latestEntry = filteredEntries.sort((a, b) => {
-        return new Date(b.time) - new Date(a.time);
-      })[0];
-      return latestEntry;
-    } else {
-      return null; // If no entry is found for the moodie
-    }
-  });
-
-  console.log("latestEntries", latestFriendsEntries);
+        if (filteredEntries.length > 0) {
+          const latestEntry = filteredEntries.sort((a, b) => {
+            return new Date(b.time) - new Date(a.time);
+          })[0];
+          return latestEntry;
+        } else {
+          return null; // If no entry is found for the moodie
+        }
+      })
+    : [];
 
   //Design
   function handleShowSentence() {
     setShowSentence(!showSentence);
   }
   const friendsEntry = getUserName && allUsers && getLatestEmotion();
-  console.log(friendsEntry, "friendsEntry Column");
-  console.log(getUserName, "getUserName Column");
 
   const currentLocalUserDate = new Date();
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      console.log("sendGift", sendGift);
       const response = await fetch("/api/community", {
         method: "POST",
         headers: {
@@ -217,7 +201,7 @@ export default function CommunityColumn() {
   const handleOutboxReaction = (emoji) => {
     setSendGift((prevInput) => [...prevInput, emoji]);
   };
-  const handleFriendsAddClick = () => {
+  const handleFriendsAddClick = (id) => {
     const element = document.getElementById("friends-search");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -234,18 +218,54 @@ export default function CommunityColumn() {
       inputRef.current.focus();
     }
   };
-  const handleAddFriend = () => {
-    const newObject = {
-      _id: 3,
-      name: "Chatty",
-      image: "/images/newfriend.jpeg",
+  async function handleAddFriend(userId, friendId) {
+    setListUpdate(!listUpdate);
+    const response = await fetch(`/api/user/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        friends: [...userData.friends, friendId],
+      }),
+    });
+
+    if (!response.ok) {
+      // Handle error
+      throw new Error("Failed to add friend");
+    }
+    mutate("/api/user");
+    console.log("user data friends", userData.friends);
+  }
+
+  useEffect(() => {
+    const handleGetFriendsList = () => {
+      if (isLoadingAllUsers || !userData) {
+        return; // Return early if loading or userData is not available
+      }
+
+      const filteredFriendsList = allUsers.filter((friend) => {
+        return userData.friends.includes(friend._id);
+      });
+      setFriendsList(filteredFriendsList); // Update friendsList state
     };
-    setMoodies((prevMoodies) => [...prevMoodies, newObject]);
-  };
+    handleGetFriendsList();
+  }, [listUpdate, userData, isLoadingAllUsers, allUsers]);
+
+  //for the searchBar Later for searching Names
+  // const friendsList = handleGetFriendsList();
+
+  // !isLoadingAllUsers &&
+  // allUsers.filter((friend) => {
+  //   return names.some((name) =>
+  //     friend.name.toLowerCase().includes(name.toLowerCase())
+  //   );
+  // });
   return (
     <Grid>
       {session && (
         <>
+          {" "}
           <FriendsFilterTile
             handleOnTyping={handleOnTyping}
             userName={userName}
@@ -255,13 +275,16 @@ export default function CommunityColumn() {
             friendsSearchValue={friendsSearchValue}
             getUserName={getUserName}
             handleAddFriend={handleAddFriend}
+            allUsers={allUsers}
+            isLoadingAllUsers={isLoadingAllUsers}
           />
           <FriendsListTile
-            moodies={moodies}
             isLoadingEntries={isLoadingEntries}
             setSearchValue={setSearchValue}
             handleFriendsAddClick={handleFriendsAddClick}
             focusInput={focusInput}
+            userData={userData}
+            friendsList={friendsList}
           />
           <InboxTile
             showSentence={showSentence}

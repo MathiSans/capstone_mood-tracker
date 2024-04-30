@@ -14,6 +14,12 @@ export default async function handler(request, response) {
       return response.status(200).json(user);
     }
   }
+  if (request.method === "PUT") {
+    const updatedUser = request.body;
+    console.log(updatedUser);
+    await User.findByIdAndUpdate(id, updatedUser);
+    response.status(200).json({ status: "User updated." });
+  }
 
   if (request.method === "POST") {
     try {
