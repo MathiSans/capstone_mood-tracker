@@ -24,9 +24,9 @@ export default function SmileTrainer({ smileThreshold, facesDetected }) {
       <motion.div
         animate={
           done
-            ? { scale: 1.2 }
+            ? { scale: 1.6 }
             : smileThreshold > 0.5
-            ? { scale: 1.2 }
+            ? { scale: 1.6 }
             : { scale: 1 }
         }
         transition={{ duration: 10 }}

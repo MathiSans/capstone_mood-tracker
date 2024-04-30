@@ -22,7 +22,6 @@ export default function Entry({ id }) {
   const { handleSphereState } = useSphereState();
   const [showSentence, setShowSentence] = useState(true);
   const router = useRouter();
-  // const { id } = router.query;
   const { data: session } = useSession();
   const { data: entry, isLoading } = useSWR(`/api/entries/${id}`);
 
@@ -31,7 +30,7 @@ export default function Entry({ id }) {
   }, [entry]);
 
   if (isLoading) {
-    return <h1>loading...</h1>;
+    return <p>loading ...</p>;
   }
 
   if (!entry) {
