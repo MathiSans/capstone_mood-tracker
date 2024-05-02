@@ -99,64 +99,6 @@ export default function Entry({ id }) {
                     </span>
                   ))}
                 </Sentence>
-                <StaticText style={{ color: "white" }}>
-                  Friends Messages:
-                  {showFriendMessages ? (
-                    <>
-                      {" "}
-                      {!isLoadingAllCommunity &&
-                        allCommunity
-                          .filter((friends) => {
-                            return friends.entryId === entry._id;
-                          })
-                          .map((message) => {
-                            console.log("message", message);
-                            const senderUsername =
-                              message.senderId === null
-                                ? "Anonym"
-                                : getUsername(message.senderId);
-                            return (
-                              <>
-                                <p
-                                  onClick={() => {
-                                    setShowFriendMessages(!showFriendMessages);
-                                  }}
-                                  style={{ fontSize: "11px", color: "white" }}
-                                  key={message._id}
-                                >
-                                  {senderUsername} send you
-                                  {message.flowers} and invited you to{"  "}
-                                  {message.activity}
-                                </p>
-                              </>
-                            );
-                          })}
-                    </>
-                  ) : (
-                    <div
-                      onClick={() => {
-                        setShowFriendMessages(!showFriendMessages);
-                      }}
-                      style={{
-                        backgroundColor: "red",
-                        color: "white",
-                        width: "1.7rem",
-                        height: "1.7rem",
-                        padding: "0.3rem",
-                        fontSize: "1rem",
-                        borderRadius: "50%",
-                        fontWeight: "bold",
-                        border: "solid 1px whitesmoke",
-                      }}
-                    >
-                      {
-                        allCommunity.filter((friends) => {
-                          return friends.entryId === entry._id;
-                        }).length
-                      }
-                    </div>
-                  )}
-                </StaticText>
                 <StaticText>{entry.time}</StaticText>{" "}
               </Page>
             </motion.div>

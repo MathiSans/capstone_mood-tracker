@@ -45,7 +45,7 @@ export default function Home() {
         hideInterface={false}
       />
       <Container>
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           <Dashboard key="dashboard" dashboardIsOpen={dashboardIsOpen} />
           {Component && (
             <motion.div

@@ -3,7 +3,6 @@ import * as Styled from "./OutboxTile.styled";
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
-import { FiDelete } from "react-icons/fi";
 import Picker from "emoji-picker-react";
 
 export default function OutboxTile({
@@ -14,10 +13,6 @@ export default function OutboxTile({
   handleDeleteMessage,
 }) {
   const [selectedTile, setSelectedTile] = useState(null);
-
-  // function onEmojiClick(emoji) {
-  //   setInputString((prevInput) => [...prevInput, emoji]);
-  // }
 
   return (
     <Styled.Container>
@@ -30,7 +25,6 @@ export default function OutboxTile({
             const messageForThisEntry = allMessages.find(
               (message) => message.entryId === entry._id
             );
-            console.log(messageForThisEntry);
             return (
               <div
                 style={{

@@ -31,21 +31,26 @@ export default function CommunityColumn() {
 
   const friendsIds = friends.map((friend) => friend._id);
 
-  let latestEntriesFromFriends = [];
-  let foundFriends = new Set();
-
   // Sort allEntries from highest to lowest index
   const sortedAllEntries = [...allEntries].reverse();
 
-  while (foundFriends.size < friendsIds.length) {
-    for (let entry of sortedAllEntries) {
-      if (friendsIds.includes(entry.user) && !foundFriends.has(entry.user)) {
-        latestEntriesFromFriends.push(entry);
-        foundFriends.add(entry.user);
-        break; // Break the for loop and start again
-      }
+  // Convert friendsIds array to a set for O(1) lookup
+  const friendsIdsSet = new Set(friendsIds);
+
+  // Initialize an object to store the latest entry for each friend
+  const latestEntriesMap = {};
+
+  // Iterate over the sorted entries
+  for (let entry of sortedAllEntries) {
+    // If the entry's user is a friend and we haven't stored an entry for them yet
+    if (friendsIdsSet.has(entry.user) && !latestEntriesMap[entry.user]) {
+      // Store the entry in the map
+      latestEntriesMap[entry.user] = entry;
     }
   }
+
+  // Convert the entries map to an array
+  let latestEntriesFromFriends = Object.values(latestEntriesMap);
 
   function handleAddFriend(friendId) {
     async function updateUser(friendId) {
@@ -140,8 +145,6 @@ export default function CommunityColumn() {
     const messageId = allMessages.find(
       (message) => message.entryId.toString() === entryId
     )?._id;
-    console.log("message", message);
-    console.log("messageId", messageId);
     let existingMessage = null;
 
     if (messageId) {
@@ -163,7 +166,6 @@ export default function CommunityColumn() {
       });
 
       if (response.ok) {
-        console.log("PUT");
         mutate(`/api/message/`);
         return true;
       } else {
@@ -183,7 +185,6 @@ export default function CommunityColumn() {
         }),
       });
       if (response.ok) {
-        console.log("POST");
         mutate(`/api/message/`);
         return true;
       } else {
@@ -202,12 +203,14 @@ export default function CommunityColumn() {
               handleAddFriend={handleAddFriend}
             />
           )}
-          <FriendsListTile
-            friends={friends}
-            handleDeleteFriend={handleDeleteFriend}
-          />
+          {!isLoadingAllUsers && (
+            <FriendsListTile
+              friends={friends}
+              handleDeleteFriend={handleDeleteFriend}
+            />
+          )}
           {/*  <InboxTile />*/}
-          {!isLoadingEntries && !isLoadingAllMessages && (
+          {!isLoadingEntries && !isLoadingAllMessages && !isLoadingAllUsers && (
             <OutboxTile
               allMessages={allMessages}
               handleAddMessage={handleAddMessage}
