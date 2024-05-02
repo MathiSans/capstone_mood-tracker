@@ -4,6 +4,8 @@ import Overlay from "@/components/Overlay/Overlay";
 import { ThemeProvider } from "styled-components";
 import { SessionProvider } from "next-auth/react";
 import { DataProvider } from "@/lib/useData";
+import { DashboardStateProvider } from "@/components/DashboardStateProvider/DashboardStateProvider";
+import { SphereStateProvider } from "@/components/ContextProviders/SphereStateProvider/SphereStateProvider";
 
 const theme = {
   colors: {
@@ -70,7 +72,11 @@ export default function App({
           <SessionProvider session={session}>
             <DataProvider>
               <Overlay>
-                <Component {...pageProps} />
+                <DashboardStateProvider>
+                  <SphereStateProvider>
+                    <Component {...pageProps} />
+                  </SphereStateProvider>
+                </DashboardStateProvider>
               </Overlay>
             </DataProvider>
           </SessionProvider>

@@ -12,7 +12,6 @@ export const Container = styled.div`
   position: fixed;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  /* justify-content: space-between; */
   background-color: var(--color-dark);
   padding: 0 24px 0 24px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
@@ -21,8 +20,6 @@ export const Container = styled.div`
 export const MenuItem = styled.div`
   cursor: pointer;
   display: flex;
-  /* justify-content: ${(props) =>
-    props.$left ? "flex-start" : props.$right ? "flex-end" : "center"}; */
   align-items: center;
   justify-self: ${(props) =>
     props.$right ? "end" : props.$left ? "start" : "center"};

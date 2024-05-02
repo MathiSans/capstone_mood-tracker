@@ -1,4 +1,5 @@
 import ActivitiesColumn from "./ActivitiesColumn/ActivitiesColumn";
+import CommunityColumn from "./CommunityColumn/CommunityColumn";
 import { Container } from "./Dashboard.styled";
 import EntriesColumn from "./EntriesColumn/EntriesColumn";
 import Menu from "./Menu/Menu";
@@ -8,8 +9,9 @@ import { useSession } from "next-auth/react";
 import { useData } from "@/lib/useData";
 import last7DaysAnalyser from "@/utils/last7DaysAnalyser";
 import experienceAnalyser from "@/utils/experienceAnalyser";
+import { animations } from "../AnimationWrapper/animations";
 
-export default function Dashboard() {
+export default function Dashboard({ dashboardIsOpen }) {
   const [selectedColumn, setSelectedColumn] = useState("overview");
   const [isLast7Days, setIsLast7Days] = useState(true);
   const [targetExperience, setTargetExperience] = useState(null);
@@ -20,6 +22,7 @@ export default function Dashboard() {
     { id: "overview", label: "Overview" },
     { id: "entries", label: "Entries" },
     { id: "activities", label: "Activities" },
+    { id: "community", label: "Community" },
   ];
 
   function handleSelectedColumnChange(column) {
@@ -73,7 +76,12 @@ export default function Dashboard() {
     ? experienceAnalyser(last7DaysEntries && last7DaysEntries)
     : experienceAnalyser(session ? userEntries : allEntries);
   return (
-    <Container>
+    <Container
+      variants={animations}
+      initial={dashboardIsOpen ? "show" : "hidden"}
+      animate={dashboardIsOpen ? "show" : "hidden"}
+      transition="easeInOut"
+    >
       <Menu
         menuItems={menuItems}
         selectedColumn={selectedColumn}
@@ -111,6 +119,7 @@ export default function Dashboard() {
         />
       )}
       {selectedColumn === menuItems[2].id && <ActivitiesColumn />}
+      {selectedColumn === menuItems[3].id && <CommunityColumn />}
     </Container>
   );
 }

@@ -20,6 +20,7 @@ export const Circle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0.8;
   background-color: ${({ $facesDetected, $smileThreshold, $done }) =>
     $done || $smileThreshold > 0.5
       ? "#18a924"
@@ -29,6 +30,7 @@ export const Circle = styled.div`
 `;
 
 export const InnerCircle = styled.div`
+  filter: blur(20px);
   position: absolute;
   height: 90%;
   width: 90%;

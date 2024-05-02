@@ -16,7 +16,7 @@ export default function Sphere({ color, opacity }) {
   lightA.intensity = 1.85;
 
   lightA.color = {};
-  lightA.color.value = "#ff2900";
+  lightA.color.value = "#3d3b3b";
   lightA.color.instance = new THREE.Color(lightA.color.value);
 
   lightA.spherical = new THREE.Spherical(1, 0.615, 2.049);
@@ -27,7 +27,7 @@ export default function Sphere({ color, opacity }) {
   lightB.intensity = 1.4;
 
   lightB.color = {};
-  lightB.color.value = "#ff2900";
+  lightB.color.value = "#3d3b3b";
   lightB.color.instance = new THREE.Color(lightB.color.value);
 
   lightB.spherical = new THREE.Spherical(1, 2.561, -1.844);
@@ -91,8 +91,14 @@ export default function Sphere({ color, opacity }) {
     mesh.current.material.uniforms.uLightBPosition.value.setFromSpherical(
       lightB.spherical
     );
-    mesh.current.material.uniforms.uLightAColor.value = new THREE.Color(color);
-    mesh.current.material.uniforms.uLightBColor.value = new THREE.Color(color);
+    mesh.current.material.uniforms.uLightAColor.value.lerp(
+      new THREE.Color(color),
+      0.02
+    );
+    mesh.current.material.uniforms.uLightBColor.value.lerp(
+      new THREE.Color(color),
+      0.02
+    );
   });
   return (
     <mesh

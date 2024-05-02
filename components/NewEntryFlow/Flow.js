@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { experiences } from "@/experiences";
-import Animation from "@/components/3DAnimation/3DAnimation";
 import NavButton from "@/components/NavButton/NavButton";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
 import * as Styled from "@/components/Layout/Layout.styled";
@@ -12,6 +11,8 @@ import AnimationWrapper from "../AnimationWrapper/AnimationWrapper";
 import Settings from "../Settings/Settings";
 import SettingsTrigger from "../SettingsTrigger/SettingsTrigger";
 import { SettingsTriggerContainer } from "@/components/Overlay/Overlay.styled";
+import { useSphereState } from "../ContextProviders/SphereStateProvider/SphereStateProvider";
+import { useEffect } from "react";
 
 export default function Flow() {
   const { mutate } = useSWR("/api/entries");
@@ -23,6 +24,11 @@ export default function Flow() {
   const [audioTrigger, setAudioTrigger] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [hideInterface, setHideInterface] = useState(false);
+  const { handleSphereState } = useSphereState();
+
+  useEffect(() => {
+    handleSphereState({ color: color, intensity: sliderValue });
+  }, [color, sliderValue]);
 
   const { data: session } = useSession();
   const userId = session?.user.id;
@@ -108,11 +114,6 @@ export default function Flow() {
 
   return (
     <>
-      <Animation
-        color={color}
-        opacity={sliderValue}
-        hideInterface={hideInterface}
-      />
       <AudioSettings
         showSettings={showSettings}
         experience={experience}
