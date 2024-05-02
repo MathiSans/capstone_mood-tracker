@@ -72,7 +72,6 @@ export default function BarChartTile({
                 barHeight={Math.floor((count / totalCount) * 100)}
                 onClick={() => {
                   handleExperienceClick(experience);
-                  console.log("clicked", experience);
                 }}
                 isClicked={clickedExperience === experience}
               />

@@ -1,7 +1,6 @@
 import { Grid } from "../Dashboard.styled";
 import ActivityTile from "../Tiles/ActivityTile/ActivityTile";
 import NewEntryTile from "./NewEntryTile/NewEntryTile";
-import { useData } from "@/lib/useData";
 import BarChartTile from "../Tiles/BarChartTile/BarChartTile";
 
 export default function OverviewColumn({
