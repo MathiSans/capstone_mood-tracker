@@ -3,30 +3,34 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
   border-radius: var(--border-radius-small);
-  background: radial-gradient(circle at left, #6f6f6f, #00000000),
-    radial-gradient(circle at right, #2e2c29, #00000000);
+  background: radial-gradient(circle at left, var(--color-dark), #00000000),
+    radial-gradient(circle at right, #444444, #00000000);
+  box-shadow: inset 0 0 10px rgba(5, 5, 5, 0.3),
+    inset 0 0 10px rgba(5, 5, 5, 0.3);
   cursor: pointer;
   grid-column-end: span 4;
   grid-row-end: span 2;
-  padding: 12px;
+  padding: 0.8rem;
 `;
 
 export const TileH3 = styled.h3`
-  color: white;
+  color: var(--color-light);
   font-size: 0.6rem;
   font-weight: 500;
+  margin: 0.5rem;
 `;
 
 export const Pill = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: black;
-  color: white;
+  background: var(--color-dark);
+  color: var(--color-light);
   border-radius: 2rem;
-  filter: drop-shadow(#242321 0rem 0rem 4px);
-  width: 2.5rem;
+  width: fit-content;
   height: 1.2rem;
-  margin-block-end: 0.4rem;
+  border: 0.5px solid #444444;
 `;

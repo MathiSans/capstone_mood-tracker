@@ -56,16 +56,22 @@ export default function BarChartTile({
             handleFilterSwitchClick();
           }}
         >
-          <Styled.Option $isActive={!isLastWeek}>all time</Styled.Option>
-          <Styled.Option $isActive={isLastWeek}>last 7 days</Styled.Option>
+          <Styled.Option $isActive={!isLastWeek}>
+            <Styled.TileH4>All time</Styled.TileH4>
+          </Styled.Option>
+          <Styled.Option $isActive={isLastWeek}>
+            <Styled.TileH4>Last 4 days</Styled.TileH4>
+          </Styled.Option>
         </Styled.Switch>
         <Styled.EntriesDescriptionContainer>
-          <Styled.EntriesDescription $bold>
+          <Styled.EntriesDescription>
             {singleExperienceList ? singleEmotionDisplayed.length : totalCount}{" "}
-            entries
+            Entries{" "}
           </Styled.EntriesDescription>
           <Styled.EntriesDescription>
-            {singleExperienceList ? "" : "most are"}{" "}
+            {singleExperienceList ? "" : "Most felt experiences are"}{" "}
+          </Styled.EntriesDescription>
+          <Styled.EntriesDescription>
             {singleExperienceList
               ? singleEmotionDisplayed[0]?.experience
               : emotionFirst}{" "}
@@ -81,10 +87,7 @@ export default function BarChartTile({
                 key={index}
                 color={color}
                 barHeight={Math.floor((count / totalCount) * 100)}
-                onClick={() => {
-                  handleExperienceClick(experience);
-                  console.log("clicked", experience);
-                }}
+                onClick={() => handleExperienceClick(experience)}
                 isClicked={clickedExperience === experience}
               />
             )

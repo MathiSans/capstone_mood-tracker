@@ -13,15 +13,7 @@ export default function getWeekdayFromTime(timeStr) {
   const weekdayIndex = dateObj.getDay();
 
   // Define an array of weekday names
-  const weekdays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
+  const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   // Return the weekday name based on the weekday index
   return weekdays[weekdayIndex];
