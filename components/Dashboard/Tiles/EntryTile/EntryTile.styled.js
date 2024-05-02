@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Link from "next/link";
 
 export const TextContainer = styled.div`
   z-index: 1;
@@ -23,6 +22,13 @@ export const ColorCircle = styled.div`
   transition: background-color 0.5s ease;
 `;
 
+export const OuterContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  grid-column-end: span 2;
+  grid-row-end: span 2;
+`;
+
 export const Container = styled.div`
   position: relative;
   width: 100%;
@@ -37,8 +43,6 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  grid-column-end: span 2;
-  grid-row-end: span 2;
   text-decoration: none;
   color: var(--color-primary-alt);
   font-size: 11px;

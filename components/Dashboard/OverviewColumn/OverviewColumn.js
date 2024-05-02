@@ -2,33 +2,22 @@ import { Grid } from "../Dashboard.styled";
 import ActivityTile from "../Tiles/ActivityTile/ActivityTile";
 import LastEntryTile from "../Tiles/LastEntryTile/LastEntryTile";
 import NewEntryTile from "../Tiles/NewEntryTile/NewEntryTile";
-import { useData } from "@/lib/useData";
-import { useSession } from "next-auth/react";
 import BarChartTile from "../Tiles/BarChartTile/BarChartTile";
 
 export default function OverviewColumn({
-        isLast7Days,
-        handleExperienceClick,
-        singleExperienceList,
-        clickedExperience,
-        singleEmotionDisplayed,
-        errorEntries,
-        isLoadingEntries,
-        handleFilterSwitchClick,
-        visualizedData,
-    })
-    const { data: session } = useSession();
-    const { allEntries, isLoadingEntries, errorEntries } =
-      useData().fetchedAllEntries;
-    const { userEntries } = useData().fetchedUserEntries;
-  
-    const lastEntry =
-      !isLoadingEntries &&
-      (session ? userEntries : allEntries) &&
-      (session
-        ? userEntries[userEntries.length - 1]
-        : allEntries[allEntries.length - 1]);
-        
+  isLast7Days,
+  handleExperienceClick,
+  singleExperienceList,
+  clickedExperience,
+  singleEmotionDisplayed,
+  entries,
+  errorEntries,
+  isLoadingEntries,
+  handleFilterSwitchClick,
+  visualizedData,
+}) {
+  const lastEntry = !isLoadingEntries && entries[entries.length - 1];
+
   return (
     <Grid>
       {!isLoadingEntries && (

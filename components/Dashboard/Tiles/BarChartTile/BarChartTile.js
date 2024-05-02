@@ -1,5 +1,3 @@
-import { useSession } from "next-auth/react";
-import experienceAnalyser from "@/utils/experienceAnalyser";
 import * as Styled from "./BarChartTile.styled";
 
 export default function BarChartTile({
@@ -53,7 +51,7 @@ export default function BarChartTile({
           </Styled.Option>
         </Styled.Switch>
         <Styled.EntriesDescriptionContainer>
-          <Styled.EntriesDescription>
+          <Styled.EntriesDescription $bold>
             {singleExperienceList ? singleEmotionDisplayed.length : totalCount}{" "}
             Entries{" "}
           </Styled.EntriesDescription>

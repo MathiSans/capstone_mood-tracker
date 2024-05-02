@@ -6,10 +6,8 @@ export const HeadContainer = styled.div`
 `;
 
 export const EntriesDescriptionContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
+  position: absolute;
+  right: 0;
 `;
 
 export const EntriesDescription = styled.article`
@@ -22,6 +20,7 @@ export const EntriesDescription = styled.article`
 `;
 
 export const Switch = styled.div`
+  position: absolute;
   display: flex;
   font-size: 0.6rem;
   background-color: var(--color-dark);
@@ -63,7 +62,6 @@ export const BarChartContainer = styled.div`
   grid-gap: 1rem;
   width: 100%;
   height: 100%;
-  margin-block-start: 1rem;
   overflow: auto;
 `;
 
