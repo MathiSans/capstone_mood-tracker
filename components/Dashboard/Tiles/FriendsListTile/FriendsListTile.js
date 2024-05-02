@@ -1,8 +1,18 @@
 import * as Styled from "./FriendsListTile.styled";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function FriendsListTile({ friends, handleDeleteFriend }) {
+  const [clicked, setClicked] = useState();
+
+  useEffect(() => {
+    setClicked(); // Clear clicked state when nonFriends updates
+  }, [friends]);
+
+  const handleClick = (id) => {
+    handleDeleteFriend(id);
+    setClicked(id);
+  };
   return (
     <Styled.Container>
       these are your friends. see their latest entries down below.
@@ -12,7 +22,8 @@ export default function FriendsListTile({ friends, handleDeleteFriend }) {
             return (
               <Styled.Friend
                 key={index}
-                onClick={() => handleDeleteFriend(user._id)}
+                onClick={() => handleClick(user._id)}
+                style={{ opacity: clicked === user._id ? 0.3 : 1 }}
               >
                 <p>{user.name}</p>
                 <Image
