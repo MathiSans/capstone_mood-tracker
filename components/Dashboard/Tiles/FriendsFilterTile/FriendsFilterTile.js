@@ -1,63 +1,33 @@
 import * as Styled from "./FriendsFilterTile.styled";
 import styled from "styled-components";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
-export default function FriendsFilterTile({
-  handleOnTyping,
-  userName,
-  inputRef,
-  isFriendsSearch,
-  setIsFriendsSearch,
-  friendsSearchValue,
-  getUserName,
-  handleAddFriend,
-}) {
-  const { data: session } = useSession();
-
+export default function FriendsFilterTile({ nonFriends, handleAddFriend }) {
   return (
-    <Styled.Container id="friends-search">
-      {" "}
-      <h1>Community-Area</h1>
-      <h3>share with your friends</h3>
-      <p>Welcome {session ? userName : "Unknown User"}</p>
-      <p>Your id: {session && session.user.id}</p>
-      <br />
-      <h4>
-        {isFriendsSearch
-          ? "Search for Your Friends"
-          : "Who you want to make gift"}
-      </h4>
-      <input
-        type="search"
-        ref={inputRef}
-        onChange={(event) => {
-          handleOnTyping(event);
-        }}
-      ></input>
-      <span> {getUserName ? getUserName.name : "no username"}</span>
-      <button
-        onClick={() => {
-          handleAddFriend();
-        }}
-      >
-        add
-      </button>
-      <ToggleButton
-        isFriendsSearch={isFriendsSearch}
-        onClick={() => {
-          setIsFriendsSearch(!isFriendsSearch);
-        }}
-      >
-        {isFriendsSearch ? "give Gift" : "search for Friends"}
-      </ToggleButton>
+    <Styled.Container>
+      find your friends. click on a user to add them to your friends list.
+      <Styled.FriendsListContainer>
+        <Styled.FriendsList>
+          {nonFriends.map((user, index) => {
+            return (
+              <Styled.Friend
+                key={index}
+                onClick={() => handleAddFriend(user._id)}
+              >
+                <p>{user.name}</p>
+                <Image
+                  style={{ borderRadius: "50%" }}
+                  height={36}
+                  width={36}
+                  src={user.image}
+                  alt={user.name}
+                />
+              </Styled.Friend>
+            );
+          })}
+        </Styled.FriendsList>
+      </Styled.FriendsListContainer>
     </Styled.Container>
   );
 }
-
-const Search = styled.div``;
-const ToggleButton = styled.button`
-  width: 150px;
-  background-color: ${(props) => (props.isFriendsSearch ? "black" : "white")};
-  border-radius: 25%;
-  color: ${(props) => (props.isFriendsSearch ? "white" : "black")};
-`;

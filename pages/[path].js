@@ -38,7 +38,7 @@ export default function Home() {
       />
       {/* <Animation color={"grey"} opacity={1} hideInterface={false} /> */}
       <Container>
-        {dashboardIsOpen && <Dashboard />}
+        {dashboardIsOpen && <Dashboard session={session} />}
         {/* {path.includes("id:") && <Entry id={path.replace("id:", "")} />} */}
         {path === "newentry" && <NewEntryFlow />}
         {path === "quotes-tool" && <QuotesWrapper />}

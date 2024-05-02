@@ -1,290 +1,145 @@
-import * as Styled from "./OutboxTile.styled";
-import { FaPlusCircle } from "react-icons/fa";
-import Picker from "emoji-picker-react";
 import EntryTile from "../EntryTile/EntryTile";
-import { FiDelete } from "react-icons/fi";
+import * as Styled from "./OutboxTile.styled";
+import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
-import { EmojiContainer } from "../../ActivitiesColumn/ActivitiesForm/ActivitiesForm.styled";
-import { Emojis } from "../../ActivitiesColumn/ActivitiesForm/ActivitiesForm.styled";
-import { DeleteButton } from "../../ActivitiesColumn/ActivitiesForm/ActivitiesForm.styled";
-import { AddEmojisSentence } from "../../ActivitiesColumn/ActivitiesForm/ActivitiesForm.styled";
-import { addButton } from "@/components/ActivitiesForm/ActivitiesForm.styled";
-import styled from "styled-components";
+import { IoClose } from "react-icons/io5";
+import { FiDelete } from "react-icons/fi";
+import Picker from "emoji-picker-react";
 
 export default function OutboxTile({
-  handleSubmit,
-  setFlowers,
-  setHug,
-  setSend,
-  setInviteActivity,
-  getUserName,
-  isLoadingActivities,
-  activities,
-  send,
-  friendsEntry,
-  searchValue,
-  latestFriendsEntries,
-  handleGetUsername,
-  isLoadingAllUsers,
-  showFriendMessages,
-  setShowFriendMessages,
-  handleOutboxReaction,
-  sendGift,
-  setSendGift,
-  setSearchValue,
-  submissionStatus,
+  allMessages,
+  latestEntriesFromFriends,
+  allUsers,
+  handleAddMessage,
+  handleDeleteMessage,
 }) {
-  console.log("submissionStatus", submissionStatus);
+  const [selectedTile, setSelectedTile] = useState(null);
+
+  // function onEmojiClick(emoji) {
+  //   setInputString((prevInput) => [...prevInput, emoji]);
+  // }
+
   return (
     <Styled.Container>
-      <h2>OUTBOX</h2>{" "}
-      <form onSubmit={handleSubmit}>
-        {/* <button
-          onClick={() => {
-            setFlowers("💐");
-            setSend("💐");
-          }}
-        >
-          Send Flowers 💐
-        </button>
-        <button
-          onClick={() => {
-            setHug("🤗");
-            setSend("🤗");
-          }}
-        >
-          Send Hugs 🤗
-        </button> */}
-        <b>send</b>
-        <span>{sendGift}</span>
-        <b>
-          {"       "}to{" "}
-          <span style={{ color: "yellow" }}>
-            {getUserName ? getUserName.name : "no username"}
-          </span>
-        </b>
-        <b>
-          {"       "}and Invite{" "}
-          <span style={{ color: "yellow" }}>
-            {getUserName ? getUserName.name : "no username"}
-          </span>{" "}
-          to...{" "}
-          <select
-            onChange={(event) => {
-              setInviteActivity(event.target.value);
-              setSend(event.target.value);
-            }}
-          >
-            <option value={false}>--choose activity--</option>
-            {!isLoadingActivities &&
-              activities.map(({ _id, title, emoji }) => (
-                <option key={_id} value={`${title} ${emoji}`}>
-                  {title}
-                </option>
-              ))}
-          </select>
-        </b>
-        <h1>{send}</h1>
-        <br />
-        <button type="submit">Send</button>{" "}
-        {submissionStatus === "success" && (
-          <span style={{ color: "green" }}>Submission successful!</span>
-        )}
-      </form>{" "}
-      {/* <section>
-        {searchValue === ""
-          ? ""
-          : friendsEntry && (
-              <p>
-                Your friend{" "}
-                <b style={{ color: "lightblue" }}>{getUserName.name}</b> felt on{" "}
-                <b style={{ color: "lightblue" }}>{friendsEntry.time}</b>
-                {"  "}
-                <b style={{ color: friendsEntry.color }}>
-                  {friendsEntry.experience}
-                </b>
-              </p>
-            )}
-      </section> */}
-      <div style={{ paddingBottom: "6rem", overflowX: "scroll" }}>
-        {showFriendMessages && (
-          <Picker
-            style={{
-              position: "absolute",
-              top: "90px",
-              left: "0",
-              zIndex: "10",
-            }}
-            pickerStyle={{ width: "100%" }}
-            onEmojiClick={(emojiObject) => {
-              handleOutboxReaction(emojiObject.emoji);
-            }}
-          />
-        )}
-
-        {showFriendMessages && (
-          <Picker
-            // reactions={["U+1F618,1F917,FE0F,1F49A,1F338"]}
-            theme={"dark"}
-            reactionsDefaultOpen={true}
-            onEmojiClick={(emojiObject) => {
-              handleOutboxReaction(emojiObject.emoji);
-            }}
-          />
-        )}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            gap: "1rem",
-            overflow: "hidden",
-
-            width: "fit-content",
-          }}
-        >
-          {latestFriendsEntries &&
-            latestFriendsEntries.map((entry) => {
-              if (entry === null || typeof entry !== "object") {
-                // Handle the case where the entry is null or not an object
-                return null;
-              }
-
-              // Destructure properties if the entry is valid
-              const {
-                _id,
-                experience,
-                time,
-                color,
-                intensity,
-                reactions,
-                location,
-                user,
-              } = entry;
-              // ({
-              //   _id,
-              //   experience,
-              //   time,
-              //   color,
-              //   intensity,
-              //   reactions,
-              //   location,
-              //   user,
-              // }) => {
-              // onEntryRender(_id);
-              return (
-                <div
-                  key={_id}
-                  style={{
-                    height: "160px",
-                    width: "160px",
-                    position: "relative",
-                  }}
-                >
-                  <EntryTile
-                    experience={experience}
-                    time={time}
-                    color={color}
-                    intensity={intensity}
-                    reactions={reactions}
-                    entryUrl={_id}
-                    location={location}
-                  />
-                  <FriendsNamePill>{handleGetUsername(user)}</FriendsNamePill>
-                  <div
+      here you find your friends latest entries.
+      <Styled.EntriesListContainer>
+        <Styled.EntriesList>
+          {latestEntriesFromFriends.map((entry, index) => {
+            const user = allUsers.find((user) => user._id === entry.user);
+            const userName = user ? user.name : "no name found";
+            const messageForThisEntry = allMessages.find(
+              (message) => message.entryId === entry._id
+            );
+            console.log(messageForThisEntry);
+            return (
+              <div
+                style={{
+                  position: "relative",
+                  height: "160px",
+                  width: "160px",
+                }}
+                key={index}
+              >
+                {" "}
+                {(!messageForThisEntry ||
+                  messageForThisEntry.message.length < 3) && (
+                  <Picker
+                    reactionsDefaultOpen="true"
+                    searchDisabled="true"
+                    open={selectedTile === entry._id}
+                    theme="dark"
                     style={{
                       position: "absolute",
-                      top: "38%",
-                      right: "52%",
-
-                      width: "10px",
-                      height: "10px",
+                      top: "0",
+                      left: "60px",
+                      zIndex: "1000",
                     }}
-                  >
-                    <EmojiContainer>
-                      {sendGift.length !== 0 ? (
-                        <>
-                          <Emojis $inputString={sendGift}>{sendGift}</Emojis>
-                          <DeleteButton
-                            onClick={() => {
-                              setSendGift(sendGift.slice(0, -1));
-                            }}
-                          >
-                            <FiDelete />
-                          </DeleteButton>
-                        </>
-                      ) : null}
-                      {sendGift.length < 3 && (
-                        <>
-                          <AddButton
-                            type="button"
-                            onClick={() => {
-                              setShowFriendMessages(!showFriendMessages);
-                              setSearchValue(handleGetUsername(user));
-                            }}
-                          >
-                            <FiPlus />
-                          </AddButton>
-                          {sendGift.length === 0 && (
-                            <AddEmojisSentence>add emojis</AddEmojisSentence>
-                          )}
-                        </>
-                      )}
-                    </EmojiContainer>
-                  </div>
-                </div>
-              );
-            })}
-        </div>
-        {/* {latestFriendsEntries.map(
-          ({ experience, reactions, _id, time, user, color }) => {
-            return (
-              <>
-                <p
-                  key={_id}
-                  style={{ padding: "5px", boxShadow: `2px 2px 4px ${color}` }}
-                >
-                  <b>{!isLoadingAllUsers && handleGetUsername(user)}</b> felt on{" "}
-                  <b>{time}</b> <b>{experience}.</b>
-                  {"  "} Reaction:
-                  <b>{reactions}</b>
-                </p>
-                <FaPlusCircle
-                  onClick={() => {
-                    setShowFriendMessages(!showFriendMessages);
+                    pickerStyle={{ width: "100%" }}
+                    onEmojiClick={(emojiObject) => {
+                      handleAddMessage(
+                        entry.user,
+                        entry._id,
+                        emojiObject.emoji
+                      );
+                      setSelectedTile(
+                        selectedTile === entry._id ? null : entry._id
+                      );
+                    }}
+                  />
+                )}
+                <div
+                  style={{
+                    height: "100%",
+                    width: "100%",
+                    zIndex: 1,
+                    position: "absolute",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
+                >
+                  {" "}
+                  <Styled.EmojiContainer>
+                    {messageForThisEntry?.message.map((message, index) => (
+                      <Styled.Emojis
+                        onClick={() => handleDeleteMessage(entry._id, index)}
+                        key={index}
+                      >
+                        {message}
+                      </Styled.Emojis>
+                    ))}
+
+                    {/* <Styled.DeleteButton
+                        onClick={() => {
+                          setInputString(inputString.slice(0, -1));
+                        }}
+                      >
+                        <FiDelete />
+                      </Styled.DeleteButton> */}
+
+                    {(!messageForThisEntry ||
+                      messageForThisEntry.message.length < 3) &&
+                      (selectedTile === entry._id ? (
+                        <IoClose
+                          onClick={() =>
+                            setSelectedTile(
+                              selectedTile === entry._id ? null : entry._id
+                            )
+                          }
+                          style={{ fontSize: "2rem", cursor: "pointer" }}
+                        />
+                      ) : (
+                        <FiPlus
+                          onClick={() =>
+                            setSelectedTile(
+                              selectedTile === entry._id ? null : entry._id
+                            )
+                          }
+                          style={{ fontSize: "2rem", cursor: "pointer" }}
+                        />
+                      ))}
+
+                    <Styled.AddEmojisSentence>
+                      {!messageForThisEntry && "add a reaction"}
+                    </Styled.AddEmojisSentence>
+                  </Styled.EmojiContainer>
+                </div>
+                <EntryTile
+                  inOutboxTile
+                  userName={userName}
+                  experience={entry.experience}
+                  time={entry.time}
+                  color={entry.color}
+                  intensity={entry.intensity}
+                  reactions={entry.reactions}
+                  entryUrl={entry.entryUrl}
+                  location={entry.location}
                 />
-              </>
+              </div>
             );
-          }
-        )} */}
-      </div>
+          })}
+        </Styled.EntriesList>
+      </Styled.EntriesListContainer>
     </Styled.Container>
   );
 }
-
-const AddButton = styled.button`
-  height: 36px;
-  width: 36px;
-  border: none;
-  font-size: 2rem;
-  color: var(--color-main-alt);
-  background-color: black;
-  z-index: 100;
-  position: absolute;
-  border-radius: 50%;
-`;
-
-const FriendsNamePill = styled.div`
-  width: 6rem;
-  height: 2rem;
-  border-radius: 30%;
-  position: absolute;
-  z-index: 100;
-  top: 0.5rem;
-  left: 0.5rem;
-  background-color: black;
-  color: white;
-  font-weight: bold;
-  font-size: 0.8rem;
-  border: 1px solid white;
-`;

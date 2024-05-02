@@ -1,6 +1,7 @@
 import { Container, MenuItem } from "./Menu.styled";
 
 export default function Menu({
+  session,
   selectedColumn,
   handleSelectedColumnChange,
   menuItems,
