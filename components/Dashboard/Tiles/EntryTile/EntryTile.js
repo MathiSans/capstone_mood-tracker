@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import * as Styled from "./EntryTile.styled";
 import Link from "next/link";
 import Intensity from "@/utils/intensity";
+import LinkWrapper from "@/components/LinkWrapper/LinkWrapper";
 
 export default function EntryTile({
   userName,
@@ -21,8 +22,10 @@ export default function EntryTile({
 
   return (
     <>
-      <Styled.Container href={`/id:${entryUrl}`}>
-        {inOutboxTile && <p>{userName}</p>}
+      <Styled.Container>
+        <LinkWrapper link={`/id:${entryUrl}`}>
+          <Styled.TextContainer>
+          {inOutboxTile && <p>{userName}</p>}
         {!inOutboxTile && (
           <Styled.TextContainer>
             {session ? (
@@ -57,6 +60,8 @@ export default function EntryTile({
           {time}
         </div>
         <Styled.ColorCircle color={color} />
+
+        </LinkWrapper>
       </Styled.Container>
     </>
   );

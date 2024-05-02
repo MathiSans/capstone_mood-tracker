@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
-import useSWR from "swr";
-import Animation from "../3DAnimation/3DAnimation";
+import useSWR, { mutate } from "swr";
+import { FiTrash2 } from "react-icons/fi";
 import { Container, Page } from "../Layout/Layout.styled";
 import {
   Sentence,
@@ -9,41 +9,29 @@ import {
   DeleteButton,
 } from "../EntriesList/EntriesList.styled";
 import Intensity from "@/utils/intensity";
-import { FiArrowLeft } from "react-icons/fi";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa6";
 import { useState } from "react";
 import { AnimatePresence, color, motion } from "framer-motion";
 import { useSession } from "next-auth/react";
-import { useData } from "@/lib/useData";
+import { useSphereState } from "../ContextProviders/SphereStateProvider/SphereStateProvider";
 import { useEffect } from "react";
 
 export default function Entry({ id }) {
+  const { handleSphereState } = useSphereState();
   const [showSentence, setShowSentence] = useState(true);
   const [showFriendMessages, setShowFriendMessages] = useState(false);
   const router = useRouter();
-  // const { id } = router.query;
   const { data: session } = useSession();
-
   const { data: entry, isLoading } = useSWR(`/api/entries/${id}`);
-  const { allUsers, isLoadingAllUsers, errorAllUsers } =
-    useData().fetchedAllUsers;
-  const { allCommunity, isLoadingAllCommunity, errorAllCommunity } =
-    useData().fetchedCommunity;
-  console.log(allCommunity);
+  const [deletingId, setDeletingId] = useState(null);
 
-  const getUsername = (userId) => {
-    const friendlyRecipient =
-      !isLoadingAllUsers &&
-      allUsers.filter((friend) => {
-        return friend._id === userId;
-      });
-    console.log(friendlyRecipient);
-    return friendlyRecipient[0].name;
-  };
+  useEffect(() => {
+    handleSphereState({ color: entry?.color, intensity: entry?.intensity });
+  }, [entry]);
 
   if (isLoading) {
-    return <h1>loading...</h1>;
+    return <p>loading ...</p>;
   }
 
   if (!entry) {
@@ -54,10 +42,22 @@ export default function Entry({ id }) {
     setShowSentence(!showSentence);
   }
 
+  async function handleDeleteEntry(event, id) {
+    event.stopPropagation();
+    await fetch(`/api/entries/${id}`, {
+      method: "DELETE",
+    });
+    mutate("/api/entries");
+    router.push("index");
+  }
+
+  function handleDeleteDialog(event, id) {
+    event.stopPropagation();
+    setDeletingId(id);
+  }
+
   return (
     <>
-      <Animation color={entry.color} opacity={entry.intensity} />
-
       <AnimatePresence>
         {showSentence && (
           <Container>
@@ -89,7 +89,9 @@ export default function Entry({ id }) {
                     value={entry.intensity}
                     experience={entry.experience}
                   />
-                  <StaticText>. You selected these tags:</StaticText>{" "}
+                  <StaticText>
+                    . {session ? "You" : "They"} selected these tags:
+                  </StaticText>{" "}
                   {entry.reactions.map((reaction, index, array) => (
                     <span key={index}>
                       {reaction}
@@ -161,22 +163,37 @@ export default function Entry({ id }) {
           </Container>
         )}
       </AnimatePresence>
-      <ToolsContainer>
-        <DeleteButton as="a" onClick={() => router.back()}>
-          {showSentence ? (
-            <FiArrowLeft />
+      {session && (
+        <ToolsContainer>
+          {deletingId === entry._id ? (
+            <DeleteButton
+              style={{ color: "red" }}
+              as="a"
+              onClick={(event) => handleDeleteEntry(event, entry._id)}
+            >
+              <FiTrash2 />
+            </DeleteButton>
           ) : (
-            <FiArrowLeft style={{ color: "grey", opacity: "0.5" }} />
+            <DeleteButton
+              as="a"
+              onClick={(event) => handleDeleteDialog(event, entry._id)}
+            >
+              {showSentence ? (
+                <FiTrash2 />
+              ) : (
+                <FiTrash2 style={{ color: "grey", opacity: "0.5" }} />
+              )}
+            </DeleteButton>
           )}
-        </DeleteButton>
-        <DeleteButton as="a" onClick={() => handleShowSentence()}>
-          {showSentence ? (
-            <FaRegEyeSlash />
-          ) : (
-            <FaRegEye style={{ color: "grey", opacity: "0.5" }} />
-          )}
-        </DeleteButton>
-      </ToolsContainer>
+          <DeleteButton as="a" onClick={() => handleShowSentence()}>
+            {showSentence ? (
+              <FaRegEyeSlash />
+            ) : (
+              <FaRegEye style={{ color: "grey", opacity: "0.5" }} />
+            )}
+          </DeleteButton>
+        </ToolsContainer>
+      )}
     </>
   );
 }

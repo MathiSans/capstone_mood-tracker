@@ -93,7 +93,6 @@ export default function SmileTrainerWrapper() {
 
   return (
     <>
-      <Styled.redFrame />
       <Styled.DisclaimerText>
         we are looking at your face and estimate your current emotions
       </Styled.DisclaimerText>

@@ -1,86 +1,38 @@
 import { Grid } from "../Dashboard.styled";
 import BarChartTile from "../Tiles/BarChartTile/BarChartTile";
-import { useState } from "react";
 import EntriesList from "./EntriesList/EntriesList";
-import { useSession } from "next-auth/react";
-import { useData } from "@/lib/useData";
-import lastWeekAnalyser from "@/utils/lastWeekAnalyser";
 
-export default function EntriesColumn() {
-  const [isLastWeek, setIsLastWeek] = useState(false);
-  const [targetExperience, setTargetExperience] = useState(null);
-  const [singleExperienceList, setSingleExperienceList] = useState(false);
-  const [clickedExperience, setClickedExperience] = useState(null);
-  // const [idsOfEntriesDisplayed, setIdsOfEntriesDisplayed] = useState([]);
-
-  const { data: session } = useSession();
-
-  const { allEntries, isLoadingEntries, errorEntries } =
-    useData().fetchedAllEntries;
-  const { userEntries } = useData().fetchedUserEntries;
-  const lastWeek = lastWeekAnalyser(session ? userEntries : allEntries);
-
-  const handleExperienceClick = (experience) => {
-    if (experience === targetExperience) {
-      setSingleExperienceList(!singleExperienceList);
-      setClickedExperience(null);
-    } else {
-      setSingleExperienceList(!singleExperienceList);
-      setClickedExperience(experience);
-      setTargetExperience(experience);
-    }
-  };
-
-  function entriesToDisplay({ lastWeek, session }) {
-    if (isLastWeek) {
-      return lastWeek;
-    }
-    if (!isLastWeek && session) {
-      return userEntries;
-    }
-    if (!isLastWeek && !session) {
-      return allEntries;
-    }
-  }
-  const allEmotionsDisplayed = entriesToDisplay({
-    lastWeek,
-    session,
-    isLastWeek,
-  });
-  const singleEmotionDisplayed = allEmotionsDisplayed.filter(
-    (experience) => experience.experience === targetExperience
-  );
-
-  const { allCommunity, isLoadingAllCommunity, errorAllCommunity } =
-    useData().fetchedCommunity;
-
-  // const friendsMessages = allCommunity.filter((friends) => {
-  //   return friends.entryId === entry._id;
-  // }).length;
-  // console.log("friendsMessages", friendsMessages);
-  // const handleEntryRender = (entryId) => {
-  //   console.log("entryId", entryId);
-  //   // setIdsOfEntriesDisplayed((prevIds) => [...prevIds, entryId]);
-  // };
-  // console.log("state Entry ID:", idsOfEntriesDisplayed);
-
-  function handleFilterSwitchClick() {
-    setIsLastWeek(!isLastWeek);
-  }
-
+export default function EntriesColumn({
+  isLast7Days,
+  setIsLast7Days,
+  handleExperienceClick,
+  targetExperience,
+  setTargetExperience,
+  singleExperienceList,
+  clickedExperience,
+  singleEmotionDisplayed,
+  isLoadingEntries,
+  errorEntries,
+  allEmotionsDisplayed,
+  handleFilterSwitchClick,
+  visualizedData,
+}) {
   return (
     <Grid>
-      <BarChartTile
-        handleFilterSwitchClick={handleFilterSwitchClick}
-        isLastWeek={isLastWeek}
-        targetExperience={targetExperience}
-        setTargetExperience={setTargetExperience}
-        handleExperienceClick={handleExperienceClick}
-        singleExperienceList={singleExperienceList}
-        clickedExperience={clickedExperience}
-        setSingleExperienceList={setSingleExperienceList}
-        singleEmotionDisplayed={singleEmotionDisplayed}
-      />
+      {!isLoadingEntries && (
+        <BarChartTile
+          handleFilterSwitchClick={handleFilterSwitchClick}
+          singleExperienceList={singleExperienceList}
+          setIsLast7Days={setIsLast7Days}
+          isLast7Days={isLast7Days}
+          handleExperienceClick={handleExperienceClick}
+          clickedExperience={clickedExperience}
+          singleEmotionDisplayed={singleEmotionDisplayed}
+          isLoadingEntries={isLoadingEntries}
+          errorEntries={errorEntries}
+          visualizedData={visualizedData}
+        />
+      )}
 
       <EntriesList
         data={

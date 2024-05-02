@@ -21,7 +21,6 @@ export const IndicatorContainer = styled.div`
   align-items: center;
   color: white;
   border-radius: 2rem;
-  opacity: 0.8;
   width: 3rem;
   height: 1rem;
   position: absolute;
