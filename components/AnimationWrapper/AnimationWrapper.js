@@ -1,30 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-
-export const animations = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { duration: 2 },
-  },
-  fadeIn: {
-    opacity: 1,
-    transition: { duration: 0.8 },
-  },
-  leftToRightInitial: { opacity: 0, x: 100 },
-  leftToRightAnimate: {
-    opacity: 1,
-    x: 0,
-
-    transition: { duration: 0.3 },
-  },
-  leftToRightExit: {
-    opacity: 0,
-    x: -100,
-
-    transition: { duration: 0.3 },
-  },
-};
+import { legacyAnimations } from "./animations";
 
 export default function AnimationWrapper({
   children,
@@ -44,7 +20,7 @@ export default function AnimationWrapper({
       initial={leftToRight ? "leftToRightInitial" : "hidden"}
       animate={hideInterface ? null : animation}
       exit={leftToRight ? "leftToRightExit" : "hidden"}
-      variants={animations}
+      variants={legacyAnimations}
     >
       {children}
     </motion.div>
