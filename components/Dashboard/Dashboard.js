@@ -17,6 +17,7 @@ export default function Dashboard({ dashboardIsOpen }) {
   const [targetExperience, setTargetExperience] = useState(null);
   const [singleExperienceList, setSingleExperienceList] = useState(false);
   const [clickedExperience, setClickedExperience] = useState(null);
+  const { data: session } = useSession();
 
   const menuItems = [
     { id: "overview", label: "Overview" },
@@ -34,7 +35,6 @@ export default function Dashboard({ dashboardIsOpen }) {
   const {
     fetchedUserEntries: { userEntries },
   } = useData();
-  const { data: session } = useSession();
 
   const last7DaysEntries =
     !isLoadingEntries && last7DaysAnalyser(session ? userEntries : allEntries);
