@@ -1,29 +1,18 @@
 import { useSession } from "next-auth/react";
 import experienceAnalyser from "@/utils/experienceAnalyser";
-import lastWeekAnalyser from "@/utils/lastWeekAnalyser";
-import { useData } from "@/lib/useData";
 import * as Styled from "./BarChartTile.styled";
 
 export default function BarChartTile({
-  isLastWeek,
   handleFilterSwitchClick,
   singleExperienceList,
+  isLast7Days,
   handleExperienceClick,
-  setSingleExperienceList,
   clickedExperience,
   singleEmotionDisplayed,
+  isLoadingEntries,
+  errorEntries,
+  visualizedData,
 }) {
-  const { data: session } = useSession();
-
-  const { allEntries, isLoadingEntries, errorEntries } =
-    useData().fetchedAllEntries;
-  const { userEntries } = useData().fetchedUserEntries;
-  const lastWeek = lastWeekAnalyser(session ? userEntries : allEntries);
-
-  const visualizedData = isLastWeek
-    ? experienceAnalyser(lastWeek)
-    : experienceAnalyser(session ? userEntries : allEntries);
-
   const totalCount = visualizedData.totalCount;
 
   if (isLoadingEntries) return <p>Entries Loading</p>;
@@ -56,11 +45,11 @@ export default function BarChartTile({
             handleFilterSwitchClick();
           }}
         >
-          <Styled.Option $isActive={!isLastWeek}>
+          <Styled.Option $isActive={!isLast7Days}>
             <Styled.TileH4>All time</Styled.TileH4>
           </Styled.Option>
-          <Styled.Option $isActive={isLastWeek}>
-            <Styled.TileH4>Last 4 days</Styled.TileH4>
+          <Styled.Option $isActive={isLast7Days}>
+            <Styled.TileH4>Last 7 days</Styled.TileH4>
           </Styled.Option>
         </Styled.Switch>
         <Styled.EntriesDescriptionContainer>
@@ -80,7 +69,7 @@ export default function BarChartTile({
         </Styled.EntriesDescriptionContainer>
       </Styled.HeadContainer>
       <Styled.BarChartContainer>
-        {visualizedData.experiences &&
+        {visualizedData &&
           visualizedData.experiences.map(
             ({ index, count, color, experience }) => (
               <Styled.SingleBar

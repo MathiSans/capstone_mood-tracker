@@ -23,7 +23,7 @@ export const ColorCircle = styled.div`
   transition: background-color 0.5s ease;
 `;
 
-export const Container = styled(Link)`
+export const Container = styled.div`
   position: relative;
   width: 100%;
   height: 100%;

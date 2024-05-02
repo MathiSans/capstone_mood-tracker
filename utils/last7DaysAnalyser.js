@@ -1,4 +1,4 @@
-export default function lastWeekAnalyser(data) {
+export default function last7DaysAnalyser(data) {
   if (Array.isArray(data)) {
     const currentDate = new Date();
     // const reversedData = [...data].reverse();
