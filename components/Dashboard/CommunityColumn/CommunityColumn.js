@@ -52,48 +52,42 @@ export default function CommunityColumn() {
   // Convert the entries map to an array
   let latestEntriesFromFriends = Object.values(latestEntriesMap);
 
-  function handleAddFriend(friendId) {
-    async function updateUser(friendId) {
-      const response = await fetch(`/api/user/${session.user.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          friends: [...userData.friends, friendId],
-        }),
-      });
+  async function handleAddFriend(friendId) {
+    const response = await fetch(`/api/user/${session.user.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        friends: [...userData.friends, friendId],
+      }),
+    });
 
-      if (response.ok) {
-        mutate(`/api/user/${session.user.id}`);
-        return true;
-      } else if (!response.ok) {
-        return false;
-      }
+    if (response.ok) {
+      mutate(`/api/user/${session.user.id}`);
+      return true;
+    } else if (!response.ok) {
+      return false;
     }
-    updateUser(friendId);
   }
 
-  function handleDeleteFriend(friendId) {
-    async function updateUser(friendId) {
-      const response = await fetch(`/api/user/${session.user.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          friends: userData.friends.filter((friend) => friend !== friendId),
-        }),
-      });
+  async function handleDeleteFriend(friendId) {
+    const response = await fetch(`/api/user/${session.user.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        friends: userData.friends.filter((friend) => friend !== friendId),
+      }),
+    });
 
-      if (response.ok) {
-        mutate(`/api/user/${session.user.id}`);
-        return true;
-      } else if (!response.ok) {
-        return false;
-      }
+    if (response.ok) {
+      mutate(`/api/user/${session.user.id}`);
+      return true;
+    } else if (!response.ok) {
+      return false;
     }
-    updateUser(friendId);
   }
 
   async function handleDeleteMessage(entryId, index) {
