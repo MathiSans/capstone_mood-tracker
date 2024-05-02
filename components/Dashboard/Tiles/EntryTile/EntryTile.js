@@ -2,7 +2,6 @@ import getWeekdayFromTime from "@/utils/getWeekdayFromTime";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import * as Styled from "./EntryTile.styled";
-import Link from "next/link";
 import Intensity from "@/utils/intensity";
 
 export default function EntryTile({
@@ -18,7 +17,8 @@ export default function EntryTile({
 
   return (
     <>
-      <Styled.Container href={`/id:${entryUrl}`}>
+      <Styled.Container href={`/id:/${entryUrl}`}>
+        <Styled.ColorCircle color={color} />
         <Styled.TextContainer>
           {session ? "You " : <Styled.StaticText>Somebody </Styled.StaticText>}
           {location === "unknown" ? (
@@ -29,12 +29,10 @@ export default function EntryTile({
               {location.region}
             </>
           )}
-          <Styled.StaticText> felt</Styled.StaticText> {experience}.{" "}
-          <Styled.StaticText>More specifically</Styled.StaticText>{" "}
-          <Intensity value={intensity} experience={experience} />
-          <Styled.StaticText>
-            . {session ? "You" : "They"} selected these tags:
-          </Styled.StaticText>{" "}
+          <Styled.StaticText> felt</Styled.StaticText> {experience},{" "}
+          <Styled.StaticText>more specifically</Styled.StaticText>{" "}
+          <Intensity value={intensity} experience={experience} />.
+          <Styled.StaticText> Selected tags: </Styled.StaticText>{" "}
           {reactions.map((reaction, index, array) => (
             <span key={index}>
               {reaction}
@@ -42,11 +40,11 @@ export default function EntryTile({
             </span>
           ))}
         </Styled.TextContainer>
-        <div>
-          {getWeekdayFromTime(time)},<br />
-          {time}
-        </div>
-        <Styled.ColorCircle color={color} />
+        <Styled.Pill>
+          <Styled.TileH3>
+            {getWeekdayFromTime(time)}, {time}
+          </Styled.TileH3>
+        </Styled.Pill>
       </Styled.Container>
     </>
   );

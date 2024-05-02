@@ -14,16 +14,13 @@ export const StaticText = styled.span`
 `;
 
 export const ColorCircle = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 70%;
-  height: 70%;
-  border-radius: var(--border-radius-round);
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-inline-end: 0.5rem;
+  border-radius: 2rem;
   background-color: ${(prop) => prop.color};
-  filter: blur(6px);
-  opacity: 0.6;
+  filter: blur(0.5px);
+  transition: background-color 0.5s ease;
 `;
 
 export const Container = styled(Link)`
@@ -31,8 +28,10 @@ export const Container = styled(Link)`
   width: 100%;
   height: 100%;
   border-radius: var(--border-radius-small);
-  background: radial-gradient(circle at left, #6f6f6f, #00000000),
-    radial-gradient(circle at right, #2e2c29, #00000000);
+  background: radial-gradient(circle at left, var(--color-dark), #00000000),
+    radial-gradient(circle at right, #444444, #00000000);
+  box-shadow: inset 0 0 10px rgba(5, 5, 5, 0.3),
+    inset 0 0 10px rgba(5, 5, 5, 0.3);
   padding: 12px 14px;
   display: flex;
   flex-direction: column;
@@ -46,20 +45,20 @@ export const Container = styled(Link)`
 `;
 
 export const TileH3 = styled.h3`
-  color: white;
+  color: var(--color-light);
   font-size: 0.6rem;
   font-weight: 500;
+  margin: 0.5rem;
 `;
 
 export const Pill = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: black;
-  color: white;
+  background: var(--color-dark);
+  color: var(--color-light);
   border-radius: 2rem;
-  filter: drop-shadow(#242321 0rem 0rem 4px);
-  width: 2.5rem;
+  border: 0.5px solid #444444;
+  width: auto;
   height: 1.2rem;
-  margin-block-end: 0.4rem;
 `;

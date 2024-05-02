@@ -1,6 +1,6 @@
 import { Grid } from "../Dashboard.styled";
 import ActivityTile from "../Tiles/ActivityTile/ActivityTile";
-import EntryTile from "../Tiles/EntryTile/EntryTile";
+import LastEntryTile from "../Tiles/LastEntryTile/LastEntryTile";
 import NewEntryTile from "../Tiles/NewEntryTile/NewEntryTile";
 import { useData } from "@/lib/useData";
 import { useSession } from "next-auth/react";
@@ -22,7 +22,7 @@ export default function OverviewColumn() {
     <Grid>
       <NewEntryTile />
       {!isLoadingEntries && (
-        <EntryTile
+        <LastEntryTile
           experience={lastEntry.experience}
           time={lastEntry.time}
           color={lastEntry.color}
