@@ -13,23 +13,19 @@ export default async function handler(request, response) {
     } else {
       return response.status(200).json(user);
     }
-  }
-
-  if (request.method === "PUT") {
+  } else if (request.method === "PUT") {
     const updatedUser = request.body;
     await User.findByIdAndUpdate(id, updatedUser);
-    response.status(200).json({ status: "User updated." });
-  }
-
-  if (request.method === "POST") {
+    return response.status(200).json({ status: "User updated." });
+  } else if (request.method === "POST") {
     try {
       const { name, email, userId } = request.body;
       const user = await User.create({ name, email, userId });
-      response.status(201).json({ success: true, data: user });
+      return response.status(201).json({ success: true, data: user });
     } catch (error) {
-      response.status(400).json({ success: false });
+      return response.status(400).json({ success: false });
     }
   } else {
-    response.status(405).json({ success: false });
+    return response.status(405).json({ success: false });
   }
 }
