@@ -1,13 +1,12 @@
 import { useState } from "react";
 import useSWR from "swr";
 import styled from "styled-components";
-import { motion } from "framer-motion";
 import { FiPlus } from "react-icons/fi";
 import { useSession } from "next-auth/react";
 import ActivityTile from "../../Tiles/ActivityTile/ActivityTile";
 
 export default function ActivitiesList({ handleShowForm }) {
-  const [filterPhrase, setFilterPhrase] = useState();
+  const [filterOption, setFilterOption] = useState("all");
   const { data: session } = useSession();
   const { data: activities, isLoading } = useSWR("/api/activities");
 
@@ -16,41 +15,42 @@ export default function ActivitiesList({ handleShowForm }) {
   }
 
   if (!activities) {
-    return;
+    return null;
   }
 
   const filteredActivities = activities.filter((activity) => {
-    if (!filterPhrase || filterPhrase === "all") {
+    if (filterOption === "all") {
       return true;
-    } else if (filterPhrase === "myActivities") {
-      return activity.hasOwnProperty("user") && typeof activity.user !== null;
-    } else if (filterPhrase === "tools") {
+    } else if (filterOption === "tools") {
       return activity.hasOwnProperty("tool");
-    } else if (Array.isArray(activity.forEmotion)) {
-      return activity.forEmotion.includes(filterPhrase);
     }
   });
 
-  function handleFilter(event) {
-    setFilterPhrase(event.target.value);
+  function handleFilter(option) {
+    setFilterOption(option);
   }
 
   return (
     <>
       <HeaderSwitches>
-        <select
-          name="emotions"
-          size="1"
-          onChange={(event) => {
-            handleFilter(event);
-          }}
-        >
-          <option value={"all"}>All Entries</option>
-          <option value={"tools"}>Tools</option>
-        </select>
+        <Switch>
+          <Option
+            $isActive={filterOption === "all"}
+            onClick={() => handleFilter("all")}
+          >
+            All Entries
+          </Option>
+          <Option
+            $isActive={filterOption === "tools"}
+            onClick={() => handleFilter("tools")}
+          >
+            Tools
+          </Option>
+        </Switch>
+
         {session && (
           <CircleBox onClick={handleShowForm}>
-            <FiPlus style={{ fontSize: "3rem" }} />
+            <FiPlus style={{ fontSize: "2rem" }} />
           </CircleBox>
         )}
       </HeaderSwitches>
@@ -70,10 +70,33 @@ const HeaderSwitches = styled.div`
   margin-top: 20px;
   padding: 3%;
   width: 100%;
-  height: 100%;
+  height: auto; /* Änderung der Höhe auf auto */
   position: relative;
   grid-column-end: span 4;
   grid-row-end: span 1;
+`;
+
+const Switch = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Option = styled.div`
+  cursor: pointer;
+  padding: 10px;
+  color: ${(props) => (props.$isActive ? "#303030" : "#f8f8f8")};
+  background-color: ${(props) => (props.$isActive ? "#f8f8f8" : "#303030")};
+  border-radius: 5px;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover {
+    background-color: ${(props) => (props.$isActive ? "#e0e0e0" : "#505050")};
+  }
 `;
 
 const CircleBox = styled.div`
@@ -81,28 +104,13 @@ const CircleBox = styled.div`
   color: #303030;
   border-radius: 50%;
   margin-bottom: 20px;
-  width: 50px;
-  height: 50px;
+  width: 40px; /* Verkleinerung der Breite auf 40px */
+  height: 40px; /* Festlegen der Höhe auf 40px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   right: 0;
-`;
-
-const ActivitiesListOption = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 20px;
-  padding: 3%;
-  width: 100%;
-  height: 100%;
-  grid-column-end: span 4;
-  grid-row-end: span 4;
-`;
-
-const WhiteBox = styled.div`
-  background-color: #303030;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  width: 100%;
+  top: 50%; /* Zentrieren vertikal */
+  transform: translateY(-50%); /* Korrektur für die Zentrierung */
 `;

@@ -16,8 +16,11 @@ export const Label = styled.label`
   color: var(--color-neutral);
 `;
 
+export const question = styled.p`
+  margin-bottom: 20px;
+`;
+
 export const AddEmojisSentence = styled.p`
-  margin-top: var(--spacing-m);
   margin-left: var(--spacing-s);
 `;
 
@@ -114,17 +117,16 @@ export const CheckboxInput = styled.input`
   font-size: var(--font-size-default);
   border-radius: var(--border-radius-medium);
   cursor: pointer;
-  top: -32px;
-  left: -14px;
+  top: -34px;
+  left: -10px;
 
   &:checked::after {
     content: "";
     position: absolute;
-    height: 40px;
-    width: 110px;
-    border: 3.5px solid var(--color-main-alt);
+    height: 100%;
+    width: 100%;
+    border: 2.5px solid var(--color-main-alt);
     font-size: var(--font-size-default);
-    color: var(--color-main-alt);
     border-radius: var(--border-radius-medium);
   }
 `;

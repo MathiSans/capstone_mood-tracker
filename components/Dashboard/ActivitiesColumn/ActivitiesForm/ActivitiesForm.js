@@ -140,7 +140,9 @@ export default function ActivitiesForm({ handleShowForm }) {
               required
             ></Styled.TextArea>
           </Styled.Label>
-          <p>For which experiences could this be?</p>
+          <Styled.question>
+            <p>For which experiences could this be?</p>
+          </Styled.question>
           <Styled.CheckboxContainer>
             {checkboxes.map((checkbox, index) => (
               <Styled.CheckboxLabel
