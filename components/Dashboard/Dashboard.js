@@ -83,6 +83,7 @@ export default function Dashboard({ dashboardIsOpen }) {
       transition="easeInOut"
     >
       <Menu
+        session={session}
         menuItems={menuItems}
         selectedColumn={selectedColumn}
         handleSelectedColumnChange={handleSelectedColumnChange}

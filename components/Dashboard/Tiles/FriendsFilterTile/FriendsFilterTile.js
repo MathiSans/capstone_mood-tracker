@@ -8,7 +8,7 @@ export default function FriendsFilterTile({ nonFriends, handleAddFriend }) {
   const [clicked, setClicked] = useState();
 
   useEffect(() => {
-    setClicked(); // Clear clicked state when nonFriends updates
+    setClicked();
   }, [nonFriends]);
 
   const handleClick = (id) => {

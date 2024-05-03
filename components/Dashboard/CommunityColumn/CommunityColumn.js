@@ -37,20 +37,39 @@ export default function CommunityColumn() {
   // Convert friendsIds array to a set for O(1) lookup
   const friendsIdsSet = new Set(friendsIds);
 
-  // Initialize an object to store the latest entry for each friend
-  const latestEntriesMap = {};
+  // Initialize a map to store the queues for each friend
+  const friendsQueues = new Map();
 
   // Iterate over the sorted entries
-  for (let entry of sortedAllEntries) {
-    // If the entry's user is a friend and we haven't stored an entry for them yet
-    if (friendsIdsSet.has(entry.user) && !latestEntriesMap[entry.user]) {
-      // Store the entry in the map
-      latestEntriesMap[entry.user] = entry;
+  for (let [index, entry] of sortedAllEntries.entries()) {
+    // Attach the position number to the entry
+    entry.position = index;
+    // If the entry's user is a friend
+    if (friendsIdsSet.has(entry.user)) {
+      // If we haven't stored any entries for them yet, initialize a queue
+      if (!friendsQueues.has(entry.user)) {
+        friendsQueues.set(entry.user, []);
+      }
+      // If we have stored less than 3 entries for them
+      if (friendsQueues.get(entry.user).length < 3) {
+        // Enqueue the entry
+        friendsQueues.get(entry.user).push(entry);
+      }
     }
   }
 
-  // Convert the entries map to an array
-  let latestEntriesFromFriends = Object.values(latestEntriesMap);
+  // Flatten the entries queues to a single array
+  let latestEntriesFromFriends = [];
+  for (let i = 0; i < 3; i++) {
+    for (let queue of friendsQueues.values()) {
+      if (queue[i]) {
+        latestEntriesFromFriends.push(queue[i]);
+      }
+    }
+  }
+
+  // Sort latestEntriesFromFriends based on the position numbers
+  latestEntriesFromFriends.sort((a, b) => a.position - b.position);
 
   async function handleAddFriend(friendId) {
     const response = await fetch(`/api/user/${session.user.id}`, {
@@ -203,7 +222,14 @@ export default function CommunityColumn() {
               handleDeleteFriend={handleDeleteFriend}
             />
           )}
-          {/*  <InboxTile />*/}
+          {!isLoadingAllUsers && !isLoadingAllMessages && !isLoadingEntries && (
+            <InboxTile
+              allEntries={allEntries}
+              session={session}
+              allUsers={allUsers}
+              allMessages={allMessages}
+            />
+          )}
           {!isLoadingEntries && !isLoadingAllMessages && !isLoadingAllUsers && (
             <OutboxTile
               allMessages={allMessages}

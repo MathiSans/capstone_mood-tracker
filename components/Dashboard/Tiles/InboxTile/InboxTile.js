@@ -1,264 +1,46 @@
 import * as Styled from "./InboxTile.styled";
-import { useSession } from "next-auth/react";
-import {
-  Sentence,
-  StaticText,
-} from "@/components/EntriesList/EntriesList.styled";
-import Intensity from "@/utils/intensity";
-import styled from "styled-components";
 
 export default function InboxTile({
-  showSentence,
-  allCommunity,
-  isLoadingAllCommunity,
-  handleGetUsername,
-  setShowFriendMessages,
-  showFriendMessages,
-  friendsEntry,
-  entriesWithUserIdGifts,
+  allUsers,
+  allMessages,
+  session,
+  allEntries,
 }) {
-  const { data: session } = useSession();
-
+  console.log("all users", allUsers);
+  console.log("allMessages", allMessages);
+  console.log("session", session);
+  console.log("allEntries", allEntries);
+  const messagesForUser = allMessages.filter(
+    (message) => message.recipientId === session.user.id
+  );
+  console.log("userMessages", messagesForUser);
   return (
     <Styled.Container>
-      {/* <div>
-        {showSentence && friendsEntry && (
-          <div>
-            <Sentence>
-              {session ? "You " : <StaticText>Somebody </StaticText>}
-              {friendsEntry.location === "unknown" ? (
-                ""
-              ) : (
-                <>
-                  <StaticText>in </StaticText>
-                  {friendsEntry.location.region}
-                </>
-              )}
-              <StaticText> felt</StaticText> {friendsEntry.experience}.{" "}
-              <StaticText>More specifically</StaticText>{" "}
-              <Intensity
-                value={friendsEntry.intensity}
-                experience={friendsEntry.experience}
-              />
-              <StaticText>. You selected these tags:</StaticText>{" "}
-              {friendsEntry.reaction}
-            </Sentence>
-            <StaticText style={{ color: "white" }}>
-              Friends Messages:
-              {showFriendMessages ? (
-                <>
-                  {" "}
-                  {!isLoadingAllCommunity &&
-                    allCommunity
-                      .filter((friends) => {
-                        return friends.entryId === friendsEntry._id;
-                      })
-                      .map((message) => {
-                        console.log("message", message);
-                        const senderUsername =
-                          message.senderId === null
-                            ? "Anonym"
-                            : handleGetUsername(message.senderId);
-                        return (
-                          <>
-                            <p
-                              onClick={() => {
-                                setShowFriendMessages(!showFriendMessages);
-                              }}
-                              style={{
-                                fontSize: "11px",
-                                color: "white",
-                              }}
-                              key={message._id}
-                            >
-                              {senderUsername} send you
-                              {message.flowers} and invited you to{"  "}
-                              {message.activity}
-                            </p>
-                          </>
-                        );
-                      })}
-                </>
-              ) : (
-                <div
-                  onClick={() => {
-                    setShowFriendMessages(!showFriendMessages);
-                  }}
-                  style={{
-                    backgroundColor: "red",
-                    color: "white",
-                    width: "1.7rem",
-                    height: "1.7rem",
-                    padding: "0.3rem",
-                    fontSize: "1rem",
-                    borderRadius: "50%",
-                    fontWeight: "bold",
-                    border: "solid 1px whitesmoke",
-                  }}
-                >
-                  {
-                    allCommunity.filter((friends) => {
-                      return friends.entryId === friendsEntry._id;
-                    }).length
-                  }
-                </div>
-              )}
-            </StaticText>
-            <StaticText>{friendsEntry.time}</StaticText>{" "}
-          </div>
-        )}
-      </div> */}
-      {/* SECOND TRY */}
-
-      {/* <h2>INBOX</h2>
-      <MessageContainers>*/}
-      <MessageContainers>
-        {entriesWithUserIdGifts &&
-          entriesWithUserIdGifts.map((giftEntry) => {
-            console.log("giftEntry", giftEntry);
+      Inbox
+      <Styled.MessagesListContainer>
+        <Styled.MessagesList>
+          <Styled.InfoText>
+            you have {messagesForUser.length}{" "}
+            {messagesForUser.length < 2 ? "reaction" : "reactions"} to your
+            entries
+          </Styled.InfoText>
+          {messagesForUser.map((message, index) => {
+            const entry = allEntries.find(
+              (entry) => entry._id === message.entryId
+            );
+            const sender = allUsers.find(
+              (entry) => entry._id === message.senderId
+            );
             return (
-              <FriendsLastEntry key={giftEntry._id}>
-                {giftEntry.name}
-                {!isLoadingAllCommunity &&
-                  friendsEntry &&
-                  allCommunity
-                    .filter((friends) => {
-                      return friends.entryId === friendsEntry._id;
-                    })
-                    .map((message) => {
-                      console.log("message", message);
-                      const senderUsername =
-                        message.senderId === null
-                          ? "Anonym"
-                          : handleGetUsername(message.senderId);
-
-                      return (
-                        <div
-                          key={message._id}
-                          style={{
-                            width: "100%",
-                            height: "100%",
-
-                            position: "absolute",
-                            top: "30%",
-                          }}
-                        >
-                          <span
-                            style={{
-                              fontSize: "100 px",
-                              width: "100%",
-                              height: "100%",
-                              color: "white",
-                            }}
-                            key={message._id}
-                          >
-                            {message.emoji[0]}
-                          </span>
-                          <span
-                            style={{
-                              fontSize: "10px",
-                              width: "100%",
-                              height: "100%",
-                              color: "white",
-
-                              display: "flex",
-                            }}
-                            key={message._id}
-                          >
-                            from {"     "}
-                            {senderUsername}
-                          </span>
-                        </div>
-                      );
-                    })}
-                <FriendsEmotionColorCircle color={giftEntry.color} />
-              </FriendsLastEntry>
+              <Styled.MessageBox key={index}>
+                <div>{sender.name}</div>
+                <Styled.Emojis>{message.message}</Styled.Emojis>
+                <Styled.ColorCircle color={entry ? entry.color : "grey"} />
+              </Styled.MessageBox>
             );
           })}
-      </MessageContainers>
-
-      {/* SECOND TRY */}
-
-      {/* <FriendsLastEntry>
-        {showSentence &&
-          friendsEntry &&
-          !isLoadingAllCommunity &&
-          allCommunity
-            .filter((friends) => {
-              return friends.entryId === friendsEntry._id;
-            })
-            .map((message) => {
-              console.log("message", message);
-              const senderUsername =
-                message.senderId === null
-                  ? "Anonym"
-                  : handleGetUsername(message.senderId);
-
-              return (
-                <div
-                  key={message._id}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-
-                    position: "absolute",
-                    top: "30%",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: "100 px",
-                      width: "100%",
-                      height: "100%",
-                      color: "white",
-                    }}
-                    key={message._id}
-                  >
-                    {message.flowers}
-                    {message.hugs}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "10px",
-                      width: "100%",
-                      height: "100%",
-                      color: "white",
-
-                      display: "flex",
-                    }}
-                    key={message._id}
-                  >
-                    from {"     "}
-                    {senderUsername}
-                  </span>
-                </div>
-              );
-            })}
-      </FriendsLastEntry> */}
+        </Styled.MessagesList>
+      </Styled.MessagesListContainer>
     </Styled.Container>
   );
 }
-
-const FriendsLastEntry = styled.div`
-  background: var(--effect-radial-gradient);
-  border-radius: var(--border-radius-small);
-  width: 150px;
-  height: 150px;
-  padding: 0;
-  position: relative;
-`;
-
-const FriendsEmotionColorCircle = styled.div`
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-  opacity: 20%;
-`;
-export const MessageContainers = styled.div`
-  width: 100vh;
-  display: flex;
-  flex-direction: row;
-  overflow: hidden;
-  gap: 1rem;
-`;

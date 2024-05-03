@@ -15,6 +15,7 @@ export const Container = styled.div`
 `;
 
 export const MenuItem = styled.div`
+  position: relative;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -22,4 +23,15 @@ export const MenuItem = styled.div`
   color: ${(props) =>
     props.$isActive ? `var(--color-main-alt)` : `var(--color-neutral)`};
   font-size: var(--font-size-small);
+
+  &:after {
+    content: ${(props) => (props.$indicator ? `""` : `none`)};
+    position: absolute;
+    top: 14px;
+    right: -6px;
+    width: 4px;
+    height: 4px;
+    background-color: red;
+    border-radius: var(--border-radius-round);
+  }
 `;

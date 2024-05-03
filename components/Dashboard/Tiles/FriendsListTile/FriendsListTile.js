@@ -6,7 +6,7 @@ export default function FriendsListTile({ friends, handleDeleteFriend }) {
   const [clicked, setClicked] = useState();
 
   useEffect(() => {
-    setClicked(); // Clear clicked state when nonFriends updates
+    setClicked();
   }, [friends]);
 
   const handleClick = (id) => {

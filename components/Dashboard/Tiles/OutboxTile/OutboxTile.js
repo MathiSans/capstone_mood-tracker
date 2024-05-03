@@ -82,15 +82,6 @@ export default function OutboxTile({
                         {message}
                       </Styled.Emojis>
                     ))}
-
-                    {/* <Styled.DeleteButton
-                        onClick={() => {
-                          setInputString(inputString.slice(0, -1));
-                        }}
-                      >
-                        <FiDelete />
-                      </Styled.DeleteButton> */}
-
                     {(!messageForThisEntry ||
                       messageForThisEntry.message.length < 3) &&
                       (selectedTile === entry._id ? (
