@@ -16,7 +16,7 @@ export default function OutboxTile({
 
   return (
     <Styled.Container>
-      here you find your friends latest entries.
+      the three latest entries of your friends
       <Styled.EntriesListContainer>
         <Styled.EntriesList>
           {latestEntriesFromFriends.map((entry, index) => {

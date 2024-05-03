@@ -6,14 +6,9 @@ export default function InboxTile({
   session,
   allEntries,
 }) {
-  console.log("all users", allUsers);
-  console.log("allMessages", allMessages);
-  console.log("session", session);
-  console.log("allEntries", allEntries);
   const messagesForUser = allMessages.filter(
     (message) => message.recipientId === session.user.id
   );
-  console.log("userMessages", messagesForUser);
   return (
     <Styled.Container>
       Inbox
@@ -33,7 +28,7 @@ export default function InboxTile({
             );
             return (
               <Styled.MessageBox key={index}>
-                <div>{sender.name}</div>
+                <div>from {sender.name}:</div>
                 <Styled.Emojis>{message.message}</Styled.Emojis>
                 <Styled.ColorCircle color={entry ? entry.color : "grey"} />
               </Styled.MessageBox>

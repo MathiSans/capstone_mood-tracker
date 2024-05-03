@@ -1,6 +1,4 @@
 import * as Styled from "./FriendsFilterTile.styled";
-import styled from "styled-components";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
@@ -17,7 +15,7 @@ export default function FriendsFilterTile({ nonFriends, handleAddFriend }) {
   };
   return (
     <Styled.Container>
-      find your friends. click on a user to add them to your friends list.
+      list of all users (click on a user to add as a friend)
       <Styled.FriendsListContainer>
         <Styled.FriendsList>
           {nonFriends.map((user, index) => {
@@ -25,7 +23,9 @@ export default function FriendsFilterTile({ nonFriends, handleAddFriend }) {
               <Styled.Friend
                 key={index}
                 onClick={() => handleClick(user._id)}
-                style={{ opacity: clicked === user._id ? 0.3 : 1 }}
+                style={{
+                  opacity: clicked === user._id ? 0.3 : 1,
+                }}
               >
                 <p>{user.name}</p>
                 <Image

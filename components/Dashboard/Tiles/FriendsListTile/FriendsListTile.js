@@ -15,7 +15,7 @@ export default function FriendsListTile({ friends, handleDeleteFriend }) {
   };
   return (
     <Styled.Container>
-      these are your friends. see their latest entries down below.
+      these are your friends (click on a user to remove them)
       <Styled.FriendsListContainer>
         <Styled.FriendsList>
           {friends.map((user, index) => {

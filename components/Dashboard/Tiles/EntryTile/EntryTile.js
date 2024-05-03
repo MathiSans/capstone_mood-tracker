@@ -2,7 +2,6 @@ import getWeekdayFromTime from "@/utils/getWeekdayFromTime";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import * as Styled from "./EntryTile.styled";
-import Link from "next/link";
 import Intensity from "@/utils/intensity";
 import LinkWrapper from "@/components/LinkWrapper/LinkWrapper";
 
