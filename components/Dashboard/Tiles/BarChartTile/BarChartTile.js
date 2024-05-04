@@ -1,5 +1,3 @@
-import { useSession } from "next-auth/react";
-import experienceAnalyser from "@/utils/experienceAnalyser";
 import * as Styled from "./BarChartTile.styled";
 
 export default function BarChartTile({
@@ -45,16 +43,22 @@ export default function BarChartTile({
             handleFilterSwitchClick();
           }}
         >
-          <Styled.Option $isActive={!isLast7Days}>all time</Styled.Option>
-          <Styled.Option $isActive={isLast7Days}>last 7 days</Styled.Option>
+          <Styled.Option $isActive={!isLast7Days}>
+            <Styled.TileH4>All time</Styled.TileH4>
+          </Styled.Option>
+          <Styled.Option $isActive={isLast7Days}>
+            <Styled.TileH4>Last 7 days</Styled.TileH4>
+          </Styled.Option>
         </Styled.Switch>
         <Styled.EntriesDescriptionContainer>
           <Styled.EntriesDescription $bold>
             {singleExperienceList ? singleEmotionDisplayed.length : totalCount}{" "}
-            entries
+            Entries{" "}
           </Styled.EntriesDescription>
           <Styled.EntriesDescription>
-            {singleExperienceList ? "" : "most are"}{" "}
+            {singleExperienceList ? "" : "Most felt experiences are"}{" "}
+          </Styled.EntriesDescription>
+          <Styled.EntriesDescription>
             {singleExperienceList
               ? singleEmotionDisplayed[0]?.experience
               : emotionFirst}{" "}
@@ -70,9 +74,7 @@ export default function BarChartTile({
                 key={index}
                 color={color}
                 barHeight={Math.floor((count / totalCount) * 100)}
-                onClick={() => {
-                  handleExperienceClick(experience);
-                }}
+                onClick={() => handleExperienceClick(experience)}
                 isClicked={clickedExperience === experience}
               />
             )

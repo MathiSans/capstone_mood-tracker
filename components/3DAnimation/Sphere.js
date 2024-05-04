@@ -93,11 +93,11 @@ export default function Sphere({ color, opacity }) {
     );
     mesh.current.material.uniforms.uLightAColor.value.lerp(
       new THREE.Color(color),
-      0.02
+      0.03
     );
     mesh.current.material.uniforms.uLightBColor.value.lerp(
       new THREE.Color(color),
-      0.02
+      0.03
     );
   });
   return (

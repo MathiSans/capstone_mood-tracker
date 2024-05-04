@@ -95,7 +95,7 @@ export default function Dashboard({ dashboardIsOpen }) {
           singleExperienceList={singleExperienceList}
           clickedExperience={clickedExperience}
           singleEmotionDisplayed={singleEmotionDisplayed}
-          allEntries={allEntries}
+          entries={session ? userEntries : allEntries}
           isLoadingEntries={isLoadingEntries}
           errorEntries={errorEntries}
           handleFilterSwitchClick={handleFilterSwitchClick}
