@@ -24,7 +24,16 @@ export default NextAuth({
           const testUser = await User.findOne({
             email: "testuser@example.com",
           });
+          const testUser2 = await User.findOne({
+            email: "testuser2@example.com",
+          });
 
+          if (
+            credentials.username === "test2" &&
+            credentials.password === "test2"
+          ) {
+            return testUser2;
+          }
           if (
             credentials.username === "test" &&
             credentials.password === "test"

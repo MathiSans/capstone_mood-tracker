@@ -73,9 +73,10 @@ export default function BarChartTile({
                 color={color}
                 experience={experience}
                 barHeight={Math.floor((count / totalCount) * 100)}
-                onClick={(event) => {
-                  handleExperienceClick(event, experience);
-                }}
+                // onClick={(event) => {
+                //   handleExperienceClick(event, experience);
+                // }}
+                onClick={() => handleExperienceClick(experience)}
                 isClicked={
                   singleExperienceList && clickedExperience === experience
                 }
