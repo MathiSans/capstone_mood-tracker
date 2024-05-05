@@ -21,7 +21,7 @@ export const question = styled.p`
 `;
 
 export const AddEmojisSentence = styled.p`
-  margin-left: var(--spacing-s);
+  text-align: center;
 `;
 
 export const EmojiContainer = styled.div`
@@ -30,7 +30,6 @@ export const EmojiContainer = styled.div`
   gap: var(--spacing-xs);
   align-items: center;
   justify-content: start;
-  height: 40px;
   margin-bottom: var(--spacing-l);
 `;
 
@@ -80,6 +79,7 @@ export const TextArea = styled.textarea`
   width: 100%;
   padding: var(--spacing-m) var(--spacing-l);
   margin: var(--spacing-s) 0;
+  margin-bottom: 20px;
 `;
 
 export const ButtonArea = styled.div`
@@ -94,6 +94,10 @@ export const CheckboxContainer = styled.div`
   flex-wrap: wrap;
   gap: var(--spacing-l);
   margin-bottom: var(--spacing-xxl);
+`;
+
+export const StyledText = styled.span`
+  margin-bottom: 0px;
 `;
 
 export const CheckboxLabel = styled.label`
@@ -128,5 +132,6 @@ export const CheckboxInput = styled.input`
     border: 2.5px solid var(--color-main-alt);
     font-size: var(--font-size-default);
     border-radius: var(--border-radius-medium);
+    margin-top: 6px;
   }
 `;

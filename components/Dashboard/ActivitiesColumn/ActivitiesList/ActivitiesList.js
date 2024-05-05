@@ -38,7 +38,7 @@ export default function ActivitiesList({ handleShowForm }) {
             $isActive={filterOption === "all"}
             onClick={() => handleFilter("all")}
           >
-            All Entries
+            All Activities
           </Option>
           <Option
             $isActive={filterOption === "tools"}
@@ -68,7 +68,6 @@ const HeaderSwitches = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 20px;
-  padding: 3%;
   width: 100%;
   height: auto; /* Änderung der Höhe auf auto */
   position: relative;

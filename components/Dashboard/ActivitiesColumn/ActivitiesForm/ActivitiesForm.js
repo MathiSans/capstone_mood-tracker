@@ -92,15 +92,9 @@ export default function ActivitiesForm({ handleShowForm }) {
             ) : null}
             {inputString.length < 5 && (
               <>
-                <Styled.addButton
-                  type="button"
-                  onClick={() => setShowPicker(!showPicker)}
-                >
-                  <FiPlus />
-                </Styled.addButton>
                 {inputString.length === 0 && (
                   <Styled.AddEmojisSentence>
-                    add emojis
+                    Add a new activity
                   </Styled.AddEmojisSentence>
                 )}
               </>
@@ -150,7 +144,7 @@ export default function ActivitiesForm({ handleShowForm }) {
                 htmlFor={checkbox.text}
                 $color={checkbox.color}
               >
-                {checkbox.text}
+                <div style={{ lineHeight: "18px" }}>{checkbox.text}</div>
                 <Styled.CheckboxInput
                   type="checkbox"
                   id={checkbox.text}
