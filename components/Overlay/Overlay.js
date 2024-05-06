@@ -1,7 +1,7 @@
 import Menu from "../Menu/Menu";
 import MenuTrigger from "../MenuTrigger/MenuTrigger";
-import Settings from "../Settings/Settings";
-import SettingsTrigger from "../SettingsTrigger/SettingsTrigger";
+import Settings from "../x_Settings/Settings";
+import SettingsTrigger from "../x_SettingsTrigger/SettingsTrigger";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import {
