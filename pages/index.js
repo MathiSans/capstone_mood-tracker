@@ -7,7 +7,7 @@ export default function Home() {
 
   useEffect(() => {
     setTimeout(() => {
-      router.replace("/index");
+      router.replace("/start");
     }, 0);
   }, []);
 
