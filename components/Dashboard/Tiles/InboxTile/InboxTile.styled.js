@@ -11,7 +11,7 @@ export const Container = styled.div`
   justify-content: space-between;
   grid-column-end: span 4;
   grid-row-end: span 2;
-  overflow-x: scroll; //added by Niko for the community boxes
+  overflow-x: scroll;
 `;
 
 export const MessagesListContainer = styled.div`
@@ -30,7 +30,7 @@ export const MessageBox = styled.div`
   height: 100px;
   padding: 6px;
   border-radius: var(--border-radius-small);
-  background: var(--effect-radial-gradient);
+  background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

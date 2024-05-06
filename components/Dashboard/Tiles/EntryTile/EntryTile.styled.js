@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const TextContainer = styled.div`
+  flex: 1;
   z-index: 1;
 `;
 
@@ -41,7 +42,7 @@ export const Container = styled.div`
   padding: 12px 14px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 6px;
   cursor: pointer;
   text-decoration: none;
   color: var(--color-primary-alt);
@@ -52,7 +53,7 @@ export const TileH3 = styled.h3`
   color: var(--color-light);
   font-size: 0.6rem;
   font-weight: 500;
-  margin: 0.5rem;
+  margin: 2px;
 `;
 
 export const Pill = styled.div`

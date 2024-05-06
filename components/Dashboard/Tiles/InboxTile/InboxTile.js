@@ -1,4 +1,11 @@
 import * as Styled from "./InboxTile.styled";
+import {
+  Tile,
+  PillText,
+  Pill,
+  InfoTextTopRight,
+  Header,
+} from "../Tiles.styled";
 
 export default function InboxTile({
   allUsers,
@@ -10,8 +17,15 @@ export default function InboxTile({
     (message) => message.recipientId === session.user.id
   );
   return (
-    <Styled.Container>
-      Inbox
+    <Tile $columns="4" $rows="2">
+      <Header>
+        <Pill>
+          <PillText>Inbox</PillText>
+        </Pill>
+        <InfoTextTopRight>
+          See your friends reactions to your entries
+        </InfoTextTopRight>
+      </Header>
       <Styled.MessagesListContainer>
         <Styled.MessagesList>
           <Styled.InfoText>
@@ -36,6 +50,6 @@ export default function InboxTile({
           })}
         </Styled.MessagesList>
       </Styled.MessagesListContainer>
-    </Styled.Container>
+    </Tile>
   );
 }

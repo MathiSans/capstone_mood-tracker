@@ -1,9 +1,17 @@
 import EntryTile from "../EntryTile/EntryTile";
 import * as Styled from "./OutboxTile.styled";
+import {
+  Tile,
+  PillText,
+  Pill,
+  InfoTextTopRight,
+  Header,
+} from "../Tiles.styled";
 import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
-import { IoClose } from "react-icons/io5";
 import Picker from "emoji-picker-react";
+import { TileH2 } from "../ActivityTile/Activity/Activity.styled";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function OutboxTile({
   allMessages,
@@ -14,9 +22,18 @@ export default function OutboxTile({
 }) {
   const [selectedTile, setSelectedTile] = useState(null);
 
+  function handleClick(id) {
+    setSelectedTile(selectedTile === id ? null : id);
+  }
+
   return (
-    <Styled.Container>
-      the three latest entries of your friends
+    <Tile $columns="4" $rows="3">
+      <Header>
+        <Pill>
+          <PillText>Outbox</PillText>
+        </Pill>
+        <InfoTextTopRight>React to your friends entries</InfoTextTopRight>
+      </Header>
       <Styled.EntriesListContainer>
         <Styled.EntriesList>
           {latestEntriesFromFriends.map((entry, index) => {
@@ -26,15 +43,7 @@ export default function OutboxTile({
               (message) => message.entryId === entry._id
             );
             return (
-              <div
-                style={{
-                  position: "relative",
-                  height: "160px",
-                  width: "160px",
-                }}
-                key={index}
-              >
-                {" "}
+              <Styled.EntryContainer key={index}>
                 {(!messageForThisEntry ||
                   messageForThisEntry.message.length < 3) && (
                   <Picker
@@ -44,8 +53,8 @@ export default function OutboxTile({
                     theme="dark"
                     style={{
                       position: "absolute",
-                      top: "0",
-                      left: "60px",
+                      bottom: "46px",
+                      left: "0px",
                       zIndex: "1000",
                     }}
                     pickerStyle={{ width: "100%" }}
@@ -55,24 +64,24 @@ export default function OutboxTile({
                         entry._id,
                         emojiObject.emoji
                       );
-                      setSelectedTile(
-                        selectedTile === entry._id ? null : entry._id
-                      );
+                      handleClick(entry._id);
                     }}
                   />
                 )}
-                <div
-                  style={{
-                    height: "100%",
-                    width: "100%",
-                    zIndex: 1,
-                    position: "absolute",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  {" "}
+                <Styled.EntryTileContainer>
+                  <EntryTile
+                    inOutboxTile
+                    userName={userName}
+                    experience={entry.experience}
+                    time={entry.time}
+                    color={entry.color}
+                    intensity={entry.intensity}
+                    reactions={entry.reactions}
+                    entryUrl={entry.entryUrl}
+                    location={entry.location}
+                  />
+                </Styled.EntryTileContainer>
+                <Styled.ReactionsContainer $color={entry.color}>
                   <Styled.EmojiContainer>
                     {messageForThisEntry?.message.map((message, index) => (
                       <Styled.Emojis
@@ -83,48 +92,26 @@ export default function OutboxTile({
                       </Styled.Emojis>
                     ))}
                     {(!messageForThisEntry ||
-                      messageForThisEntry.message.length < 3) &&
-                      (selectedTile === entry._id ? (
-                        <IoClose
-                          onClick={() =>
-                            setSelectedTile(
-                              selectedTile === entry._id ? null : entry._id
-                            )
-                          }
-                          style={{ fontSize: "2rem", cursor: "pointer" }}
-                        />
-                      ) : (
-                        <FiPlus
-                          onClick={() =>
-                            setSelectedTile(
-                              selectedTile === entry._id ? null : entry._id
-                            )
-                          }
-                          style={{ fontSize: "2rem", cursor: "pointer" }}
-                        />
-                      ))}
-
-                    <Styled.AddEmojisSentence>
-                      {!messageForThisEntry && "add a reaction"}
-                    </Styled.AddEmojisSentence>
+                      messageForThisEntry.message.length < 3) && (
+                      <Styled.CrossIcon onClick={() => handleClick(entry._id)}>
+                        <motion.div
+                          animate={{
+                            rotate:
+                              selectedTile === entry._id ? "45deg" : "0deg",
+                          }}
+                        >
+                          <FiPlus />
+                        </motion.div>
+                      </Styled.CrossIcon>
+                    )}
+                    {!messageForThisEntry && "add a reaction"}
                   </Styled.EmojiContainer>
-                </div>
-                <EntryTile
-                  inOutboxTile
-                  userName={userName}
-                  experience={entry.experience}
-                  time={entry.time}
-                  color={entry.color}
-                  intensity={entry.intensity}
-                  reactions={entry.reactions}
-                  entryUrl={entry.entryUrl}
-                  location={entry.location}
-                />
-              </div>
+                </Styled.ReactionsContainer>
+              </Styled.EntryContainer>
             );
           })}
         </Styled.EntriesList>
       </Styled.EntriesListContainer>
-    </Styled.Container>
+    </Tile>
   );
 }

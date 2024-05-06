@@ -25,17 +25,12 @@ export const EntriesList = styled.div`
 `;
 
 export const Emojis = styled.div`
-  font-size: 2rem;
+  font-size: 1.5rem;
   cursor: pointer;
 
   &:hover {
     opacity: 0.4;
   }
-`;
-
-export const AddEmojisSentence = styled.p`
-  /* margin-top: var(--spacing-m);
-  margin-left: var(--spacing-s); */
 `;
 
 export const EmojiContainer = styled.div`
@@ -48,23 +43,31 @@ export const EmojiContainer = styled.div`
   height: 100%;
 `;
 
-export const addButton = styled.button`
-  height: 36px;
-  width: 36px;
-  border: none;
-  font-size: 2rem;
-  color: var(--color-main-alt);
-  background-color: transparent;
-  margin-left: -12px;
+export const EntryContainer = styled.div`
+  position: relative;
+  width: 160px;
+  height: 200px;
 `;
 
-export const DeleteButton = styled.button`
-  height: 36px;
-  width: 36px;
-  border-radius: var(--border-radius-round);
-  margin-top: var(--spacing-xs);
-  border: none;
-  font-size: 1.6rem;
-  background-color: transparent;
-  color: var(--color-main-alt);
+export const EntryTileContainer = styled.div`
+  height: 160px;
+  width: 160px;
+`;
+
+export const ReactionsContainer = styled.div`
+  height: 34px;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-size-small);
+  background-color: ${(props) =>
+    props.$color ? props.$color : "var(--color-main)"};
+  border-radius: 16px;
+  margin-top: 6px;
+`;
+
+export const CrossIcon = styled.div`
+  font-size: 2rem;
+  cursor: pointer;
 `;

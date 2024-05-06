@@ -75,10 +75,11 @@ export const HeadContainer = styled.div`
 `;
 const scrollAnimation = keyframes`
   0% { transform: translateX(130%); }
-  100% { transform: translateX(-600%); }
+  100% { transform: translateX(-200%); }
 `;
 
 export const TextContainer = styled.div`
+  font-size: 2rem;
   animation: ${scrollAnimation} 20s linear infinite;
   white-space: nowrap;
   margin: 4px;

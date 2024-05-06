@@ -1,14 +1,17 @@
 import { Grid } from "../Dashboard.styled";
+import * as Styled from "./CommunityColumn.styled";
 import InboxTile from "../Tiles/InboxTile/InboxTile";
 import OutboxTile from "@/components/Dashboard/Tiles/OutboxTile/OutboxTile";
-import FriendsListTile from "@/components/Dashboard/Tiles/FriendsListTile/FriendsListTile";
 import { useSession } from "next-auth/react";
 import { useData } from "@/lib/useData";
 import { mutate } from "swr";
 import useSWR from "swr";
 import FriendsFilterTile from "../Tiles/FriendsFilterTile/FriendsFilterTile";
+import { useState } from "react";
 
 export default function CommunityColumn() {
+  const [communityFeaturesAccepted, setCommunityFeaturesAccepted] =
+    useState(false);
   const { data: session } = useSession();
   const { allEntries, isLoadingEntries, errorEntries } =
     useData().fetchedAllEntries;
@@ -19,12 +22,20 @@ export default function CommunityColumn() {
 
   const { data: userData } = useSWR(`/api/user/${session.user.id}`);
 
-  const nonFriends = allUsers.filter(
+  const usersThatAcceptedCommunityFeatures = allUsers.filter(
+    (user) => user.communityFeatures === true
+  );
+
+  const allUsersWithoutCurrentUser = usersThatAcceptedCommunityFeatures.filter(
+    (user) => user._id !== session.user.id
+  );
+
+  const nonFriends = usersThatAcceptedCommunityFeatures.filter(
     (user) =>
       !userData?.friends.includes(user._id) && user._id !== session.user.id
   );
 
-  const friends = allUsers.filter(
+  const friends = usersThatAcceptedCommunityFeatures.filter(
     (user) =>
       userData?.friends.includes(user._id) && user._id !== session.user.id
   );
@@ -206,41 +217,85 @@ export default function CommunityColumn() {
     }
   }
 
+  async function handleAcceptCommunityFeatures() {
+    setCommunityFeaturesAccepted(true);
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    const response = await fetch(`/api/user/${session.user.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        communityFeatures: true,
+      }),
+    });
+
+    if (response.ok) {
+      mutate(`/api/user/${session.user.id}`);
+
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   return (
-    <Grid>
-      {session && (
-        <>
-          {!isLoadingAllUsers && (
-            <FriendsFilterTile
-              nonFriends={nonFriends}
-              handleAddFriend={handleAddFriend}
-            />
-          )}
-          {!isLoadingAllUsers && (
-            <FriendsListTile
-              friends={friends}
-              handleDeleteFriend={handleDeleteFriend}
-            />
-          )}
-          {!isLoadingAllUsers && !isLoadingAllMessages && !isLoadingEntries && (
-            <InboxTile
-              allEntries={allEntries}
-              session={session}
-              allUsers={allUsers}
-              allMessages={allMessages}
-            />
-          )}
-          {!isLoadingEntries && !isLoadingAllMessages && !isLoadingAllUsers && (
-            <OutboxTile
-              allMessages={allMessages}
-              handleAddMessage={handleAddMessage}
-              handleDeleteMessage={handleDeleteMessage}
-              latestEntriesFromFriends={latestEntriesFromFriends}
-              allUsers={allUsers}
-            />
-          )}
-        </>
+    <>
+      {userData?.communityFeatures ? (
+        <Grid>
+          <>
+            {!isLoadingAllUsers && (
+              <FriendsFilterTile
+                allUsers={allUsersWithoutCurrentUser}
+                friends={friends}
+                handleAddFriend={handleAddFriend}
+                handleDeleteFriend={handleDeleteFriend}
+              />
+            )}
+            {!isLoadingAllUsers &&
+              !isLoadingAllMessages &&
+              !isLoadingEntries && (
+                <InboxTile
+                  allEntries={allEntries}
+                  session={session}
+                  allUsers={usersThatAcceptedCommunityFeatures}
+                  allMessages={allMessages}
+                />
+              )}
+            {!isLoadingEntries &&
+              !isLoadingAllMessages &&
+              !isLoadingAllUsers &&
+              friends.length > 0 && (
+                <OutboxTile
+                  allMessages={allMessages}
+                  handleAddMessage={handleAddMessage}
+                  handleDeleteMessage={handleDeleteMessage}
+                  latestEntriesFromFriends={latestEntriesFromFriends}
+                  allUsers={usersThatAcceptedCommunityFeatures}
+                />
+              )}
+          </>
+        </Grid>
+      ) : (
+        <Styled.SwitchContainer>
+          Enable community features to see your friends' latest entries and
+          reactions. Your latest entries will be visable for other users who
+          also accepted these terms.
+          <Styled.Switch
+            onClick={() => {
+              handleAcceptCommunityFeatures();
+            }}
+          >
+            <Styled.Option $isActive={!communityFeaturesAccepted}>
+              <Styled.TileH4>off</Styled.TileH4>
+            </Styled.Option>
+            <Styled.Option $isActive={communityFeaturesAccepted}>
+              <Styled.TileH4>on</Styled.TileH4>
+            </Styled.Option>
+          </Styled.Switch>
+        </Styled.SwitchContainer>
       )}
-    </Grid>
+    </>
   );
 }

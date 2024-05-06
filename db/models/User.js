@@ -7,6 +7,7 @@ const userSchema = new Schema({
   email: { type: String, required: true },
   image: { type: String, required: true },
   friends: [String],
+  communityFeatures: { type: Boolean, default: false },
 });
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
