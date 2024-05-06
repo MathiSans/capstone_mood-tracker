@@ -17,11 +17,18 @@ export const ColorCircle = styled.div`
   margin-inline-end: 0.5rem;
   border-radius: 2rem;
   background-color: ${(prop) => prop.color};
-  filter: blur(0.5px);
+
   transition: background-color 0.5s ease;
 `;
 
-export const Container = styled(Link)`
+export const OuterContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  grid-column-end: span 2;
+  grid-row-end: span 1;
+`;
+
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -35,8 +42,6 @@ export const Container = styled(Link)`
   box-shadow: inset 0 0 10px rgba(5, 5, 5, 0.3),
     inset 0 0 10px rgba(5, 5, 5, 0.3);
   cursor: pointer;
-  grid-column-end: span 2;
-  grid-row-end: span 1;
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
@@ -60,7 +65,7 @@ export const Pill = styled.div`
   border-radius: 2rem;
   border: 0.5px solid #444444;
   width: auto;
-  height: 1.2rem;
+  height: 1.5rem;
 `;
 
 export const HeadContainer = styled.div`
@@ -77,5 +82,4 @@ const scrollAnimation = keyframes`
 export const TextContainer = styled.div`
   animation: ${scrollAnimation} 20s linear infinite;
   white-space: nowrap;
-  margin: 4px;
 `;
