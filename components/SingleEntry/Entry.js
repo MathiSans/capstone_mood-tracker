@@ -12,7 +12,7 @@ import Intensity from "@/utils/intensity";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa6";
 import { useState } from "react";
-import { AnimatePresence, color, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 import { useSphereState } from "../ContextProviders/SphereStateProvider/SphereStateProvider";
 import { useEffect } from "react";
@@ -20,7 +20,6 @@ import { useEffect } from "react";
 export default function Entry({ id }) {
   const { handleSphereState } = useSphereState();
   const [showSentence, setShowSentence] = useState(true);
-  const [showFriendMessages, setShowFriendMessages] = useState(false);
   const router = useRouter();
   const { data: session } = useSession();
   const { data: entry, isLoading } = useSWR(`/api/entries/${id}`);
@@ -48,12 +47,16 @@ export default function Entry({ id }) {
       method: "DELETE",
     });
     mutate("/api/entries");
-    router.push("index");
+    router.push("start");
   }
 
   function handleDeleteDialog(event, id) {
     event.stopPropagation();
     setDeletingId(id);
+
+    setTimeout(() => {
+      setDeletingId(null);
+    }, 3000);
   }
 
   return (
@@ -110,14 +113,21 @@ export default function Entry({ id }) {
           {deletingId === entry._id ? (
             <DeleteButton
               style={{ color: "red" }}
-              as="a"
               onClick={(event) => handleDeleteEntry(event, entry._id)}
             >
-              <FiTrash2 />
+              <motion.div
+                initial={{ opacity: 1 }}
+                animate={{ opacity: [1, 0] }}
+                transition={{
+                  repeat: Infinity,
+                  ease: "easeOut",
+                }}
+              >
+                <FiTrash2 />
+              </motion.div>
             </DeleteButton>
           ) : (
             <DeleteButton
-              as="a"
               onClick={(event) => handleDeleteDialog(event, entry._id)}
             >
               {showSentence ? (
