@@ -32,7 +32,7 @@ export default function TagCloud({
           $color={
             colorSelected &&
             selectedTags.some((selectedTag) => selectedTag.name === tag.name)
-              ? tag.color || "rgba(255, 255, 255, 0.2)"
+              ? tag.color || "rgba(0, 0, 0, 0.1)"
               : "transparent"
           }
         >
