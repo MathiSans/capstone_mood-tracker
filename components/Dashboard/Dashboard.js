@@ -41,27 +41,6 @@ export default function Dashboard({ dashboardIsOpen }) {
 
   const allEmotionsDisplayed = entriesToDisplay();
 
-  // const handleExperienceClick = (event, experience) => {
-  //   const targetValues = Object.values(event.target);
-  //   const experienceBarChart = targetValues[1].experience;
-
-  //   setClickedExperience(experienceBarChart);
-  //   setTargetExperience(experienceBarChart);
-  //   setSingleExperienceList(!singleExperienceList);
-
-  //   console.log(targetExperience, experienceBarChart, experience);
-
-  //   if (experience === targetExperience) {
-  //     setSingleExperienceList(!singleExperienceList);
-  //     // setClickedExperience(null);
-
-  //     console.log("singleExperienceList", singleExperienceList);
-  //   }
-  //   if (experience !== targetExperience) {
-  //     console.log("experience is not experience");
-  //   }
-  // };
-
   const handleExperienceClick = (experience) => {
     setClickedExperience(experience);
     setTargetExperience(experience);
