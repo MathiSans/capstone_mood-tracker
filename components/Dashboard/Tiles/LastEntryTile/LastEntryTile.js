@@ -1,6 +1,5 @@
-import getWeekdayFromTime from "@/utils/getWeekdayFromTime";
 import { useSession } from "next-auth/react";
-import * as Styled from "./EntryTile.styled";
+import * as Styled from "./LastEntryTile.styled";
 import Intensity from "@/utils/intensity";
 import LinkWrapper from "@/components/LinkWrapper/LinkWrapper";
 
@@ -19,7 +18,12 @@ export default function EntryTile({
     <Styled.OuterContainer>
       <LinkWrapper link={`/id:${entryUrl}`}>
         <Styled.Container>
-          <Styled.ColorCircle color={color} />
+          <Styled.HeadContainer>
+            <Styled.Pill>
+              <Styled.TileH3>Last entry</Styled.TileH3>
+            </Styled.Pill>
+            <Styled.ColorCircle color={color} />
+          </Styled.HeadContainer>
           <Styled.TextContainer>
             {session ? (
               "You "
@@ -33,9 +37,9 @@ export default function EntryTile({
               </>
             )}
             <Styled.StaticText> felt</Styled.StaticText> {experience},{" "}
-            <Styled.StaticText>more specifically</Styled.StaticText>{" "}
-            <Intensity value={intensity} experience={experience} />.
-            <Styled.StaticText> Selected tags: </Styled.StaticText>{" "}
+            <Styled.StaticText>more specifically. </Styled.StaticText>{" "}
+            <Intensity value={intensity} experience={experience} />{" "}
+            <Styled.StaticText>Selected tags:</Styled.StaticText>{" "}
             {reactions.map((reaction, index, array) => (
               <span key={index}>
                 {reaction}
@@ -43,11 +47,6 @@ export default function EntryTile({
               </span>
             ))}
           </Styled.TextContainer>
-          <Styled.Pill>
-            <Styled.TileH3>
-              {getWeekdayFromTime(time)}, {time}
-            </Styled.TileH3>
-          </Styled.Pill>
         </Styled.Container>
       </LinkWrapper>
     </Styled.OuterContainer>

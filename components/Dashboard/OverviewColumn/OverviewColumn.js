@@ -1,6 +1,7 @@
 import { Grid } from "../Dashboard.styled";
 import ActivityTile from "../Tiles/ActivityTile/ActivityTile";
-import NewEntryTile from "./NewEntryTile/NewEntryTile";
+import LastEntryTile from "../Tiles/LastEntryTile/LastEntryTile";
+import NewEntryTile from "../Tiles/NewEntryTile/NewEntryTile";
 import BarChartTile from "../Tiles/BarChartTile/BarChartTile";
 
 export default function OverviewColumn({
@@ -9,11 +10,14 @@ export default function OverviewColumn({
   singleExperienceList,
   clickedExperience,
   singleEmotionDisplayed,
+  entries,
   errorEntries,
   isLoadingEntries,
   handleFilterSwitchClick,
   visualizedData,
 }) {
+  const lastEntry = !isLoadingEntries && entries[entries.length - 1];
+
   return (
     <Grid>
       {!isLoadingEntries && (
@@ -30,6 +34,18 @@ export default function OverviewColumn({
         />
       )}
       <NewEntryTile />
+      {!isLoadingEntries && (
+        <LastEntryTile
+          experience={lastEntry.experience}
+          time={lastEntry.time}
+          color={lastEntry.color}
+          intensity={lastEntry.intensity}
+          reactions={lastEntry.reactions}
+          entryUrl={lastEntry._id}
+          location={lastEntry.location}
+          isOnOverviewColumn
+        />
+      )}
       <ActivityTile isOnOverviewColumn />
     </Grid>
   );
