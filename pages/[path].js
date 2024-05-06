@@ -19,11 +19,15 @@ import Image from "next/image";
 import styled from "styled-components";
 import Link from "next/link";
 
+const ImageWrapper = styled(motion.div)`
+  display: inline-block;
+`;
+
 const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 12vh; /* Setze die Höhe des Containers auf die gesamte Bildschirmhöhe */
+  height: 12vh;
 `;
 
 export default function Home() {
@@ -58,12 +62,14 @@ export default function Home() {
         onClick={() => handleSphereState({ color: "grey", intensity: 0.1 })}
       >
         <Link href="/start">
-          <Image
-            src="/images/mood-tracker-logo1.png"
-            alt="Your Logo"
-            width={45} // Setze die Breite deines Logos
-            height={45} // Setze die Höhe deines Logos
-          />
+          <ImageWrapper whileHover={{ scale: 0.9, rotate: -50 }}>
+            <Image
+              src="/images/mood-tracker-logo1.png"
+              alt="Your Logo"
+              width={50}
+              height={50}
+            />
+          </ImageWrapper>
         </Link>
       </LogoContainer>
       <Container>
