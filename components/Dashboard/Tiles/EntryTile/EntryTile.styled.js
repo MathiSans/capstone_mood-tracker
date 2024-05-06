@@ -67,6 +67,7 @@ export const TextBlock = styled.div`
   color: var(--color-light);
   font-size: ${(props) => (props.isTag ? "0.6rem" : "0.8rem")};
   font-weight: ${(props) => (props.isTag ? "500" : "500")};
+  line-height: 1.4;
 `;
 
 export const EntryText = styled.span`

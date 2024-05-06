@@ -46,21 +46,21 @@ const StyledContainer = styled.div`
 `;
 
 const StyledMuteButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
+  margin-inline-end: 1.5rem;
+  margin-block-end: 20px;
+  height: 40px;
+  width: 40px;
+  font-size: 1.2rem;
   color: ${(props) =>
     props.$isMuted ? `var(--color-neutral)` : `var(--color-main-alt)`};
   border: 1px solid
     ${(props) =>
       props.$isMuted ? `var(--color-neutral)` : `var(--color-main-alt)`};
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-radius: var(--border-radius-round);
-  margin-inline-end: 1.5rem;
-  margin-block-end: 9rem;
-  font-size: 1.2rem;
-  height: 40px;
-  width: 40px;
   cursor: pointer;
   display: ${(props) => (props.$showSettings ? "show" : "none")};
 `;

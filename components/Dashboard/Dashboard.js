@@ -13,7 +13,7 @@ import { animations } from "../AnimationWrapper/animations";
 
 export default function Dashboard({ dashboardIsOpen }) {
   const [selectedColumn, setSelectedColumn] = useState("overview");
-  const [isLast7Days, setIsLast7Days] = useState(true);
+  const [isLast7Days, setIsLast7Days] = useState(false);
   const [targetExperience, setTargetExperience] = useState(null);
   const [singleExperienceList, setSingleExperienceList] = useState(false);
   const [clickedExperience, setClickedExperience] = useState(null);
