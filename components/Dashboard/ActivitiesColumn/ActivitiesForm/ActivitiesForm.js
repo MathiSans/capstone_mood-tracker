@@ -9,13 +9,11 @@ import { useSession } from "next-auth/react";
 
 export default function ActivitiesForm({ handleShowForm }) {
   const [selectedEmotions, setSelectedEmotions] = useState([]);
-  const [inputString, setInputString] = useState([]);
   const [showPicker, setShowPicker] = useState(false);
   const { data: session } = useSession();
   const userId = session?.user.id;
 
   function onEmojiClick(emoji) {
-    setInputString((prevInput) => [...prevInput, emoji]);
     setShowPicker(false);
     window.scrollTo(0, 0);
   }
@@ -35,7 +33,7 @@ export default function ActivitiesForm({ handleShowForm }) {
     event.preventDefault();
     const title = event.target.elements.title.value.trim();
     const description = event.target.elements.description.value.trim();
-    if (!title || !description || inputString.length === 0) {
+    if (!title || !description) {
       alert("Title, description or emoji cannot be empty or just spaces.");
       return;
     }
@@ -48,7 +46,6 @@ export default function ActivitiesForm({ handleShowForm }) {
       body: JSON.stringify({
         user: session ? userId : null,
         title: event.target.elements.title.value,
-        emoji: inputString,
         description: event.target.elements.description.value,
         forEmotion: selectedEmotions,
       }),
@@ -75,31 +72,9 @@ export default function ActivitiesForm({ handleShowForm }) {
     <>
       <Styled.Card>
         <form onSubmit={handleSubmit}>
-          <Styled.EmojiContainer>
-            {inputString.length !== 0 ? (
-              <>
-                <Styled.Emojis $inputString={inputString}>
-                  {inputString}
-                </Styled.Emojis>
-                <Styled.DeleteButton
-                  onClick={() => {
-                    setInputString(inputString.slice(0, -1));
-                  }}
-                >
-                  <FiDelete />
-                </Styled.DeleteButton>
-              </>
-            ) : null}
-            {inputString.length < 5 && (
-              <>
-                {inputString.length === 0 && (
-                  <Styled.AddEmojisSentence>
-                    Add a new activity
-                  </Styled.AddEmojisSentence>
-                )}
-              </>
-            )}
-          </Styled.EmojiContainer>
+          <Styled.AddEmojisSentence>
+            Add a new activity
+          </Styled.AddEmojisSentence>
           {showPicker && (
             <Picker
               style={{

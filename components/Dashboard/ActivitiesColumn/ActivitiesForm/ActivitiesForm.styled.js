@@ -21,7 +21,8 @@ export const question = styled.p`
 `;
 
 export const AddEmojisSentence = styled.p`
-  text-align: center;
+  text-align: left;
+  margin-bottom: 10px;
 `;
 
 export const EmojiContainer = styled.div`
@@ -42,7 +43,7 @@ export const Card = styled.div`
   border-radius: var(--border-radius-small);
   margin: 1rem;
   max-width: 600px;
-  padding: var(--spacing-xxxl);
+  padding: 7%;
   position: relative;
   grid-column-end: span 4;
   grid-row-end: span 8;
