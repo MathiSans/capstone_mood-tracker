@@ -4,7 +4,7 @@ import { Container } from "./Dashboard.styled";
 import EntriesColumn from "./EntriesColumn/EntriesColumn";
 import Menu from "./Menu/Menu";
 import OverviewColumn from "./OverviewColumn/OverviewColumn";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useData } from "@/lib/useData";
 import last7DaysAnalyser from "@/utils/last7DaysAnalyser";
@@ -44,10 +44,9 @@ export default function Dashboard({ dashboardIsOpen }) {
   const handleExperienceClick = (experience) => {
     setClickedExperience(experience);
     setTargetExperience(experience);
-    if (experience === targetExperience) {
-      setSingleExperienceList(!singleExperienceList);
-      setClickedExperience(null);
-    }
+    setSingleExperienceList(
+      experience !== clickedExperience || !singleExperienceList
+    );
   };
 
   function entriesToDisplay() {
@@ -99,6 +98,7 @@ export default function Dashboard({ dashboardIsOpen }) {
           errorEntries={errorEntries}
           handleFilterSwitchClick={handleFilterSwitchClick}
           visualizedData={visualizedData}
+          targetExperience={targetExperience}
         />
       )}
       {selectedColumn === menuItems[1].id && (
