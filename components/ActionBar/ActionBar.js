@@ -1,9 +1,12 @@
 import { Container, MenuItem } from "./ActionBar.styled";
-import { LuSettings2 } from "react-icons/lu";
 import Image from "next/image";
 import { signIn, signOut } from "next-auth/react";
+import { TbSphere } from "react-icons/tb";
+import { TbSphereOff } from "react-icons/tb";
 
 export default function ActionBar({
+  handleHideInterface,
+  hideInterface,
   dashboardIsOpen,
   handleDashboardIsOpen,
   session,
@@ -18,7 +21,11 @@ export default function ActionBar({
 
   return (
     <Container>
-      <MenuItem onClick={handleLoginButton} $left $isActive={true}>
+      <MenuItem
+        onClick={!hideInterface ? () => handleLoginButton() : undefined}
+        $left
+        $isActive={!hideInterface}
+      >
         {session ? (
           <Image
             alt="user profile picture"
@@ -32,11 +39,19 @@ export default function ActionBar({
           "login"
         )}
       </MenuItem>
-      <MenuItem onClick={handleDashboardIsOpen} $isActive={true}>
+      <MenuItem
+        onClick={!hideInterface ? () => handleDashboardIsOpen() : undefined}
+        $isActive={!hideInterface}
+      >
         {dashboardIsOpen ? "close" : "open"}
       </MenuItem>
-      <MenuItem $right $isActive={true}>
-        <LuSettings2 />
+      <MenuItem
+        style={{ fontSize: "1rem" }}
+        $right
+        $isActive={true}
+        onClick={() => handleHideInterface()}
+      >
+        {!hideInterface ? <TbSphere /> : <TbSphereOff />}
       </MenuItem>
     </Container>
   );

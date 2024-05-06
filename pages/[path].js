@@ -15,6 +15,7 @@ import { useDashboardState } from "@/components/DashboardStateProvider/Dashboard
 import { useSphereState } from "@/components/ContextProviders/SphereStateProvider/SphereStateProvider";
 import { motion, AnimatePresence } from "framer-motion";
 import { animations } from "@/components/AnimationWrapper/animations";
+import styled from "styled-components";
 
 export default function Home() {
   const { dashboardIsOpen, handleDashboardIsOpen } = useDashboardState();
@@ -23,6 +24,7 @@ export default function Home() {
   const { path } = router.query;
   const { data: session } = useSession();
   const { isLoadingEntries } = useData().fetchedAllEntries;
+  const [hideInterface, setHideInterface] = useState(false);
 
   const componentMap = {
     "new-entry": Flow,
@@ -31,19 +33,30 @@ export default function Home() {
     "guided-meditation": GuidedMeditation,
   };
 
-  const Component = path?.includes("id:") ? Entry : componentMap[path];
+  const Component = path?.includes("id:")
+    ? Entry
+    : path?.includes("tool:")
+    ? ToolsWrapper
+    : componentMap[path];
+
+  function handleHideInterface() {
+    setHideInterface(!hideInterface);
+  }
 
   return (
-    <>
+    <PathContainer>
       <ActionBar
+        handleHideInterface={handleHideInterface}
+        hideInterface={hideInterface}
         session={session}
         dashboardIsOpen={dashboardIsOpen}
         handleDashboardIsOpen={handleDashboardIsOpen}
       />
+
       <Animation
         color={sphereState.color}
         opacity={sphereState.intensity}
-        hideInterface={false}
+        hideInterface={hideInterface}
       />
       <Container>
         <AnimatePresence initial={false}>
@@ -64,6 +77,13 @@ export default function Home() {
           )}
         </AnimatePresence>
       </Container>
-    </>
+    </PathContainer>
   );
 }
+
+const PathContainer = styled.div`
+  height: 100dvh;
+  width: 100vw;
+  overflow: hidden;
+  position: absolute;
+`;
