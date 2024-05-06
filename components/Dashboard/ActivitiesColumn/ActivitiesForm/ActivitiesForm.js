@@ -64,11 +64,11 @@ export default function ActivitiesForm({ handleShowForm }) {
   }
 
   const checkboxes = [
-    { text: "enjoyment", color: "#dabe39" },
-    { text: "fear", color: "purple" },
-    { text: "anger", color: "red" },
-    { text: "disgust", color: "green" },
-    { text: "sadness", color: "blue" },
+    { text: "enjoyment", color: "#B6A660" },
+    { text: "fear", color: "#9265BD" },
+    { text: "anger", color: "#CD7373" },
+    { text: "disgust", color: "#779962" },
+    { text: "sadness", color: "#7190D4" },
   ];
 
   return (
