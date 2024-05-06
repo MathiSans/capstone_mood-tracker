@@ -1,25 +1,29 @@
 import styled from "styled-components";
+import lightenTextColor from "@/utils/lightenTextColor";
 
 export const TextContainer = styled.div`
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 10%,
+    black 95%,
+    transparent 100%
+  );
+  color: var(--color-light);
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
   z-index: 1;
 `;
 
-export const DynamicCardSpan = styled.p`
-  color: ${(prop) => prop.color};
-`;
-
-export const StaticText = styled.span`
-  color: var(--color-neutral);
-`;
-
 export const ColorCircle = styled.div`
-  width: 0.5rem;
-  height: 0.5rem;
-  margin-inline-end: 0.5rem;
+  display: flex;
+  width: 0.6rem;
+  height: 0.6rem;
   border-radius: 2rem;
   background-color: ${(prop) => prop.color};
-  filter: blur(0.5px);
-  transition: background-color 0.5s ease;
+  border: 1.5px solid rgba(0, 0, 0, 0.6);
 `;
 
 export const OuterContainer = styled.div`
@@ -30,7 +34,6 @@ export const OuterContainer = styled.div`
 `;
 
 export const Container = styled.div`
-  position: relative;
   width: 100%;
   height: 100%;
   border-radius: var(--border-radius-small);
@@ -38,31 +41,54 @@ export const Container = styled.div`
     radial-gradient(circle at right, #444444, #00000000);
   box-shadow: inset 0 0 10px rgba(5, 5, 5, 0.3),
     inset 0 0 10px rgba(5, 5, 5, 0.3);
-  padding: 12px 14px;
+  padding: 0.4rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
   text-decoration: none;
-  color: var(--color-primary-alt);
-  font-size: 11px;
+  font-size: 0.6rem;
+  font-weight: 600;
 `;
 
 export const TileH3 = styled.h3`
   color: var(--color-light);
   font-size: 0.6rem;
   font-weight: 500;
-  margin: 0.5rem;
+`;
+
+export const TextBlock = styled.div`
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.4rem;
+  height: auto;
+  margin-block-start: 0.5rem;
+  padding-inline: 0.6rem;
+  padding-block: 0.4rem;
+  color: var(--color-light);
+  font-size: ${(props) => (props.isTag ? "0.6rem" : "0.8rem")};
+  font-weight: ${(props) => (props.isTag ? "500" : "500")};
+  line-height: 1.4;
+`;
+
+export const EntryText = styled.span`
+  color: ${(props) => props.color || "var(--color-light)"};
+  ${(props) =>
+    props.color &&
+    `
+    color: ${lightenTextColor(props.color, 0.5)}; 
+  `}
 `;
 
 export const Pill = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background: var(--color-dark);
   color: var(--color-light);
   border-radius: 2rem;
   border: 0.5px solid #444444;
   width: auto;
-  height: 1.2rem;
+  height: auto;
+  padding-inline: 0.6rem;
+  padding-block: 0.3rem;
 `;

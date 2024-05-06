@@ -14,7 +14,7 @@ export const EntriesDescription = styled.article`
   align-self: center;
   font-weight: ${(props) => (props.$bold ? "bold" : "normal")};
   color: var(--color-light);
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   font-weight: 400;
   padding-inline: 1rem;
 `;

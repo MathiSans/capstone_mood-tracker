@@ -17,7 +17,7 @@ export const ColorCircle = styled.div`
   margin-inline-end: 0.5rem;
   border-radius: 2rem;
   background-color: ${(prop) => prop.color};
-  filter: blur(0.5px);
+
   transition: background-color 0.5s ease;
 `;
 
@@ -65,7 +65,7 @@ export const Pill = styled.div`
   border-radius: 2rem;
   border: 0.5px solid #444444;
   width: auto;
-  height: 1.2rem;
+  height: 1.5rem;
 `;
 
 export const HeadContainer = styled.div`
@@ -82,5 +82,4 @@ const scrollAnimation = keyframes`
 export const TextContainer = styled.div`
   animation: ${scrollAnimation} 20s linear infinite;
   white-space: nowrap;
-  margin: 4px;
 `;

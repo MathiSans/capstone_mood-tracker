@@ -8,9 +8,6 @@ import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
 import fetchLocation from "@/utils/locationTracking";
 import AnimationWrapper from "../AnimationWrapper/AnimationWrapper";
-import Settings from "../Settings/Settings";
-import SettingsTrigger from "../SettingsTrigger/SettingsTrigger";
-import { SettingsTriggerContainer } from "@/components/Overlay/Overlay.styled";
 import { useSphereState } from "../ContextProviders/SphereStateProvider/SphereStateProvider";
 import { useEffect } from "react";
 
@@ -22,7 +19,7 @@ export default function Flow() {
   const [color, setColor] = useState("grey");
   const [page, setPage] = useState(0);
   const [audioTrigger, setAudioTrigger] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
+  const [showSettings, setShowSettings] = useState(true);
   const [hideInterface, setHideInterface] = useState(false);
   const { handleSphereState } = useSphereState();
 
@@ -34,14 +31,14 @@ export default function Flow() {
   const userId = session?.user.id;
 
   const guides = [
-    "share your emotions ...",
-    "breathe",
-    "think about your day",
-    "how do you feel?",
-    "what do you feel right now?",
-    "how intense is this feeling for you?",
-    "what's your reaction?",
-    "Thank you for sharing",
+    "Breath in...",
+    "... and out",
+    "Assess this very moment",
+    "And continue...",
+    "What feeling are you experiencing?",
+    "How intense is this feeling?",
+    "How do or did you react?",
+    "Your new entry has been added.",
   ];
 
   function handleShowSettings() {
@@ -94,16 +91,6 @@ export default function Flow() {
     }
   }
 
-  const button = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        delay: 0,
-      },
-    },
-  };
-
   const handleLoginButton = () => {
     if (session) {
       signOut();
@@ -120,18 +107,6 @@ export default function Flow() {
         audioTrigger={audioTrigger}
         setAudioTrigger={setAudioTrigger}
       />
-      <SettingsTriggerContainer>
-        <SettingsTrigger
-          showSettings={showSettings}
-          handleShowSettings={handleShowSettings}
-        />
-      </SettingsTriggerContainer>
-      {showSettings && (
-        <Settings
-          hideInterface={hideInterface}
-          handleHideInterface={handleHideInterface}
-        />
-      )}
       <Styled.Container>
         <Styled.Page>
           <PageDisplay
@@ -150,7 +125,7 @@ export default function Flow() {
         <AnimationWrapper hideInterface={hideInterface} fadeIn key={page}>
           <Styled.Navigation>
             {!session && page === 0 && (
-              <NavButton handleClick={handleLoginButton}>login</NavButton>
+              <NavButton handleClick={handleLoginButton}>Login</NavButton>
             )}
             {page < 1 && (
               <NavButton
@@ -160,8 +135,8 @@ export default function Flow() {
                 }}
               >
                 {!session
-                  ? "log your mood anonymously"
-                  : "log your current mood"}
+                  ? "Log your mood anonymously"
+                  : "Log your current mood"}
               </NavButton>
             )}
             {page === 1 && (
@@ -170,14 +145,14 @@ export default function Flow() {
                   setPage((currPage) => currPage + 1);
                 }}
               >
-                next
+                Next
               </NavButton>
             )}
             {(page === 3 || page === 4) && (
               <NavButton
                 handleClick={() => setPage((currPage) => currPage - 1)}
               >
-                prev
+                Previous
               </NavButton>
             )}
             {(page === 2 || page === 3) && (
@@ -187,7 +162,7 @@ export default function Flow() {
                   setPage((currPage) => currPage + 1);
                 }}
               >
-                next
+                Next
               </NavButton>
             )}
             {page === 4 && (
@@ -195,13 +170,13 @@ export default function Flow() {
                 disabled={reactions.length === 0}
                 handleClick={handleSave}
               >
-                next
+                Next
               </NavButton>
             )}
 
             {page === 5 && (
               <NavButton linkToPage={"./entries_old"}>
-                go to emotion entries
+                Check out your entries
               </NavButton>
             )}
           </Styled.Navigation>

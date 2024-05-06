@@ -18,12 +18,10 @@ export default function EntryTile({
     <Styled.OuterContainer>
       <LinkWrapper link={`/id:${entryUrl}`}>
         <Styled.Container>
-          <Styled.HeadContainer>
-            <Styled.Pill>
-              <Styled.TileH3>Last entry</Styled.TileH3>
-            </Styled.Pill>
+          <Styled.Pill>
+            <Styled.TileH3>Last entry</Styled.TileH3>
             <Styled.ColorCircle color={color} />
-          </Styled.HeadContainer>
+          </Styled.Pill>
           <Styled.TextContainer>
             {session ? (
               "You "
