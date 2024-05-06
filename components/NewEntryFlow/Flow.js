@@ -8,9 +8,6 @@ import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
 import fetchLocation from "@/utils/locationTracking";
 import AnimationWrapper from "../AnimationWrapper/AnimationWrapper";
-import Settings from "../x_Settings/Settings";
-import SettingsTrigger from "../x_SettingsTrigger/SettingsTrigger";
-import { SettingsTriggerContainer } from "@/components/Overlay/Overlay.styled";
 import { useSphereState } from "../ContextProviders/SphereStateProvider/SphereStateProvider";
 import { useEffect } from "react";
 
