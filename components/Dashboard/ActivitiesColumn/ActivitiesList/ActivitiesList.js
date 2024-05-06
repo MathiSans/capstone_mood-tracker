@@ -8,17 +8,19 @@ import ActivityTile from "../../Tiles/ActivityTile/ActivityTile";
 export default function ActivitiesList({ handleShowForm }) {
   const [filterOption, setFilterOption] = useState("all");
   const { data: session } = useSession();
-  const { data: activities, isLoading } = useSWR("/api/activities");
+  const { data: initialActivities, isLoading } = useSWR("/api/activities");
 
   if (isLoading) {
     return <p>loading...</p>;
   }
 
-  if (!activities) {
+  if (!initialActivities) {
     return null;
   }
 
-  const filteredActivities = activities.filter((activity) => {
+  const sortedActivities = [...initialActivities].reverse();
+
+  const filteredActivities = sortedActivities.filter((activity) => {
     if (filterOption === "all") {
       return true;
     } else if (filterOption === "tools") {
