@@ -9,8 +9,7 @@ export default function NavButton({
 }) {
   const theme = useTheme();
   return (
-    //! Is this conditional rendering still needed?
-    <Styled.Button onClick={handleClick} disabled={disabled}>
+    <Styled.Button onClick={handleClick} $disabled={disabled}>
       {linkToPage ? (
         <Styled.ButtonTextLink $disabled href={linkToPage} theme={theme}>
           {children}

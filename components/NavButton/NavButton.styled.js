@@ -6,7 +6,8 @@ export const Button = styled.button`
   align-items: center;
   padding: var(--spacing-m) 1rem;
   background: rgba(255, 255, 255, 0.1);
-  color: var(--color-light);
+  color: ${(props) =>
+    props.$disabled ? "var(--color-neutral)" : "var(--color-light)"};
   border: transparent;
   border-radius: var(--border-radius-small);
   cursor: pointer;

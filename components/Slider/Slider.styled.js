@@ -8,7 +8,7 @@ export const RangeInput = styled.input`
   appearance: none;
   -webkit-appearance: none;
   margin: var(--spacing-m) 0;
-  width: 100%;
+  width: 300px;
 
   &:focus {
     outline: none;
@@ -30,7 +30,7 @@ export const RangeInput = styled.input`
     border-radius: 50%;
     background: rgba(255, 255, 255, 1);
     cursor: pointer;
-    transform: translateY(-50%);
+    transform: translateY(-45%);
     background-blend-mode: normal;
   }
 `;

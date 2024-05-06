@@ -2,6 +2,7 @@ import { useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { experiences } from "@/experiences";
 import NavButton from "@/components/NavButton/NavButton";
+import LinkWrapper from "../LinkWrapper/LinkWrapper";
 import PageDisplay from "@/components/PageDisplay/PageDisplay";
 import * as Styled from "@/components/Layout/Layout.styled";
 import useSWR from "swr";
@@ -124,10 +125,7 @@ export default function Flow() {
         </Styled.Page>
         <AnimationWrapper hideInterface={hideInterface} fadeIn key={page}>
           <Styled.Navigation>
-            {!session && page === 0 && (
-              <NavButton handleClick={handleLoginButton}>Login</NavButton>
-            )}
-            {page < 1 && (
+            {page === 0 && (
               <NavButton
                 handleClick={() => {
                   setAudioTrigger(true);
@@ -175,8 +173,8 @@ export default function Flow() {
             )}
 
             {page === 5 && (
-              <NavButton linkToPage={"./entries_old"}>
-                Check out your entries
+              <NavButton>
+                <LinkWrapper link="start">Check out your entries</LinkWrapper>
               </NavButton>
             )}
           </Styled.Navigation>
