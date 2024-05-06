@@ -5,8 +5,10 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace("/index");
-  });
+    setTimeout(() => {
+      router.replace("/index");
+    }, 0);
+  }, []);
 
   return null;
 }
