@@ -17,7 +17,10 @@ export default function ActivityTile({ isOnOverviewColumn, activity }) {
             ? activities
                 .filter((activity) => activity.hasOwnProperty("tool"))
                 .map((activity) => (
-                  <Activity key={activity._id} activity={activity} />
+                  <Activity
+                    key={activity._id}
+                    activity={activity}
+                  />
                 ))
             : []}
         </Carousel>

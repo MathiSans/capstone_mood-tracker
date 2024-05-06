@@ -1,5 +1,6 @@
 import * as Styled from "./Activity.styled";
 import LinkWrapper from "@/components/LinkWrapper/LinkWrapper";
+import RandomIcon from "../RandomIcon/RandomIcon.js";
 
 export default function Activity({ activity }) {
   return (
@@ -10,6 +11,7 @@ export default function Activity({ activity }) {
           <Styled.ActivityDescription>
             {activity.description}
           </Styled.ActivityDescription>
+          <RandomIcon activity={activity} />
         </LinkWrapper>
       ) : (
         <>
@@ -17,6 +19,7 @@ export default function Activity({ activity }) {
           <Styled.ActivityDescription>
             {activity.description}
           </Styled.ActivityDescription>
+          <RandomIcon activity={activity} />
         </>
       )}
     </>

@@ -11,6 +11,8 @@ const activitySchema = new Schema({
   forEmotion: [String],
   tool: Boolean,
   link: String,
+  shapeIndex: Number,
+  shapeType: String,
 });
 
 const Activity =
