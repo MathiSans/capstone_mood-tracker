@@ -71,7 +71,7 @@ export const Container = styled.div`
 
 export const SingleBar = styled.div`
   width: 100%;
-  height: ${(props) => props.barHeight * 2}%;
+  height: ${(props) => props.barHeight}%;
   background-color: ${(props) => props.color};
   border-radius: var(--border-radius-small);
   border: ${(props) => (props.isClicked ? "2.5px solid white" : "none")};
