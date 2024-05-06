@@ -279,7 +279,7 @@ export default function CommunityColumn() {
         </Grid>
       ) : (
         <Styled.SwitchContainer>
-          Enable community features to see your friends' latest entries and
+          Enable community features to see your friends latest entries and
           reactions. Your latest entries will be visable for other users who
           also accepted these terms.
           <Styled.Switch
