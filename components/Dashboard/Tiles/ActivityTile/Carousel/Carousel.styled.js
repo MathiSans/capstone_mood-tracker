@@ -35,9 +35,9 @@ export const Indicator = styled.div`
   height: 0.35rem;
   width: 0.35rem;
   border-radius: 50%;
-  background: ${(props) => (props.active ? "white" : "grey")};
+  background: ${(props) => (props.$active ? "white" : "grey")};
   ${(props) =>
-    props.active &&
+    props.$active &&
     css`
       animation: ${css`
         ${indicatorAnimation} 5500ms forwards

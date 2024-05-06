@@ -31,6 +31,7 @@ export default function EntriesColumn({
           isLoadingEntries={isLoadingEntries}
           errorEntries={errorEntries}
           visualizedData={visualizedData}
+          targetExperience={targetExperience}
         />
       )}
 
