@@ -22,6 +22,7 @@ export default function Home() {
   const router = useRouter();
   const { path } = router.query;
   const { data: session } = useSession();
+  const { isLoadingEntries } = useData().fetchedAllEntries;
 
   const componentMap = {
     "new-entry": Flow,
@@ -45,8 +46,10 @@ export default function Home() {
         hideInterface={false}
       />
       <Container>
-        <AnimatePresence mode="wait">
-          <Dashboard key="dashboard" dashboardIsOpen={dashboardIsOpen} />
+        <AnimatePresence>
+          {!isLoadingEntries && (
+            <Dashboard key="dashboard" dashboardIsOpen={dashboardIsOpen} />
+          )}
           {Component && (
             <motion.div
               key={path}

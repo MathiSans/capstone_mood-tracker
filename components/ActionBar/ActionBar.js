@@ -26,6 +26,7 @@ export default function ActionBar({
             src={session.user.image}
             width={24}
             height={24}
+            priority
           />
         ) : (
           "login"

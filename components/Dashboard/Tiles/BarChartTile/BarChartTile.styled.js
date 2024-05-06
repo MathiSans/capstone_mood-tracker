@@ -81,10 +81,10 @@ export const Container = styled.div`
 
 export const SingleBar = styled.div`
   width: 100%;
-  height: ${(props) => props.barHeight}%;
-  background-color: ${(props) => props.color};
+  height: ${(props) => props.$barHeight}%;
+  background-color: ${(props) => props.$color};
   border-radius: 2rem;
-  border: ${(props) => (props.isClicked ? "2.5px solid white" : "none")};
+  border: ${(props) => (props.$isClicked ? "2.5px solid white" : "none")};
   border-top-left-radius: var(--border-radius-small);
   border-top-right-radius: var(--border-radius-small);
   border-bottom-left-radius: 0.2rem;
