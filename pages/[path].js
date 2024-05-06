@@ -46,7 +46,7 @@ export default function Home() {
         hideInterface={false}
       />
       <Container>
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
           {!isLoadingEntries && (
             <Dashboard key="dashboard" dashboardIsOpen={dashboardIsOpen} />
           )}
@@ -54,9 +54,9 @@ export default function Home() {
             <motion.div
               key={path}
               variants={animations}
-              initial="fadeOut"
+              // initial="fadeOut"
               animate={dashboardIsOpen ? "fadeOut" : "fadeIn"}
-              exit="fadeOut"
+              // exit="fadeOut"
               transition="easeInOut"
             >
               <Component id={path.replace("id:", "")} />

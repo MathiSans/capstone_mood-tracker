@@ -17,7 +17,7 @@ export const Grid = styled.div`
   padding: 114px 0 114px 0;
   display: grid;
   grid-template-columns: 80px 80px 80px 80px;
-  grid-gap: 1rem;
+  grid-gap: 8px;
   grid-auto-rows: 80px;
   overflow-y: scroll;
   *::-webkit-scrollbar {

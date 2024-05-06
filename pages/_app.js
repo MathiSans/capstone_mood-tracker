@@ -14,6 +14,11 @@ const theme = {
     light: "white",
     neutral: "grey",
     danger: "red",
+    anger: "#CD7373",
+    fear: "#9265BD",
+    enjoyment: "#B6A660",
+    disgust: "#779962",
+    sadness: "#7190D4",
   },
   fonts: {
     main: "system-ui",
