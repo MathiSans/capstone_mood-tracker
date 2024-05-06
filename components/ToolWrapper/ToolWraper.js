@@ -5,6 +5,7 @@ import QuotesWrapper from "../../components/QuotesWrapper/QuotesWrapper";
 import SmileTrainerWrapper from "@/components/SmileTrainerWrapper/SmileTrainerWrapper";
 import { Container, Page } from "@/components/Layout/Layout.styled";
 import GuidedMeditation from "@/components/GuidedMeditation/GuidedMeditation";
+import EmotionTextAnalysis from "@/pages/ekman";
 
 export default function ToolWrapper({ tool }) {
   const [page, setPage] = useState(0);
@@ -25,6 +26,9 @@ export default function ToolWrapper({ tool }) {
               {page === 1 && tool.includes("meditation") && (
                 <GuidedMeditation />
               )}
+              {page === 1 &&
+                tool.includes("text-analyser") &&
+                (<EmotionTextAnalysis />)(<GuidedMeditation />)}
             </>
           )}
         </Page>
