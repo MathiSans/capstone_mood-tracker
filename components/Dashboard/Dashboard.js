@@ -39,8 +39,6 @@ export default function Dashboard({ dashboardIsOpen }) {
   const last7DaysEntries =
     !isLoadingEntries && last7DaysAnalyser(session ? userEntries : allEntries);
 
-  const allEmotionsDisplayed = entriesToDisplay();
-
   const handleExperienceClick = (experience) => {
     setClickedExperience(experience);
     setTargetExperience(experience);
@@ -60,6 +58,8 @@ export default function Dashboard({ dashboardIsOpen }) {
       return allEntries;
     }
   }
+
+  const allEmotionsDisplayed = entriesToDisplay();
 
   const singleEmotionDisplayed =
     allEmotionsDisplayed &&
