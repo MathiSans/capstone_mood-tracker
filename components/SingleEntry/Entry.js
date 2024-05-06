@@ -12,7 +12,7 @@ import Intensity from "@/utils/intensity";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa6";
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, color, motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 import { useSphereState } from "../ContextProviders/SphereStateProvider/SphereStateProvider";
 import { useEffect } from "react";
@@ -20,6 +20,7 @@ import { useEffect } from "react";
 export default function Entry({ id }) {
   const { handleSphereState } = useSphereState();
   const [showSentence, setShowSentence] = useState(true);
+  const [showFriendMessages, setShowFriendMessages] = useState(false);
   const router = useRouter();
   const { data: session } = useSession();
   const { data: entry, isLoading } = useSWR(`/api/entries/${id}`);

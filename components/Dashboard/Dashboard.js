@@ -17,12 +17,13 @@ export default function Dashboard({ dashboardIsOpen }) {
   const [targetExperience, setTargetExperience] = useState(null);
   const [singleExperienceList, setSingleExperienceList] = useState(false);
   const [clickedExperience, setClickedExperience] = useState(null);
+  const { data: session } = useSession();
 
   const menuItems = [
     { id: "overview", label: "Overview" },
     { id: "entries", label: "Entries" },
     { id: "activities", label: "Activities" },
-    { id: "community", label: "Community" },
+    ...(session ? [{ id: "community", label: "Community" }] : []),
   ];
 
   function handleSelectedColumnChange(column) {
@@ -34,7 +35,6 @@ export default function Dashboard({ dashboardIsOpen }) {
   const {
     fetchedUserEntries: { userEntries },
   } = useData();
-  const { data: session } = useSession();
 
   const last7DaysEntries =
     !isLoadingEntries && last7DaysAnalyser(session ? userEntries : allEntries);
@@ -82,6 +82,7 @@ export default function Dashboard({ dashboardIsOpen }) {
       transition="easeInOut"
     >
       <Menu
+        session={session}
         menuItems={menuItems}
         selectedColumn={selectedColumn}
         handleSelectedColumnChange={handleSelectedColumnChange}
@@ -119,7 +120,7 @@ export default function Dashboard({ dashboardIsOpen }) {
         />
       )}
       {selectedColumn === menuItems[2].id && <ActivitiesColumn />}
-      {selectedColumn === menuItems[3].id && <CommunityColumn />}
+      {session && selectedColumn === menuItems[3].id && <CommunityColumn />}
     </Container>
   );
 }

@@ -53,6 +53,7 @@ export default NextAuth({
   adapter: MongoDBAdapter(clientPromise),
   session: {
     strategy: "jwt",
+    maxAge: 60 * 60,
   },
 
   callbacks: {
