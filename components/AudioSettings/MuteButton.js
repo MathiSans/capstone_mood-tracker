@@ -60,7 +60,7 @@ const StyledMuteButton = styled.button`
   border: 1px solid
     ${(props) =>
       props.$isMuted ? `var(--color-neutral)` : `var(--color-main-alt)`};
-  border-radius: var(--border-radius-round);
+  border-radius: var(--border-radius-small);
   cursor: pointer;
   display: ${(props) => (props.$showSettings ? "show" : "none")};
 `;

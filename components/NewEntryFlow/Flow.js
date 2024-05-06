@@ -8,8 +8,8 @@ import useSWR from "swr";
 import AudioSettings from "../AudioSettings/AudioSettings";
 import fetchLocation from "@/utils/locationTracking";
 import AnimationWrapper from "../AnimationWrapper/AnimationWrapper";
-import Settings from "../Settings/Settings";
-import SettingsTrigger from "../SettingsTrigger/SettingsTrigger";
+import Settings from "../x_Settings/Settings";
+import SettingsTrigger from "../x_SettingsTrigger/SettingsTrigger";
 import { SettingsTriggerContainer } from "@/components/Overlay/Overlay.styled";
 import { useSphereState } from "../ContextProviders/SphereStateProvider/SphereStateProvider";
 import { useEffect } from "react";
@@ -93,16 +93,6 @@ export default function Flow() {
       setPage((currPage) => currPage + 1);
     }
   }
-
-  const button = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        delay: 0,
-      },
-    },
-  };
 
   const handleLoginButton = () => {
     if (session) {
