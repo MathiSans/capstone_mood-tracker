@@ -15,6 +15,7 @@ import { useDashboardState } from "@/components/DashboardStateProvider/Dashboard
 import { useSphereState } from "@/components/ContextProviders/SphereStateProvider/SphereStateProvider";
 import { motion, AnimatePresence } from "framer-motion";
 import { animations } from "@/components/AnimationWrapper/animations";
+import ToolWrapper from "@/components/ToolWrapper/ToolWraper";
 
 export default function Home() {
   const { dashboardIsOpen, handleDashboardIsOpen } = useDashboardState();
@@ -31,8 +32,12 @@ export default function Home() {
     "guided-meditation": GuidedMeditation,
   };
 
-  const Component = path?.includes("id:") ? Entry : componentMap[path];
-
+  const Component = path?.includes("id:")
+    ? Entry
+    : path?.includes("tool:")
+    ? ToolWrapper
+    : componentMap[path];
+  console.log(path);
   return (
     <>
       <ActionBar
@@ -59,7 +64,10 @@ export default function Home() {
               // exit="fadeOut"
               transition="easeInOut"
             >
-              <Component id={path.replace("id:", "")} />
+              <Component
+                id={path.replace("id:", "")}
+                tool={path.replace("tool:", "")}
+              />
             </motion.div>
           )}
         </AnimatePresence>
