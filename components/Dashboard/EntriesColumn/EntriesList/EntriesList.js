@@ -10,11 +10,11 @@ export default function EntriesList({ data }) {
       </NoDataContainer>
     );
   }
+  const reversedData = [...data].reverse();
   return (
     <>
-      {data.map(
+      {reversedData.map(
         ({ _id, experience, time, color, intensity, reactions, location }) => {
-          // onEntryRender(_id);
           return (
             <EntryTile
               key={_id}
