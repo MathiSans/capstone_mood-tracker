@@ -5,7 +5,6 @@ export const Container = styled.div`
   position: fixed;
   display: flex;
   justify-content: space-between;
-  top: 36px;
   height: 42px;
   width: 368px;
   border-radius: 16px;

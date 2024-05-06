@@ -67,7 +67,6 @@ const HeaderSwitches = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 20px;
   width: 100%;
   height: auto; /* Änderung der Höhe auf auto */
   position: relative;

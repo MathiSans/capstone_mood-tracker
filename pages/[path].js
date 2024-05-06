@@ -15,10 +15,20 @@ import { useDashboardState } from "@/components/DashboardStateProvider/Dashboard
 import { useSphereState } from "@/components/ContextProviders/SphereStateProvider/SphereStateProvider";
 import { motion, AnimatePresence } from "framer-motion";
 import { animations } from "@/components/AnimationWrapper/animations";
+import Image from "next/image";
+import styled from "styled-components";
+import Link from "next/link";
+
+const LogoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 12vh; /* Setze die Höhe des Containers auf die gesamte Bildschirmhöhe */
+`;
 
 export default function Home() {
   const { dashboardIsOpen, handleDashboardIsOpen } = useDashboardState();
-  const { sphereState } = useSphereState();
+  const { sphereState, handleSphereState } = useSphereState();
   const router = useRouter();
   const { path } = router.query;
   const { data: session } = useSession();
@@ -44,6 +54,18 @@ export default function Home() {
         opacity={sphereState.intensity}
         hideInterface={false}
       />
+      <LogoContainer
+        onClick={() => handleSphereState({ color: "grey", intensity: 0.1 })}
+      >
+        <Link href="/start">
+          <Image
+            src="/images/mood-tracker-logo1.png"
+            alt="Your Logo"
+            width={45} // Setze die Breite deines Logos
+            height={45} // Setze die Höhe deines Logos
+          />
+        </Link>
+      </LogoContainer>
       <Container>
         <AnimatePresence mode="wait">
           <Dashboard key="dashboard" dashboardIsOpen={dashboardIsOpen} />
