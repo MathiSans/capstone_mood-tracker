@@ -102,8 +102,8 @@ export default function Home() {
           animate={{ opacity: 0, transition: { duration: 2, delay: 7 } }}
         >
           You enabled Sphere Mode. Touch the sphere, turn it, make it smaller or
-          larger and reaange it to your liking. Reset the sphere by clicking the
-          logo up top.
+          larger and rearrange it to your liking. Reset the sphere by clicking
+          the logo up top.
         </SphereModeInfo>
       )}
       <Container>
