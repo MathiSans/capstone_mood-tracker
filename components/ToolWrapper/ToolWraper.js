@@ -1,11 +1,10 @@
 import ToolMoodMeasurer from "@/components/ToolMoodMeasurer/ToolMoodMeasurer";
 import { useState } from "react";
-import { useRouter } from "next/router";
 import QuotesWrapper from "../../components/QuotesWrapper/QuotesWrapper";
 import SmileTrainerWrapper from "@/components/SmileTrainerWrapper/SmileTrainerWrapper";
 import { Container, Page } from "@/components/Layout/Layout.styled";
 import GuidedMeditation from "@/components/GuidedMeditation/GuidedMeditation";
-import EmotionTextAnalysis from "@/pages/ekman";
+import EmotionTextAnalysis from "@/components/EmotionTextAnalysis/EmotionTextAnalysis";
 
 export default function ToolWrapper({ tool }) {
   const [page, setPage] = useState(0);
@@ -26,9 +25,7 @@ export default function ToolWrapper({ tool }) {
               {page === 1 && tool.includes("meditation") && (
                 <GuidedMeditation />
               )}
-              {page === 1 &&
-                tool.includes("text-analyser") &&
-                (<EmotionTextAnalysis />)(<GuidedMeditation />)}
+              {tool === "textanalyser" && page === 1 && <EmotionTextAnalysis />}{" "}
             </>
           )}
         </Page>
