@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  margin-top: 60px;
   z-index: 100;
   position: fixed;
   display: flex;
@@ -10,7 +11,7 @@ export const Container = styled.div`
   border-radius: var(--border-radius-medium);
   background-color: var(--color-dark);
   padding: 0 24px 0 24px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
 `;
 
 export const MenuItem = styled.div`

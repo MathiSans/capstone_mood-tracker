@@ -15,7 +15,7 @@ export const Page = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: var(--spacing-xxxl);
+  gap: var(--spacing-xxl);
   margin-bottom: 10vh;
 `;
 

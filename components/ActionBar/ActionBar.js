@@ -20,7 +20,7 @@ export default function ActionBar({
   }
 
   return (
-    <Container>
+    <Container $isActive={!hideInterface}>
       <MenuItem
         onClick={!hideInterface ? () => handleLoginButton() : undefined}
         $left
