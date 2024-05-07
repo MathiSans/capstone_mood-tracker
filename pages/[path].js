@@ -55,7 +55,7 @@ export default function Home() {
   const Component = path?.includes("id:")
     ? Entry
     : path?.includes("tool:")
-    ? ToolsWrapper
+    ? ToolWrapper
     : componentMap[path];
   function handleHideInterface() {
     setHideInterface(!hideInterface);
