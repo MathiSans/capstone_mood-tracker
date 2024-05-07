@@ -16,7 +16,6 @@ import { useSphereState } from "@/components/ContextProviders/SphereStateProvide
 import { motion, AnimatePresence } from "framer-motion";
 import { animations } from "@/components/AnimationWrapper/animations";
 import LandingPage from "@/components/LandingPage/LandingPage";
-import ToolWrapper from "@/components/ToolWrapper/ToolWraper";
 import ToolWrapper from "@/components/ToolWrapper/ToolWrapper";
 import Image from "next/image";
 import styled from "styled-components";
