@@ -30,7 +30,7 @@ const LogoContainer = styled.div`
   align-items: center;
   height: 12vh;
   position: absolute;
-  top: 10px;
+  top: 3px;
   left: 50%;
   transform: translateX(-50%);
 `;
