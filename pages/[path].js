@@ -15,6 +15,7 @@ import { useDashboardState } from "@/components/DashboardStateProvider/Dashboard
 import { useSphereState } from "@/components/ContextProviders/SphereStateProvider/SphereStateProvider";
 import { motion, AnimatePresence } from "framer-motion";
 import { animations } from "@/components/AnimationWrapper/animations";
+import LandingPage from "@/components/LandingPage/LandingPage";
 import ToolWrapper from "@/components/ToolWrapper/ToolWrapper";
 import Image from "next/image";
 import styled from "styled-components";
@@ -45,6 +46,7 @@ export default function Home() {
   const [hideInterface, setHideInterface] = useState(false);
 
   const componentMap = {
+    start: LandingPage,
     "new-entry": Flow,
     quotes: QuotesWrapper,
     smiletrainer: SmileTrainerWrapper,

@@ -23,6 +23,7 @@ export const RangeInput = styled.input`
   }
 
   &::-webkit-slider-thumb {
+    position: relative;
     appearance: none;
     -webkit-appearance: none;
     height: 1.2rem;
