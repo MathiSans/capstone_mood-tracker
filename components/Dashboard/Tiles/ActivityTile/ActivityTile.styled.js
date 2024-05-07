@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+  position: relative;
   width: 100%;
   height: 100%;
   border-radius: var(--border-radius-small);
@@ -10,27 +9,8 @@ export const Container = styled.div`
     radial-gradient(circle at right, #444444, #00000000);
   box-shadow: inset 0 0 10px rgba(5, 5, 5, 0.3),
     inset 0 0 10px rgba(5, 5, 5, 0.3);
-  cursor: pointer;
   grid-column-end: span 4;
   grid-row-end: span 2;
-  padding: 0.8rem;
-`;
-
-export const TileH3 = styled.h3`
-  color: var(--color-light);
-  font-size: 0.6rem;
-  font-weight: 500;
-  margin: 0.5rem;
-`;
-
-export const Pill = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--color-dark);
-  color: var(--color-light);
-  border-radius: 2rem;
-  width: fit-content;
-  height: 1.2rem;
-  border: 0.5px solid #444444;
+  padding: 16px;
+  overflow: hidden;
 `;

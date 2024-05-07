@@ -10,8 +10,6 @@ export default function BarChartTile({
   isLoadingEntries,
   errorEntries,
   visualizedData,
-
-  targetExperience,
 }) {
   const totalCount = visualizedData.totalCount;
 
@@ -75,8 +73,10 @@ export default function BarChartTile({
               <Styled.SingleBar
                 key={index}
                 $color={color}
-                // experience={experience}
-                $barHeight={Math.floor((count / totalCount) * 100)}
+                $barHeight={Math.min(
+                  Math.floor((count / totalCount) * 250),
+                  100
+                )}
                 onClick={() => handleExperienceClick(experience)}
                 $isClicked={
                   singleExperienceList && clickedExperience === experience

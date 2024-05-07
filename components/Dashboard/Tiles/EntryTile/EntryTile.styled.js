@@ -53,7 +53,7 @@ export const Container = styled.div`
 
 export const TileH3 = styled.h3`
   color: var(--color-light);
-  font-size: 0.6rem;
+  font-size: 8.5px;
   font-weight: 500;
 `;
 
@@ -65,8 +65,8 @@ export const TextBlock = styled.div`
   padding-inline: 0.6rem;
   padding-block: 0.4rem;
   color: var(--color-light);
-  font-size: ${(props) => (props.isTag ? "0.6rem" : "0.8rem")};
-  font-weight: ${(props) => (props.isTag ? "500" : "500")};
+  font-size: ${(props) => (props.isTag ? "0.6rem" : "0.7rem")};
+  font-weight: ${(props) => (props.isTag ? "300" : "500")};
   line-height: 1.4;
 `;
 

@@ -16,8 +16,8 @@ export const Label = styled.label`
   color: var(--color-neutral);
 `;
 
-export const question = styled.p`
-  margin-bottom: 20px;
+export const Question = styled.p`
+  /* margin-bottom: 20px; */
 `;
 
 export const AddEmojisSentence = styled.p`
@@ -36,17 +36,11 @@ export const EmojiContainer = styled.div`
 
 export const Card = styled.div`
   background: var(--effect-radial-gradient);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-l);
   border-radius: var(--border-radius-small);
-  margin: 1rem;
-  max-width: 600px;
-  padding: 7%;
+  padding: 24px;
   position: relative;
   grid-column-end: span 4;
-  grid-row-end: span 8;
+  grid-row-end: span 7;
 `;
 
 export const Form = styled.form`
@@ -93,7 +87,7 @@ export const ButtonArea = styled.div`
 export const CheckboxContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-l);
+  gap: var(--spacing-s);
   margin-bottom: var(--spacing-xxl);
 `;
 
@@ -105,9 +99,9 @@ export const CheckboxLabel = styled.label`
   height: 40px;
   padding: 10px;
   text-align: center;
-  width: 110px;
+  width: 92px;
   border-radius: var(--border-radius-medium);
-  font-size: var(--font-size-default);
+  font-size: 0.92rem;
   background-color: ${(props) =>
     props.$color ? props.$color : `var(--color-neutral)`};
 `;
@@ -117,9 +111,9 @@ export const CheckboxInput = styled.input`
   position: relative;
   -webkit-appearance: none;
   height: 40px;
-  width: 110px;
+  width: 92px;
   outline: none;
-  font-size: var(--font-size-default);
+  font-size: 0.92rem;
   border-radius: var(--border-radius-medium);
   cursor: pointer;
   top: -34px;

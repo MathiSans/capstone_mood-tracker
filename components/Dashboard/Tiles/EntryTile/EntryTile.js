@@ -33,10 +33,16 @@ export default function EntryTile({
               <Styled.EntryText>In {location.region} </Styled.EntryText>
             </>
           )}
-          {session ? "you" : <Styled.EntryText>somebody</Styled.EntryText>}
+          {inOutboxTile ? (
+            userName
+          ) : session ? (
+            "you"
+          ) : (
+            <Styled.EntryText>somebody</Styled.EntryText>
+          )}
           <Styled.EntryText> experienced </Styled.EntryText>
           <Styled.EntryText color={color}>{experience}</Styled.EntryText>,
-          <Styled.EntryText> more specifically </Styled.EntryText>{" "}
+          <Styled.EntryText> more specifically </Styled.EntryText>
           <Intensity value={intensity} experience={experience} />. tags:{" "}
           {reactions.map((reaction, index, array) => (
             <React.Fragment key={index}>

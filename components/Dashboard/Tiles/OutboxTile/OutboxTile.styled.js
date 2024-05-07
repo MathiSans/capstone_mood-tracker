@@ -45,6 +45,10 @@ export const EmojiContainer = styled.div`
 
 export const EntryContainer = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 160px;
   height: 200px;
 `;
@@ -63,8 +67,10 @@ export const ReactionsContainer = styled.div`
   font-size: var(--font-size-small);
   background-color: ${(props) =>
     props.$color ? props.$color : "var(--color-main)"};
-  border-radius: 16px;
-  margin-top: 6px;
+  border-radius: 0 0 12px 12px;
+  width: fit-content;
+  padding: 0 12px;
+  box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.6);
 `;
 
 export const CrossIcon = styled.div`

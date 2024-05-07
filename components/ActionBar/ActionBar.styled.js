@@ -16,7 +16,7 @@ export const Container = styled.div`
   padding: 0 24px 0 24px;
   border: 1px solid
     ${(props) =>
-      props.$isActive ? `var(--color-main-alt)` : `var(--color-danger)`};
+      props.$isActive ? `var(--color-neutral)` : `var(--color-danger)`};
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
 `;
 
@@ -24,9 +24,10 @@ export const MenuItem = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-small);
   justify-self: ${(props) =>
     props.$right ? "end" : props.$left ? "start" : "center"};
   color: ${(props) =>
     props.$isActive ? `var(--color-main-alt)` : `var(--color-neutral)`};
-  font-size: var(--font-size-small);
 `;

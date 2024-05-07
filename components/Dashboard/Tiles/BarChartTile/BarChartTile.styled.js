@@ -76,7 +76,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   grid-column-end: span 4;
-  grid-row-end: span 2;
+  grid-row-end: span 3;
 `;
 
 export const SingleBar = styled.div`
@@ -85,10 +85,11 @@ export const SingleBar = styled.div`
   background-color: ${(props) => props.$color};
   border-radius: 2rem;
   border: ${(props) => (props.$isClicked ? "2.5px solid white" : "none")};
-  border-top-left-radius: var(--border-radius-small);
+  /* border-top-left-radius: var(--border-radius-small);
   border-top-right-radius: var(--border-radius-small);
   border-bottom-left-radius: 0.2rem;
-  border-bottom-right-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem; */
+  border-radius: 14px;
 `;
 
 export const TileH4 = styled.h4`
