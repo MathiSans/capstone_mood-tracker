@@ -6,7 +6,6 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 1.5rem;
-  top: 36px;
   height: 42px;
   border-radius: var(--border-radius-medium);
   background-color: var(--color-dark);

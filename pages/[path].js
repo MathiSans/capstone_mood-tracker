@@ -15,11 +15,29 @@ import { useDashboardState } from "@/components/DashboardStateProvider/Dashboard
 import { useSphereState } from "@/components/ContextProviders/SphereStateProvider/SphereStateProvider";
 import { motion, AnimatePresence } from "framer-motion";
 import { animations } from "@/components/AnimationWrapper/animations";
+import Image from "next/image";
 import styled from "styled-components";
+import Link from "next/link";
+
+const ImageWrapper = styled(motion.div)`
+  display: inline-block;
+`;
+
+const LogoContainer = styled.div`
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 12vh;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+`;
 
 export default function Home() {
   const { dashboardIsOpen, handleDashboardIsOpen } = useDashboardState();
-  const { sphereState } = useSphereState();
+  const { sphereState, handleSphereState } = useSphereState();
   const router = useRouter();
   const { path } = router.query;
   const { data: session } = useSession();
@@ -56,8 +74,22 @@ export default function Home() {
       <Animation
         color={sphereState.color}
         opacity={sphereState.intensity}
-        hideInterface={hideInterface}
+        hideInterface={false}
       />
+      <LogoContainer
+        onClick={() => handleSphereState({ color: "grey", intensity: 0.1 })}
+      >
+        <Link href="/start">
+          <ImageWrapper whileHover={{ scale: 0.9, rotate: -50 }}>
+            <Image
+              src="/images/mood-tracker-logo1.png"
+              alt="Your Logo"
+              width={50}
+              height={50}
+            />
+          </ImageWrapper>
+        </Link>
+      </LogoContainer>
       <Container>
         <AnimatePresence initial={false}>
           {!isLoadingEntries && (
