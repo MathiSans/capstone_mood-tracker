@@ -4,9 +4,7 @@ import LinkWrapper from "@/components/LinkWrapper/LinkWrapper";
 import { useData } from "@/lib/useData";
 
 export default function MessagesOverviewTile() {
-  const { data: session } = useSession();
-  const { allMessages, isLoadingAllMessages, errorAllMessages } =
-    useData().fetchedAllMessages;
+  const { allMessages, isLoadingAllMessages } = useData().fetchedAllMessages;
   return (
     <Styled.OuterContainer>
       <LinkWrapper link={``}>
@@ -16,14 +14,16 @@ export default function MessagesOverviewTile() {
               <Styled.TileH3>Last reactions</Styled.TileH3>
             </Styled.Pill>
           </Styled.HeadContainer>
-          <Styled.TextContainer>
-            {allMessages?.map((message, index, array) => (
-              <span key={index}>
-                {message.message}
-                {index < array.length - 1 && " "}
-              </span>
-            ))}
-          </Styled.TextContainer>
+          {!isLoadingAllMessages && (
+            <Styled.TextContainer>
+              {allMessages?.map((message, index, array) => (
+                <span key={index}>
+                  {message.message}
+                  {index < array.length - 1 && " "}
+                </span>
+              ))}
+            </Styled.TextContainer>
+          )}
         </Styled.Container>
       </LinkWrapper>
     </Styled.OuterContainer>

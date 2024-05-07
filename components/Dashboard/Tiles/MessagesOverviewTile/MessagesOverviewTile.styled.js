@@ -75,7 +75,7 @@ export const HeadContainer = styled.div`
 `;
 const scrollAnimation = keyframes`
   0% { transform: translateX(130%); }
-  100% { transform: translateX(-200%); }
+  100% { transform: translateX(-500%); }
 `;
 
 export const TextContainer = styled.div`

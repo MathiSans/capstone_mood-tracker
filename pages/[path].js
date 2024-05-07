@@ -97,6 +97,15 @@ export default function Home() {
           </ImageWrapper>
         </LinkWrapper>
       </LogoContainer>
+      {hideInterface && (
+        <SphereModeInfo
+          animate={{ opacity: 0, transition: { duration: 2, delay: 7 } }}
+        >
+          You enabled Sphere Mode. Touch the sphere, turn it, make it smaller or
+          larger and reaange it to your liking. Reset the sphere by clicking the
+          logo up top.
+        </SphereModeInfo>
+      )}
       <Container>
         <AnimatePresence initial={false}>
           {!isLoadingEntries && (
@@ -128,4 +137,16 @@ const PathContainer = styled.div`
   width: 100vw;
   overflow: hidden;
   position: relative;
+`;
+
+const SphereModeInfo = styled(motion.div)`
+  position: absolute;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-neutral);
+  font-size: var(--font-size-small);
+  text-align: center;
+  z-index: 10000;
+  max-width: 300px;
 `;
