@@ -27,3 +27,10 @@ export const ActivityLink = styled(Link)`
   text-decoration: none;
   color: inherit;
 `;
+
+export const ShapeContainer = styled.div`
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  filter: blur(20px);
+`;

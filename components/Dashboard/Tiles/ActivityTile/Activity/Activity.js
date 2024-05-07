@@ -1,3 +1,4 @@
+import AwesomeShapesProvider from "../AwesomeShapesProvider/AwesomeShapesProvider";
 import * as Styled from "./Activity.styled";
 import LinkWrapper from "@/components/LinkWrapper/LinkWrapper";
 
@@ -10,6 +11,9 @@ export default function Activity({ activity }) {
           <Styled.ActivityDescription>
             {activity.description}
           </Styled.ActivityDescription>
+          <Styled.ShapeContainer>
+            <AwesomeShapesProvider />
+          </Styled.ShapeContainer>
         </LinkWrapper>
       ) : (
         <>
@@ -17,6 +21,9 @@ export default function Activity({ activity }) {
           <Styled.ActivityDescription>
             {activity.description}
           </Styled.ActivityDescription>
+          <Styled.ShapeContainer>
+            <AwesomeShapesProvider />
+          </Styled.ShapeContainer>
         </>
       )}
     </>

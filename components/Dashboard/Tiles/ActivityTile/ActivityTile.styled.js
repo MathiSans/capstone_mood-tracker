@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -14,6 +15,7 @@ export const Container = styled.div`
   grid-column-end: span 4;
   grid-row-end: span 2;
   padding: 0.8rem;
+  overflow: hidden;
 `;
 
 export const TileH3 = styled.h3`
