@@ -39,7 +39,7 @@ export const MessageBox = styled.div`
 `;
 
 export const Emojis = styled.div`
-  font-size: 1.6rem;
+  font-size: 1.5rem;
 `;
 
 export const ColorCircle = styled.div`
