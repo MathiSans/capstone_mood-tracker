@@ -38,5 +38,7 @@ export const TextAnalysisContainer = styled.div`
 `;
 
 export const StyledLabel = styled.div`
-  margin-bottom: -3rem;
+  margin-top: ${(props) => (props.showList ? "auto" : "-3rem")};
+  padding-top: 1.5rem;
+  margin-bottom: ${(props) => (props.predictionsState ? "-3rem" : "auto")};
 `;

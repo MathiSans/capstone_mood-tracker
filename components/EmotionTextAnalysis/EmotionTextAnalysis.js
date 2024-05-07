@@ -86,7 +86,11 @@ function EmotionTextAnalysis() {
     <TextAnalysisContainer showList={showList}>
       <Page emotionTextAnalysis={true}>
         <h3>Emotion Text Analysis Tool</h3>
-        <StyledLabel htmlFor="language">
+        <StyledLabel
+          showList={showList}
+          predictionsState={predictionsState}
+          htmlFor="language"
+        >
           language{"       "}
           <select id="language" onChange={handleLanguageSelect}>
             <option value="en">english</option>
