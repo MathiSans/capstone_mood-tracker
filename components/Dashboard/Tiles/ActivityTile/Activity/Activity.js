@@ -1,5 +1,6 @@
 import * as Styled from "./Activity.styled";
 import LinkWrapper from "@/components/LinkWrapper/LinkWrapper";
+import { Coolshape } from "coolshapes-react";
 
 export default function Activity({ activity }) {
   return (
@@ -17,6 +18,7 @@ export default function Activity({ activity }) {
           <Styled.ActivityDescription>
             {activity.description}
           </Styled.ActivityDescription>
+          <Coolshape size={89} />
         </>
       )}
     </>
