@@ -5,7 +5,7 @@ export const Container = styled.div`
   position: fixed;
   display: flex;
   justify-content: space-between;
-
+  gap: 1.5rem;
   height: 42px;
   border-radius: var(--border-radius-medium);
   background-color: var(--color-dark);

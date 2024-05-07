@@ -24,10 +24,15 @@ const ImageWrapper = styled(motion.div)`
 `;
 
 const LogoContainer = styled.div`
+  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 12vh;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 export default function Home() {
