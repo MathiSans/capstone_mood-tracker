@@ -40,7 +40,7 @@ export const Indicator = styled.div`
     props.$active &&
     css`
       animation: ${css`
-        ${indicatorAnimation} 4500ms forwards
+        ${indicatorAnimation} 4000ms forwards
       `};
     `}
 `;
