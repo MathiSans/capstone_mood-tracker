@@ -80,10 +80,16 @@ export default function Home() {
         onClick={() => handleSphereState({ color: "grey", intensity: 0.1 })}
       >
         <Link href="/start">
-          <ImageWrapper whileHover={{ scale: 0.9, rotate: -50 }}>
+          <ImageWrapper
+            whileHover={{
+              scale: 0.9,
+              rotate: -360,
+              transition: { duration: 20 },
+            }}
+          >
             <Image
               src="/images/mood-tracker-logo1.png"
-              alt="Your Logo"
+              alt="Ruh logo"
               width={50}
               height={50}
             />
