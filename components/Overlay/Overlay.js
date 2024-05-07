@@ -17,9 +17,6 @@ export default function Overlay({ children }) {
   function handleShowMenu() {
     setShowMenu(!showMenu);
   }
-  // function handleShowSettings() {
-  //   setShowSettings(!showSettings);
-  // }
 
   return (
     <>
@@ -31,12 +28,6 @@ export default function Overlay({ children }) {
         <MenuTriggerContainer>
           <MenuTrigger showMenu={showMenu} handleShowMenu={handleShowMenu} />
         </MenuTriggerContainer>
-        {/* <SettingsTriggerContainer>
-          <SettingsTrigger
-            showSettings={showSettings}
-            handleShowSettings={handleShowSettings}
-          />{" "}
-        </SettingsTriggerContainer> */}
       </MenuContainer>
       {children}
     </>
