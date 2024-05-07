@@ -36,6 +36,8 @@ export default function Home() {
   const router = useRouter();
   const { path } = router.query;
   const { data: session } = useSession();
+  const { isLoadingEntries } = useData().fetchedAllEntries;
+  const [hideInterface, setHideInterface] = useState(false);
 
   const componentMap = {
     "new-entry": Flow,
@@ -44,15 +46,26 @@ export default function Home() {
     "guided-meditation": GuidedMeditation,
   };
 
-  const Component = path?.includes("id:") ? Entry : componentMap[path];
+  const Component = path?.includes("id:")
+    ? Entry
+    : path?.includes("tool:")
+    ? ToolsWrapper
+    : componentMap[path];
+
+  function handleHideInterface() {
+    setHideInterface(!hideInterface);
+  }
 
   return (
-    <>
+    <PathContainer>
       <ActionBar
+        handleHideInterface={handleHideInterface}
+        hideInterface={hideInterface}
         session={session}
         dashboardIsOpen={dashboardIsOpen}
         handleDashboardIsOpen={handleDashboardIsOpen}
       />
+
       <Animation
         color={sphereState.color}
         opacity={sphereState.intensity}
@@ -73,15 +86,17 @@ export default function Home() {
         </Link>
       </LogoContainer>
       <Container>
-        <AnimatePresence mode="wait">
-          <Dashboard key="dashboard" dashboardIsOpen={dashboardIsOpen} />
+        <AnimatePresence initial={false}>
+          {!isLoadingEntries && (
+            <Dashboard key="dashboard" dashboardIsOpen={dashboardIsOpen} />
+          )}
           {Component && (
             <motion.div
               key={path}
               variants={animations}
-              initial="fadeOut"
+              // initial="fadeOut"
               animate={dashboardIsOpen ? "fadeOut" : "fadeIn"}
-              exit="fadeOut"
+              // exit="fadeOut"
               transition="easeInOut"
             >
               <Component id={path.replace("id:", "")} />
@@ -89,6 +104,13 @@ export default function Home() {
           )}
         </AnimatePresence>
       </Container>
-    </>
+    </PathContainer>
   );
 }
+
+const PathContainer = styled.div`
+  height: 100dvh;
+  width: 100vw;
+  overflow: hidden;
+  position: absolute;
+`;

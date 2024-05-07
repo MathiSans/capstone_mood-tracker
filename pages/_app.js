@@ -1,6 +1,5 @@
 import GlobalStyle from "../styles";
 import { SWRConfig } from "swr";
-import Overlay from "@/components/Overlay/Overlay";
 import { ThemeProvider } from "styled-components";
 import { SessionProvider } from "next-auth/react";
 import { DataProvider } from "@/lib/useData";
@@ -14,6 +13,11 @@ const theme = {
     light: "white",
     neutral: "grey",
     danger: "red",
+    anger: "#CD7373",
+    fear: "#9265BD",
+    enjoyment: "#B6A660",
+    disgust: "#779962",
+    sadness: "#7190D4",
   },
   fonts: {
     main: "system-ui",
@@ -47,7 +51,7 @@ const theme = {
       "radial-gradient(circle, rgba(42, 42, 42, 1) 0%, rgba(13, 13, 13, 1) 100%)",
   },
   borders: {
-    radiusSmall: "12px",
+    radiusSmall: "10px",
     radiusMedium: "20px",
     radiusLarge: "100px",
     radiusRound: "50%",
@@ -71,13 +75,11 @@ export default function App({
         >
           <SessionProvider session={session}>
             <DataProvider>
-              <Overlay>
-                <DashboardStateProvider>
-                  <SphereStateProvider>
-                    <Component {...pageProps} />
-                  </SphereStateProvider>
-                </DashboardStateProvider>
-              </Overlay>
+              <DashboardStateProvider>
+                <SphereStateProvider>
+                  <Component {...pageProps} />
+                </SphereStateProvider>
+              </DashboardStateProvider>
             </DataProvider>
           </SessionProvider>
         </SWRConfig>

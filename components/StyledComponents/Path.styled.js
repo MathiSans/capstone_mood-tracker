@@ -6,4 +6,7 @@ export const Container = styled.div`
   align-items: center;
   height: 100dvh;
   width: 100vw;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
 `;

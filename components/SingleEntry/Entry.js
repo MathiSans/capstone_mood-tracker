@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
-import useSWR from "swr";
-import Animation from "../3DAnimation/3DAnimation";
+import useSWR, { mutate } from "swr";
+import { FiTrash2 } from "react-icons/fi";
 import { Container, Page } from "../Layout/Layout.styled";
 import {
   Sentence,
@@ -9,7 +9,6 @@ import {
   DeleteButton,
 } from "../EntriesList/EntriesList.styled";
 import Intensity from "@/utils/intensity";
-import { FiArrowLeft } from "react-icons/fi";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaRegEye } from "react-icons/fa6";
 import { useState } from "react";
@@ -24,6 +23,7 @@ export default function Entry({ id }) {
   const router = useRouter();
   const { data: session } = useSession();
   const { data: entry, isLoading } = useSWR(`/api/entries/${id}`);
+  const [deletingId, setDeletingId] = useState(null);
 
   useEffect(() => {
     handleSphereState({ color: entry?.color, intensity: entry?.intensity });
@@ -39,6 +39,24 @@ export default function Entry({ id }) {
 
   function handleShowSentence() {
     setShowSentence(!showSentence);
+  }
+
+  async function handleDeleteEntry(event, id) {
+    event.stopPropagation();
+    await fetch(`/api/entries/${id}`, {
+      method: "DELETE",
+    });
+    mutate("/api/entries");
+    router.push("start");
+  }
+
+  function handleDeleteDialog(event, id) {
+    event.stopPropagation();
+    setDeletingId(id);
+
+    setTimeout(() => {
+      setDeletingId(null);
+    }, 3000);
   }
 
   return (
@@ -90,22 +108,44 @@ export default function Entry({ id }) {
           </Container>
         )}
       </AnimatePresence>
-      <ToolsContainer>
-        {/* <DeleteButton as="a" onClick={() => router.back()}>
-          {showSentence ? (
-            <FiArrowLeft />
+      {session && (
+        <ToolsContainer>
+          {deletingId === entry._id ? (
+            <DeleteButton
+              style={{ color: "red" }}
+              onClick={(event) => handleDeleteEntry(event, entry._id)}
+            >
+              <motion.div
+                initial={{ opacity: 1 }}
+                animate={{ opacity: [1, 0] }}
+                transition={{
+                  repeat: Infinity,
+                  ease: "easeOut",
+                }}
+              >
+                <FiTrash2 />
+              </motion.div>
+            </DeleteButton>
           ) : (
-            <FiArrowLeft style={{ color: "grey", opacity: "0.5" }} />
+            <DeleteButton
+              onClick={(event) => handleDeleteDialog(event, entry._id)}
+            >
+              {showSentence ? (
+                <FiTrash2 />
+              ) : (
+                <FiTrash2 style={{ color: "grey", opacity: "0.5" }} />
+              )}
+            </DeleteButton>
           )}
-        </DeleteButton> */}
-        <DeleteButton as="a" onClick={() => handleShowSentence()}>
-          {showSentence ? (
-            <FaRegEyeSlash />
-          ) : (
-            <FaRegEye style={{ color: "grey", opacity: "0.5" }} />
-          )}
-        </DeleteButton>
-      </ToolsContainer>
+          <DeleteButton as="a" onClick={() => handleShowSentence()}>
+            {showSentence ? (
+              <FaRegEyeSlash />
+            ) : (
+              <FaRegEye style={{ color: "grey", opacity: "0.5" }} />
+            )}
+          </DeleteButton>
+        </ToolsContainer>
+      )}
     </>
   );
 }

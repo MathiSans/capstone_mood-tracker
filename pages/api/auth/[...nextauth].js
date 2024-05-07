@@ -1,5 +1,7 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
+
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/db/mongodb";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -13,6 +15,10 @@ export default NextAuth({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
     CredentialsProvider({
       name: "credentials",
       credentials: {
@@ -24,7 +30,16 @@ export default NextAuth({
           const testUser = await User.findOne({
             email: "testuser@example.com",
           });
+          const testUser2 = await User.findOne({
+            email: "testuser2@example.com",
+          });
 
+          if (
+            credentials.username === "test2" &&
+            credentials.password === "test2"
+          ) {
+            return testUser2;
+          }
           if (
             credentials.username === "test" &&
             credentials.password === "test"
@@ -44,6 +59,7 @@ export default NextAuth({
   adapter: MongoDBAdapter(clientPromise),
   session: {
     strategy: "jwt",
+    maxAge: 60 * 60,
   },
 
   callbacks: {

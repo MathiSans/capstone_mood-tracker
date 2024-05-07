@@ -42,7 +42,7 @@ export default function Carousel({ children }) {
       </AnimatePresence>
       <Styled.IndicatorContainer>
         {children.map((_, index) => (
-          <Styled.Indicator key={index} active={index === currentIndex} />
+          <Styled.Indicator key={index} $active={index === currentIndex} />
         ))}
       </Styled.IndicatorContainer>
     </Styled.CarouselContainer>

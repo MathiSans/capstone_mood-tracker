@@ -7,7 +7,7 @@ export const Container = styled.div`
   transform: translateX(-50%);
   width: 220px;
   height: 42px;
-  border-radius: 16px;
+  border-radius: var(--border-radius-medium);
   z-index: 100000;
   position: fixed;
   display: grid;

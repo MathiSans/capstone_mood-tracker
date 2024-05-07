@@ -2,13 +2,17 @@ import styled from "styled-components";
 
 export const IntensityContainer = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 1rem;
 `;
 
 export const Intensity = styled.p`
-  color: ${(props) =>
-    props.index === 1 ? "white" : "rgba(255, 255, 255, 0.5)"};
-  text-align: center;
   min-width: 80px;
-  text-shadow: black 2px 0 25px;
+  font-size: var(--font-size-small);
+  font-weight: 400;
+  text-align: center;
+  color: ${(props) =>
+    props.index === 1 ? "var(--color-light)" : "rgba(255, 255, 255, 0.5)"};
+  padding: var(--spacing-m) 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-small);
 `;

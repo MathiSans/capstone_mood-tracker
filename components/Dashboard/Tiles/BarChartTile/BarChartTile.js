@@ -1,29 +1,18 @@
-import { useSession } from "next-auth/react";
-import experienceAnalyser from "@/utils/experienceAnalyser";
-import lastWeekAnalyser from "@/utils/lastWeekAnalyser";
-import { useData } from "@/lib/useData";
 import * as Styled from "./BarChartTile.styled";
 
 export default function BarChartTile({
-  isLastWeek,
   handleFilterSwitchClick,
   singleExperienceList,
+  isLast7Days,
   handleExperienceClick,
-  setSingleExperienceList,
   clickedExperience,
   singleEmotionDisplayed,
+  isLoadingEntries,
+  errorEntries,
+  visualizedData,
+
+  targetExperience,
 }) {
-  const { data: session } = useSession();
-
-  const { allEntries, isLoadingEntries, errorEntries } =
-    useData().fetchedAllEntries;
-  const { userEntries } = useData().fetchedUserEntries;
-  const lastWeek = lastWeekAnalyser(session ? userEntries : allEntries);
-
-  const visualizedData = isLastWeek
-    ? experienceAnalyser(lastWeek)
-    : experienceAnalyser(session ? userEntries : allEntries);
-
   const totalCount = visualizedData.totalCount;
 
   if (isLoadingEntries) return <p>Entries Loading</p>;
@@ -56,16 +45,22 @@ export default function BarChartTile({
             handleFilterSwitchClick();
           }}
         >
-          <Styled.Option $isActive={!isLastWeek}>all time</Styled.Option>
-          <Styled.Option $isActive={isLastWeek}>last 7 days</Styled.Option>
+          <Styled.Option $isActive={!isLast7Days}>
+            <Styled.TileH4>All time</Styled.TileH4>
+          </Styled.Option>
+          <Styled.Option $isActive={isLast7Days}>
+            <Styled.TileH4>Last 7 days</Styled.TileH4>
+          </Styled.Option>
         </Styled.Switch>
         <Styled.EntriesDescriptionContainer>
           <Styled.EntriesDescription $bold>
             {singleExperienceList ? singleEmotionDisplayed.length : totalCount}{" "}
-            entries
+            Entries{" "}
           </Styled.EntriesDescription>
           <Styled.EntriesDescription>
-            {singleExperienceList ? "" : "most are"}{" "}
+            {singleExperienceList ? "" : "Most felt experiences are"}{" "}
+          </Styled.EntriesDescription>
+          <Styled.EntriesDescription>
             {singleExperienceList
               ? singleEmotionDisplayed[0]?.experience
               : emotionFirst}{" "}
@@ -74,18 +69,18 @@ export default function BarChartTile({
         </Styled.EntriesDescriptionContainer>
       </Styled.HeadContainer>
       <Styled.BarChartContainer>
-        {visualizedData.experiences &&
+        {visualizedData &&
           visualizedData.experiences.map(
-            ({ index, count, color, experience }) => (
+            ({ count, color, experience }, index) => (
               <Styled.SingleBar
                 key={index}
-                color={color}
-                barHeight={Math.floor((count / totalCount) * 100)}
-                onClick={() => {
-                  handleExperienceClick(experience);
-                  console.log("clicked", experience);
-                }}
-                isClicked={clickedExperience === experience}
+                $color={color}
+                // experience={experience}
+                $barHeight={Math.floor((count / totalCount) * 100)}
+                onClick={() => handleExperienceClick(experience)}
+                $isClicked={
+                  singleExperienceList && clickedExperience === experience
+                }
               />
             )
           )}

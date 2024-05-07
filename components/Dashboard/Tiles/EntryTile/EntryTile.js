@@ -1,12 +1,13 @@
+import React from "react";
 import getWeekdayFromTime from "@/utils/getWeekdayFromTime";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import * as Styled from "./EntryTile.styled";
-import Link from "next/link";
 import Intensity from "@/utils/intensity";
 import LinkWrapper from "@/components/LinkWrapper/LinkWrapper";
 
 export default function EntryTile({
+  userName,
+  inOutboxTile,
   experience,
   time,
   color,
@@ -16,46 +17,47 @@ export default function EntryTile({
   location,
 }) {
   const { data: session } = useSession();
-  const router = useRouter();
 
-  return (
-    <>
-      <Styled.Container>
-        <LinkWrapper link={`/id:${entryUrl}`}>
-          <Styled.TextContainer>
-            {session ? (
-              "You "
-            ) : (
-              <Styled.StaticText>Somebody </Styled.StaticText>
-            )}
-            {location === "unknown" ? (
-              ""
-            ) : (
-              <>
-                <Styled.StaticText>in </Styled.StaticText>
-                {location.region}
-              </>
-            )}
-            <Styled.StaticText> felt</Styled.StaticText> {experience}.{" "}
-            <Styled.StaticText>More specifically</Styled.StaticText>{" "}
-            <Intensity value={intensity} experience={experience} />
-            <Styled.StaticText>
-              . {session ? "You" : "They"} selected these tags:
-            </Styled.StaticText>{" "}
-            {reactions.map((reaction, index, array) => (
-              <span key={index}>
+  const Content = (inOutboxTile) => (
+    <Styled.Container>
+      <Styled.Pill>
+        <Styled.TileH3>
+          {getWeekdayFromTime(time)}, {time}
+        </Styled.TileH3>
+        <Styled.ColorCircle color={color} />
+      </Styled.Pill>
+      <Styled.TextContainer>
+        <Styled.TextBlock>
+          {location !== "unknown" && (
+            <>
+              <Styled.EntryText>In {location.region} </Styled.EntryText>
+            </>
+          )}
+          {session ? "you" : <Styled.EntryText>somebody</Styled.EntryText>}
+          <Styled.EntryText> experienced </Styled.EntryText>
+          <Styled.EntryText color={color}>{experience}</Styled.EntryText>,
+          <Styled.EntryText> more specifically </Styled.EntryText>{" "}
+          <Intensity value={intensity} experience={experience} />. tags:{" "}
+          {reactions.map((reaction, index, array) => (
+            <React.Fragment key={index}>
+              <Styled.EntryText color={color}>
                 {reaction}
                 {index < array.length - 1 && ", "}
-              </span>
-            ))}
-          </Styled.TextContainer>
-          <div>
-            {getWeekdayFromTime(time)},<br />
-            {time}
-          </div>
-          <Styled.ColorCircle color={color} />
-        </LinkWrapper>
-      </Styled.Container>
-    </>
+              </Styled.EntryText>
+            </React.Fragment>
+          ))}
+        </Styled.TextBlock>
+      </Styled.TextContainer>
+    </Styled.Container>
+  );
+
+  return (
+    <Styled.OuterContainer>
+      {!inOutboxTile ? (
+        <LinkWrapper link={`/id:${entryUrl}`}>{Content()}</LinkWrapper>
+      ) : (
+        <>{Content(inOutboxTile)}</>
+      )}
+    </Styled.OuterContainer>
   );
 }
