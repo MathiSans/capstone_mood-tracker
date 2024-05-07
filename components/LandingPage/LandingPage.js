@@ -3,6 +3,16 @@ import * as Styled from "./LandingPage.styled";
 import { MdInfoOutline } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 import { AnimatePresence } from "framer-motion";
+import styled, { keyframes } from "styled-components";
+
+const colorCycle = keyframes`
+  0% { color: red; }
+  20% { color: blue; }
+  40% { color: green; }
+  60% { color: yellow; }
+  80% { color: purple; }
+  100% { color: red; }
+`;
 
 export default function LandingPage() {
   const [isInfoBoxVisible, setInfoBoxVisible] = useState(false);
@@ -43,18 +53,45 @@ export default function LandingPage() {
               <p>
                 <br />
                 The Ruh app enables you to log, improve and maintain your mood.
-                Learn to observe and understand your emotional fluctuations. Try
-                out suggested activities to improve and maintain your mood and
-                connect with people you care about, share and appreciate their
-                moodiness as well. Enjoy the journey!
+                Learn to observe your emotional fluctuations and become more
+                mindful towards them through activities and by connecting with
+                people you care about. Enjoy the journey!
               </p>
               <br />
               <p>
-                This web app has been built by a group of five. We all
-                participated in a Web Development Bootcamp and this final
-                capstone project is the result. Feel free to visit us in GitHub:
+                Ruh is a capstone project built by
+                <br />
+                <Styled.Contributor
+                  href={"https://github.com/janphilipp-winkler"}
+                >
+                  Jan-Philipp
+                </Styled.Contributor>
+                ,
+                <Styled.Contributor href={"https://github.com/MathiSans"}>
+                  Mathis
+                </Styled.Contributor>
+                ,
+                <Styled.Contributor href={"https://github.com/NikCrmr"}>
+                  Niko
+                </Styled.Contributor>
+                ,
+                <Styled.Contributor href={"https://github.com/Ramin-faqyri"}>
+                  Ramin
+                </Styled.Contributor>
+                and
+                <Styled.Contributor
+                  href={"https://github.com/janphilipp-winkler"}
+                >
+                  Şevket
+                </Styled.Contributor>{" "}
+                during a Frontend Dev Bootcamp.
               </p>
             </Styled.InfoText>
+            <Styled.GitHubLink
+              href={"https://github.com/MathiSans/capstone_mood-tracker"}
+            >
+              Ruh on Github
+            </Styled.GitHubLink>
             <Styled.CloseIcon
               visible={isInfoBoxVisible}
               onClick={handleShowInfo}
