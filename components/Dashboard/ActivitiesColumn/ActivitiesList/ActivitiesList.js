@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import ActivityTile from "../../Tiles/ActivityTile/ActivityTile";
 
 export default function ActivitiesList({ handleShowForm }) {
-  const [filterOption, setFilterOption] = useState("activities");
+  const [filterOption, setFilterOption] = useState("tools");
   const { data: session } = useSession();
   const { data: initialActivities, isLoading } = useSWR("/api/activities");
 

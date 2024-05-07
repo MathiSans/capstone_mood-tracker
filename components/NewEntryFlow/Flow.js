@@ -32,7 +32,7 @@ export default function Flow() {
   const userId = session?.user.id;
 
   const guides = [
-    "Breath in...",
+    "Breathe in...",
     "... and out",
     "Assess this very moment",
     "And continue...",

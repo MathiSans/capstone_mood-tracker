@@ -49,7 +49,7 @@ export default function LandingPage() {
             exit={{ scale: 0.8, opacity: 0 }}
           >
             <Styled.InfoText>
-              <p>The Mood Tracker Project</p>
+              <p style={{ fontWeight: "700" }}>The Mood Tracker Project</p>
               <p>
                 <br />
                 The Ruh app enables you to log, improve and maintain your mood.
@@ -60,34 +60,61 @@ export default function LandingPage() {
               <br />
               <p>
                 Ruh is a capstone project built by
-                <br />
                 <Styled.Contributor
+                  $color="var(--color-anger)"
+                  target="_blank"
+                  href={"https://github.com/MathiSans"}
+                >
+                  Mathis
+                </Styled.Contributor>
+                ,
+                <Styled.Contributor
+                  $color="var(--color-fear)"
+                  target="_blank"
                   href={"https://github.com/janphilipp-winkler"}
                 >
                   Jan-Philipp
                 </Styled.Contributor>
                 ,
-                <Styled.Contributor href={"https://github.com/MathiSans"}>
-                  Mathis
-                </Styled.Contributor>
-                ,
-                <Styled.Contributor href={"https://github.com/NikCrmr"}>
+                <Styled.Contributor
+                  $color="var(--color-disgust)"
+                  target="_blank"
+                  href={"https://github.com/NikCrmr"}
+                >
                   Niko
                 </Styled.Contributor>
                 ,
-                <Styled.Contributor href={"https://github.com/Ramin-faqyri"}>
+                <Styled.Contributor
+                  $color="var(--color-sadness)"
+                  target="_blank"
+                  href={"https://github.com/Ramin-faqyri"}
+                >
                   Ramin
                 </Styled.Contributor>
                 and
                 <Styled.Contributor
+                  $color="var(--color-enjoyment)"
+                  target="_blank"
                   href={"https://github.com/janphilipp-winkler"}
                 >
                   Şevket
                 </Styled.Contributor>{" "}
-                during a Frontend Dev Bootcamp.
+                during a Frontend Dev Bootcamp at{" "}
+                <a
+                  style={{
+                    textDecoration: "none",
+                    color: "var(--color-main-alt)",
+                  }}
+                  href="https://neuefische.de"
+                  target="_blank"
+                >
+                  Neue Fische
+                </a>{" "}
+                between March and May 2024.
               </p>
             </Styled.InfoText>
             <Styled.GitHubLink
+              target="_blank"
               href={"https://github.com/MathiSans/capstone_mood-tracker"}
             >
               Ruh on Github

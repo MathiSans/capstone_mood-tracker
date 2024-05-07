@@ -27,10 +27,10 @@ export const InfoBox = styled(motion.div)`
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(40px);
   border-radius: var(--border-radius-small);
-  padding: 1rem;
-  width: 300px;
+  padding: 32px;
+  width: 280px;
   max-height: 80vh;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 `;
 
 export const Title = styled.p`
@@ -60,6 +60,7 @@ export const InfoText = styled.p`
   font-size: 0.8rem;
   font-weight: 500;
   text-align: left;
+  width: 100%;
 `;
 
 export const CloseIcon = styled.button`
@@ -89,7 +90,7 @@ export const ContributorsContainer = styled.p`
 `;
 
 export const Contributor = styled.a`
-  color: var(--color-light);
+  color: ${(props) => props.$color || "var(--color-light)"};
   font-size: var(--font-size-small);
   text-decoration: none;
   text-decoration: underline;
@@ -97,4 +98,5 @@ export const Contributor = styled.a`
   text-underline-offset: 3px;
   margin-inline: 0.1rem;
   cursor: pointer;
+  white-space: nowrap;
 `;

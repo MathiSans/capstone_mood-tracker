@@ -13,9 +13,11 @@ export default function InboxTile({
   session,
   allEntries,
 }) {
-  const messagesForUser = allMessages.filter(
-    (message) => message.recipientId === session.user.id
-  );
+  const messagesForUser = allMessages
+    .filter((message) => message.recipientId === session.user.id)
+    .slice()
+    .reverse();
+
   return (
     <Tile $columns="4" $rows="2">
       <Header>

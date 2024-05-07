@@ -28,22 +28,29 @@ export default function EntryTile({
       </Styled.Pill>
       <Styled.TextContainer>
         <Styled.TextBlock>
+          {inOutboxTile ? (
+            <Styled.EntryText>{userName} </Styled.EntryText>
+          ) : session ? (
+            "You "
+          ) : (
+            <Styled.EntryText>Somebody </Styled.EntryText>
+          )}
           {location !== "unknown" && (
             <>
-              <Styled.EntryText>In {location.region} </Styled.EntryText>
+              in
+              <Styled.EntryText color={color}>
+                {" "}
+                {location.region}{" "}
+              </Styled.EntryText>
             </>
-          )}
-          {inOutboxTile ? (
-            userName
-          ) : session ? (
-            "you"
-          ) : (
-            <Styled.EntryText>somebody</Styled.EntryText>
           )}
           <Styled.EntryText> experienced </Styled.EntryText>
           <Styled.EntryText color={color}>{experience}</Styled.EntryText>,
           <Styled.EntryText> more specifically </Styled.EntryText>
-          <Intensity value={intensity} experience={experience} />. tags:{" "}
+          <Styled.EntryText color={color}>
+            <Intensity value={intensity} experience={experience} />
+          </Styled.EntryText>
+          . Selected tags:{" "}
           {reactions.map((reaction, index, array) => (
             <React.Fragment key={index}>
               <Styled.EntryText color={color}>
