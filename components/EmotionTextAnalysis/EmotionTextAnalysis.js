@@ -91,7 +91,6 @@ function EmotionTextAnalysis() {
           predictionsState={predictionsState}
           htmlFor="language"
         >
-          language{"       "}
           <select id="language" onChange={handleLanguageSelect}>
             <option value="en">english</option>
             <option value="de">german</option>

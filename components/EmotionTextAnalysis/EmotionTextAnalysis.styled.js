@@ -18,27 +18,23 @@ export const CircleContainer = styled.div`
 `;
 
 export const StyledTextarea = styled.textarea`
-  height: 9.375rem;
-  width: 90vw;
+  padding: 8px;
+  height: 120px;
+  width: 240px;
 `;
 
 export const StyledQuestion = styled.p`
-  width: 90vw;
+  text-align: center;
 `;
 
 export const TextAnalysisContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  margin-bottom: -4rem;
-  width: 100vw;
-  height: ${(props) => (props.showList ? "auto" : "80vh")};
-  margin-top: ${(props) => (props.showList ? "auto" : "1rem")};
+  width: 300px;
+  overflow-y: auto;
+  height: 60vh;
 `;
 
 export const StyledLabel = styled.div`
-  margin-top: ${(props) => (props.showList ? "auto" : "-3rem")};
+  /* margin-top: ${(props) => (props.showList ? "auto" : "-3rem")};
   padding-top: 1.5rem;
-  margin-bottom: ${(props) => (props.predictionsState ? "-3rem" : "auto")};
+  margin-bottom: ${(props) => (props.predictionsState ? "-3rem" : "auto")}; */
 `;

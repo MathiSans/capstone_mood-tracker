@@ -16,7 +16,7 @@ export const Page = styled.div`
   justify-content: center;
   align-items: center;
   gap: var(--spacing-xxl);
-  margin-bottom: 10vh;
+  /* margin-bottom: 10vh; */
 `;
 
 export const Navigation = styled.div`
@@ -25,4 +25,5 @@ export const Navigation = styled.div`
   align-items: center;
   display: flex;
   gap: var(--spacing-l);
+  margin-top: 10vh;
 `;

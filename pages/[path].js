@@ -18,7 +18,7 @@ import { animations } from "@/components/AnimationWrapper/animations";
 import ToolWrapper from "@/components/ToolWrapper/ToolWrapper";
 import Image from "next/image";
 import styled from "styled-components";
-import Link from "next/link";
+import LinkWrapper from "@/components/LinkWrapper/LinkWrapper";
 
 const ImageWrapper = styled(motion.div)`
   display: inline-block;
@@ -78,7 +78,7 @@ export default function Home() {
       <LogoContainer
         onClick={() => handleSphereState({ color: "grey", intensity: 0.1 })}
       >
-        <Link href="/start">
+        <LinkWrapper link="/start">
           <ImageWrapper
             whileHover={{
               scale: 0.9,
@@ -93,7 +93,7 @@ export default function Home() {
               height={36}
             />
           </ImageWrapper>
-        </Link>
+        </LinkWrapper>
       </LogoContainer>
       <Container>
         <AnimatePresence initial={false}>

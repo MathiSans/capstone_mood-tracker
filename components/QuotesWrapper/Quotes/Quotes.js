@@ -56,11 +56,11 @@ export default function Quotes({ quote, refreshQuote, handleCounter }) {
 
   function getFontSize(quote) {
     let baseSize = 40; // base font size in px
-    let maxLength = 60; // max characters count for base size
+    let maxLength = 40; // max characters count for base size
     if (quote.length > maxLength) {
       let diff = quote.length - maxLength;
       let sizeDecrease = Math.floor(diff / 4); // decrease font size by 1px for each 4 characters over maxLength
-      return Math.max(baseSize - sizeDecrease, 19); // don't go below 16px
+      return Math.max(baseSize - sizeDecrease, 16); // don't go below 16px
     }
 
     return baseSize;
@@ -73,8 +73,8 @@ export default function Quotes({ quote, refreshQuote, handleCounter }) {
       style={{
         perspective: "1200px",
         transformStyle: "preserve-3d",
-        width: "330px",
-        height: "400px",
+        width: "320px",
+        height: "340px",
       }}
     >
       <motion.div
