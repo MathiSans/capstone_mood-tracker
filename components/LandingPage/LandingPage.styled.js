@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { IoClose } from "react-icons/io5";
 
 export const InfoContainer = styled.div`
   display: flex;
@@ -42,14 +41,18 @@ export const Title = styled.p`
 
 export const Subtitle = styled.p`
   font-size: 18px;
-  font-weight: 200;
+  font-weight: 400;
   text-align: center;
 `;
 
-export const InfoIcon = styled.div`
+export const InfoIcon = styled.button`
   display: flex;
   justify-content: center;
   margin-top: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--color-light);
+  font-size: 1.4rem;
   cursor: pointer;
 `;
 
@@ -59,7 +62,11 @@ export const InfoText = styled.p`
   text-align: left;
 `;
 
-export const CloseIcon = styled(IoClose)`
+export const CloseIcon = styled.button`
   margin-top: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--color-light);
+  font-size: 1.4rem;
   cursor: pointer;
 `;

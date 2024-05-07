@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as Styled from "./LandingPage.styled";
 import { MdInfoOutline } from "react-icons/md";
+import { IoClose } from "react-icons/io5";
 import { AnimatePresence } from "framer-motion";
 
 export default function LandingPage() {
@@ -20,7 +21,10 @@ export default function LandingPage() {
             get inspired to change them <br />
             and connect with others
           </Styled.Subtitle>
-          <Styled.InfoIcon onClick={handleShowInfo}>
+          <Styled.InfoIcon
+            onClick={handleShowInfo}
+            aria-label="open info box for more information around the app"
+          >
             <MdInfoOutline />
           </Styled.InfoIcon>
         </>
@@ -54,7 +58,10 @@ export default function LandingPage() {
             <Styled.CloseIcon
               visible={isInfoBoxVisible}
               onClick={handleShowInfo}
-            />
+              aria-label="close info box"
+            >
+              <IoClose />
+            </Styled.CloseIcon>
           </Styled.InfoBox>
         )}
       </AnimatePresence>
