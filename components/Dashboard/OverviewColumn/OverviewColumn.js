@@ -35,7 +35,7 @@ export default function OverviewColumn({
         />
       )}
       <NewEntryTile />
-      {!isLoadingEntries && (
+      {lastEntry && !isLoadingEntries && (
         <LastEntryTile
           experience={lastEntry.experience}
           time={lastEntry.time}
