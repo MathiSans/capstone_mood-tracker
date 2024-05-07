@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { Container, Page } from "@/components/Layout/Layout.styled";
+import { Page } from "@/components/Layout/Layout.styled";
 import NavButton from "@/components/NavButton/NavButton";
 import Circle from "@/components/Circle/Circle";
 import { TbList } from "react-icons/tb";
 import {
   CircleContainer,
   StyledTextarea,
+  StyledQuestion,
+  TextAnalysisContainer,
+  StyledLabel,
 } from "@/components/EmotionTextAnalysis/EmotionTextAnalysis.styled";
 import { questions } from "@/components/EmotionTextAnalysis/EmotionTextAnalysisQuestions";
 
@@ -80,18 +83,18 @@ function EmotionTextAnalysis() {
   }
 
   return (
-    <Container>
-      <Page>
+    <TextAnalysisContainer showList={showList}>
+      <Page emotionTextAnalysis={true}>
         <h3>Emotion Text Analysis Tool</h3>
-        <label htmlFor="language">
+        <StyledLabel htmlFor="language">
           language{"       "}
           <select id="language" onChange={handleLanguageSelect}>
             <option value="en">english</option>
             <option value="de">german</option>
             <option value="es">espanol</option>
           </select>{" "}
-        </label>
-        <p>{questions[page] && questions[page]}</p>
+        </StyledLabel>
+        <StyledQuestion>{questions[page] && questions[page]}</StyledQuestion>
         {page === 10 && (
           <p>
             <TbList onClick={() => setShowList(!showList)} />
@@ -166,15 +169,10 @@ function EmotionTextAnalysis() {
                 />
               ))}
             </CircleContainer>
-            <NavButton
-              handleClick={() => alert("Thank you for choosing our tool!")}
-            >
-              Finish
-            </NavButton>
           </>
         )}
       </Page>
-    </Container>
+    </TextAnalysisContainer>
   );
 }
 

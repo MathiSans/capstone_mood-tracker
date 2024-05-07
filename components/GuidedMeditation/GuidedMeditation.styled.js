@@ -13,12 +13,13 @@ export const SourceContainer = styled.div`
 `;
 
 export const Article = styled.article`
-  margin-top: 1%.5;
+  margin-top: 1rem;
 `;
 
 export const MeditationContainer = styled.div`
   padding: 0 2rem 0 2rem;
   max-width: 600px;
+  margin-top: -4rem;
 `;
 
 export const BrightLink = styled(Link)`

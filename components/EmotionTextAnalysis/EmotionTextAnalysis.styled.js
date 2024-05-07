@@ -19,5 +19,24 @@ export const CircleContainer = styled.div`
 
 export const StyledTextarea = styled.textarea`
   height: 9.375rem;
-  width: 100%;
+  width: 90vw;
+`;
+
+export const StyledQuestion = styled.p`
+  width: 90vw;
+`;
+
+export const TextAnalysisContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: -4rem;
+  width: 100vw;
+  height: ${(props) => (props.showList ? "auto" : "80vh")};
+  margin-top: ${(props) => (props.showList ? "auto" : "1rem")};
+`;
+
+export const StyledLabel = styled.div`
+  margin-bottom: -3rem;
 `;
