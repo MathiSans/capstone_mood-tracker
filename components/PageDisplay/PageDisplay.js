@@ -29,15 +29,11 @@ export default function PageDisplay({
           case 0:
             return (
               <>
-                <Styled.TitleContainer>
-                  <Guide bigger={true} text={"komm zur Ruh"} />
-                  {session && (
-                    <h2 style={{ textAlign: "center" }}>
-                      Welcome back, <br />
-                      {session.user.name}
-                    </h2>
-                  )}
-                </Styled.TitleContainer>
+                <p style={{ width: "300px", textAlign: "center" }}>
+                  {session
+                    ? `${session.user.name}, tell the sphere how you feel right now.`
+                    : "Tell the sphere how you feel right now."}
+                </p>
               </>
             );
           case 1:
@@ -81,15 +77,17 @@ export default function PageDisplay({
                     leftToRight
                     key={page}
                   >
-                    <Slider
-                      experience={experience}
-                      sliderValue={sliderValue}
-                      handleSliderChange={handleSliderChange}
-                    />
-                    <IntensityDisplay
-                      experience={experience}
-                      sliderValue={sliderValue}
-                    />
+                    <Styled.SliderWrapper>
+                      <Slider
+                        experience={experience}
+                        sliderValue={sliderValue}
+                        handleSliderChange={handleSliderChange}
+                      />
+                      <IntensityDisplay
+                        experience={experience}
+                        sliderValue={sliderValue}
+                      />
+                    </Styled.SliderWrapper>
                   </AnimationWrapper>
                 </AnimatePresence>
               </>

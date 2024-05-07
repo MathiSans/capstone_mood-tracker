@@ -54,13 +54,13 @@ const StyledMuteButton = styled.button`
   margin-block-end: 20px;
   height: 40px;
   width: 40px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: ${(props) =>
     props.$isMuted ? `var(--color-neutral)` : `var(--color-main-alt)`};
   border: 1px solid
     ${(props) =>
       props.$isMuted ? `var(--color-neutral)` : `var(--color-main-alt)`};
-  border-radius: var(--border-radius-small);
+  border-radius: var(--border-radius-round);
   cursor: pointer;
   display: ${(props) => (props.$showSettings ? "show" : "none")};
 `;

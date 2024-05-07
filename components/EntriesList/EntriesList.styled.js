@@ -9,7 +9,7 @@ export const DeleteAnswer = styled.p`
   cursor: pointer;
 `;
 
-export const DeleteButton = styled.button`
+export const DeleteButton = styled.div`
   border-radius: var(--border-radius-large);
   border: none;
   font-size: 1.5rem;
@@ -81,7 +81,7 @@ export const DeleteContainer = styled.div`
 
 export const ToolsContainer = styled.div`
   position: absolute;
-  top: 7dvh;
+  bottom: 30dvh;
   left: 50vw;
   transform: translate(-50%, -50%);
   display: flex;

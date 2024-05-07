@@ -41,6 +41,7 @@ export default function EntriesColumn({
         }
         targetExperience={targetExperience}
         setTargetExperience={setTargetExperience}
+        // onEntryRender={"handleEntryRender"}
       />
     </Grid>
   );

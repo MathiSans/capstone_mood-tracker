@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export const Container = styled(motion.div)`
   position: absolute;
-  top: 0;
+  top: 90px;
   left: auto;
   display: flex;
   flex-direction: column;
@@ -14,10 +14,10 @@ export const Container = styled(motion.div)`
 `;
 
 export const Grid = styled.div`
-  padding: 114px 0 114px 0;
+  padding: 60px 0 114px 0;
   display: grid;
   grid-template-columns: 80px 80px 80px 80px;
-  grid-gap: 1rem;
+  grid-gap: 8px;
   grid-auto-rows: 80px;
   overflow-y: scroll;
   *::-webkit-scrollbar {

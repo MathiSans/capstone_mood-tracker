@@ -8,7 +8,7 @@ export const RangeInput = styled.input`
   appearance: none;
   -webkit-appearance: none;
   margin: var(--spacing-m) 0;
-  width: 100%;
+  width: 300px;
 
   &:focus {
     outline: none;

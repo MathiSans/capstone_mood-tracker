@@ -16,9 +16,13 @@ export const Label = styled.label`
   color: var(--color-neutral);
 `;
 
+export const question = styled.p`
+  margin-bottom: 20px;
+`;
+
 export const AddEmojisSentence = styled.p`
-  margin-top: var(--spacing-m);
-  margin-left: var(--spacing-s);
+  text-align: left;
+  margin-bottom: 10px;
 `;
 
 export const EmojiContainer = styled.div`
@@ -27,7 +31,6 @@ export const EmojiContainer = styled.div`
   gap: var(--spacing-xs);
   align-items: center;
   justify-content: start;
-  height: 40px;
   margin-bottom: var(--spacing-l);
 `;
 
@@ -40,7 +43,7 @@ export const Card = styled.div`
   border-radius: var(--border-radius-small);
   margin: 1rem;
   max-width: 600px;
-  padding: var(--spacing-xxxl);
+  padding: 7%;
   position: relative;
   grid-column-end: span 4;
   grid-row-end: span 8;
@@ -77,6 +80,7 @@ export const TextArea = styled.textarea`
   width: 100%;
   padding: var(--spacing-m) var(--spacing-l);
   margin: var(--spacing-s) 0;
+  margin-bottom: 20px;
 `;
 
 export const ButtonArea = styled.div`
@@ -91,6 +95,10 @@ export const CheckboxContainer = styled.div`
   flex-wrap: wrap;
   gap: var(--spacing-l);
   margin-bottom: var(--spacing-xxl);
+`;
+
+export const StyledText = styled.span`
+  margin-bottom: 0px;
 `;
 
 export const CheckboxLabel = styled.label`
@@ -114,17 +122,17 @@ export const CheckboxInput = styled.input`
   font-size: var(--font-size-default);
   border-radius: var(--border-radius-medium);
   cursor: pointer;
-  top: -32px;
-  left: -14px;
+  top: -34px;
+  left: -10px;
 
   &:checked::after {
     content: "";
     position: absolute;
-    height: 40px;
-    width: 110px;
-    border: 3.5px solid var(--color-main-alt);
+    height: 100%;
+    width: 100%;
+    border: 2.5px solid var(--color-main-alt);
     font-size: var(--font-size-default);
-    color: var(--color-main-alt);
     border-radius: var(--border-radius-medium);
+    margin-top: 6px;
   }
 `;

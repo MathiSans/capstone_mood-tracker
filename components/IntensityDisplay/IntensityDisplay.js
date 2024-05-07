@@ -12,16 +12,27 @@ export default function IntensityDisplay({ sliderValue, experience }) {
     const nextIntensity =
       index < intensities.length - 1 ? intensities[index + 1].name : null;
 
-    return [previousIntensity, currentIntensity, nextIntensity];
+    return { previousIntensity, currentIntensity, nextIntensity };
   }
+
+  const { previousIntensity, currentIntensity, nextIntensity } =
+    calculateIntensity(sliderValue);
 
   return (
     <Styled.IntensityContainer>
-      {calculateIntensity(sliderValue).map((intensity, index) => (
-        <Styled.Intensity index={index} key={`${intensity}-${index}`}>
-          {intensity}
+      {previousIntensity && (
+        <Styled.Intensity key={`previous-${previousIntensity}`}>
+          {previousIntensity}
         </Styled.Intensity>
-      ))}
+      )}
+      <Styled.Intensity index={1} key={`current-${currentIntensity}`}>
+        {currentIntensity}
+      </Styled.Intensity>
+      {nextIntensity && (
+        <Styled.Intensity key={`next-${nextIntensity}`}>
+          {nextIntensity}
+        </Styled.Intensity>
+      )}
     </Styled.IntensityContainer>
   );
 }
