@@ -61,7 +61,7 @@ export const BarChartContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 1rem;
   width: 100%;
-  height: 100%;
+  height: 90%;
   overflow: auto;
 `;
 
@@ -75,6 +75,7 @@ export const Container = styled.div`
   padding: 0.8rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   grid-column-end: span 4;
   grid-row-end: span 3;
 `;
