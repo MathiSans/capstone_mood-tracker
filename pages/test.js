@@ -1,5 +1,5 @@
-import EmotionTextAnalysis from "@/components/EmotionTextAnalysis/EmotionTextAnalysis";
+import DrawingCanvas from "@/components/Draw/Draw";
 
 export default function Test() {
-  return <EmotionTextAnalysis />;
+  return <DrawingCanvas />;
 }
