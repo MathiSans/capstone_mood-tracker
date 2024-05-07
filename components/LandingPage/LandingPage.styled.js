@@ -70,3 +70,31 @@ export const CloseIcon = styled.button`
   font-size: 1.4rem;
   cursor: pointer;
 `;
+
+export const GitHubLink = styled.a`
+  margin-top: 1.5rem;
+  padding: 0.4rem 0.8rem;
+  color: var(--color-light);
+  font-size: var(--font-size-small);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--color-neutral);
+  border-radius: var(--border-radius-small);
+  text-decoration: none;
+  cursor: pointer;
+`;
+
+export const ContributorsContainer = styled.p`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const Contributor = styled.a`
+  color: var(--color-light);
+  font-size: var(--font-size-small);
+  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  margin-inline: 0.1rem;
+  cursor: pointer;
+`;

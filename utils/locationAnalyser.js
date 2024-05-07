@@ -20,7 +20,7 @@ export default function locationAnalyser(data) {
       };
     } else {
       locationMap[region].count++;
-      if (!locationMap[region].cities.includes(city)) {
+      if (!Map[region].cities.includes(city)) {
         locationMap[region].cities.push(city);
       }
     }
