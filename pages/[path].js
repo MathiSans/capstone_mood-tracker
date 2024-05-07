@@ -72,11 +72,11 @@ export default function Home() {
         handleDashboardIsOpen={handleDashboardIsOpen}
       />
 
-      {/* <Animation
+      <Animation
         color={sphereState.color}
         opacity={sphereState.intensity}
         hideInterface={hideInterface}
-      /> */}
+      />
       <LogoContainer
         onClick={() => handleSphereState({ color: "grey", intensity: 0.1 })}
       >

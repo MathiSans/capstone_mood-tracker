@@ -24,18 +24,19 @@ export const IndicatorContainer = styled.div`
   width: 3rem;
   height: 1rem;
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -110px;
+  right: 16px;
+  top: 16px;
   padding-inline: 0.2rem;
-  filter: drop-shadow(#242321 0rem 0rem 4px);
+  filter: drop-shadow(#242321 0rem 2px 6px);
+  z-index: 2;
 `;
 
 export const Indicator = styled.div`
   height: 0.35rem;
   width: 0.35rem;
   border-radius: 50%;
-  background: ${(props) => (props.$active ? "white" : "grey")};
+  border: 1px solid white;
+  background: ${(props) => (props.$active ? "white" : "none")};
   ${(props) =>
     props.$active &&
     css`
@@ -47,6 +48,6 @@ export const Indicator = styled.div`
 
 export const CarouselContainer = styled.div`
   width: 100%;
+  height: 100%;
   position: relative;
-  padding-bottom: 1.5rem;
 `;

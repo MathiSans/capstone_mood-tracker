@@ -3,14 +3,13 @@ import styled from "styled-components";
 export const HeaderSwitches = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: end;
   justify-content: space-between;
-  margin-top: 20px;
   width: 100%;
-  height: auto; /* Änderung der Höhe auf auto */
   position: relative;
   grid-column-end: span 4;
   grid-row-end: span 1;
+  padding-bottom: 16px;
 `;
 
 export const Switch = styled.div`
@@ -21,7 +20,8 @@ export const Switch = styled.div`
 
 export const Option = styled.div`
   cursor: pointer;
-  padding: 8px 16px;
+  padding: 6px 12px;
+  font-size: var(--font-size-small);
   color: ${(props) => (props.$isActive ? "#303030" : "#f8f8f8")};
   background-color: ${(props) => (props.$isActive ? "#f8f8f8" : "#303030")};
   border-radius: var(--border-radius-medium);
@@ -40,13 +40,10 @@ export const CircleBox = styled.div`
   background-color: #f8f8f8;
   color: #303030;
   border-radius: 50%;
-  width: 40px; /* Verkleinerung der Breite auf 40px */
-  height: 40px; /* Festlegen der Höhe auf 40px */
+  width: 31px;
+  height: 31px;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  right: 0;
-  top: 50%; /* Zentrieren vertikal */
-  transform: translateY(-50%); /* Korrektur für die Zentrierung */
+  cursor: pointer;
 `;

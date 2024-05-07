@@ -9,14 +9,8 @@ import { useSession } from "next-auth/react";
 
 export default function ActivitiesForm({ handleShowForm }) {
   const [selectedEmotions, setSelectedEmotions] = useState([]);
-  const [showPicker, setShowPicker] = useState(false);
   const { data: session } = useSession();
   const userId = session?.user.id;
-
-  function onEmojiClick(emoji) {
-    setShowPicker(false);
-    window.scrollTo(0, 0);
-  }
 
   function handleCheckboxChange(emotion, isChecked) {
     if (isChecked) {
@@ -34,7 +28,7 @@ export default function ActivitiesForm({ handleShowForm }) {
     const title = event.target.elements.title.value.trim();
     const description = event.target.elements.description.value.trim();
     if (!title || !description) {
-      alert("Title, description or emoji cannot be empty or just spaces.");
+      alert("Title or description cannot be empty.");
       return;
     }
 
@@ -71,31 +65,16 @@ export default function ActivitiesForm({ handleShowForm }) {
   return (
     <>
       <Styled.Card>
-        <form onSubmit={handleSubmit}>
+        <Styled.Form onSubmit={handleSubmit}>
           <Styled.AddEmojisSentence>
             Add a new activity
           </Styled.AddEmojisSentence>
-          {showPicker && (
-            <Picker
-              style={{
-                position: "absolute",
-                top: "90px",
-                left: "0",
-                zIndex: "10",
-              }}
-              pickerStyle={{ width: "100%" }}
-              onEmojiClick={(emojiObject) => {
-                onEmojiClick(emojiObject.emoji);
-              }}
-            />
-          )}
-
           <Styled.Label htmlFor="title">
             enter a title for your activity
             <Styled.InputField
               id="title"
               name="title"
-              maxLength={50}
+              maxLength={36}
               required
             ></Styled.InputField>
           </Styled.Label>
@@ -104,14 +83,14 @@ export default function ActivitiesForm({ handleShowForm }) {
             <Styled.TextArea
               id="description"
               name="description"
-              maxLength={250}
+              maxLength={125}
               rows="4"
               required
             ></Styled.TextArea>
           </Styled.Label>
-          <Styled.question>
+          <Styled.Question>
             <p>For which experiences could this be?</p>
-          </Styled.question>
+          </Styled.Question>
           <Styled.CheckboxContainer>
             {checkboxes.map((checkbox, index) => (
               <Styled.CheckboxLabel
@@ -136,7 +115,7 @@ export default function ActivitiesForm({ handleShowForm }) {
               Cancel
             </NavButton>
           </Styled.ButtonArea>
-        </form>
+        </Styled.Form>
       </Styled.Card>
     </>
   );

@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 export const DashboardContext = createContext();
 
 export function DashboardStateProvider({ children }) {
-  const [dashboardIsOpen, setDashboardIsOpen] = useState(true);
+  const [dashboardIsOpen, setDashboardIsOpen] = useState(false);
 
   function handleDashboardIsOpen() {
     setDashboardIsOpen(!dashboardIsOpen);

@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import ActivityTile from "../../Tiles/ActivityTile/ActivityTile";
 
 export default function ActivitiesList({ handleShowForm }) {
-  const [filterOption, setFilterOption] = useState("all");
+  const [filterOption, setFilterOption] = useState("activities");
   const { data: session } = useSession();
   const { data: initialActivities, isLoading } = useSWR("/api/activities");
 
@@ -21,10 +21,12 @@ export default function ActivitiesList({ handleShowForm }) {
   const sortedActivities = [...initialActivities].reverse();
 
   const filteredActivities = sortedActivities.filter((activity) => {
-    if (filterOption === "all") {
-      return true;
+    if (filterOption === "activities") {
+      return !activity.hasOwnProperty("tool");
     } else if (filterOption === "tools") {
       return activity.hasOwnProperty("tool");
+    } else if (filterOption === "myActivities") {
+      return activity.user === session.user.id;
     }
   });
 
@@ -37,16 +39,22 @@ export default function ActivitiesList({ handleShowForm }) {
       <Styled.HeaderSwitches>
         <Styled.Switch>
           <Styled.Option
-            $isActive={filterOption === "all"}
-            onClick={() => handleFilter("all")}
-          >
-            All Activities
-          </Styled.Option>
-          <Styled.Option
             $isActive={filterOption === "tools"}
             onClick={() => handleFilter("tools")}
           >
             Tools
+          </Styled.Option>
+          <Styled.Option
+            $isActive={filterOption === "activities"}
+            onClick={() => handleFilter("activities")}
+          >
+            Activities
+          </Styled.Option>
+          <Styled.Option
+            $isActive={filterOption === "myActivities"}
+            onClick={() => handleFilter("myActivities")}
+          >
+            my Activities
           </Styled.Option>
         </Styled.Switch>
 

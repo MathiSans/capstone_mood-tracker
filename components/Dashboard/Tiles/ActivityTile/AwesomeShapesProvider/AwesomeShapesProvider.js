@@ -26,14 +26,11 @@ export default function AwesomeShapesProvider() {
   const color1 = getRandomHexColor();
   const color2 = getRandomHexColor();
 
-  console.log(color1, color2);
-
   return (
     <Component
-      //   color={"red"}
       color={`linear-gradient(135deg, ${color1}, ${color2})`}
       size={"200px"}
-      zIndex={2}
+      zIndex={1}
       position="relative"
     />
   );

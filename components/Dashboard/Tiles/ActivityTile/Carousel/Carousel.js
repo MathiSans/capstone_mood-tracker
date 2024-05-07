@@ -18,8 +18,8 @@ export default function Carousel({ children }) {
   };
 
   return (
-    <Styled.CarouselContainer>
-      <AnimatePresence initial={false}>
+    <>
+      <AnimatePresence>
         {children.map(
           (child, index) =>
             index === currentIndex && (
@@ -29,11 +29,6 @@ export default function Carousel({ children }) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                style={{
-                  position: "absolute",
-                  width: "100%",
-                  top: 0,
-                }}
               >
                 {child}
               </motion.div>
@@ -42,9 +37,13 @@ export default function Carousel({ children }) {
       </AnimatePresence>
       <Styled.IndicatorContainer>
         {children.map((_, index) => (
-          <Styled.Indicator key={index} $active={index === currentIndex} />
+          <Styled.Indicator
+            onClick={() => handleIndicatorClick(index)}
+            key={index}
+            $active={index === currentIndex}
+          />
         ))}
       </Styled.IndicatorContainer>
-    </Styled.CarouselContainer>
+    </>
   );
 }

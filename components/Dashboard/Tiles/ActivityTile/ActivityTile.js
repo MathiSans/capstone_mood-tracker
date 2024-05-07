@@ -7,15 +7,8 @@ export default function ActivityTile({ isOnOverviewColumn, activity }) {
   const { activities, isLoadingActivities, errorActivities } =
     useData().fetchedActivities;
 
-  const isToolActivity =
-    activity && activity.hasOwnProperty("tool") && activity.tool;
-
   return (
     <Styled.Container>
-      <Styled.Pill>
-        <Styled.TileH3>{isToolActivity ? "Tool" : "Tipp"}</Styled.TileH3>
-      </Styled.Pill>
-
       {isOnOverviewColumn && (
         <Carousel>
           {!isLoadingActivities

@@ -35,8 +35,7 @@ export const LinkContainer = styled.div`
   text-decoration: none;
   border-radius: 2rem;
   padding: 5px 5px;
-  margin: 0 auto;
-  width: 70%;
+  width: 100%;
   background-color: rgba(255, 255, 255, 1);
   mix-blend-mode: lighten;
   border-radius: 2rem;
