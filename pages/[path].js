@@ -15,6 +15,7 @@ import { useDashboardState } from "@/components/DashboardStateProvider/Dashboard
 import { useSphereState } from "@/components/ContextProviders/SphereStateProvider/SphereStateProvider";
 import { motion, AnimatePresence } from "framer-motion";
 import { animations } from "@/components/AnimationWrapper/animations";
+import ToolWrapper from "@/components/ToolWrapper/ToolWraper";
 import Image from "next/image";
 import styled from "styled-components";
 import Link from "next/link";
@@ -56,7 +57,6 @@ export default function Home() {
     : path?.includes("tool:")
     ? ToolsWrapper
     : componentMap[path];
-
   function handleHideInterface() {
     setHideInterface(!hideInterface);
   }
@@ -110,7 +110,10 @@ export default function Home() {
               // exit="fadeOut"
               transition="easeInOut"
             >
-              <Component id={path.replace("id:", "")} />
+              <Component
+                id={path.replace("id:", "")}
+                tool={path.replace("tool:", "")}
+              />
             </motion.div>
           )}
         </AnimatePresence>
