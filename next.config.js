@@ -39,7 +39,7 @@ const nextConfig = {
 
   // Add images configuration
   images: {
-    domains: ["avatars.githubusercontent.com"], // Add your domain here
+    domains: ["avatars.githubusercontent.com", "lh3.googleusercontent.com"], // Add your domain here
   },
 };
 
