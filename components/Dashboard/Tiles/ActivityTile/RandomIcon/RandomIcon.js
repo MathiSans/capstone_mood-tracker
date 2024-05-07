@@ -1,5 +1,5 @@
 import { Coolshape } from "coolshapes-react";
-import * as Styled from "./RandomIcon.styled";
+import * as Styled from "./RandomIcon.styled.js";
 
 export default function RandomIcon({ activity }) {
   return (
