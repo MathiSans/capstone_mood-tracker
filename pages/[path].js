@@ -15,7 +15,7 @@ import { useDashboardState } from "@/components/DashboardStateProvider/Dashboard
 import { useSphereState } from "@/components/ContextProviders/SphereStateProvider/SphereStateProvider";
 import { motion, AnimatePresence } from "framer-motion";
 import { animations } from "@/components/AnimationWrapper/animations";
-import ToolWrapper from "@/components/ToolWrapper/ToolWraper";
+import ToolWrapper from "@/components/ToolWrapper/ToolWrapper";
 import Image from "next/image";
 import styled from "styled-components";
 import Link from "next/link";
@@ -29,9 +29,8 @@ const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 12vh;
   position: absolute;
-  top: 3px;
+  top: 16px;
   left: 50%;
   transform: translateX(-50%);
 `;
@@ -74,7 +73,7 @@ export default function Home() {
       <Animation
         color={sphereState.color}
         opacity={sphereState.intensity}
-        hideInterface={false}
+        hideInterface={hideInterface}
       />
       <LogoContainer
         onClick={() => handleSphereState({ color: "grey", intensity: 0.1 })}
@@ -90,8 +89,8 @@ export default function Home() {
             <Image
               src="/images/mood-tracker-logo1.png"
               alt="Ruh logo"
-              width={50}
-              height={50}
+              width={36}
+              height={36}
             />
           </ImageWrapper>
         </Link>
@@ -126,5 +125,5 @@ const PathContainer = styled.div`
   height: 100dvh;
   width: 100vw;
   overflow: hidden;
-  position: absolute;
+  position: relative;
 `;

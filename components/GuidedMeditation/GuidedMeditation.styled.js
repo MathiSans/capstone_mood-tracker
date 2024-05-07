@@ -17,9 +17,9 @@ export const Article = styled.article`
 `;
 
 export const MeditationContainer = styled.div`
-  padding: 0 2rem 0 2rem;
+  /* padding: 0 2rem 0 2rem;
   max-width: 600px;
-  margin-top: -4rem;
+  margin-top: -4rem; */
 `;
 
 export const BrightLink = styled(Link)`

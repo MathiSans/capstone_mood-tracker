@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 
 export const Container = styled(motion.div)`
   position: absolute;
-  top: 90px;
   left: auto;
   display: flex;
   flex-direction: column;
@@ -14,7 +13,7 @@ export const Container = styled(motion.div)`
 `;
 
 export const Grid = styled.div`
-  padding: 60px 0 114px 0;
+  padding: 120px 0 90px 0;
   display: grid;
   grid-template-columns: 80px 80px 80px 80px;
   grid-gap: 8px;
