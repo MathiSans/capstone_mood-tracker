@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import Link from "next/link";
 
 export const ColorText = styled.p`
   color: ${(prop) => prop.color};

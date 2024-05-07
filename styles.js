@@ -41,6 +41,11 @@ export default createGlobalStyle`
         --color-dark: ${colors.dark};
         --color-neutral: ${colors.neutral};
         --color-danger: ${colors.danger};
+        --color-anger: ${colors.anger};
+        --color-fear: ${colors.fear};
+        --color-enjoyment: ${colors.enjoyment};
+        --color-disgust: ${colors.disgust};
+        --color-sadness: ${colors.sadness};
 
         --font-main: ${fonts.main};
         --font-serif: ${fonts.serif};

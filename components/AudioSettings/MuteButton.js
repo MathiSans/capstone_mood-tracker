@@ -50,17 +50,17 @@ const StyledMuteButton = styled.button`
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  margin-inline-end: 1.5rem;
-  margin-block-end: 20px;
-  height: 40px;
-  width: 40px;
-  font-size: 1.2rem;
+  margin-inline-end: 1.2rem;
+  margin-block-end: 36px;
+  height: 42px;
+  width: 42px;
+  font-size: 1rem;
   color: ${(props) =>
     props.$isMuted ? `var(--color-neutral)` : `var(--color-main-alt)`};
   border: 1px solid
     ${(props) =>
       props.$isMuted ? `var(--color-neutral)` : `var(--color-main-alt)`};
-  border-radius: var(--border-radius-small);
+  border-radius: var(--border-radius-round);
   cursor: pointer;
   display: ${(props) => (props.$showSettings ? "show" : "none")};
 `;

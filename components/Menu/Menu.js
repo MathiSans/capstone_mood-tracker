@@ -48,7 +48,7 @@ export default function Menu({ handleShowMenu }) {
       <Styled.MenuContainer>
         {[
           { text: session ? "logout" : "login", link: "handleLoginButton" },
-          { text: "new home", link: "/index" },
+          { text: "new home", link: "/start" },
           { text: "LEGACY: enter a mood", link: "/flow" },
           { text: "LEGACY: moods collection", link: "/entries_old" },
           { text: "LEGACY: moods map", link: "/maps" },

@@ -71,14 +71,14 @@ export default function BarChartTile({
       <Styled.BarChartContainer>
         {visualizedData &&
           visualizedData.experiences.map(
-            ({ index, count, color, experience }) => (
+            ({ count, color, experience }, index) => (
               <Styled.SingleBar
                 key={index}
-                color={color}
-                experience={experience}
-                barHeight={Math.floor((count / totalCount) * 100)}
+                $color={color}
+                // experience={experience}
+                $barHeight={Math.floor((count / totalCount) * 100)}
                 onClick={() => handleExperienceClick(experience)}
-                isClicked={
+                $isClicked={
                   singleExperienceList && clickedExperience === experience
                 }
               />

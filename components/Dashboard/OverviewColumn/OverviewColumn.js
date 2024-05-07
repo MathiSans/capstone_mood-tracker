@@ -3,6 +3,7 @@ import ActivityTile from "../Tiles/ActivityTile/ActivityTile";
 import LastEntryTile from "../Tiles/LastEntryTile/LastEntryTile";
 import NewEntryTile from "../Tiles/NewEntryTile/NewEntryTile";
 import BarChartTile from "../Tiles/BarChartTile/BarChartTile";
+import MessagesOverviewTile from "../Tiles/MessagesOverviewTile/MessagesOverviewTile";
 
 export default function OverviewColumn({
   isLast7Days,
@@ -34,7 +35,7 @@ export default function OverviewColumn({
         />
       )}
       <NewEntryTile />
-      {!isLoadingEntries && (
+      {lastEntry && !isLoadingEntries && (
         <LastEntryTile
           experience={lastEntry.experience}
           time={lastEntry.time}
@@ -46,6 +47,7 @@ export default function OverviewColumn({
           isOnOverviewColumn
         />
       )}
+      <MessagesOverviewTile />
       <ActivityTile isOnOverviewColumn />
     </Grid>
   );

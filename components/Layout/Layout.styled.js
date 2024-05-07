@@ -7,6 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   width: 100vw;
   min-height: 100dvh;
+  z-index: 2;
 `;
 
 export const Page = styled.div`
@@ -14,7 +15,7 @@ export const Page = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: var(--spacing-xxxl);
+  gap: var(--spacing-xxl);
   margin-bottom: 10vh;
 `;
 

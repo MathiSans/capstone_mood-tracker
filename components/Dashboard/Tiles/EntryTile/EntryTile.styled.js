@@ -44,7 +44,7 @@ export const Container = styled.div`
   padding: 0.4rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 6px;
   cursor: pointer;
   text-decoration: none;
   font-size: 0.6rem;

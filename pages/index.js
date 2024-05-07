@@ -1,12 +1,15 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { Container } from "@/components/Layout/Layout.styled";
 
 export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace("/index");
-  });
+    setTimeout(() => {
+      router.replace("/start");
+    }, 0);
+  }, []);
 
-  return null;
+  return <Container>logo</Container>;
 }

@@ -3,6 +3,7 @@ import Slider from "../Slider/Slider";
 import NavButton from "../NavButton/NavButton";
 import Guide from "../Guide/Guide";
 import * as Styled from "./ToolMoodMeasurer.styled";
+import LinkWrapper from "../LinkWrapper/LinkWrapper";
 
 export default function ToolMoodMeasurer({ page, setPage }) {
   const [before, setBefore] = useState(0.5);
@@ -67,7 +68,9 @@ export default function ToolMoodMeasurer({ page, setPage }) {
         </NavButton>
       )}
       {page === 3 && (
-        <NavButton linkToPage={"/activities"}>go back to activities</NavButton>
+        <NavButton>
+          <LinkWrapper link="start">go back to activities</LinkWrapper>
+        </NavButton>
       )}
     </>
   );
