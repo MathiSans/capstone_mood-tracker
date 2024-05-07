@@ -91,6 +91,7 @@ export default function LandingPage() {
                 >
                   Ramin
                 </Styled.Contributor>
+                <br />
                 and
                 <Styled.Contributor
                   $color="var(--color-enjoyment)"
