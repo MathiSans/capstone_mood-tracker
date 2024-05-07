@@ -8,7 +8,7 @@ export default function RandomIcon({ activity }) {
         type={activity.shapeType}
         noise={false}
         index={activity.shapeIndex}
-        size={90}
+        size={89}
       />
     </Styled.RandomIconContainer>
   );
