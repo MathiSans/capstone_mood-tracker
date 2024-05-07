@@ -2,9 +2,19 @@ import NavButton from "../NavButton/NavButton";
 import * as Styled from "./Menu.styled";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function Menu({ handleShowMenu }) {
+  const { data: session } = useSession();
   const router = useRouter();
+
+  const handleLoginButton = () => {
+    if (session) {
+      signOut();
+    } else {
+      signIn();
+    }
+  };
 
   const buttonAnimation = {
     whileHover: { scale: 1.05 },
@@ -20,8 +30,12 @@ export default function Menu({ handleShowMenu }) {
   };
 
   async function handleMenuButtonClick(linkToPage) {
-    await router.push(linkToPage);
-    handleShowMenu();
+    if (linkToPage === "handleLoginButton") {
+      handleLoginButton();
+    } else {
+      await router.push(linkToPage);
+      handleShowMenu();
+    }
   }
 
   return (
@@ -33,17 +47,15 @@ export default function Menu({ handleShowMenu }) {
     >
       <Styled.MenuContainer>
         {[
-          { text: "login", link: "" },
-          { text: "enter a mood", link: "/" },
-          { text: "moods collection", link: "entries" },
-          { text: "moods map", link: "moods-map" },
-          { text: "activities", link: "activities" },
+          { text: session ? "logout" : "login", link: "handleLoginButton" },
+          { text: "new home", link: "/start" },
+          { text: "LEGACY: enter a mood", link: "/flow" },
+          { text: "LEGACY: moods collection", link: "/entries_old" },
+          { text: "LEGACY: moods map", link: "/maps" },
+          { text: "LEGACY: activities", link: "/activities" },
         ].map((page, index) => (
           <motion.div key={index} {...buttonAnimation}>
-            <NavButton
-              disabled={page.text === "login"}
-              handleClick={() => handleMenuButtonClick(page.link)}
-            >
+            <NavButton handleClick={() => handleMenuButtonClick(page.link)}>
               {page.text}
             </NavButton>
           </motion.div>

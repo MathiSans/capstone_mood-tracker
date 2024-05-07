@@ -5,16 +5,17 @@ import { mutate } from "swr";
 import Picker from "emoji-picker-react";
 import { FiPlus } from "react-icons/fi";
 import { FiDelete } from "react-icons/fi";
+import { useSession } from "next-auth/react";
 
 export default function ActivitiesForm({ handleShowForm }) {
   const [selectedEmotions, setSelectedEmotions] = useState([]);
   const [inputString, setInputString] = useState([]);
   const [showPicker, setShowPicker] = useState(false);
+  const { data: session } = useSession();
+  const userId = session?.user.id;
 
   function onEmojiClick(emoji) {
     setInputString((prevInput) => [...prevInput, emoji]);
-    setShowPicker(false);
-    window.scrollTo(0, 0);
   }
 
   function handleCheckboxChange(emotion, isChecked) {
@@ -43,6 +44,7 @@ export default function ActivitiesForm({ handleShowForm }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        user: session ? userId : null,
         title: event.target.elements.title.value,
         emoji: inputString,
         description: event.target.elements.description.value,
@@ -137,7 +139,6 @@ export default function ActivitiesForm({ handleShowForm }) {
             ></Styled.TextArea>
           </Styled.Label>
           <p>For which experiences could this be?</p>
-
           <Styled.CheckboxContainer>
             {checkboxes.map((checkbox, index) => (
               <Styled.CheckboxLabel

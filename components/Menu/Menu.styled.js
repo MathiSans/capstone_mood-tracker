@@ -2,14 +2,15 @@ import styled from "styled-components";
 
 export const MenuContainer = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100vw;
   height: 100dvh;
   display: flex;
   align-items: center;
+  margin-block-end: 1.5rem;
+  gap: 14px;
   justify-content: center;
   flex-direction: column;
-  gap: 18px;
+  gap: var(--spacing-l);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 `;

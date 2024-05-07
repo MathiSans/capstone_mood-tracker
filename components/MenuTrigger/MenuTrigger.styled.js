@@ -1,31 +1,21 @@
 import styled, { css } from "styled-components";
 
-export const TriggerContainer = styled.div`
-  position: fixed;
-  justify-content: center;
-  align-items: end;
-  padding-bottom: 28px;
-  bottom: 0;
-  display: flex;
-  width: 100vw;
-  height: 60px;
-`;
-
 export const MenuTriggerButton = styled.button`
+  display: flex;
   background-color: white;
   border: none;
   color: black;
+  border-radius: 1.5rem;
+  padding: 0.5rem 0.5rem;
+  font-size: 1.5rem;
+  filter: drop-shadow(black 0rem 0rem 25px);
+  cursor: pointer;
+
   ${(props) =>
     props.$showMenu &&
     css`
       background-color: transparent;
-      border: 1px solid white;
+      box-shadow: inset 0 0 0 1px white;
       color: white;
     `}
-
-  border-radius: 20px;
-  padding: 12px 24px;
-  font-size: 1rem;
-  filter: drop-shadow(black 0rem 0rem 25px);
-  cursor: pointer;
 `;

@@ -1,7 +1,7 @@
 export const experiences = [
   {
     name: "anger",
-    color: "red",
+    color: "#CD7373",
     intensity: [
       { name: "annoyance" },
       { name: "frustration" },
@@ -25,7 +25,7 @@ export const experiences = [
   },
   {
     name: "fear",
-    color: "purple",
+    color: "#9265BD",
     intensity: [
       { name: "trepidation" },
       { name: "nervousness" },
@@ -48,7 +48,7 @@ export const experiences = [
   },
   {
     name: "enjoyment",
-    color: "yellow",
+    color: "#B6A660",
     intensity: [
       { name: "sensory pleasure" },
       { name: "rejoicing" },
@@ -75,7 +75,7 @@ export const experiences = [
   },
   {
     name: "disgust",
-    color: "green",
+    color: "#779962",
     intensity: [
       { name: "dislike" },
       { name: "aversion" },
@@ -94,7 +94,7 @@ export const experiences = [
   },
   {
     name: "sadness",
-    color: "blue",
+    color: "#7190D4",
     intensity: [
       { name: "disappointment" },
       { name: "discouragement" },

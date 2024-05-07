@@ -5,6 +5,14 @@ const nextConfig = {
   },
   reactStrictMode: true,
   webpack(config) {
+    config.resolve = {
+      ...config.resolve,
+      fallback: {
+        fs: false,
+        path: false,
+        os: false,
+      },
+    };
     config.module.rules.push(
       {
         test: /\.(svg)$/i,
@@ -27,6 +35,11 @@ const nextConfig = {
     );
 
     return config;
+  },
+
+  // Add images configuration
+  images: {
+    domains: ["avatars.githubusercontent.com", "lh3.googleusercontent.com"], // Add your domain here
   },
 };
 

@@ -7,11 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   width: 100vw;
   min-height: 100dvh;
-`;
-
-export const MenuContainer = styled.div`
-  position: relative;
-  z-index: 9999;
+  z-index: 2;
 `;
 
 export const Page = styled.div`
@@ -19,8 +15,8 @@ export const Page = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
-  margin-bottom: 10vh;
+  gap: var(--spacing-xxl);
+  /* margin-bottom: 10vh; */
 `;
 
 export const Navigation = styled.div`
@@ -28,5 +24,6 @@ export const Navigation = styled.div`
   justify-content: center;
   align-items: center;
   display: flex;
-  gap: 20px;
+  gap: var(--spacing-l);
+  margin-top: 10vh;
 `;

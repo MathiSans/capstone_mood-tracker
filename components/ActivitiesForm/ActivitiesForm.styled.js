@@ -5,55 +5,49 @@ export const addButton = styled.button`
   width: 36px;
   border: none;
   font-size: 2rem;
-  color: white;
+  color: var(--color-main-alt);
   background-color: transparent;
-  margin-left: -11px;
+  margin-left: -12px;
 `;
 
 export const Label = styled.label`
   position: relative;
-  font-size: 0.8rem;
-  color: #989898;
+  font-size: var(--font-size-small);
+  color: var(--color-neutral);
 `;
 
 export const AddEmojisSentence = styled.p`
-  margin-top: 11px;
-  margin-left: 8px;
+  margin-top: var(--spacing-m);
+  margin-left: var(--spacing-s);
 `;
 
 export const EmojiContainer = styled.div`
   position: relative;
   display: flex;
-  gap: 4px;
+  gap: var(--spacing-xs);
   align-items: center;
   justify-content: start;
   height: 40px;
-  margin-bottom: 20px;
+  margin-bottom: var(--spacing-l);
 `;
 
 export const Card = styled.div`
-  background-color: #141414;
-  background: rgb(42, 42, 42);
-  background: radial-gradient(
-    circle,
-    rgba(42, 42, 42, 1) 0%,
-    rgba(13, 13, 13, 1) 100%
-  );
+  background: var(--effect-radial-gradient);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  border-radius: 12px;
+  gap: var(--spacing-l);
+  border-radius: var(--border-radius-small);
   margin: 1rem;
   max-width: 600px;
-  padding: 44px;
+  padding: var(--spacing-xxxl);
   position: relative;
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--spacing-l);
 `;
 
 export const Emojis = styled.div`
@@ -63,29 +57,29 @@ export const Emojis = styled.div`
 export const DeleteButton = styled.button`
   height: 36px;
   width: 36px;
-  border-radius: 50%;
-  margin-top: 5px;
+  border-radius: var(--border-radius-round);
+  margin-top: var(--spacing-xs);
   border: none;
   font-size: 1.6rem;
   background-color: transparent;
-  color: white;
+  color: var(--color-main-alt);
 `;
 
 export const InputField = styled.input`
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  padding: var(--spacing-m) var(--spacing-l);
+  margin: var(--spacing-s) 0;
 `;
 
 export const TextArea = styled.textarea`
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  padding: var(--spacing-m) var(--spacing-l);
+  margin: var(--spacing-s) 0;
 `;
 
 export const ButtonArea = styled.div`
   display: flex;
-  gap: 20px;
+  gap: var(--spacing-l);
   justify-content: center;
   width: 100%;
 `;
@@ -93,8 +87,8 @@ export const ButtonArea = styled.div`
 export const CheckboxContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 30px;
+  gap: var(--spacing-l);
+  margin-bottom: var(--spacing-xxl);
 `;
 
 export const CheckboxLabel = styled.label`
@@ -102,10 +96,10 @@ export const CheckboxLabel = styled.label`
   padding: 10px;
   text-align: center;
   width: 110px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 1rem;
-  background-color: ${(props) => (props.$color ? props.$color : "grey")};
+  border-radius: var(--border-radius-medium);
+  font-size: var(--font-size-default);
+  background-color: ${(props) =>
+    props.$color ? props.$color : `var(--color-neutral)`};
 `;
 
 export const CheckboxInput = styled.input`
@@ -115,21 +109,20 @@ export const CheckboxInput = styled.input`
   height: 40px;
   width: 110px;
   outline: none;
-  font-size: 1rem;
-  border-radius: 20px;
+  font-size: var(--font-size-default);
+  border-radius: var(--border-radius-medium);
   cursor: pointer;
   top: -32px;
   left: -14px;
 
   &:checked::after {
     content: "";
-    padding: 4px 20px 10px 20px;
     position: absolute;
     height: 40px;
     width: 110px;
-    border: 3.5px solid white;
-    font-size: 1rem;
-    color: #fff;
-    border-radius: 20px;
+    border: 3.5px solid var(--color-main-alt);
+    font-size: var(--font-size-default);
+    color: var(--color-main-alt);
+    border-radius: var(--border-radius-medium);
   }
 `;

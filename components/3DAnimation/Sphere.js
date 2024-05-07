@@ -1,11 +1,13 @@
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useMemo, useRef, useEffect, useState } from "react";
 import vertexShader from "!!raw-loader!./shaders/sphere/vertexshader.glsl";
 import fragmentShader from "!!raw-loader!./shaders/sphere/fragmentshader.glsl";
 import * as THREE from "three";
+import { MathUtils } from "three";
 
 export default function Sphere({ color, opacity }) {
   const mesh = useRef();
+  const hover = useRef(false);
   const [tangentsComputed, setTangentsComputed] = useState(false);
 
   // Light A
@@ -14,7 +16,7 @@ export default function Sphere({ color, opacity }) {
   lightA.intensity = 1.85;
 
   lightA.color = {};
-  lightA.color.value = "#ff2900";
+  lightA.color.value = "#3d3b3b";
   lightA.color.instance = new THREE.Color(lightA.color.value);
 
   lightA.spherical = new THREE.Spherical(1, 0.615, 2.049);
@@ -25,12 +27,12 @@ export default function Sphere({ color, opacity }) {
   lightB.intensity = 1.4;
 
   lightB.color = {};
-  lightB.color.value = "#ff2900";
+  lightB.color.value = "#3d3b3b";
   lightB.color.instance = new THREE.Color(lightB.color.value);
 
   lightB.spherical = new THREE.Spherical(1, 2.561, -1.844);
 
-  const defaultDisplacementFrequency = 10;
+  const defaultDisplacementFrequency = 2.12;
   const timeFrequency = 0.4;
 
   const uniforms = useMemo(
@@ -67,7 +69,7 @@ export default function Sphere({ color, opacity }) {
   }, []);
 
   useEffect(() => {
-    const newDisplacementFrequency = opacity * defaultDisplacementFrequency + 2;
+    const newDisplacementFrequency = opacity * defaultDisplacementFrequency + 1;
     mesh.current.material.uniforms.uDisplacementFrequency.value =
       newDisplacementFrequency;
   }, [opacity]);
@@ -76,25 +78,40 @@ export default function Sphere({ color, opacity }) {
     const { clock } = state;
     mesh.current.material.uniforms.uTime.value =
       timeFrequency * clock.getElapsedTime();
+
+    mesh.current.material.uniforms.uDistortionFrequency.value = MathUtils.lerp(
+      mesh.current.material.uniforms.uDistortionFrequency.value,
+      hover.current ? 4 : 1.5,
+      0.02
+    );
+
     mesh.current.material.uniforms.uLightAPosition.value.setFromSpherical(
       lightA.spherical
     );
     mesh.current.material.uniforms.uLightBPosition.value.setFromSpherical(
       lightB.spherical
     );
-    mesh.current.material.uniforms.uLightAColor.value = new THREE.Color(color);
-    mesh.current.material.uniforms.uLightBColor.value = new THREE.Color(color);
+    mesh.current.material.uniforms.uLightAColor.value.lerp(
+      new THREE.Color(color),
+      0.03
+    );
+    mesh.current.material.uniforms.uLightBColor.value.lerp(
+      new THREE.Color(color),
+      0.03
+    );
   });
   return (
-    <>
-      <mesh ref={mesh}>
-        <sphereGeometry args={[1.4, 512, 512]} />
-        <shaderMaterial
-          fragmentShader={fragmentShader}
-          vertexShader={vertexShader}
-          uniforms={uniforms}
-        />
-      </mesh>
-    </>
+    <mesh
+      ref={mesh}
+      onPointerOver={() => (hover.current = true)}
+      onPointerOut={() => (hover.current = false)}
+    >
+      <sphereGeometry args={[1.4, 512, 512]} />
+      <shaderMaterial
+        fragmentShader={fragmentShader}
+        vertexShader={vertexShader}
+        uniforms={uniforms}
+      />
+    </mesh>
   );
 }

@@ -1,89 +1,71 @@
 import GlobalStyle from "../styles";
 import { SWRConfig } from "swr";
-import Layout from "@/components/Layout/Layout";
 import { ThemeProvider } from "styled-components";
-//import { useState } from "react";
-import useLocalStorageState from "use-local-storage-state";
+import { SessionProvider } from "next-auth/react";
+import { DataProvider } from "@/lib/useData";
+import { DashboardStateProvider } from "@/components/DashboardStateProvider/DashboardStateProvider";
+import { SphereStateProvider } from "@/components/ContextProviders/SphereStateProvider/SphereStateProvider";
 
-const darkTheme = {
-  color: "white",
-  backgroundColor: "black",
-  bgColor2: "indigo",
-  borderColor: "lime",
-  Navigation: {
-    backgroundColor: "rgb(0, 0, 0)",
-    backgroundGradient:
-      "linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 33%, rgba(0, 0, 0, 0) 100%)",
+const theme = {
+  colors: {
+    black: "black",
+    dark: "#232323",
+    light: "white",
+    neutral: "grey",
+    danger: "red",
+    anger: "#CD7373",
+    fear: "#9265BD",
+    enjoyment: "#B6A660",
+    disgust: "#779962",
+    sadness: "#7190D4",
   },
-  ActivityCard: {
-    backgroundColor: "#141414",
-    backgroundColor2: "rgb(42, 42, 42)",
-    backgroundGradient:
-      "radial-gradient(circle,rgba(42, 42, 42, 1) 0%,rgba(13, 13, 13, 1) 100%)",
-    button: "white",
-    buttonTextLink: "black",
+  fonts: {
+    main: "system-ui",
+    serif: "Cambria, Cochin, Georgia, Times, serif",
   },
-  Guide: {
-    color: "white",
+  fontSize: {
+    default: "1rem",
+    small: "0.8rem",
+    large: "2rem",
+    xl: "3rem",
   },
-  EntriesList: {
-    cardBackgroundColor: "white",
-    cardBoxShadow:
-      "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
-    cardBG2: "rgb(42, 42, 42);",
-    cardBackGroundGradient:
+  fontWeight: {
+    light: "200",
+    normal: "400",
+    bold: "700",
+  },
+  spacing: {
+    xs: "4px",
+    s: "8px",
+    m: "12px",
+    l: "20px",
+    xl: "28px",
+    xxl: "32px",
+    xxxl: "44px",
+  },
+  effects: {
+    boxShadow: "",
+    dropShadow: "",
+    linearGradient: "-webkit-linear-gradient(#e3f710, #ff0000)",
+    radialGradient:
       "radial-gradient(circle, rgba(42, 42, 42, 1) 0%, rgba(13, 13, 13, 1) 100%)",
   },
-};
-const lightTheme = {
-  color: darkTheme.backgroundColor,
-  backgroundColor: "white",
-  bgColor2: "lightblue",
-  borderColor: "pink",
-  Navigation: {
-    backgroundColor: "white",
-    backgroundGradient:
-      "linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 33%, rgba(0, 0, 0, 0) 100%)",
-    button: "black",
-    buttonTextLink: "black",
-  },
-  ActivityCard: {
-    backgroundColor: "#efecec",
-    backgroundColor2: "rgb(215, 213, 213)",
-    backgroundGradient:
-      "radial-gradient(circle,rgba(238, 236, 236, 1) 0%,rgba(252, 251, 251, 1) 100%)",
-  },
-  Guide: {
-    color: "white",
-  },
-  EntriesList: {
-    cardBackgroundColor: "white",
-    cardBoxShadow:
-      "rgba(255, 255, 255, 0.25) 0px 54px 55px, rgba(255, 255, 255, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px",
-    cardBG2: "rgb(42, 42, 42);",
-    cardBackGroundGradient:
-      "radial-gradient(circle, rgba(42, 42, 42, 1) 0%, rgba(13, 13, 13, 1) 100%)",
+  borders: {
+    radiusSmall: "10px",
+    radiusMedium: "20px",
+    radiusLarge: "100px",
+    radiusRound: "50%",
+    strength: "2px",
   },
 };
 
-/* background-color: #141414;
-  background: rgb(42, 42, 42);
-  background: radial-gradient(
-    circle,
-    rgba(42, 42, 42, 1) 0%,
-    rgba(13, 13, 13, 1) 100%
-  );*/
-
-export default function App({ Component, pageProps }) {
-  const [theme, setTheme] = useLocalStorageState("dark");
-  const isDarkTheme = theme === "dark";
-
-  const handleToggleTheme = () => {
-    setTheme(isDarkTheme ? "light" : "dark");
-  };
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
     <>
-      <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+      <ThemeProvider theme={theme}>
         <GlobalStyle />
         <SWRConfig
           value={{
@@ -91,9 +73,15 @@ export default function App({ Component, pageProps }) {
               fetch(resource, init).then((res) => res.json()),
           }}
         >
-          <Layout>
-            <Component {...pageProps} handleToggleTheme={handleToggleTheme} />
-          </Layout>
+          <SessionProvider session={session}>
+            <DataProvider>
+              <DashboardStateProvider>
+                <SphereStateProvider>
+                  <Component {...pageProps} />
+                </SphereStateProvider>
+              </DashboardStateProvider>
+            </DataProvider>
+          </SessionProvider>
         </SWRConfig>
       </ThemeProvider>
     </>
