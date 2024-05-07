@@ -50,12 +50,14 @@ export default function ActivitiesList({ handleShowForm }) {
           >
             Activities
           </Styled.Option>
-          <Styled.Option
-            $isActive={filterOption === "myActivities"}
-            onClick={() => handleFilter("myActivities")}
-          >
-            my Activities
-          </Styled.Option>
+          {session && (
+            <Styled.Option
+              $isActive={filterOption === "myActivities"}
+              onClick={() => handleFilter("myActivities")}
+            >
+              my Activities
+            </Styled.Option>
+          )}
         </Styled.Switch>
 
         {session && (
