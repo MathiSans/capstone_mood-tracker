@@ -38,6 +38,18 @@ export default function ActivitiesForm({ handleShowForm }) {
       return;
     }
 
+    const shapes = [
+      "star",
+      "triangle",
+      "moon",
+      "polygon",
+      "flower",
+      "rectangle",
+      "ellipse",
+      "wheel",
+      "misc",
+    ];
+
     const response = await fetch("/api/activities", {
       method: "POST",
       headers: {
@@ -48,6 +60,8 @@ export default function ActivitiesForm({ handleShowForm }) {
         title: event.target.elements.title.value,
         description: event.target.elements.description.value,
         forEmotion: selectedEmotions,
+        shapeIndex: Math.floor(Math.random() * 7),
+        shapeType: shapes[Math.floor(Math.random() * shapes.length)],
       }),
     });
 
