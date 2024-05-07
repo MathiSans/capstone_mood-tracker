@@ -15,6 +15,7 @@ import { useDashboardState } from "@/components/DashboardStateProvider/Dashboard
 import { useSphereState } from "@/components/ContextProviders/SphereStateProvider/SphereStateProvider";
 import { motion, AnimatePresence } from "framer-motion";
 import { animations } from "@/components/AnimationWrapper/animations";
+import LandingPage from "@/components/LandingPage/LandingPage";
 
 export default function Home() {
   const { dashboardIsOpen, handleDashboardIsOpen } = useDashboardState();
@@ -24,6 +25,7 @@ export default function Home() {
   const { data: session } = useSession();
 
   const componentMap = {
+    start: LandingPage,
     "new-entry": Flow,
     quotes: QuotesWrapper,
     smiletrainer: SmileTrainerWrapper,

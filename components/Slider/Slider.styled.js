@@ -23,6 +23,7 @@ export const RangeInput = styled.input`
   }
 
   &::-webkit-slider-thumb {
+    position: relative;
     appearance: none;
     -webkit-appearance: none;
     height: 1.2rem;
@@ -30,7 +31,7 @@ export const RangeInput = styled.input`
     border-radius: 50%;
     background: rgba(255, 255, 255, 1);
     cursor: pointer;
-    transform: translateY(-50%);
+    transform: translateY(-45%);
     background-blend-mode: normal;
   }
 `;

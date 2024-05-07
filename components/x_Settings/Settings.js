@@ -47,23 +47,3 @@ const HideInterface = styled.button`
   bottom: 0;
   right: 0;
 `;
-
-// const StyledMuteButton = styled.button`
-//   background-color: transparent;
-//   color: ${(props) =>
-//     props.$isMuted ? `var(--color-neutral)` : `var(--color-main-alt)`};
-//   border: 1px solid
-//     ${(props) =>
-//       props.$isMuted ? `var(--color-neutral)` : `var(--color-main-alt)`};
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   border-radius: var(--border-radius-round);
-//   margin-inline-end: 1.5rem;
-//   margin-block-end: 9rem;
-//   font-size: 1.2rem;
-//   height: 40px;
-//   width: 40px;
-//   cursor: pointer;
-//   display: ${(props) => (props.$showSettings ? "show" : "none")};
-// `;
