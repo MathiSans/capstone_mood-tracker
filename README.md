@@ -14,17 +14,28 @@ You can find the hosted version on Vercel: [Demo Version of Capstone Project](ht
 
 ## Tech Stack
 
+- HTML
+- CSS
+- JavaScript
 - React
-- Next.js
 - Styled Components
-- NextAuth.js
-- MongoDB
-- Mongoose
-- SWR
+- Next.js
 - Three.js
 - React Three Fibre
+- Node.js
+- SWR
 - Framer Motion
+- React Icons
 - React H5 Audio Player
+- MongoDB
+- Mongoose
+- NextAuth
+- GitHub-Login
+- Google-Login
+- Face-API
+- Quotes API
+- IPinfo API
+- Ekman Emotion Analysis API
 
 ## Project Setup
 
