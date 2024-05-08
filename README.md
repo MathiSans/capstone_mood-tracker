@@ -1,39 +1,36 @@
-## "MoodDiary"
+# Capstone Project: Ruh
 
-A serene and personal app designed for users to document their daily thoughts, experiences, and mood in a private space. MoodDiary combines the introspective practice of keeping a diary with the self-awareness benefits of mood tracking, offering a simple yet powerful tool for personal reflection and mental health monitoring.
+![Ruh App](public/images/header.png)
 
-### Minimum Viable Product (MVP)
+With Ruh you can Track your moods, get inspired to change, maintain and share your state with the people you care about.
 
-#### Daily Diary Entries
+## Demo:
 
-- Users can write diary entries to document their day, thoughts, feelings, and experiences.
+You can find the hosted version on Vercel: [Demo Version of Capstone Project](https://mood-diary-five.vercel.app/)
 
-#### Mood Selection
+**Important:** This demo is optimized for mobile screen.
 
-- For each diary entry, users select their mood from a predefined set of moods (e.g., happy, sad, anxious, excited) to capture their emotional state.
+![App Screens](public/images/screens.png)
 
-#### Mood Tracking
+## Tech Stack
 
-- Users can view a history of their mood selections over time, displayed in a simple graph or calendar view to identify patterns or changes in their emotional wellbeing.
+- React
+- Next.js
+- Styled Components
+- NextAuth.js
+- MongoDB
+- Mongoose
+- SWR
+- Three.js
+- React Three Fibre
+- Framer Motion
+- React H5 Audio Player
 
-#### Entry Organiziation
+## Project Setup
 
-- Each diary entry and mood selection is automatically timestamped to organize entries chronologically.
-
-#### Delete Entries
-
-- Users can delete entries if they wish to remove them from their diary.
-
-#### Edit Entries
-
-- Users can edit entries including Date and time Stamp if they wish to change them.
-
-### Additional Features
-
-- **Customizable Dairy Entry Templates** Users can pre select promps to fill out every day.
-- **Personalization:** Users can personalize the app's appearance with themes or background colors to match their preference, enhancing the personal journaling experience.
-- **Search Functionality:** Implement a search feature to allow users to find past entries by keyword, date, or mood, facilitating reflection and recollection.
-
-### Advanced Features
-
-- **Password Protection:** Ensure that the diary is password-protected or uses biometric authentication (fingerprint or facial recognition) for app access, safeguarding user privacy.
+- Clone this repository
+- You don't need an API key
+- Install all dependencies with `$ npm install`
+- Run app in dev mode with `$ npm run dev`
+- Server: [http://localhost:3000/](http://localhost:3000/)
+- Run tests via `$ npm run test`
