@@ -29,7 +29,7 @@ You can find the hosted version on Vercel: [Demo Version of Capstone Project](ht
 ## Project Setup
 
 - Clone this repository
-- You need to add the following API keys to your `env.local`:
+- You need to add the following API keys to your `env.local` and Vercel:
   - GOOGLE_CLIENT_ID
   - GOOGLE_CLIENT_SECRET
   - X_RAPID_API_KEY
