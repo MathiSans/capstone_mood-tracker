@@ -29,7 +29,15 @@ You can find the hosted version on Vercel: [Demo Version of Capstone Project](ht
 ## Project Setup
 
 - Clone this repository
-- You don't need an API key
+- You need to add the following API keys to your `env.local`:
+  - GOOGLE_CLIENT_ID
+  - GOOGLE_CLIENT_SECRET
+  - X_RAPID_API_KEY
+  - GITHUB_SECRET
+  - GITHUB_ID
+  - NEXTAUTH_URL
+  - NEXTAUTH_SECRET
+  - MONGODB_URI
 - Install all dependencies with `$ npm install`
 - Run app in dev mode with `$ npm run dev`
 - Server: [http://localhost:3000/](http://localhost:3000/)
