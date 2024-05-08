@@ -6,7 +6,7 @@ With Ruh you can Track your moods, get inspired to change, maintain and share yo
 
 ## Demo:
 
-You can find the hosted version on Vercel: [Demo Version of Capstone Project](https://mood-diary-five.vercel.app/)
+You can find the hosted version on Vercel: [Demo Version of Capstone Project](https://capstone-ruh.vercel.app/))
 
 **Important:** This demo is optimized for mobile screen.
 
