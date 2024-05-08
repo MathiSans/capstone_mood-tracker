@@ -14,7 +14,7 @@ You can find the hosted version on Vercel: [Demo Version of Capstone Project](ht
 
 ## Tech Stack
 
-`HTML`, `CSS`, `JavaScript`, `React`, `Styled Components`, `Next.js`, `Three.js`, `Three.js`, `React Three Fibre`, `Node.js`, `SWR`, `Framer Motion`, `Emoji Picker`, `React Icons`, `React H5 Audio Player`, `MongoDB`, `Mongoose`, `NextAuth`, `GitHub-Login`, `Google-Login`, `Face-API`, `Quotes API`, `IPinfo API`, `Ekman Emotion Analysis API`
+`HTML`, `CSS`, `JavaScript`, `React`, `Styled Components`, `Next.js`, `Three.js`, `React Three Fibre`, `Node.js`, `SWR`, `Framer Motion`, `Emoji Picker`, `React Icons`, `React H5 Audio Player`, `MongoDB`, `Mongoose`, `NextAuth`, `GitHub-Login`, `Google-Login`, `Face-API`, `Quotes API`, `IPinfo API`, `Ekman Emotion Analysis API`
 
 ## Project Setup
 
